@@ -41,11 +41,33 @@ namespace fitfam
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int theme_custom1_background = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int theme_devicedefault_background = 2131034113;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
 			// aapt resource value: 0x7f020000
 			public const int Icon = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int logo = 2130837505;
 			
 			static Drawable()
 			{
@@ -60,20 +82,38 @@ namespace fitfam
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050003
-			public const int button1 = 2131034115;
+			// aapt resource value: 0x7f070001
+			public const int actionMenuView1 = 2131165185;
 			
-			// aapt resource value: 0x7f050004
-			public const int button2 = 2131034116;
+			// aapt resource value: 0x7f070006
+			public const int button1 = 2131165190;
 			
-			// aapt resource value: 0x7f050002
-			public const int checkedTextView1 = 2131034114;
+			// aapt resource value: 0x7f070007
+			public const int button2 = 2131165191;
 			
-			// aapt resource value: 0x7f050001
-			public const int imageView1 = 2131034113;
+			// aapt resource value: 0x7f070009
+			public const int button3 = 2131165193;
 			
-			// aapt resource value: 0x7f050000
-			public const int progressBar1 = 2131034112;
+			// aapt resource value: 0x7f070008
+			public const int button4 = 2131165192;
+			
+			// aapt resource value: 0x7f070002
+			public const int imageButton1 = 2131165186;
+			
+			// aapt resource value: 0x7f070003
+			public const int imageButton2 = 2131165187;
+			
+			// aapt resource value: 0x7f070004
+			public const int imageButton3 = 2131165188;
+			
+			// aapt resource value: 0x7f070005
+			public const int imageButton4 = 2131165189;
+			
+			// aapt resource value: 0x7f07000a
+			public const int imageView1 = 2131165194;
+			
+			// aapt resource value: 0x7f070000
+			public const int imageView5 = 2131165184;
 			
 			static Id()
 			{
@@ -89,7 +129,13 @@ namespace fitfam
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int Findafamform = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int Homepage = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int Main = 2130903042;
 			
 			static Layout()
 			{
@@ -116,6 +162,25 @@ namespace fitfam
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int Theme_Custom = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int Theme_Custom1 = 2131099649;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}
