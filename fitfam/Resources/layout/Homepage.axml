@@ -2,59 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView5" />
-    <ActionMenuView
+        android:id="@+id/linearLayout1"
+        android:background="@drawable/gold_plate">
+        <ImageView
+            android:src="@drawable/gold_logo"
+            android:layout_width="match_parent"
+            android:layout_height="86.0dp"
+            android:id="@+id/imageView5"
+            android:scaleType="fitCenter"
+            android:background="@drawable/gold_plate" />
+        <ActionMenuView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/actionMenuView1">
+            <ImageButton
+                android:src="@drawable/home"
+                android:id="@+id/imageButton1"
+                android:background="@drawable/gold_button" />
+            <ImageButton
+                android:src="@drawable/face"
+                android:id="@+id/imageButton2"
+                android:background="@drawable/gold_button" />
+            <ImageButton
+                android:src="@drawable/message"
+                android:id="@+id/imageButton3"
+                android:background="@drawable/gold_button" />
+            <ImageButton
+                android:src="@drawable/clock"
+                android:id="@+id/imageButton4"
+                android:background="@drawable/gold_button" />
+        </ActionMenuView>
+    </LinearLayout>
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/actionMenuView1">
-        <ImageButton
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton1" />
-        <ImageButton
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton2" />
-        <ImageButton
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton3" />
-        <ImageButton
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton4" />
-    </ActionMenuView>
+        android:id="@+id/space1"
+        android:layout_marginBottom="20.0dp" />
     <Button
         android:id="@+id/button1"
-        android:height="80dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="FIND A FAM" />
+        android:text="FIND A FAM"
+        android:background="@drawable/gold_button"
+        style="@style/button_text" />
     <Button
         android:text="CREATE A FAM"
+        android:id="@+id/button2"
+        android:background="@drawable/gold_button"
+        style="@style/button_text" />
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:height="80dp" />
+        android:id="@+id/space2"
+        android:layout_marginBottom="10.0dp" />
     <Button
         android:text="FIND EVENT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/button4"
-        android:height="80dp" />
+        android:background="@drawable/gold_button"
+        style="@style/button_text"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp" />
     <Button
         android:text="CREATE EVENT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/button3"
-        android:height="80dp" />
+        android:background="@drawable/gold_button"
+        style="@style/button_text" />
 </LinearLayout>

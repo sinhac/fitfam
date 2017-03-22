@@ -3,5 +3,34 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <ImageView
+        android:src="@drawable/fitfamlogo1smaller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5" />
+    <ActionMenuView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/actionMenuView1">
+        <ImageButton
+            android:src="@drawable/home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton1" />
+        <ImageButton
+            android:src="@drawable/face"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2" />
+        <ImageButton
+            android:src="@drawable/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton3" />
+        <ImageButton
+            android:src="@drawable/clock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton4" />
+    </ActionMenuView>
 </LinearLayout>
