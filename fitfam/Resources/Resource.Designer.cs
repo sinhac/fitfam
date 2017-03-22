@@ -26,6 +26,7 @@ namespace fitfam
 		
 		public static void UpdateIdValues()
 		{
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::fitfam.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Attribute
