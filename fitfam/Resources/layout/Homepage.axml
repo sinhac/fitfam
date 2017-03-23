@@ -63,9 +63,7 @@
         android:text="FIND EVENT"
         android:id="@+id/button4"
         android:background="@drawable/gold_button"
-        style="@style/button_text"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp" />
+        style="@style/button_text" />
     <Button
         android:text="CREATE EVENT"
         android:id="@+id/button3"

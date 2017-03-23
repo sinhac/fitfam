@@ -33,4 +33,48 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton4" />
     </ActionMenuView>
+    <TextView
+        android:text="Activity"
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/multiAutoCompleteTextView1" />
+    <TextView
+        android:text="City or Zip Code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompleteTextView1" />
+    <TextView
+        android:text="Experience Level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompleteTextView2" />
+    <TextView
+        android:text="Time (DatePicker?)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4" />
+    <TextView
+        android:text="Time (TimePicker?)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5" />
+    <Button
+        android:text="Find My FitFam!"
+        android:id="@+id/button2"
+        android:background="@drawable/gold_button"
+        style="@style/button_text"
+        android:layout_width="260.5dp"
+        android:layout_height="65.5dp" />
 </LinearLayout>
