@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:background="@drawable/gold_plate">
+        <ImageView
+            android:src="@drawable/gold_logo"
+            android:layout_width="match_parent"
+            android:layout_height="86.0dp"
+            android:id="@+id/imageView5"
+            android:scaleType="fitCenter"
+            android:background="@drawable/gold_plate" />
+        <ActionMenuView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/actionMenuView1">
+            <ImageButton
+                android:src="@drawable/home"
+                android:id="@+id/imageButton1"
+                android:background="@drawable/gold_button" />
+            <ImageButton
+                android:src="@drawable/face"
+                android:id="@+id/imageButton2"
+                android:background="@drawable/gold_button" />
+            <ImageButton
+                android:src="@drawable/message"
+                android:id="@+id/imageButton3"
+                android:background="@drawable/gold_button" />
+            <ImageButton
+                android:src="@drawable/clock"
+                android:id="@+id/imageButton4"
+                android:background="@drawable/gold_button" />
+        </ActionMenuView>
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space1"
+        android:layout_marginBottom="30.0dp" />
+    <TextView
+        android:text="Bio"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompleteTextView1"
+        android:backgroundTint="#ffb4b4b4" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space2"
+        android:layout_marginBottom="15.0dp" />
+    <TextView
+        android:text="Gender"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space2"
+        android:layout_marginBottom="15.0dp" />
+    <TextView
+        android:text="Activities/Interests"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space2"
+        android:layout_marginBottom="15.0dp" />
+    <TextView
+        android:text="Availability"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3" />
+</LinearLayout>
