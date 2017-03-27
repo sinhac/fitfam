@@ -9,6 +9,7 @@ namespace fitfam
     {
         protected override void OnCreate(Bundle bundle)
         {
+            DynamoDB database = new DynamoDB("AKIAJFNNEKKTWKG5IMJQ", "4hxybS1Lrny5Mn3Ynmy5y88tUNJNrrbu4UrvdlZw", Amazon.RegionEndpoint.USEast1);
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
