@@ -33,23 +33,23 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton4" />
     </ActionMenuView>
-    <EditText
-        android:id="@+id/activity"
+    <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/multiAutoCompleteTextView1"
         android:text="Activity" />
-    <EditText
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cityzip"
+        android:id="@+id/autoCompleteTextView1"
         android:text="City or Zip Code" />
-    <EditText
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/experience"
+        android:id="@+id/autoCompleteTextView2"
         android:text="Experience Level" />
     <Button
-        android:text="Find My FitFam!"
+        android:text="Find Events!"
         android:id="@+id/button2"
         android:background="@drawable/gold_button"
         style="@style/button_text"
