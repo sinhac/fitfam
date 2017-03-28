@@ -109,23 +109,53 @@ namespace fitfam
 			// aapt resource value: 0x7f070001
 			public const int actionMenuView1 = 2131165185;
 			
-			// aapt resource value: 0x7f070009
-			public const int autoCompleteTextView1 = 2131165193;
+			// aapt resource value: 0x7f07000a
+			public const int autoCompleteTextView1 = 2131165194;
 			
 			// aapt resource value: 0x7f07000b
 			public const int autoCompleteTextView2 = 2131165195;
 			
-			// aapt resource value: 0x7f070011
-			public const int button1 = 2131165201;
+			// aapt resource value: 0x7f070018
+			public const int button1 = 2131165208;
+			
+			// aapt resource value: 0x7f070009
+			public const int button2 = 2131165193;
+			
+			// aapt resource value: 0x7f07001b
+			public const int button3 = 2131165211;
+			
+			// aapt resource value: 0x7f07001a
+			public const int button4 = 2131165210;
+			
+			// aapt resource value: 0x7f07000d
+			public const int checkBox1 = 2131165197;
 			
 			// aapt resource value: 0x7f07000e
-			public const int button2 = 2131165198;
+			public const int checkedTextView1 = 2131165198;
 			
-			// aapt resource value: 0x7f070014
-			public const int button3 = 2131165204;
+			// aapt resource value: 0x7f07000f
+			public const int checkedTextView2 = 2131165199;
+			
+			// aapt resource value: 0x7f070010
+			public const int checkedTextView3 = 2131165200;
+			
+			// aapt resource value: 0x7f070011
+			public const int checkedTextView4 = 2131165201;
+			
+			// aapt resource value: 0x7f070012
+			public const int checkedTextView5 = 2131165202;
 			
 			// aapt resource value: 0x7f070013
-			public const int button4 = 2131165203;
+			public const int checkedTextView6 = 2131165203;
+			
+			// aapt resource value: 0x7f070014
+			public const int checkedTextView7 = 2131165204;
+			
+			// aapt resource value: 0x7f070007
+			public const int editText1 = 2131165191;
+			
+			// aapt resource value: 0x7f070006
+			public const int editText2 = 2131165190;
 			
 			// aapt resource value: 0x7f070002
 			public const int imageButton1 = 2131165186;
@@ -139,38 +169,29 @@ namespace fitfam
 			// aapt resource value: 0x7f070005
 			public const int imageButton4 = 2131165189;
 			
-			// aapt resource value: 0x7f070015
-			public const int imageView1 = 2131165205;
+			// aapt resource value: 0x7f07001c
+			public const int imageView1 = 2131165212;
 			
 			// aapt resource value: 0x7f070000
 			public const int imageView5 = 2131165184;
 			
-			// aapt resource value: 0x7f07000f
-			public const int linearLayout1 = 2131165199;
-			
-			// aapt resource value: 0x7f070007
-			public const int multiAutoCompleteTextView1 = 2131165191;
-			
-			// aapt resource value: 0x7f070010
-			public const int space1 = 2131165200;
-			
-			// aapt resource value: 0x7f070012
-			public const int space2 = 2131165202;
-			
-			// aapt resource value: 0x7f070006
-			public const int textView1 = 2131165190;
+			// aapt resource value: 0x7f070016
+			public const int linearLayout1 = 2131165206;
 			
 			// aapt resource value: 0x7f070008
-			public const int textView2 = 2131165192;
+			public const int multiAutoCompleteTextView1 = 2131165192;
 			
-			// aapt resource value: 0x7f07000a
-			public const int textView3 = 2131165194;
+			// aapt resource value: 0x7f070017
+			public const int space1 = 2131165207;
+			
+			// aapt resource value: 0x7f070019
+			public const int space2 = 2131165209;
+			
+			// aapt resource value: 0x7f070015
+			public const int textView5 = 2131165205;
 			
 			// aapt resource value: 0x7f07000c
-			public const int textView4 = 2131165196;
-			
-			// aapt resource value: 0x7f07000d
-			public const int textView5 = 2131165197;
+			public const int textView6 = 2131165196;
 			
 			static Id()
 			{
@@ -186,13 +207,16 @@ namespace fitfam
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Findafamform = 2130903040;
+			public const int Createafamform = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int Homepage = 2130903041;
+			public const int Findafamform = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Main = 2130903042;
+			public const int Homepage = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int Main = 2130903043;
 			
 			static Layout()
 			{

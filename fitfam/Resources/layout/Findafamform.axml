@@ -33,38 +33,67 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton4" />
     </ActionMenuView>
-    <TextView
-        android:text="Activity"
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
     <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/multiAutoCompleteTextView1" />
-    <TextView
-        android:text="City or Zip Code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+        android:id="@+id/multiAutoCompleteTextView1"
+        android:text="Activity" />
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView1" />
-    <TextView
-        android:text="Experience Level"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
+        android:id="@+id/autoCompleteTextView1"
+        android:text="City or Zip Code" />
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView2" />
+        android:id="@+id/autoCompleteTextView2"
+        android:text="Experience Level" />
     <TextView
-        android:text="Time (DatePicker?)"
+        android:text="Tap on the days and times you are available:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4" />
+        android:id="@+id/textView6" />
+    <CheckBox
+        android:text="CheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox1" />
+    <CheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkedTextView1"
+        android:text="Sunday" />
+    <CheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkedTextView2"
+        android:text="Monday" />
+    <CheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkedTextView3"
+        android:text="Tuesday" />
+    <CheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkedTextView4"
+        android:text="Wednesday" />
+    <CheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkedTextView5"
+        android:text="Thursday" />
+    <CheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkedTextView6"
+        android:text="Friday" />
+    <CheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkedTextView7"
+        android:text="Saturday" />
     <TextView
         android:text="Time (TimePicker?)"
         android:layout_width="match_parent"
