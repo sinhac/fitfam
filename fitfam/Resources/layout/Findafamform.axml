@@ -33,43 +33,63 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton4" />
     </ActionMenuView>
-    <TextView
+    <MultiAutoCompleteTextView
+        android:id="@+id/multiAutoCompleteTextView1"
         android:text="Activity"
-        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <MultiAutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/multiAutoCompleteTextView1" />
-    <TextView
-        android:text="City or Zip Code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView1" />
-    <TextView
-        android:text="Experience Level"
+        android:id="@+id/autoCompleteTextView1"
+        android:text="City or Zip Code" />
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
-    <AutoCompleteTextView
+        android:id="@+id/linearLayout1">
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView4"
+            android:text="Monday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView5"
+            android:text="Tuesday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView6"
+            android:text="Wednesday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView7"
+            android:text="Thursday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView2" />
-    <TextView
-        android:text="Time (DatePicker?)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4" />
-    <TextView
-        android:text="Time (TimePicker?)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
+        android:id="@+id/linearLayout2">
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView8"
+            android:text="Friday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView9"
+            android:text="Saturday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView3"
+            android:text="Sunday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
     <Button
         android:text="Find My FitFam!"
         android:id="@+id/button2"
