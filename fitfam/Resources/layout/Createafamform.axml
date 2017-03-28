@@ -34,22 +34,24 @@
             android:id="@+id/imageButton4" />
     </ActionMenuView>
     <EditText
-        android:id="@+id/activity"
+        android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Activity" />
+        android:id="@+id/editText2"
+        android:text="Name your new fam" />
     <EditText
+        android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cityzip"
-        android:text="City or Zip Code" />
-    <EditText
+        android:id="@+id/editText1"
+        android:text="Write a brief description of your new fam here" />
+    <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/experience"
-        android:text="Experience Level" />
+        android:id="@+id/multiAutoCompleteTextView1"
+        android:text="Add a tag to your fam. You can add multiple." />
     <Button
-        android:text="Find My FitFam!"
+        android:text="Create Fam!"
         android:id="@+id/button2"
         android:background="@drawable/gold_button"
         style="@style/button_text"
