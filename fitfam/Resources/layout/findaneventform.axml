@@ -49,7 +49,7 @@
         android:id="@+id/autoCompleteTextView2"
         android:text="Experience Level" />
     <Button
-        android:text="Find My FitFam!"
+        android:text="Find Events!"
         android:id="@+id/button2"
         android:background="@drawable/gold_button"
         style="@style/button_text"

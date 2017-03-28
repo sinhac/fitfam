@@ -49,22 +49,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView4" />
-    <AutoCompleteTextView
+    <TextView
+        android:text="Type the bio you want visible on your profile here"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView1"
-        android:backgroundTint="#ffb4b4b4" />
+        android:id="@+id/textView5" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space2"
         android:layout_marginBottom="15.0dp" />
-    <TextView
-        android:text="Gender"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:text="Gender"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <Space
+            android:layout_width="32.5dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space3" />
+        <TextView
+            android:text="Private"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView8" />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/switch1" />
+        <TextView
+            android:text="Public"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView7" />
+    </LinearLayout>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup1">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Male"
+            android:id="@+id/radioButton1" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:id="@+id/radioButton2" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:id="@+id/radioButton3" />
+    </RadioGroup>
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,6 +123,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView2" />
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/multiAutoCompleteTextView1"
+        android:text="Enter activities and interests " />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
