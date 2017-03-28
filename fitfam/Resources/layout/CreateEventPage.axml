@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1">
+    <Button
+        p1:text="Create Event"
+        p1:id="@+id/button1"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content" />
+    <TextView
+        p1:text="Event Name"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/textView1" />
+    <MultiAutoCompleteTextView
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/multiAutoCompleteTextView1"
+        p1:text="Enter your activity tag" />
+    <MultiAutoCompleteTextView
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/multiAutoCompleteTextView2"
+        p1:text="Enter the Location" />
+    <Switch
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/switch1"
+        p1:text="Make Public" />
+    <EditText
+        p1:inputType="textMultiLine"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/editText1"
+        p1:text="Enter Event Description" />
+    <TimePicker
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/timePicker1"
+        p1:minWidth="25px"
+        p1:minHeight="25px" />
+    <TimePicker
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/timePicker2"
+        p1:minWidth="25px"
+        p1:minHeight="25px" />
+</LinearLayout>

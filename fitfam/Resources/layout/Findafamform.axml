@@ -54,11 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView6" />
-    <CheckBox
-        android:text="CheckBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox1" />
     <CheckedTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,11 +89,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/checkedTextView7"
         android:text="Saturday" />
-    <TextView
-        android:text="Time (TimePicker?)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
     <Button
         android:text="Find My FitFam!"
         android:id="@+id/button2"
