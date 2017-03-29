@@ -33,62 +33,21 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton4" />
     </ActionMenuView>
-    <MultiAutoCompleteTextView
+    <EditText
+        android:id="@+id/activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/multiAutoCompleteTextView1"
         android:text="Activity" />
-    <AutoCompleteTextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView1"
+        android:id="@+id/cityzip"
         android:text="City or Zip Code" />
-    <AutoCompleteTextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView2"
+        android:id="@+id/experience"
         android:text="Experience Level" />
-    <TextView
-        android:text="Tap on the days and times you are available:"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6" />
-    <CheckedTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkedTextView1"
-        android:text="Sunday" />
-    <CheckedTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkedTextView2"
-        android:text="Monday" />
-    <CheckedTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkedTextView3"
-        android:text="Tuesday" />
-    <CheckedTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkedTextView4"
-        android:text="Wednesday" />
-    <CheckedTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkedTextView5"
-        android:text="Thursday" />
-    <CheckedTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkedTextView6"
-        android:text="Friday" />
-    <CheckedTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkedTextView7"
-        android:text="Saturday" />
     <Button
         android:text="Find My FitFam!"
         android:id="@+id/button2"
