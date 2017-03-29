@@ -126,6 +126,10 @@
     <Reference Include="Xamarin.Android.Support.v7.MediaRouter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.v7.MediaRouter.23.0.1.3\lib\MonoAndroid403\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Facebook">
+      <HintPath>..\packages\Xamarin.Facebook.Android.4.4.0.1\lib\MonoAndroid403\Xamarin.Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Forms.2.0.1.6505\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
@@ -140,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AWSClient.cs" />
     <Compile Include="CreateEventActivity.cs" />
     <Compile Include="CreateafamformActivity.cs" />
     <Compile Include="EditProfilePageActivity.cs" />
