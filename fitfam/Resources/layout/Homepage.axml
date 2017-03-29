@@ -45,13 +45,13 @@
         android:id="@+id/space1"
         android:layout_marginBottom="20.0dp" />
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/find_fam_button"
         android:text="FIND A FAM"
         android:background="@drawable/gold_button"
         style="@style/button_text" />
     <Button
         android:text="CREATE A FAM"
-        android:id="@+id/button2"
+        android:id="@+id/create_fam_button"
         android:background="@drawable/gold_button"
         style="@style/button_text" />
     <Space
@@ -61,12 +61,12 @@
         android:layout_marginBottom="10.0dp" />
     <Button
         android:text="FIND EVENT"
-        android:id="@+id/button4"
+        android:id="@+id/find_event_button"
         android:background="@drawable/gold_button"
         style="@style/button_text" />
     <Button
         android:text="CREATE EVENT"
-        android:id="@+id/button3"
+        android:id="@+id/create_event_button"
         android:background="@drawable/gold_button"
         style="@style/button_text" />
 </LinearLayout>
