@@ -6,12 +6,16 @@ using Android.Views;
 using Android.App;
 using Android.Widget;
 using Android.OS;
+using Amazon.DynamoDBv2.DocumentModel;
+using System.Collections.Generic;
 
 namespace fitfam
 {
     [Activity(Label = "fitfam", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        
+        
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -23,7 +27,7 @@ namespace fitfam
             // and attach an event to it
             Button login_button = FindViewById<Button>(Resource.Id.login_button);
             Button signup_button = FindViewById<Button>(Resource.Id.signup_button);
-
+            
             login_button.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
             };
@@ -31,6 +35,12 @@ namespace fitfam
             signup_button.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
             };
+
+            
+            
+
+            //var request = new Amazon.Runtime.AmazonWebServiceRequest;
+            //var request = new Amazon.DynamoDBv2.AmazonDynamoDBRequest();
         }
     }
 }
