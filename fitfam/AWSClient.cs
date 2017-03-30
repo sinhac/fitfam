@@ -118,6 +118,39 @@ namespace fitfam
             }
         }
 
+        public PutItemRequest makePutRequest(string tablename, Dictionary<string, AttributeValue> item)
+        {
+            var request = new PutItemRequest
+            {
+                TableName = tablename,
+                Item = item
+            };
+            return request;
+        }
+
+        public GetItemRequest makeGetRequest(string tablename, Dictionary<string, AttributeValue> key)
+        {
+            var request = new GetItemRequest
+            {
+                TableName = tablename,
+                Key = key
+            };
+            return request;
+        }
+
+        public UpdateItemRequest makeUpdateRequest(string tablename, Dictionary<string, AttributeValue> key, Dictionary<string, string> names, Dictionary<string, AttributeValue> values, string expression)
+        {
+            var request = new UpdateItemRequest
+            {
+                TableName = tablename,
+                Key = key,
+                ExpressionAttributeNames = names,
+                ExpressionAttributeValues = values,
+                UpdateExpression = expression
+            };
+            return request;
+        }
+
         public void Dispose()
         {
             publicKey = null;
