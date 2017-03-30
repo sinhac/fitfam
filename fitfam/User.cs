@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Amazon.DynamoDBv2.Model;
 
 namespace fitfam
 {
@@ -82,6 +83,16 @@ namespace fitfam
         {
             //get user data
         }
+        
+        public void createEntry()
+        {
+            using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+            {
+                using (var client = awsClient.getDynamoDBClient())
+                {
 
+                }
+            }      
+        }
     }
 }
