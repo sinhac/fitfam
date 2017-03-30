@@ -24,7 +24,7 @@ namespace fitfam
         public string Description
         {
             get { return description; }
-            set { description = value}
+            set { description = value; }
         }
         private List<string> tags;
         public List<string> Tags

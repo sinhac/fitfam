@@ -90,7 +90,12 @@ namespace fitfam
             {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-
+                    /*
+                    var item = new Dictionary<string, AttributeValue>()
+                    {
+                        {"userId", new AttributeValue }
+                    }
+                    */
                 }
             }      
         }

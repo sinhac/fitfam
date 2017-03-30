@@ -24,7 +24,7 @@ namespace fitfam
 
             Button match_button = FindViewById<Button>(Resource.Id.create_event_button);
 
-            find_fam_button.Click += delegate {
+            match_button.Click += delegate {
                 StartActivity(typeof(FindafamformActivity));
             };
         }
