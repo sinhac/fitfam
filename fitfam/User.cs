@@ -25,7 +25,15 @@ namespace fitfam
             get { return username; }
         }
         private List<string> activities;
+        public List<string> Activities
+        {
+            get { return activities; }
+        }
         private Dictionary<string, bool> availability;
+        public Dictionary<string, bool> Availability
+        {
+            get { return availability; }
+        }
         private bool availabilitySet;
         public bool AvailabilitySet
         {
@@ -44,7 +52,15 @@ namespace fitfam
             set { experienceLevel = value; }
         }
         private List<Group> fitFams;
+        public List<Group> FitFams
+        {
+            get { return fitFams; }
+        }
         private List<User> friends;
+        public List<User> Friends
+        {
+            get { return friends; }
+        }
         private string gender;
         public string Gender
         {
@@ -57,6 +73,10 @@ namespace fitfam
             set { pic = value; }
         }
         private List<Event> sharedEvents;
+        public List<Event> SharedEvents
+        {
+            get { return sharedEvents; }
+        }
 
         public User(string userId)
         {
