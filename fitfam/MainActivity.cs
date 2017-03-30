@@ -31,6 +31,8 @@ namespace fitfam
             signup_button.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
             };
+
+            Finish();
         }
     }
 }

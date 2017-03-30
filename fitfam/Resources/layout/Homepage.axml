@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1"
-        android:background="@drawable/gold_plate" >
+        android:background="@drawable/gold_plate">
         <ImageView
             android:src="@drawable/gold_logo"
             android:layout_width="match_parent"
@@ -20,29 +20,29 @@
         <ActionMenuView
             android:id="@+id/actionMenuView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
-                android:background="@drawable/gold_button" 
+                android:background="@drawable/gold_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/face"
                 android:id="@+id/imageButton2"
-                android:background="@drawable/gold_button" 
+                android:background="@drawable/gold_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/message"
                 android:id="@+id/imageButton3"
-                android:background="@drawable/gold_button" 
+                android:background="@drawable/gold_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/clock"
                 android:id="@+id/imageButton4"
-                android:background="@drawable/gold_button" 
+                android:background="@drawable/gold_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </ActionMenuView>
@@ -56,33 +56,33 @@
         android:id="@+id/find_fam_button"
         android:text="FIND A FAM"
         android:background="@drawable/gold_button"
-        style="@style/button_text" 
+        style="@style/button_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="80dp" />
     <Button
         android:text="CREATE A FAM"
         android:id="@+id/create_fam_button"
         android:background="@drawable/gold_button"
-        style="@style/button_text" 
+        style="@style/button_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="80dp" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space2"
-        android:layout_marginBottom="10.0dp"/>
+        android:layout_marginBottom="10.0dp" />
     <Button
         android:text="FIND EVENT"
         android:id="@+id/find_event_button"
         android:background="@drawable/gold_button"
-        style="@style/button_text" 
+        style="@style/button_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="80dp" />
     <Button
         android:text="CREATE EVENT"
         android:id="@+id/create_event_button"
         android:background="@drawable/gold_button"
-        style="@style/button_text" 
+        style="@style/button_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="80dp" />
 </LinearLayout>

@@ -26,6 +26,8 @@ namespace fitfam
             button2.Click += delegate {
                 StartActivity(typeof(matchesActivity));
             };
+
+            Finish();
         }
     }
 }

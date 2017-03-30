@@ -140,11 +140,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FamProfileActivity.cs" />
     <Compile Include="CreateEventActivity.cs" />
     <Compile Include="CreateafamformActivity.cs" />
     <Compile Include="EditProfilePageActivity.cs" />
     <Compile Include="EventPageActivity.cs" />
-    <Compile Include="FamProfileActivity.cs" />
     <Compile Include="FamQuickViewActivity.cs" />
     <Compile Include="FindafamformActivity.cs" />
     <Compile Include="FindaneventActivity.cs" />

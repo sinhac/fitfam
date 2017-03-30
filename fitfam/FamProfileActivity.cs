@@ -3,16 +3,15 @@ using Android.OS;
 
 namespace fitfam
 {
-    [Activity(Label = "FamProfileActivity")]
+    [Activity(Label = "Activity1")]
     public class FamProfileActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.FamProfile);
 
             // Create your application here
-
+            SetContentView(Resource.Layout.FamProfile);
         }
     }
 }
