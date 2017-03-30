@@ -28,5 +28,7 @@
         android:background="@drawable/gold_button"
         style="@style/button_text"
         android:paddingLeft="30dp"
-        android:paddingRight="30dp" />
+        android:paddingRight="30dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content" />
 </LinearLayout>

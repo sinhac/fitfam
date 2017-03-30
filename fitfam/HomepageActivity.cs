@@ -35,6 +35,8 @@ namespace fitfam
             create_event_button.Click += delegate {
                 StartActivity(typeof(CreateEventActivity));
             };
+
+            Finish();
         }
     }
 }

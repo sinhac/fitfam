@@ -3,5 +3,26 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/space1" />
+    <TextView
+        android:text="My Fams"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3" />
+    <TextView
+        android:text="Basketball"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+    <TextView
+        android:text="Come play pickup with us!"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
 </LinearLayout>
