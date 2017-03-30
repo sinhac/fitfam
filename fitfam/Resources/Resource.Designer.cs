@@ -2471,32 +2471,32 @@ namespace fitfam
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f080056
-			public const int abc_background_cache_hint_selector_material_dark = 2131230806;
-			
-			// aapt resource value: 0x7f080057
-			public const int abc_background_cache_hint_selector_material_light = 2131230807;
-			
 			// aapt resource value: 0x7f080058
-			public const int abc_color_highlight_material = 2131230808;
+			public const int abc_background_cache_hint_selector_material_dark = 2131230808;
+			
+			// aapt resource value: 0x7f080059
+			public const int abc_background_cache_hint_selector_material_light = 2131230809;
+			
+			// aapt resource value: 0x7f08005a
+			public const int abc_color_highlight_material = 2131230810;
 			
 			// aapt resource value: 0x7f080004
 			public const int abc_input_method_navigation_guard = 2131230724;
 			
-			// aapt resource value: 0x7f080059
-			public const int abc_primary_text_disable_only_material_dark = 2131230809;
-			
-			// aapt resource value: 0x7f08005a
-			public const int abc_primary_text_disable_only_material_light = 2131230810;
-			
 			// aapt resource value: 0x7f08005b
-			public const int abc_primary_text_material_dark = 2131230811;
+			public const int abc_primary_text_disable_only_material_dark = 2131230811;
 			
 			// aapt resource value: 0x7f08005c
-			public const int abc_primary_text_material_light = 2131230812;
+			public const int abc_primary_text_disable_only_material_light = 2131230812;
 			
 			// aapt resource value: 0x7f08005d
-			public const int abc_search_url_text = 2131230813;
+			public const int abc_primary_text_material_dark = 2131230813;
+			
+			// aapt resource value: 0x7f08005e
+			public const int abc_primary_text_material_light = 2131230814;
+			
+			// aapt resource value: 0x7f08005f
+			public const int abc_search_url_text = 2131230815;
 			
 			// aapt resource value: 0x7f080005
 			public const int abc_search_url_text_normal = 2131230725;
@@ -2507,11 +2507,11 @@ namespace fitfam
 			// aapt resource value: 0x7f080007
 			public const int abc_search_url_text_selected = 2131230727;
 			
-			// aapt resource value: 0x7f08005e
-			public const int abc_secondary_text_material_dark = 2131230814;
+			// aapt resource value: 0x7f080060
+			public const int abc_secondary_text_material_dark = 2131230816;
 			
-			// aapt resource value: 0x7f08005f
-			public const int abc_secondary_text_material_light = 2131230815;
+			// aapt resource value: 0x7f080061
+			public const int abc_secondary_text_material_light = 2131230817;
 			
 			// aapt resource value: 0x7f080008
 			public const int accent_material_dark = 2131230728;
@@ -2747,11 +2747,11 @@ namespace fitfam
 			// aapt resource value: 0x7f08003b
 			public const int switch_thumb_disabled_material_light = 2131230779;
 			
-			// aapt resource value: 0x7f080060
-			public const int switch_thumb_material_dark = 2131230816;
+			// aapt resource value: 0x7f080062
+			public const int switch_thumb_material_dark = 2131230818;
 			
-			// aapt resource value: 0x7f080061
-			public const int switch_thumb_material_light = 2131230817;
+			// aapt resource value: 0x7f080063
+			public const int switch_thumb_material_light = 2131230819;
 			
 			// aapt resource value: 0x7f08003c
 			public const int switch_thumb_normal_material_dark = 2131230780;
@@ -2759,11 +2759,17 @@ namespace fitfam
 			// aapt resource value: 0x7f08003d
 			public const int switch_thumb_normal_material_light = 2131230781;
 			
-			// aapt resource value: 0x7f080054
-			public const int theme_custom1_background = 2131230804;
+			// aapt resource value: 0x7f080056
+			public const int theme_custom1_background = 2131230806;
 			
 			// aapt resource value: 0x7f080055
-			public const int theme_devicedefault_background = 2131230805;
+			public const int theme_custom2_background = 2131230805;
+			
+			// aapt resource value: 0x7f080054
+			public const int theme_custom3_background = 2131230804;
+			
+			// aapt resource value: 0x7f080057
+			public const int theme_devicedefault_background = 2131230807;
 			
 			static Color()
 			{
@@ -3578,14 +3584,14 @@ namespace fitfam
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b007f
-			public const int actTag = 2131427455;
+			// aapt resource value: 0x7f0b0081
+			public const int actTag = 2131427457;
 			
 			// aapt resource value: 0x7f0b00b9
 			public const int action0 = 2131427513;
 			
-			// aapt resource value: 0x7f0b0078
-			public const int actionMenuView1 = 2131427448;
+			// aapt resource value: 0x7f0b0079
+			public const int actionMenuView1 = 2131427449;
 			
 			// aapt resource value: 0x7f0b0061
 			public const int action_bar = 2131427425;
@@ -3665,11 +3671,11 @@ namespace fitfam
 			// aapt resource value: 0x7f0b003c
 			public const int button = 2131427388;
 			
-			// aapt resource value: 0x7f0b0082
-			public const int button1 = 2131427458;
+			// aapt resource value: 0x7f0b0083
+			public const int button1 = 2131427459;
 			
-			// aapt resource value: 0x7f0b0080
-			public const int button2 = 2131427456;
+			// aapt resource value: 0x7f0b0082
+			public const int button2 = 2131427458;
 			
 			// aapt resource value: 0x7f0b0057
 			public const int buttonPanel = 2131427415;
@@ -3752,8 +3758,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00b0
 			public const int default_control_frame = 2131427504;
 			
-			// aapt resource value: 0x7f0b007e
-			public const int description = 2131427454;
+			// aapt resource value: 0x7f0b0080
+			public const int description = 2131427456;
 			
 			// aapt resource value: 0x7f0b000d
 			public const int disableHome = 2131427341;
@@ -3764,8 +3770,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0040
 			public const int display_always = 2131427392;
 			
-			// aapt resource value: 0x7f0b0087
-			public const int editText1 = 2131427463;
+			// aapt resource value: 0x7f0b0088
+			public const int editText1 = 2131427464;
 			
 			// aapt resource value: 0x7f0b0063
 			public const int edit_query = 2131427427;
@@ -3794,8 +3800,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00a0
 			public const int experience = 2131427488;
 			
-			// aapt resource value: 0x7f0b007d
-			public const int famName = 2131427453;
+			// aapt resource value: 0x7f0b007f
+			public const int famName = 2131427455;
 			
 			// aapt resource value: 0x7f0b0033
 			public const int fill = 2131427379;
@@ -3830,23 +3836,23 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0049
 			public const int image = 2131427401;
 			
-			// aapt resource value: 0x7f0b0079
-			public const int imageButton1 = 2131427449;
-			
 			// aapt resource value: 0x7f0b007a
-			public const int imageButton2 = 2131427450;
+			public const int imageButton1 = 2131427450;
 			
 			// aapt resource value: 0x7f0b007b
-			public const int imageButton3 = 2131427451;
+			public const int imageButton2 = 2131427451;
 			
 			// aapt resource value: 0x7f0b007c
-			public const int imageButton4 = 2131427452;
+			public const int imageButton3 = 2131427452;
+			
+			// aapt resource value: 0x7f0b007d
+			public const int imageButton4 = 2131427453;
 			
 			// aapt resource value: 0x7f0b00a7
 			public const int imageView1 = 2131427495;
 			
-			// aapt resource value: 0x7f0b0077
-			public const int imageView5 = 2131427447;
+			// aapt resource value: 0x7f0b0078
+			public const int imageView5 = 2131427448;
 			
 			// aapt resource value: 0x7f0b009d
 			public const int imageView6 = 2131427485;
@@ -3869,8 +3875,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00c2
 			public const int line3 = 2131427522;
 			
-			// aapt resource value: 0x7f0b0081
-			public const int linearLayout1 = 2131427457;
+			// aapt resource value: 0x7f0b0077
+			public const int linearLayout1 = 2131427447;
 			
 			// aapt resource value: 0x7f0b0090
 			public const int linearLayout2 = 2131427472;
@@ -3914,11 +3920,11 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0035
 			public const int mini = 2131427381;
 			
-			// aapt resource value: 0x7f0b0084
-			public const int multiAutoCompleteTextView1 = 2131427460;
-			
 			// aapt resource value: 0x7f0b0085
-			public const int multiAutoCompleteTextView2 = 2131427461;
+			public const int multiAutoCompleteTextView1 = 2131427461;
+			
+			// aapt resource value: 0x7f0b0086
+			public const int multiAutoCompleteTextView2 = 2131427462;
 			
 			// aapt resource value: 0x7f0b0014
 			public const int multiply = 2131427348;
@@ -4046,14 +4052,14 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0043
 			public const int small = 2131427395;
 			
-			// aapt resource value: 0x7f0b008b
-			public const int snackbar_action = 2131427467;
-			
-			// aapt resource value: 0x7f0b008a
-			public const int snackbar_text = 2131427466;
-			
 			// aapt resource value: 0x7f0b008c
-			public const int space1 = 2131427468;
+			public const int snackbar_action = 2131427468;
+			
+			// aapt resource value: 0x7f0b008b
+			public const int snackbar_text = 2131427467;
+			
+			// aapt resource value: 0x7f0b007e
+			public const int space1 = 2131427454;
 			
 			// aapt resource value: 0x7f0b008f
 			public const int space2 = 2131427471;
@@ -4091,8 +4097,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00b3
 			public const int subtitle = 2131427507;
 			
-			// aapt resource value: 0x7f0b0086
-			public const int switch1 = 2131427462;
+			// aapt resource value: 0x7f0b0087
+			public const int switch1 = 2131427463;
 			
 			// aapt resource value: 0x7f0b000c
 			public const int tabMode = 2131427340;
@@ -4106,8 +4112,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0054
 			public const int textSpacerNoButtons = 2131427412;
 			
-			// aapt resource value: 0x7f0b0083
-			public const int textView1 = 2131427459;
+			// aapt resource value: 0x7f0b0084
+			public const int textView1 = 2131427460;
 			
 			// aapt resource value: 0x7f0b0098
 			public const int textView2 = 2131427480;
@@ -4133,11 +4139,11 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00bf
 			public const int time = 2131427519;
 			
-			// aapt resource value: 0x7f0b0088
-			public const int timePicker1 = 2131427464;
-			
 			// aapt resource value: 0x7f0b0089
-			public const int timePicker2 = 2131427465;
+			public const int timePicker1 = 2131427465;
+			
+			// aapt resource value: 0x7f0b008a
+			public const int timePicker2 = 2131427466;
 			
 			// aapt resource value: 0x7f0b004d
 			public const int title = 2131427405;
@@ -5360,6 +5366,12 @@ namespace fitfam
 			
 			// aapt resource value: 0x7f07015b
 			public const int Theme_Custom1 = 2131165531;
+			
+			// aapt resource value: 0x7f07015c
+			public const int Theme_Custom2 = 2131165532;
+			
+			// aapt resource value: 0x7f07015d
+			public const int Theme_Custom3 = 2131165533;
 			
 			// aapt resource value: 0x7f070000
 			public const int Theme_MediaRouter = 2131165184;

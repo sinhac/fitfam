@@ -3,36 +3,54 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:src="@drawable/fitfamlogo1smaller"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView5" />
-    <ActionMenuView
+        android:id="@+id/linearLayout1"
+        android:background="@drawable/gold_plate">
+        <ImageView
+            android:src="@drawable/gold_logo"
+            android:layout_width="match_parent"
+            android:layout_height="86.0dp"
+            android:id="@+id/imageView5"
+            android:scaleType="fitCenter"
+            android:background="@drawable/gold_plate" />
+        <ActionMenuView
+            android:id="@+id/actionMenuView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:src="@drawable/home"
+                android:id="@+id/imageButton1"
+                android:background="@drawable/gold_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:src="@drawable/face"
+                android:id="@+id/imageButton2"
+                android:background="@drawable/gold_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:src="@drawable/message"
+                android:id="@+id/imageButton3"
+                android:background="@drawable/gold_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:src="@drawable/clock"
+                android:id="@+id/imageButton4"
+                android:background="@drawable/gold_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </ActionMenuView>
+    </LinearLayout>
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/actionMenuView1">
-        <ImageButton
-            android:src="@drawable/home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton1" />
-        <ImageButton
-            android:src="@drawable/face"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton2" />
-        <ImageButton
-            android:src="@drawable/message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton3" />
-        <ImageButton
-            android:src="@drawable/clock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton4" />
-    </ActionMenuView>
+        android:id="@+id/space1"
+        android:layout_marginBottom="36.5dp" />
     <EditText
         android:id="@+id/activity"
         android:layout_width="match_parent"

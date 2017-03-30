@@ -25,7 +25,7 @@
                 android:id="@+id/imageButton1"
                 android:background="@drawable/gold_button"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"  />
+                android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/face"
                 android:id="@+id/imageButton2"
@@ -35,13 +35,13 @@
             <ImageButton
                 android:src="@drawable/message"
                 android:id="@+id/imageButton3"
-                android:background="@drawable/gold_button" 
+                android:background="@drawable/gold_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/clock"
                 android:id="@+id/imageButton4"
-                android:background="@drawable/gold_button" 
+                android:background="@drawable/gold_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </ActionMenuView>
@@ -106,7 +106,7 @@
         android:id="@+id/space2"
         android:layout_marginBottom="10.0dp" />
     <Button
-        android:text="CONTACT NOW"
+        android:text="JOIN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button1"
