@@ -3,5 +3,56 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <ImageView
+        android:src="@drawable/fitfamlogo1smaller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5" />
+    <ActionMenuView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/actionMenuView1">
+        <ImageButton
+            android:src="@drawable/home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton1" />
+        <ImageButton
+            android:src="@drawable/face"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2" />
+        <ImageButton
+            android:src="@drawable/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton3" />
+        <ImageButton
+            android:src="@drawable/clock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton4" />
+    </ActionMenuView>
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/multiAutoCompleteTextView1"
+        android:text="Activity" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompleteTextView1"
+        android:text="City or Zip Code" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompleteTextView2"
+        android:text="Experience Level" />
+    <Button
+        android:text="Find Events!"
+        android:id="@+id/button2"
+        android:background="@drawable/gold_button"
+        style="@style/button_text"
+        android:layout_width="260.5dp"
+        android:layout_height="65.5dp" />
 </LinearLayout>
