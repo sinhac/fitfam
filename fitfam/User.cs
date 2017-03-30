@@ -20,11 +20,6 @@ namespace fitfam
         {
             get { return userId; }
         }
-        private string username;
-        public string Username
-        {
-            get { return username; }
-        }
         private List<string> activities;
         public List<string> Activities
         {
@@ -79,25 +74,55 @@ namespace fitfam
             get { return sharedEvents; }
         }
 
+        /// <summary>
+        /// Creates user object
+        /// </summary>
+        /// <param name="userId"></param>
         public User(string userId)
         {
-            //get user data
+            this.userId = userId;                        
         }
         
+        /// <summary>
+        /// Enters user entry to table
+        /// Should only be used once per user
+        /// </summary>
         public void createEntry()
         {
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    /*
+                    var table = "fitfam-mobilehub-2083376203-users";
                     var item = new Dictionary<string, AttributeValue>()
                     {
-                        {"userId", new AttributeValue }
-                    }
-                    */
+                        {"userId", new AttributeValue { S = userId } }
+                    };
+                    awsClient.putItem(client, awsClient.makePutRequest(table, item));                   
                 }
             }      
         }
+
+        public void getEntry()
+        {
+            using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+            {
+                using (var client = awsClient.getDynamoDBClient())
+                {
+                    var table = "fitfam-mobilehub-2083376203-users";
+                    var key = new Dictionary<string, AttributeValue>()
+                    {
+                        {"userId", new AttributeValue { S = userId } }
+                    };
+                    var response = awsClient.getItem(client, awsClient.makeGetRequest(table, key));
+                    var userMap = response.Item;
+                    if (userMap.ContainsKey("activities"))
+                        activities = userMap["activities"].SS;
+                   // if (userMap.ContainsKey("availability"))
+                     //   availability = userMap["availability"].M;
+                }
+            }
+        }
+
     }
 }
