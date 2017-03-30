@@ -22,10 +22,10 @@ namespace fitfam
             // Create your application here
             SetContentView(Resource.Layout.matches);
 
-            Button match_button = FindViewById<Button>(Resource.Id.create_event_button);
+            Button match_button = FindViewById<Button>(Resource.Id.button1);
 
-            find_fam_button.Click += delegate {
-                StartActivity(typeof(FindafamformActivity));
+            match_button.Click += delegate {
+                StartActivity(typeof(FamQuickViewActivity));
             };
         }
     }

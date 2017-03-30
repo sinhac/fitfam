@@ -17,6 +17,8 @@ namespace fitfam
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Event newEvent = new Event();
+
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateEventPage);
 

@@ -35,7 +35,7 @@ namespace fitfam
                 // var newActivity = new Intent(this, typeof(FamProfileActivity));
                 // newActivity.PutExtra("Fam Name", famNameInput);
                 // StartActivity(newActivity);
-                StartActivity(typeof(FamProfileActivity));
+                StartActivity(typeof(matchesActivity));
             };
 
             Finish();
