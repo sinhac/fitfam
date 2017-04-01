@@ -18,9 +18,9 @@
             android:background="@drawable/gold_plate" />
         <LinearLayout
             android:orientation="horizontal"
-            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
@@ -51,27 +51,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space1"
-        android:layout_marginBottom="36.5dp" />
-    <MultiAutoCompleteTextView
+        android:layout_marginBottom="20.0dp" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10.0dp"
+        android:id="@+id/space3" />
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/multiAutoCompleteTextView1"
-        android:text="Activity" />
-    <AutoCompleteTextView
+        android:id="@+id/space2" />
+    <CalendarView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView1"
-        android:text="City or Zip Code" />
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView2"
-        android:text="Experience Level" />
-    <Button
-        android:text="Find Events!"
-        android:id="@+id/button2"
-        android:background="@drawable/gold_button"
-        style="@style/button_text"
-        android:layout_width="260.5dp"
-        android:layout_height="65.5dp" />
+        android:id="@+id/calendarView1" />
 </LinearLayout>
