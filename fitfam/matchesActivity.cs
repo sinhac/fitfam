@@ -14,10 +14,10 @@ namespace fitfam
             // Create your application here
             SetContentView(Resource.Layout.Matches);
 
-            Button match_button = FindViewById<Button>(Resource.Id.button1);
+            Button match_button = FindViewById<Button>(Resource.Id.create_event_button);
 
             match_button.Click += delegate {
-                StartActivity(typeof(FamQuickViewActivity));
+                StartActivity(typeof(FindafamformActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
