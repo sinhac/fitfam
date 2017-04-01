@@ -21,22 +21,40 @@ namespace fitfam
             Button create_event_button = FindViewById<Button>(Resource.Id.create_event_button);
 
             find_fam_button.Click += delegate {
-                StartActivity(typeof(FindafamformActivity));
+                StartActivity(typeof(FindAFamFormActivity));
             };
 
             create_fam_button.Click += delegate {
-                StartActivity(typeof(CreateafamformActivity));
+                StartActivity(typeof(CreateAFamFormActivity));
             };
 
             find_event_button.Click += delegate {
-                StartActivity(typeof(FindaneventActivity));
+                StartActivity(typeof(FindAnEventActivity));
             };
 
             create_event_button.Click += delegate {
                 StartActivity(typeof(CreateEventActivity));
             };
 
-            Finish();
+            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
+            imagebutton1.Click += delegate {
+                StartActivity(typeof(HomepageActivity));
+            };
+
+            ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
+            imagebutton2.Click += delegate {
+                StartActivity(typeof(ProfilePageActivity));
+            };
+
+            ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
+            imagebutton3.Click += delegate {
+                StartActivity(typeof(NotificationsActivity));
+            };
+
+            ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
+            imagebutton4.Click += delegate {
+                StartActivity(typeof(ScheduleActivity));
+            };
         }
     }
 }
