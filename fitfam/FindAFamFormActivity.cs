@@ -9,6 +9,7 @@ namespace fitfam
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Group fam = new Group();
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.FindAFamForm);
 

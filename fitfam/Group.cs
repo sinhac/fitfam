@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Amazon.DynamoDBv2.Model;
 
 namespace fitfam
 {
@@ -48,9 +49,26 @@ namespace fitfam
             get { return eventList; }
         }
 
-        public Group()
+        public Group(string name, string description)
         {
-
+             this.groupName = name;
+             this.description = description;
+             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+                {
+                using (var client = awsClient.getDynamoDBClient())
+                {
+                    Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
+                    {
+                        { "groupName", new AttributeValue { S = groupName } },
+                        { "description", new AttributeValue { S = description } }
+                    };
+                    awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-groups", item));
+                
+                }
+             }
+            
         }
+
+
     }
 }

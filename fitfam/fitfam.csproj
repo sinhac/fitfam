@@ -173,6 +173,22 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\CreateAFamForm.axml" />
+    <AndroidResource Include="Resources\layout\CreateEventPage.axml" />
+    <AndroidResource Include="Resources\layout\DaySchedule.axml" />
+    <AndroidResource Include="Resources\layout\EditProfilePage.axml" />
+    <AndroidResource Include="Resources\layout\EventPage.axml" />
+    <AndroidResource Include="Resources\layout\FamProfile.axml" />
+    <AndroidResource Include="Resources\layout\FamQuickView.axml" />
+    <AndroidResource Include="Resources\layout\FindAFamForm.axml" />
+    <AndroidResource Include="Resources\layout\FindAnEventForm.axml" />
+    <AndroidResource Include="Resources\layout\Homepage.axml" />
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\Matches.axml" />
+    <AndroidResource Include="Resources\layout\Notifications.axml" />
+    <AndroidResource Include="Resources\layout\ProfilePage.axml" />
+    <AndroidResource Include="Resources\layout\Schedule.axml" />
+    <AndroidResource Include="Resources\layout\UserProfilePage.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -231,9 +247,7 @@
     <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.3.1.2\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
     <Analyzer Include="..\packages\AWSSDK.SimpleNotificationService.3.3.0.10\analyzers\dotnet\cs\AWSSDK.SimpleNotificationService.CodeAnalysis.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\layout\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
