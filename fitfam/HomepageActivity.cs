@@ -28,7 +28,7 @@ namespace fitfam
                 StartActivity(typeof(CreateAFamFormActivity));
             };
 
-            find_event_button.Click += delegate {
+            find_event_button.Click += delegate {   
                 StartActivity(typeof(FindAnEventActivity));
             };
 
