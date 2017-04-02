@@ -4,16 +4,14 @@ using Android.Widget;
 
 namespace fitfam
 {
-    [Activity(Label = "NotificationActivity")]
-    public class NotificationsActivity : Activity
+    [Activity(Label = "EditProfilePage")]
+    public class EditProfilePageActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Notifications);
 
             // Create your application here
-
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
@@ -33,6 +31,7 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
+            
         }
     }
 }

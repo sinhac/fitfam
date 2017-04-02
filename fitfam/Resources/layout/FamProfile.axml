@@ -20,7 +20,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3">
+            android:id="@+id/linearLayout2">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
@@ -51,53 +51,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space1"
-        android:layout_marginBottom="20.0dp" />
+        android:layout_marginBottom="30.0dp" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/space1" />
     <TextView
-        android:text="Monday, March 3, 2017"
+        android:text="My Fams"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10.0dp"
-        android:id="@+id/space3" />
+        android:id="@+id/textView3" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/space2" />
+        android:id="@+id/space2"
+        android:layout_marginBottom="11.5dp" />
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2"
-        android:background="@drawable/gold_plate"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <ImageView
-            android:src="@drawable/mightyman"
-            android:layout_width="77.5dp"
-            android:layout_height="57.5dp"
-            android:id="@+id/imageView6"
-            android:layout_marginLeft="10dp" />
+        android:id="@+id/linearLayout1"
+        android:background="@drawable/gold_plate">
+        <TextView
+            android:text="Basketball"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/space3"
+            android:layout_marginBottom="10.0dp" />
+        <TextView
+            android:text="Come play pickup with us!"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:background="@drawable/gold_plate">
         <TextView
             android:text="Soccer Squad"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="29.5dp"
-            android:id="@+id/textView2"
-            android:layout_marginLeft="5dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1" />
         <Space
-            android:layout_width="22.5dp"
-            android:layout_height="match_parent"
-            android:id="@+id/space4" />
-        <Button
-            android:text="2pm - 4pm"
-            android:id="@+id/button1"
-            android:layout_width="92.5dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/gold_button" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/space3"
+            android:layout_marginBottom="10.0dp" />
+        <TextView
+            android:text="Bio: Here's some awesome information about this group. You and your friends should join it. Yada yada yada..................................................................."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" />
     </LinearLayout>
 </LinearLayout>

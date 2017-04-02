@@ -4,15 +4,21 @@ using Android.Widget;
 
 namespace fitfam
 {
-    [Activity(Label = "NotificationActivity")]
-    public class NotificationsActivity : Activity
+    [Activity(Label = "matchesActivity")]
+    public class MatchesActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Notifications);
 
             // Create your application here
+            SetContentView(Resource.Layout.Matches);
+
+            Button match_button = FindViewById<Button>(Resource.Id.button1);
+
+            match_button.Click += delegate {
+                StartActivity(typeof(FamQuickViewActivity));
+            };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
@@ -33,6 +39,7 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
+            
         }
     }
 }

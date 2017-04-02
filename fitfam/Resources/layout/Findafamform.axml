@@ -18,9 +18,9 @@
             android:background="@drawable/gold_plate" />
         <LinearLayout
             android:orientation="horizontal"
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3">
+            android:layout_height="wrap_content">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
@@ -51,53 +51,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space1"
-        android:layout_marginBottom="20.0dp" />
-    <TextView
-        android:text="Monday, March 3, 2017"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginBottom="36.5dp" />
+    <EditText
+        android:id="@+id/activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10.0dp"
-        android:id="@+id/space3" />
-    <Space
+        android:text="Activity" />
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/space2" />
-    <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/cityzip"
+        android:text="City or Zip Code" />
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2"
-        android:background="@drawable/gold_plate"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <ImageView
-            android:src="@drawable/mightyman"
-            android:layout_width="77.5dp"
-            android:layout_height="57.5dp"
-            android:id="@+id/imageView6"
-            android:layout_marginLeft="10dp" />
-        <TextView
-            android:text="Soccer Squad"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="29.5dp"
-            android:id="@+id/textView2"
-            android:layout_marginLeft="5dp" />
-        <Space
-            android:layout_width="22.5dp"
-            android:layout_height="match_parent"
-            android:id="@+id/space4" />
-        <Button
-            android:text="2pm - 4pm"
-            android:id="@+id/button1"
-            android:layout_width="92.5dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/gold_button" />
-    </LinearLayout>
+        android:id="@+id/experience"
+        android:text="Experience Level" />
+    <Button
+        android:text="Find My FitFam!"
+        android:id="@+id/button2"
+        android:background="@drawable/gold_button"
+        style="@style/button_text"
+        android:layout_width="260.5dp"
+        android:layout_height="65.5dp" />
 </LinearLayout>
