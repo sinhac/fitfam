@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -52,38 +51,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space1"
-        android:layout_marginBottom="20.0dp" />
-    <Button
-        android:id="@+id/find_fam_button"
-        android:text="FIND A FAM"
-        android:background="@drawable/gold_button"
-        style="@style/button_text"
-        android:layout_width="match_parent"
-        android:layout_height="80dp" />
-    <Button
-        android:text="CREATE A FAM"
-        android:id="@+id/create_fam_button"
-        android:background="@drawable/gold_button"
-        style="@style/button_text"
-        android:layout_width="match_parent"
-        android:layout_height="80dp" />
-    <Space
+        android:layout_marginBottom="36.5dp" />
+    <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/space2"
-        android:layout_marginBottom="10.0dp" />
+        android:id="@+id/multiAutoCompleteTextView1"
+        android:text="Activity" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompleteTextView1"
+        android:text="City or Zip Code" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompleteTextView2"
+        android:text="Experience Level" />
     <Button
-        android:text="FIND EVENT"
-        android:id="@+id/find_event_button"
+        android:text="Find Events!"
+        android:id="@+id/button2"
         android:background="@drawable/gold_button"
         style="@style/button_text"
-        android:layout_width="match_parent"
-        android:layout_height="80dp" />
-    <Button
-        android:text="CREATE EVENT"
-        android:id="@+id/create_event_button"
-        android:background="@drawable/gold_button"
-        style="@style/button_text"
-        android:layout_width="match_parent"
-        android:layout_height="80dp" />
+        android:layout_width="260.5dp"
+        android:layout_height="65.5dp" />
 </LinearLayout>
