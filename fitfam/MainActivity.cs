@@ -1,17 +1,10 @@
-﻿using System;
-
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.App;
+﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using Amazon.DynamoDBv2.DocumentModel;
-using System.Collections.Generic;
 
 namespace fitfam
 {
-    [Activity(Label = "fitfam", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "fitfam", MainLauncher = true, Icon = "@drawable/mightyMan")]
     public class MainActivity : Activity
     {
         
@@ -35,9 +28,6 @@ namespace fitfam
             signup_button.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
             };
-
-            
-            
 
             //var request = new Amazon.Runtime.AmazonWebServiceRequest;
             //var request = new Amazon.DynamoDBv2.AmazonDynamoDBRequest();

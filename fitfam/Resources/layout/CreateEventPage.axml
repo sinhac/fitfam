@@ -2,8 +2,51 @@
 <LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
     p1:orientation="vertical"
     p1:layout_width="match_parent"
-    p1:layout_height="match_parent"
-    p1:id="@+id/linearLayout1">
+    p1:layout_height="match_parent">
+    <LinearLayout
+        p1:orientation="vertical"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/linearLayout2"
+        p1:background="@drawable/gold_plate">
+        <ImageView
+            p1:src="@drawable/gold_logo"
+            p1:layout_width="match_parent"
+            p1:layout_height="86.0dp"
+            p1:id="@+id/imageView5"
+            p1:scaleType="fitCenter"
+            p1:background="@drawable/gold_plate" />
+        <LinearLayout
+            p1:orientation="horizontal"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/linearLayout3">
+            <ImageButton
+                p1:src="@drawable/home"
+                p1:id="@+id/imageButton1"
+                p1:background="@drawable/gold_button"
+                p1:layout_width="wrap_content"
+                p1:layout_height="match_parent" />
+            <ImageButton
+                p1:src="@drawable/face"
+                p1:id="@+id/imageButton2"
+                p1:background="@drawable/gold_button"
+                p1:layout_width="wrap_content"
+                p1:layout_height="match_parent" />
+            <ImageButton
+                p1:src="@drawable/message"
+                p1:id="@+id/imageButton3"
+                p1:background="@drawable/gold_button"
+                p1:layout_width="wrap_content"
+                p1:layout_height="match_parent" />
+            <ImageButton
+                p1:src="@drawable/clock"
+                p1:id="@+id/imageButton4"
+                p1:background="@drawable/gold_button"
+                p1:layout_width="wrap_content"
+                p1:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
     <Button
         p1:text="Create Event"
         p1:id="@+id/button1"

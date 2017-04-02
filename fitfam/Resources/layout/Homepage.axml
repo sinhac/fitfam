@@ -17,35 +17,36 @@
             android:id="@+id/imageView5"
             android:scaleType="fitCenter"
             android:background="@drawable/gold_plate" />
-        <ActionMenuView
-            android:id="@+id/actionMenuView1"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
                 android:background="@drawable/gold_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/face"
                 android:id="@+id/imageButton2"
                 android:background="@drawable/gold_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/message"
                 android:id="@+id/imageButton3"
                 android:background="@drawable/gold_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/clock"
                 android:id="@+id/imageButton4"
                 android:background="@drawable/gold_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
-        </ActionMenuView>
+        </LinearLayout>
     </LinearLayout>
     <Space
         android:layout_width="match_parent"

@@ -16,79 +16,52 @@
             android:id="@+id/imageView5"
             android:scaleType="fitCenter"
             android:background="@drawable/gold_plate" />
-        <ActionMenuView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/actionMenuView1">
+            android:id="@+id/linearLayout2">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
                 android:background="@drawable/gold_button"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/face"
                 android:id="@+id/imageButton2"
                 android:background="@drawable/gold_button"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/message"
                 android:id="@+id/imageButton3"
                 android:background="@drawable/gold_button"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
             <ImageButton
                 android:src="@drawable/clock"
                 android:id="@+id/imageButton4"
                 android:background="@drawable/gold_button"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content" />
-        </ActionMenuView>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </LinearLayout>
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space1"
         android:layout_marginBottom="20.0dp" />
-    <TextView
-        android:text="Which Fams fit you?"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView1"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10.0dp"
         android:id="@+id/space3" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout4"
-        android:minWidth="25px"
-        android:minHeight="25px" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space2" />
-    <LinearLayout
-        android:orientation="horizontal"
+    <CalendarView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:id="@+id/linearLayout3">
-        <ImageView
-            android:src="@drawable/mightyman"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView6" />
-        <Button
-            android:text="Soccer Squad"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/button1"
-            android:background="@drawable/gold_button" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/calendarView1" />
 </LinearLayout>
