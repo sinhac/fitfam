@@ -4,14 +4,20 @@ using Android.Widget;
 
 namespace fitfam
 {
-    [Activity(Label = "FamQuickViewActivity")]
-    public class FamQuickViewActivity : Activity
+    [Activity(Label = "FindaneventActivity")]
+    public class FindAnEventActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.FindAnEventForm);
 
-            SetContentView(Resource.Layout.FamQuickView);
+            // Create your application here
+            Button button2 = FindViewById<Button>(Resource.Id.button2);
+
+            button2.Click += delegate {
+                StartActivity(typeof(MatchesActivity));
+            };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {

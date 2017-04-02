@@ -4,36 +4,40 @@ using Android.Widget;
 
 namespace fitfam
 {
-    [Activity(Label = "HomepageActivity")]
-    public class HomepageActivity : Activity
+    [Activity(Label = "FindafamformActivity")]
+    public class FindAFamFormActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Homepage);
+            SetContentView(Resource.Layout.FindAFamForm);
 
             // Create your application here
-            Button find_fam_button = FindViewById<Button>(Resource.Id.find_fam_button);
-            Button create_fam_button = FindViewById<Button>(Resource.Id.create_fam_button);
-            Button find_event_button = FindViewById<Button>(Resource.Id.find_event_button);
-            Button create_event_button = FindViewById<Button>(Resource.Id.create_event_button);
 
-            find_fam_button.Click += delegate {
-                StartActivity(typeof(FindAFamFormActivity));
+            var activity = FindViewById<EditText>(Resource.Id.activity);
+            var activityTag = "";
+            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                activityTag = e.Text.ToString();
             };
 
-            create_fam_button.Click += delegate {
-                StartActivity(typeof(CreateAFamFormActivity));
+            var cityZip = FindViewById<EditText>(Resource.Id.cityzip);
+            var cityZipInput = "";
+            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                cityZipInput = e.Text.ToString();
             };
 
-            find_event_button.Click += delegate {   
-                StartActivity(typeof(FindAnEventActivity));
+            var experience = FindViewById<EditText>(Resource.Id.experience);
+            var experienceInput = "";
+            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                experienceInput = e.Text.ToString();
             };
 
-            create_event_button.Click += delegate {
-                StartActivity(typeof(CreateEventActivity));
+            Button button2 = FindViewById<Button>(Resource.Id.button2);
+            button2.Click += delegate {
+                StartActivity(typeof(MatchesActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -55,6 +59,7 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
+            
         }
     }
 }
