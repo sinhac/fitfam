@@ -10,6 +10,7 @@ namespace fitfam
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Group group = new Group();
             base.OnCreate(savedInstanceState);
 
             // Create your application here
@@ -21,6 +22,7 @@ namespace fitfam
             famName.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 famNameInput = e.Text.ToString();
+                group.GroupName = famNameInput;
             };
 
             var description = FindViewById<EditText>(Resource.Id.description);
@@ -28,6 +30,7 @@ namespace fitfam
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 descriptionInput = e.Text.ToString();
+                group.Description = descriptionInput;
             };
             
             Button button2 = FindViewById<Button>(Resource.Id.button2);

@@ -29,7 +29,7 @@ namespace fitfam
         private List<string> tags;
         public List<string> Tags
         {
-            get { return Tags; }
+            get { return tags; }
         }
         private string pic;
         public string Pic

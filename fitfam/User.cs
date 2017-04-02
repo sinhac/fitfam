@@ -71,7 +71,10 @@ namespace fitfam
         public string Pic
         {
             get { return pic; }
-            set { pic = value; }
+            set {
+                pic = value;
+                // update DB
+            }
         }
         private List<Event> sharedEvents;
         public List<Event> SharedEvents
@@ -81,7 +84,7 @@ namespace fitfam
 
         public User(string userId)
         {
-            //get user data
+            //get user data from DB
         }
         
         public void createEntry()
