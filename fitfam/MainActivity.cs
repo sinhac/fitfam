@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Amazon.DynamoDBv2.DocumentModel;
 using System.Collections.Generic;
+using Xamarin.Facebook;
 
 namespace fitfam
 {
@@ -29,6 +30,7 @@ namespace fitfam
             Button signup_button = FindViewById<Button>(Resource.Id.signup_button);
             
             login_button.Click += delegate {
+                (var loginManager = new Xamarin.Facebook.Login.LoginManager())
                 StartActivity(typeof(HomepageActivity));
             };
 
