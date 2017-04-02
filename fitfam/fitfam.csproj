@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AWSClient.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="CreateAFamFormActivity.cs" />
     <Compile Include="CreateEventActivity.cs" />
     <Compile Include="DayScheduleActivity.cs" />
