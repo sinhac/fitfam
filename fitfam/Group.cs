@@ -15,6 +15,11 @@ namespace fitfam
 {
     class Group
     {
+        private string groupId;
+        public string GroupId
+        {
+            get { return groupId; }
+        }
         private string groupName;
         public string GroupName
         {
@@ -49,16 +54,20 @@ namespace fitfam
             get { return eventList; }
         }
 
-        public Group(string name, string description)
+        public Group(string name, string description, User creator)
         {
              this.groupName = name;
              this.description = description;
+             this.addMember(creator, true);
+
              using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
                 {
                 using (var client = awsClient.getDynamoDBClient())
                 {
+                    groupId = groupName + creator.UserId;
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
+                        { "groupId", new AttributeValue { S = groupId} },
                         { "groupName", new AttributeValue { S = groupName } },
                         { "description", new AttributeValue { S = description } }
                     };
@@ -67,6 +76,12 @@ namespace fitfam
                 }
              }
             
+        }
+
+        public void addMember(User user, bool isAdmin)
+        {
+            members[user] = isAdmin;
+            //add member to server
         }
 
 
