@@ -145,15 +145,53 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AWSClient.cs" />
+    <Compile Include="CreateAFamFormActivity.cs" />
+    <Compile Include="CreateEventActivity.cs" />
+    <Compile Include="DayScheduleActivity.cs" />
+    <Compile Include="EditProfilePageActivity.cs" />
+    <Compile Include="EventPageActivity.cs" />
+    <Compile Include="FamProfileActivity.cs" />
+    <Compile Include="FamQuickViewActivity.cs" />
+    <Compile Include="HomepageActivity.cs" />
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="NotificationsActivity.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="ProfilePageActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="fitfam.csproj.bak" />
     <None Include="GettingStarted.Xamarin" />
+    <None Include="obj\Release\CoreCompileInputs.cache" />
+    <None Include="obj\Release\libraryimports.cache" />
+    <None Include="obj\Release\libraryprojectimports.cache" />
+    <None Include="obj\Release\R.cs.flag" />
+    <None Include="obj\Release\sdks.cache" />
+    <None Include="obj\Release\__library_projects__\FormsViewGroup.stamp" />
+    <None Include="obj\Release\__library_projects__\System.Runtime.stamp" />
+    <None Include="obj\Release\__library_projects__\Xamarin.Forms.Core.stamp" />
+    <None Include="obj\Release\__library_projects__\Xamarin.Forms.Platform.Android.stamp" />
+    <None Include="obj\Release\__library_projects__\Xamarin.Forms.Platform.stamp" />
+    <None Include="obj\Release\__library_projects__\Xamarin.Forms.Xaml.stamp" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\CreateAFamForm.axml" />
+    <AndroidResource Include="Resources\layout\CreateEventPage.axml" />
+    <AndroidResource Include="Resources\layout\DaySchedule.axml" />
+    <AndroidResource Include="Resources\layout\EventPage.axml" />
+    <AndroidResource Include="Resources\layout\FamProfile.axml" />
+    <AndroidResource Include="Resources\layout\Homepage.axml" />
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\Notifications.axml" />
+    <AndroidResource Include="Resources\layout\ProfilePage.axml" />
+    <AndroidResource Include="Resources\layout\Schedule.axml" />
+    <AndroidResource Include="Resources\layout\UserProfilePage.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -213,7 +251,46 @@
     <Analyzer Include="..\packages\AWSSDK.SimpleNotificationService.3.3.0.10\analyzers\dotnet\cs\AWSSDK.SimpleNotificationService.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\layout\" />
+    <AndroidResource Include="Resources\drawable\profileImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="obj\Release\android\fitfam\fitfam\R.java" />
+    <Content Include="obj\Release\res\drawable\clock.png" />
+    <Content Include="obj\Release\res\drawable\face.png" />
+    <Content Include="obj\Release\res\drawable\fitfamlogo1smaller.png" />
+    <Content Include="obj\Release\res\drawable\gold_button.xml" />
+    <Content Include="obj\Release\res\drawable\gold_logo.png" />
+    <Content Include="obj\Release\res\drawable\gold_plate.xml" />
+    <Content Include="obj\Release\res\drawable\home.png" />
+    <Content Include="obj\Release\res\drawable\icon.png" />
+    <Content Include="obj\Release\res\drawable\logo.png" />
+    <Content Include="obj\Release\res\drawable\message.png" />
+    <Content Include="obj\Release\res\drawable\mightyman.png" />
+    <Content Include="obj\Release\res\layout\editprofilepage.xml" />
+    <Content Include="obj\Release\res\layout\famquickview.xml" />
+    <Content Include="obj\Release\res\layout\findafamform.xml" />
+    <Content Include="obj\Release\res\layout\homepage.xml" />
+    <Content Include="obj\Release\res\layout\main.xml" />
+    <Content Include="obj\Release\res\layout\matches.xml" />
+    <Content Include="obj\Release\res\values\strings.xml" />
+    <Content Include="obj\Release\res\values\styles.xml" />
+    <Content Include="obj\Release\res\values\theme.xml" />
+    <Content Include="obj\Release\__library_projects__\FormsViewGroup\library_project_imports\formsviewgroup.jar" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Release\__library_projects__\System.Runtime\library_project_imports\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Core\library_project_imports\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Platform.Android\library_project_imports\assets\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Platform.Android\library_project_imports\bin\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Platform.Android\library_project_imports\java\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Platform.Android\library_project_imports\res\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Platform\library_project_imports\assets\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Platform\library_project_imports\bin\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Platform\library_project_imports\java\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Platform\library_project_imports\res\" />
+    <Folder Include="obj\Release\__library_projects__\Xamarin.Forms.Xaml\library_project_imports\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

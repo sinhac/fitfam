@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space1"
-        android:minHeight="260" />
+        android:minHeight="260dp" />
     <Button
         android:text="Set Availability"
         android:id="@+id/availButton"

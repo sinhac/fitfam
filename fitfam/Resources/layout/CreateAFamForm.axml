@@ -57,18 +57,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/famName"
-        android:text="Name your new fam" />
+        android:hint="Name your new fam" />
     <EditText
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/description"
-        android:text="Write a brief description of your new fam here" />
+        android:hint="Write a brief description of your new fam here" />
     <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/actTag"
-        android:text="Add a tag to your fam. You can add multiple." />
+        android:hint="Add a tag to your fam. You can add multiple." />
     <Button
         android:text="Create Fam!"
         android:id="@+id/button2"
