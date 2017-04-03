@@ -4,38 +4,41 @@ using Android.Widget;
 
 namespace fitfam
 {
-    [Activity(Label = "CreateafamformActivity")]
-    public class CreateAFamFormActivity : Activity
+    [Activity(Label = "FindafamformActivity")]
+    public class FindAFamFormActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Group fam = new Group();
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.FindAFamForm);
 
             // Create your application here
-            SetContentView(Resource.Layout.CreateAFamForm);
 
-            // Create your application here
-            var famName = FindViewById<EditText>(Resource.Id.famName);
-            var famNameInput = "";
-            famName.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            var activity = FindViewById<EditText>(Resource.Id.activity);
+            var activityTag = "";
+            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
-                famNameInput = e.Text.ToString();
+                activityTag = e.Text.ToString();
             };
 
-            var description = FindViewById<EditText>(Resource.Id.description);
-            var descriptionInput = "";
-            description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            var cityZip = FindViewById<EditText>(Resource.Id.cityzip);
+            var cityZipInput = "";
+            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
-                descriptionInput = e.Text.ToString();
+                cityZipInput = e.Text.ToString();
             };
-            
+
+            var experience = FindViewById<EditText>(Resource.Id.experience);
+            var experienceInput = "";
+            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                experienceInput = e.Text.ToString();
+            };
+
             Button button2 = FindViewById<Button>(Resource.Id.button2);
             button2.Click += delegate {
-                // var newActivity = new Intent(this, typeof(FamProfileActivity));
-                // newActivity.PutExtra("Fam Name", famNameInput);
-                // StartActivity(newActivity);
-                Group fam = new Group(famNameInput, descriptionInput);
-                StartActivity(typeof(FamProfileActivity));
+                StartActivity(typeof(MatchesActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -57,6 +60,7 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
+            
         }
     }
 }
