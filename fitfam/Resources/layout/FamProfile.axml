@@ -20,7 +20,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2">
+            android:id="@+id/linearLayout2"
+            android:gravity="center">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
@@ -67,56 +68,28 @@
         android:layout_height="wrap_content"
         android:id="@+id/space2"
         android:layout_marginBottom="11.5dp" />
-    <LinearLayout
-        android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
+    <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:background="@drawable/gold_plate">
-        <TextView
-            android:text="Basketball"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/space3"
-            android:layout_marginBottom="10.0dp" />
-        <TextView
-            android:text="Come play pickup with us!"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
+        android:padding="16dp"
+        android:text="Basketball"
+        android:drawableLeft="@drawable/minimightyman"
+        android:textSize="24sp"
+        android:background="@drawable/gold_button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:drawablePadding="50dp" />
+    <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:background="@drawable/gold_plate">
-        <TextView
-            android:text="Soccer Squad"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/space3"
-            android:layout_marginBottom="10.0dp" />
-        <TextView
-            android:text="Bio: Here's some awesome information about this group. You and your friends should join it. Yada yada yada..................................................................."
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2" />
-    </LinearLayout>
+        android:padding="16dp"
+        android:text="Soccer Squad"
+        android:drawableLeft="@drawable/minimightyman"
+        android:textSize="24sp"
+        android:background="@drawable/gold_button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:drawablePadding="50dp" />
 </LinearLayout>

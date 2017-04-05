@@ -39,7 +39,11 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
-            
+
+            Button button2 = FindViewById<Button>(Resource.Id.button2);
+            button2.Click += delegate {
+                StartActivity(typeof(FamQuickViewActivity));
+            };
         }
     }
 }

@@ -20,7 +20,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3">
+            android:id="@+id/linearLayout3"
+            android:gravity="center">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
@@ -68,31 +69,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space2" />
-    <LinearLayout
-        android:orientation="horizontal"
+    <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2"
+        android:padding="16dp"
+        android:text="Soccer Squad"
+        android:drawableLeft="@drawable/minimightyman"
+        android:textSize="24sp"
         android:background="@drawable/gold_button"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <ImageView
-            android:src="@drawable/mightyman"
-            android:layout_width="77.5dp"
-            android:layout_height="57.5dp"
-            android:id="@+id/imageView6"
-            android:layout_marginLeft="10dp" />
-        <TextView
-            android:text="Soccer Squad"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="29.5dp"
-            android:id="@+id/textView2"
-            android:layout_marginLeft="5dp" />
-    </LinearLayout>
-    <Button
-        android:text="Soccer Squad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1" />  
+        android:layout_marginRight="10dp"
+        android:drawablePadding="50dp" />
 </LinearLayout>
