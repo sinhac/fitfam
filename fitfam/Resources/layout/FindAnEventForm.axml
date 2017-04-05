@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -20,7 +21,8 @@
             android:orientation="horizontal"
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
@@ -52,21 +54,43 @@
         android:layout_height="wrap_content"
         android:id="@+id/space1"
         android:layout_marginBottom="36.5dp" />
+    <TextView
+        android:text="Activity"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
     <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/multiAutoCompleteTextView1"
-        android:text="Activity" />
+        android:hint="Activity" />
+    <TextView
+        android:text="Location"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/autoCompleteTextView1"
-        android:text="City or Zip Code" />
-    <AutoCompleteTextView
+        android:hint="City or Zip Code" />
+    <TextView
+        android:text="Experience Level"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView2"
-        android:text="Experience Level" />
+        android:id="@+id/textView3" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner1"
+        android:prompt="@string/experience_prompt" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16.0dp"
+        android:id="@+id/space2" />
     <Button
         android:text="Find Events!"
         android:id="@+id/button2"

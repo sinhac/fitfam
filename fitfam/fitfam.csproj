@@ -237,6 +237,9 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\CreateAFamForm.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\CreateAFamForm.axml" />
     <AndroidResource Include="Resources\layout\CreateEventPage.axml" />
     <AndroidResource Include="Resources\layout\DaySchedule.axml" />
@@ -253,9 +256,7 @@
     <AndroidResource Include="Resources\layout\Notifications.axml" />
     <AndroidResource Include="Resources\layout\ProfilePage.axml" />
     <AndroidResource Include="Resources\layout\Schedule.axml" />
-    <AndroidResource Include="Resources\layout\UserProfilePage.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UserProfilePage.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

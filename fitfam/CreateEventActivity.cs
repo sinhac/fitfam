@@ -13,9 +13,9 @@ namespace fitfam
             SetContentView(Resource.Layout.CreateEventPage);
 
             // Create your application here
-            Button button2 = FindViewById<Button>(Resource.Id.button2);
+            Button button1 = FindViewById<Button>(Resource.Id.button1);
 
-            button2.Click += delegate {
+            button1.Click += delegate {
                 StartActivity(typeof(MatchesActivity));
             };
 
