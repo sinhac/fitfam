@@ -52,6 +52,16 @@ namespace fitfam
         }
 
         /// <summary>
+        /// Get DynamoDB client
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public Table getTable(Amazon.DynamoDBv2.AmazonDynamoDBClient client, string table)
+        {
+            return Table.LoadTable(client, table);
+        }
+        /// <summary>
         /// Executes put item request
         /// </summary>
         /// <param name="client">dynamodb client</param>
