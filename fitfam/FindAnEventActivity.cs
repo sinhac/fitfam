@@ -1,6 +1,7 @@
 using Android.App;
 using Android.OS;
 using Android.Widget;
+using System;
 
 namespace fitfam
 {
@@ -13,6 +14,29 @@ namespace fitfam
             SetContentView(Resource.Layout.FindAnEventForm);
 
             // Create your application here
+            Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner1);
+
+            spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            var adapter = ArrayAdapter.CreateFromResource(
+                    this, Resource.Array.experience_array, Android.Resource.Layout.SimpleSpinnerItem);
+
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinner.Adapter = adapter;
+
+            var activity = FindViewById<EditText>(Resource.Id.activity);
+            var activityTag = "";
+            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                activityTag = e.Text.ToString();
+            };
+
+            var cityZip = FindViewById<EditText>(Resource.Id.cityzip);
+            var cityZipInput = "";
+            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                cityZipInput = e.Text.ToString();
+            };
+
             Button button2 = FindViewById<Button>(Resource.Id.button2);
 
             button2.Click += delegate {
@@ -39,6 +63,13 @@ namespace fitfam
                 StartActivity(typeof(ScheduleActivity));
             };
             
+        }
+        private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
+
+            string toast = string.Format("The experience is {0}", spinner.GetItemAtPosition(e.Position));
+            Toast.MakeText(this, toast, ToastLength.Long).Show();
         }
     }
 }

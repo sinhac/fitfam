@@ -2,4 +2,21 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">fitfam</string>
+    <string name="experience_prompt">Choose an experience level</string>
+    <string-array name="experience_array">
+      <item>Plebeian (I\'ve never heard of this - I\'ve done this once)</item>
+      <item>Intermediate (I haven\'t done this in a while - I do this occasionally)</item>
+      <item>Olympian (I do this regularly - This is my life)</item>
+    </string-array>
+    <string name="availability_prompt">Choose a preferred workout time</string>
+    <string-array name="availability_array">
+      <item>Early morning (3-6am)</item>
+      <item>Morning (6-9am)</item>
+      <item>Late morning (9-12noon)</item>
+      <item>Afternoon (12-3pm)</item>
+      <item>Late afternoon (3-6pm)</item>
+      <item>Early evening (6-9pm)</item>
+      <item>Evening (9-12midnight)</item>
+      <item>Late evening (12-3am)</item>
+    </string-array>
 </resources>
