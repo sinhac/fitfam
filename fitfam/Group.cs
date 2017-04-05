@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Amazon.DynamoDBv2.Model;
+using Amazon.DynamoDBv2.DocumentModel;
 
 namespace fitfam
 {
@@ -59,23 +60,25 @@ namespace fitfam
              this.groupName = name;
              this.description = description;
              this.addMember(creator, true);
-
+            System.Console.WriteLine("connecting to database");
              using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
-                {
+             {
+                System.Console.WriteLine("connected to database");
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    using (var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups"))
-                    {
-                        groupId = groupName + creator.UserId;
-                        var groupEntry = new Document();
-                        groupEntry["groupId"] = groupId;
-                        groupEntry["groupName"] = groupName;
-                        groupEntry["description"] = description;
-                        var membersDoc = new Document();
-                        membersDoc[creator.userId] = true;
-                        groupEntry["members"] = membersDoc;
-                        table.PutItem(groupEntry);
-                    }
+                    System.Console.WriteLine("writing to database");
+                    var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups");
+                    
+                    groupId = groupName + creator.UserId;
+                    var groupEntry = new Document();
+                    groupEntry["groupId"] = groupId;
+                    groupEntry["groupName"] = groupName;
+                    groupEntry["description"] = description;
+                    var membersDoc = new Document();
+                    membersDoc[creator.UserId] = true;
+                    groupEntry["members"] = membersDoc;
+                    table.PutItemAsync(groupEntry);
+                    System.Console.WriteLine("wrote to database");
                     /*
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {

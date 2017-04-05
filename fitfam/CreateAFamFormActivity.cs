@@ -9,6 +9,7 @@ namespace fitfam
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            System.Console.WriteLine("opened createfam form");
             base.OnCreate(savedInstanceState);
 
             // Create your application here
@@ -34,7 +35,9 @@ namespace fitfam
                 // var newActivity = new Intent(this, typeof(FamProfileActivity));
                 // newActivity.PutExtra("Fam Name", famNameInput);
                 // StartActivity(newActivity);
-                Group fam = new Group(famNameInput, descriptionInput);
+                System.Console.WriteLine("creating fam");
+                Group fam = new Group(famNameInput, descriptionInput, new User("test"));
+                System.Console.WriteLine("Created fam");
                 StartActivity(typeof(FamProfileActivity));
             };
 
