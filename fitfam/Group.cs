@@ -64,15 +64,29 @@ namespace fitfam
                 {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    groupId = groupName + creator.UserId;
+                    using (var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups"))
+                    {
+                        groupId = groupName + creator.UserId;
+                        var groupEntry = new Document();
+                        groupEntry["groupId"] = groupId;
+                        groupEntry["groupName"] = groupName;
+                        groupEntry["description"] = description;
+                        var membersDoc = new Document();
+                        membersDoc[creator.userId] = true;
+                        groupEntry["members"] = membersDoc;
+                        table.PutItem(groupEntry);
+                    }
+                    /*
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "groupId", new AttributeValue { S = groupId} },
                         { "groupName", new AttributeValue { S = groupName } },
-                        { "description", new AttributeValue { S = description } }
+                        { "description", new AttributeValue { S = description } },
+                        { "members", new AttributeValue { M = } }
+
                     };
-                    awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-groups", item));
-                
+                    awsClient.putItem(client, awsClient.makePutRequest(, item));
+                    */
                 }
              }
             

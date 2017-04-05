@@ -247,7 +247,9 @@
     <AndroidResource Include="Resources\layout\EventPage.axml" />
     <AndroidResource Include="Resources\layout\FamProfile.axml" />
     <AndroidResource Include="Resources\layout\FamQuickView.axml" />
-    <AndroidResource Include="Resources\layout\FindAFamForm.axml" />
+    <AndroidResource Include="Resources\layout\FindAFamForm.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\FindAnEventForm.axml" />
     <AndroidResource Include="Resources\layout\GroupsPage.axml" />
     <AndroidResource Include="Resources\layout\Homepage.axml" />
