@@ -2,7 +2,8 @@
 <LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
     p1:orientation="vertical"
     p1:layout_width="match_parent"
-    p1:layout_height="match_parent">
+    p1:layout_height="match_parent"
+    p1:gravity="center_horizontal">
     <LinearLayout
         p1:orientation="vertical"
         p1:layout_width="match_parent"
@@ -20,7 +21,8 @@
             p1:orientation="horizontal"
             p1:layout_width="match_parent"
             p1:layout_height="wrap_content"
-            p1:id="@+id/linearLayout3">
+            p1:id="@+id/linearLayout3"
+            p1:gravity="center">
             <ImageButton
                 p1:src="@drawable/home"
                 p1:id="@+id/imageButton1"
@@ -53,7 +55,7 @@
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content" />
     <TextView
-        p1:text="Event Name"
+        p1:hint="Event Name"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/textView1" />
@@ -61,12 +63,12 @@
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/multiAutoCompleteTextView1"
-        p1:text="Enter your activity tag" />
+        p1:hint="Enter your activity tag" />
     <MultiAutoCompleteTextView
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/multiAutoCompleteTextView2"
-        p1:text="Enter the Location" />
+        p1:hint="Enter the Location" />
     <Switch
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
@@ -77,7 +79,33 @@
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/editText1"
-        p1:text="Enter Event Description" />
+        p1:hint="Enter Event Description" />
+    <TextView
+        p1:text="Select the experience level(s) you would like your event to consist of:"
+        p1:textAppearance="?android:attr/textAppearanceLarge"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/textView4" />
+    <CheckBox
+        p1:text="Plebeian (I've never heard of this - I've done this once)"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/checkBox1" />
+    <CheckBox
+        p1:text="Intermediate (I haven't done this in a while - I do this occasionally)"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/checkBox2" />
+    <CheckBox
+        p1:text="Olympian (I do this regularly - This is my life)"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/checkBox3" />
+    <Space
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/space2"
+        p1:layout_marginBottom="25.5dp" />
     <TimePicker
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"

@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/theme_devicedefault_background">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -20,7 +22,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3">
+            android:id="@+id/linearLayout3"
+            android:gravity="center">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"
@@ -52,23 +55,67 @@
         android:layout_height="wrap_content"
         android:id="@+id/space1"
         android:layout_marginBottom="30.0dp" />
+    <TextView
+        android:text="Fam Name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
     <EditText
         android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/famName"
-        android:text="Name your new fam" />
+        android:hint="Name your new fam" />
+    <TextView
+        android:text="Description"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
     <EditText
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/description"
-        android:text="Write a brief description of your new fam here" />
+        android:hint="Write a brief description of your new fam here" />
+    <TextView
+        android:text="Tags"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3" />
     <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/actTag"
-        android:text="Add a tag to your fam. You can add multiple." />
+        android:hint="Add a tag to your fam. You can add multiple." />
+    <TextView
+        android:text="Select the experience level(s) you would like your fam to consist of:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4" />
+    <CheckBox
+        android:text="Plebeian (I've never heard of this - I've done this once)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox1" />
+    <CheckBox
+        android:text="Intermediate (I haven't done this in a while - I do this occasionally)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox2" />
+    <CheckBox
+        android:text="Olympian (I do this regularly - This is my life)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox3" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space2"
+        android:layout_marginBottom="25.5dp" />
     <Button
         android:text="Create Fam!"
         android:id="@+id/button2"
