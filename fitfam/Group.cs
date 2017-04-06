@@ -61,7 +61,7 @@ namespace fitfam
              this.addMember(creator, true);
 
              using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
-                {
+             {
                 using (var client = awsClient.getDynamoDBClient())
                 {
                     groupId = groupName + creator.UserId;
@@ -75,13 +75,14 @@ namespace fitfam
                 
                 }
              }
-            
+              
         }
 
         public void addMember(User user, bool isAdmin)
         {
             members[user] = isAdmin;
             //add member to server
+
         }
 
 
