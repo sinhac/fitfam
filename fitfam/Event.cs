@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Amazon.DynamoDBv2.Model;
+
 
 namespace fitfam
 { 
@@ -84,6 +86,11 @@ namespace fitfam
                 using (var client = awsClient.getDynamoDBClient())
                 {
                     eventId = eventName + creator.UserId + startTime.ToString();
+                    List<string> attending_userids = new List<string>();
+                    for (int i = 0; i < attending.Count; i++)
+                    {
+                        attending_userids.Add(attending[i].UserId);
+                    }
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "eventId", new AttributeValue { S = eventId} },
@@ -92,9 +99,9 @@ namespace fitfam
                         { "location", new AttributeValue { S = location } },
                         { "startTime", new AttributeValue { S = startTime.ToString() } },
                         { "endTime", new AttributeValue { S = endTime.ToString() } },
-                        { "publicEvent", new AttributeValue { S = publicEvent } },
-                        { "tags", new AttributeValue { S = tags } },
-                        { "attending", new AttributeValue { S = attending } }
+                        { "publicEvent", new AttributeValue { BOOL = publicEvent } },
+                        { "tags", new AttributeValue { SS = tags } },
+                        { "attending", new AttributeValue { SS = attending_userids } }
                     };
                     awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
 
