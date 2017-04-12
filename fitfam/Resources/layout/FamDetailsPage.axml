@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:background="@color/theme_devicedefault_background">
     <LinearLayout
         android:orientation="vertical"
@@ -21,7 +22,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2"
+            android:id="@+id/linearLayout3"
             android:gravity="center">
             <ImageButton
                 android:src="@drawable/home"
@@ -53,15 +54,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space1"
-        android:layout_marginBottom="20.0dp" />
+        android:layout_marginBottom="30.0dp" />
     <TextView
-        android:text="The Date"
+        android:text="groupName"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textDisplay" />
-    <CalendarView
+        android:id="@+id/textView1" />
+    <TextView
+        android:text="description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/calendarView1" />
+        android:id="@+id/textView2" />
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView6" />
+    <Button
+        android:text="Events"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:background="@drawable/gold_button"
+        style="@style/button_text" />
 </LinearLayout>
