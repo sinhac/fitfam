@@ -3077,8 +3077,8 @@ namespace fitfam
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b0097
-			public const int actTag = 2131427479;
+			// aapt resource value: 0x7f0b0098
+			public const int actTag = 2131427480;
 			
 			// aapt resource value: 0x7f0b00f6
 			public const int action0 = 2131427574;
@@ -3182,8 +3182,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00a0
 			public const int button1 = 2131427488;
 			
-			// aapt resource value: 0x7f0b009d
-			public const int button2 = 2131427485;
+			// aapt resource value: 0x7f0b009e
+			public const int button2 = 2131427486;
 			
 			// aapt resource value: 0x7f0b00cb
 			public const int button3 = 2131427531;
@@ -3209,14 +3209,14 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0040
 			public const int center_vertical = 2131427392;
 			
-			// aapt resource value: 0x7f0b0099
-			public const int checkBox1 = 2131427481;
-			
 			// aapt resource value: 0x7f0b009a
-			public const int checkBox2 = 2131427482;
+			public const int checkBox1 = 2131427482;
 			
 			// aapt resource value: 0x7f0b009b
-			public const int checkBox3 = 2131427483;
+			public const int checkBox2 = 2131427483;
+			
+			// aapt resource value: 0x7f0b009c
+			public const int checkBox3 = 2131427484;
 			
 			// aapt resource value: 0x7f0b0067
 			public const int checkbox = 2131427431;
@@ -3284,8 +3284,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0053
 			public const int default_activity_button = 2131427411;
 			
-			// aapt resource value: 0x7f0b0095
-			public const int description = 2131427477;
+			// aapt resource value: 0x7f0b0096
+			public const int description = 2131427478;
 			
 			// aapt resource value: 0x7f0b00ad
 			public const int design_bottom_sheet = 2131427501;
@@ -3335,8 +3335,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0066
 			public const int expanded_menu = 2131427430;
 			
-			// aapt resource value: 0x7f0b0093
-			public const int famName = 2131427475;
+			// aapt resource value: 0x7f0b0094
+			public const int famName = 2131427476;
 			
 			// aapt resource value: 0x7f0b0047
 			public const int fill = 2131427399;
@@ -3377,23 +3377,23 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0052
 			public const int image = 2131427410;
 			
-			// aapt resource value: 0x7f0b008d
-			public const int imageButton1 = 2131427469;
-			
 			// aapt resource value: 0x7f0b008e
-			public const int imageButton2 = 2131427470;
+			public const int imageButton1 = 2131427470;
 			
 			// aapt resource value: 0x7f0b008f
-			public const int imageButton3 = 2131427471;
+			public const int imageButton2 = 2131427471;
 			
 			// aapt resource value: 0x7f0b0090
-			public const int imageButton4 = 2131427472;
+			public const int imageButton3 = 2131427472;
+			
+			// aapt resource value: 0x7f0b0091
+			public const int imageButton4 = 2131427473;
 			
 			// aapt resource value: 0x7f0b00d5
 			public const int imageView1 = 2131427541;
 			
-			// aapt resource value: 0x7f0b008b
-			public const int imageView5 = 2131427467;
+			// aapt resource value: 0x7f0b008c
+			public const int imageView5 = 2131427468;
 			
 			// aapt resource value: 0x7f0b00a8
 			public const int imageView6 = 2131427496;
@@ -3422,17 +3422,17 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0107
 			public const int line3 = 2131427591;
 			
-			// aapt resource value: 0x7f0b008a
-			public const int linearLayout1 = 2131427466;
+			// aapt resource value: 0x7f0b008b
+			public const int linearLayout1 = 2131427467;
 			
 			// aapt resource value: 0x7f0b009f
 			public const int linearLayout2 = 2131427487;
 			
-			// aapt resource value: 0x7f0b008c
-			public const int linearLayout3 = 2131427468;
+			// aapt resource value: 0x7f0b008d
+			public const int linearLayout3 = 2131427469;
 			
-			// aapt resource value: 0x7f0b009e
-			public const int linearLayout4 = 2131427486;
+			// aapt resource value: 0x7f0b008a
+			public const int linearLayout4 = 2131427466;
 			
 			// aapt resource value: 0x7f0b00cc
 			public const int linearLayout5 = 2131427532;
@@ -3446,8 +3446,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00d6
 			public const int login_button = 2131427542;
 			
-			// aapt resource value: 0x7f0b0110
-			public const int masked = 2131427600;
+			// aapt resource value: 0x7f0b0111
+			public const int masked = 2131427601;
 			
 			// aapt resource value: 0x7f0b00f9
 			public const int media_actions = 2131427577;
@@ -3704,11 +3704,11 @@ namespace fitfam
 			// aapt resource value: 0x7f0b003d
 			public const int snap = 2131427389;
 			
-			// aapt resource value: 0x7f0b0091
-			public const int space1 = 2131427473;
+			// aapt resource value: 0x7f0b0092
+			public const int space1 = 2131427474;
 			
-			// aapt resource value: 0x7f0b009c
-			public const int space2 = 2131427484;
+			// aapt resource value: 0x7f0b009d
+			public const int space2 = 2131427485;
 			
 			// aapt resource value: 0x7f0b00a7
 			public const int space3 = 2131427495;
@@ -3788,8 +3788,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b005d
 			public const int textSpacerNoTitle = 2131427421;
 			
-			// aapt resource value: 0x7f0b0092
-			public const int textView1 = 2131427474;
+			// aapt resource value: 0x7f0b0093
+			public const int textView1 = 2131427475;
 			
 			// aapt resource value: 0x7f0b00c7
 			public const int textView10 = 2131427527;
@@ -3809,14 +3809,14 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00bd
 			public const int textView15 = 2131427517;
 			
-			// aapt resource value: 0x7f0b0094
-			public const int textView2 = 2131427476;
+			// aapt resource value: 0x7f0b0095
+			public const int textView2 = 2131427477;
 			
-			// aapt resource value: 0x7f0b0096
-			public const int textView3 = 2131427478;
+			// aapt resource value: 0x7f0b0097
+			public const int textView3 = 2131427479;
 			
-			// aapt resource value: 0x7f0b0098
-			public const int textView4 = 2131427480;
+			// aapt resource value: 0x7f0b0099
+			public const int textView4 = 2131427481;
 			
 			// aapt resource value: 0x7f0b00b6
 			public const int textView5 = 2131427510;
