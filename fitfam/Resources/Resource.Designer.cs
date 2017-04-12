@@ -2377,8 +2377,26 @@ namespace fitfam
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
+			// aapt resource value: 0x7f020139
+			public const int avd_hide_password_1 = 2130837817;
+			
+			// aapt resource value: 0x7f02013a
+			public const int avd_hide_password_2 = 2130837818;
+			
+			// aapt resource value: 0x7f02013b
+			public const int avd_hide_password_3 = 2130837819;
+			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
+			
+			// aapt resource value: 0x7f02013c
+			public const int avd_show_password_1 = 2130837820;
+			
+			// aapt resource value: 0x7f02013d
+			public const int avd_show_password_2 = 2130837821;
+			
+			// aapt resource value: 0x7f02013e
+			public const int avd_show_password_3 = 2130837822;
 			
 			// aapt resource value: 0x7f020055
 			public const int clock = 2130837589;
@@ -3446,8 +3464,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00d6
 			public const int login_button = 2131427542;
 			
-			// aapt resource value: 0x7f0b0110
-			public const int masked = 2131427600;
+			// aapt resource value: 0x7f0b0111
+			public const int masked = 2131427601;
 			
 			// aapt resource value: 0x7f0b00f9
 			public const int media_actions = 2131427577;
