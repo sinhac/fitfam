@@ -77,5 +77,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/button1"
         android:background="@drawable/gold_button"
-        style="@style/button_text" />
+        style="@style/button_text"
+        android:gravity="center" />
 </LinearLayout>

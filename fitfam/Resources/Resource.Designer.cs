@@ -3137,8 +3137,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0103
 			public const int actions = 2131427587;
 			
-			// aapt resource value: 0x7f0b00cc
-			public const int activity = 2131427532;
+			// aapt resource value: 0x7f0b00cd
+			public const int activity = 2131427533;
 			
 			// aapt resource value: 0x7f0b0050
 			public const int activity_chooser_view_content = 2131427408;
@@ -3164,8 +3164,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b001b
 			public const int automatic = 2131427355;
 			
-			// aapt resource value: 0x7f0b010e
-			public const int availButton = 2131427598;
+			// aapt resource value: 0x7f0b010f
+			public const int availButton = 2131427599;
 			
 			// aapt resource value: 0x7f0b0031
 			public const int beginning = 2131427377;
@@ -3185,8 +3185,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b009d
 			public const int button2 = 2131427485;
 			
-			// aapt resource value: 0x7f0b00ca
-			public const int button3 = 2131427530;
+			// aapt resource value: 0x7f0b00cb
+			public const int button3 = 2131427531;
 			
 			// aapt resource value: 0x7f0b0057
 			public const int buttonPanel = 2131427415;
@@ -3224,8 +3224,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00ff
 			public const int chronometer = 2131427583;
 			
-			// aapt resource value: 0x7f0b00cd
-			public const int cityzip = 2131427533;
+			// aapt resource value: 0x7f0b00ce
+			public const int cityzip = 2131427534;
 			
 			// aapt resource value: 0x7f0b0045
 			public const int clip_horizontal = 2131427397;
@@ -3356,8 +3356,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b004b
 			public const int @fixed = 2131427403;
 			
-			// aapt resource value: 0x7f0b010c
-			public const int fullNameTextView = 2131427596;
+			// aapt resource value: 0x7f0b010d
+			public const int fullNameTextView = 2131427597;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int home = 2131427333;
@@ -3434,8 +3434,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b009e
 			public const int linearLayout4 = 2131427486;
 			
-			// aapt resource value: 0x7f0b00cb
-			public const int linearLayout5 = 2131427531;
+			// aapt resource value: 0x7f0b00cc
+			public const int linearLayout5 = 2131427532;
 			
 			// aapt resource value: 0x7f0b0021
 			public const int listMode = 2131427361;
@@ -3536,9 +3536,6 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00ed
 			public const int mr_volume_slider = 2131427565;
 			
-			// aapt resource value: 0x7f0b00a0
-			public const int multiAutoCompleteTextView1 = 2131427488;
-			
 			// aapt resource value: 0x7f0b00a1
 			public const int multiAutoCompleteTextView1 = 2131427489;
 			
@@ -3614,8 +3611,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00b9
 			public const int radioGroup1 = 2131427513;
 			
-			// aapt resource value: 0x7f0b010b
-			public const int relativeLayout1 = 2131427595;
+			// aapt resource value: 0x7f0b010c
+			public const int relativeLayout1 = 2131427596;
 			
 			// aapt resource value: 0x7f0b001a
 			public const int right = 2131427354;
@@ -3824,8 +3821,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00b6
 			public const int textView5 = 2131427510;
 			
-			// aapt resource value: 0x7f0b00ce
-			public const int textView6 = 2131427534;
+			// aapt resource value: 0x7f0b00cf
+			public const int textView6 = 2131427535;
 			
 			// aapt resource value: 0x7f0b00b8
 			public const int textView7 = 2131427512;
@@ -3890,8 +3887,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b000e
 			public const int view_offset_helper = 2131427342;
 			
-			// aapt resource value: 0x7f0b010f
-			public const int visible = 2131427599;
+			// aapt resource value: 0x7f0b0110
+			public const int visible = 2131427600;
 			
 			// aapt resource value: 0x7f0b00eb
 			public const int volume_item_container = 2131427563;
