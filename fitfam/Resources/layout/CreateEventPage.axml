@@ -5,128 +5,129 @@
     p1:layout_height="wrap_content"
     p1:gravity="center_horizontal"
     p1:background="@color/theme_devicedefault_background">
-  <ScrollView
-      p1:layout_width="match_parent"
-      p1:layout_height="match_parent">
-    <LinearLayout
-        p1:orientation="vertical"
+    <ScrollView
         p1:layout_width="match_parent"
-        p1:layout_height="wrap_content"
-        p1:id="@+id/linearLayout4">
-      <LinearLayout
-          p1:orientation="vertical"
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/linearLayout2"
-          p1:background="@drawable/gold_plate">
-        <ImageView
-            p1:src="@drawable/gold_logo"
-            p1:layout_width="match_parent"
-            p1:layout_height="86.0dp"
-            p1:id="@+id/imageView5"
-            p1:scaleType="fitCenter"
-            p1:background="@drawable/gold_plate" />
+        p1:layout_height="match_parent">
         <LinearLayout
-            p1:orientation="horizontal"
+            p1:orientation="vertical"
             p1:layout_width="match_parent"
             p1:layout_height="wrap_content"
-            p1:id="@+id/linearLayout3"
-            p1:gravity="center">
-          <ImageButton
-              p1:src="@drawable/home"
-              p1:id="@+id/imageButton1"
-              p1:background="@drawable/gold_button"
-              p1:layout_width="wrap_content"
-              p1:layout_height="match_parent" />
-          <ImageButton
-              p1:src="@drawable/face"
-              p1:id="@+id/imageButton2"
-              p1:background="@drawable/gold_button"
-              p1:layout_width="wrap_content"
-              p1:layout_height="match_parent" />
-          <ImageButton
-              p1:src="@drawable/message"
-              p1:id="@+id/imageButton3"
-              p1:background="@drawable/gold_button"
-              p1:layout_width="wrap_content"
-              p1:layout_height="match_parent" />
-          <ImageButton
-              p1:src="@drawable/clock"
-              p1:id="@+id/imageButton4"
-              p1:background="@drawable/gold_button"
-              p1:layout_width="wrap_content"
-              p1:layout_height="match_parent" />
+            p1:id="@+id/linearLayout4">
+            <LinearLayout
+                p1:orientation="vertical"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout2"
+                p1:background="@drawable/gold_plate">
+                <ImageView
+                    p1:src="@drawable/gold_logo"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="86.0dp"
+                    p1:id="@+id/imageView5"
+                    p1:scaleType="fitCenter"
+                    p1:background="@drawable/gold_plate" />
+                <LinearLayout
+                    p1:orientation="horizontal"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/linearLayout3"
+                    p1:gravity="center">
+                    <ImageButton
+                        p1:src="@drawable/home"
+                        p1:id="@+id/imageButton1"
+                        p1:background="@drawable/gold_button"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="match_parent" />
+                    <ImageButton
+                        p1:src="@drawable/face"
+                        p1:id="@+id/imageButton2"
+                        p1:background="@drawable/gold_button"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="match_parent" />
+                    <ImageButton
+                        p1:src="@drawable/message"
+                        p1:id="@+id/imageButton3"
+                        p1:background="@drawable/gold_button"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="match_parent" />
+                    <ImageButton
+                        p1:src="@drawable/clock"
+                        p1:id="@+id/imageButton4"
+                        p1:background="@drawable/gold_button"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                p1:hint="Event Name"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView1" />
+            <MultiAutoCompleteTextView
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/multiAutoCompleteTextView1"
+                p1:hint="Enter your activity tag" />
+            <MultiAutoCompleteTextView
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/multiAutoCompleteTextView2"
+                p1:hint="Enter the Location" />
+            <Switch
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/switch1"
+                p1:text="Make Public" />
+            <EditText
+                p1:inputType="textMultiLine"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/editText1"
+                p1:hint="Enter Event Description" />
+            <TextView
+                p1:text="Select the experience level(s) you would like your event to consist of:"
+                p1:textAppearance="?android:attr/textAppearanceLarge"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView4" />
+            <CheckBox
+                p1:text="Plebeian (I've never heard of this - I've done this once)"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/checkBox1" />
+            <CheckBox
+                p1:text="Intermediate (I haven't done this in a while - I do this occasionally)"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/checkBox2" />
+            <CheckBox
+                p1:text="Olympian (I do this regularly - This is my life)"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/checkBox3" />
+            <Space
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/space2"
+                p1:layout_marginBottom="25.5dp" />
+            <TimePicker
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/timePicker1"
+                p1:minWidth="25px"
+                p1:minHeight="25px" />
+            <TimePicker
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/timePicker2"
+                p1:minWidth="25px"
+                p1:minHeight="25px" />
+            <Button
+                p1:text="Create Event"
+                p1:id="@+id/button1"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:background="@drawable/gold_button" />
         </LinearLayout>
-      </LinearLayout>
-      <Button
-          p1:text="Create Event"
-          p1:id="@+id/button1"
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content" />
-      <TextView
-          p1:hint="Event Name"
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/textView1" />
-      <MultiAutoCompleteTextView
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/multiAutoCompleteTextView1"
-          p1:hint="Enter your activity tag" />
-      <MultiAutoCompleteTextView
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/multiAutoCompleteTextView2"
-          p1:hint="Enter the Location" />
-      <Switch
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/switch1"
-          p1:text="Make Public" />
-      <EditText
-          p1:inputType="textMultiLine"
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/editText1"
-          p1:hint="Enter Event Description" />
-      <TextView
-          p1:text="Select the experience level(s) you would like your event to consist of:"
-          p1:textAppearance="?android:attr/textAppearanceLarge"
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/textView4" />
-      <CheckBox
-          p1:text="Plebeian (I've never heard of this - I've done this once)"
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/checkBox1" />
-      <CheckBox
-          p1:text="Intermediate (I haven't done this in a while - I do this occasionally)"
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/checkBox2" />
-      <CheckBox
-          p1:text="Olympian (I do this regularly - This is my life)"
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/checkBox3" />
-      <Space
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/space2"
-          p1:layout_marginBottom="25.5dp" />
-      <TimePicker
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/timePicker1"
-          p1:minWidth="25px"
-          p1:minHeight="25px" />
-      <TimePicker
-          p1:layout_width="match_parent"
-          p1:layout_height="wrap_content"
-          p1:id="@+id/timePicker2"
-          p1:minWidth="25px"
-          p1:minHeight="25px" />
-    </LinearLayout>
-  </ScrollView>
+    </ScrollView>
 </LinearLayout>
