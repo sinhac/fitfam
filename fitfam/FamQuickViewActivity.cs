@@ -32,6 +32,19 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
+
+            Button backtosearch = FindViewById<Button>(Resource.Id.button2);
+            backtosearch.Click += delegate
+            {
+                StartActivity(typeof(MatchesActivity));
+            };
+
+            /*Button join = FindViewById<Button>(Resource.Id.button1);
+            join.Click += delegate
+            {
+
+            };*/
+   
             
         }
     }

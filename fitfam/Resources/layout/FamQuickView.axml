@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:background="@color/theme_devicedefault_background">
     <LinearLayout
         android:orientation="vertical"
@@ -21,7 +22,8 @@
             android:orientation="horizontal"
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
             <ImageButton
                 android:src="@drawable/home"
                 android:id="@+id/imageButton1"

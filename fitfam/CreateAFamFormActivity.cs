@@ -38,7 +38,7 @@ namespace fitfam
                 System.Console.WriteLine("creating fam");
                 Group fam = new Group(famNameInput, descriptionInput, new User("test"));
                 System.Console.WriteLine("Created fam");
-                StartActivity(typeof(FamProfileActivity));
+                StartActivity(typeof(FamDetailsPageActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
