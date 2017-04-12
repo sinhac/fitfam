@@ -25,13 +25,55 @@ namespace fitfam
         public string GroupName
         {
             get { return groupName; }
-            set { groupName = value; }
+            set
+            {
+                groupName = value;
+                using (AWSClient awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+                {
+                    using (var client = awsClient.getDynamoDBClient())
+                    {
+                        var key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } };
+                        var attrNames = new Dictionary<string, string>()
+                        {
+                            {"#GN", "groupName" }
+                        };
+                            var attrVals = new Dictionary<string, AttributeValue>()
+                        {
+                            {":groupNameValue", new AttributeValue {S = groupName} }
+                        };
+                        var expression = "SET #GN = :groupNameValue";
+                        var request = awsClient.makeUpdateRequest("fitfam-mobilehub-2083376203-groups", key, attrNames, attrVals, expression);
+                        client.UpdateItemAsync(request);
+                    }                
+                }
+            }
         }
         private string description;
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            set
+            {
+                description = value;
+                using (AWSClient awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+                {
+                    using (var client = awsClient.getDynamoDBClient())
+                    {
+                        var key = new Dictionary<string, AttributeValue>() { { "description", new AttributeValue { S = groupId } } };
+                        var attrNames = new Dictionary<string, string>()
+                        {
+                            {"#D", "description" }
+                        };
+                        var attrVals = new Dictionary<string, AttributeValue>()
+                        {
+                            {":descriptionValue", new AttributeValue {S = groupName} }
+                        };
+                        var expression = "SET #D = :descriptionValue";
+                        var request = awsClient.makeUpdateRequest("fitfam-mobilehub-2083376203-groups", key, attrNames, attrVals, expression);
+                        client.UpdateItemAsync(request);
+                    }
+                }
+            }
         }
         private List<string> tags;
         public List<string> Tags
@@ -42,7 +84,28 @@ namespace fitfam
         public string Pic
         {
             get { return pic; }
-            set { pic = value; }
+            set
+            {
+                pic = value;
+                using (AWSClient awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+                {
+                    using (var client = awsClient.getDynamoDBClient())
+                    {
+                        var key = new Dictionary<string, AttributeValue>() { { "pic", new AttributeValue { S = groupId } } };
+                        var attrNames = new Dictionary<string, string>()
+                        {
+                            {"#P", "pic" }
+                        };
+                        var attrVals = new Dictionary<string, AttributeValue>()
+                        {
+                            {":picValue", new AttributeValue {S = groupName} }
+                        };
+                        var expression = "SET #P = :picValue";
+                        var request = awsClient.makeUpdateRequest("fitfam-mobilehub-2083376203-groups", key, attrNames, attrVals, expression);
+                        client.UpdateItemAsync(request);
+                    }
+                }
+            }
         }
         private Dictionary<User, bool> members; //true means they are an admin
         public Dictionary<User, bool> Members
@@ -59,6 +122,7 @@ namespace fitfam
         {
              this.groupName = name;
              this.description = description;
+            this.members = new Dictionary<User, bool>();
              this.addMember(creator, true);
             System.Console.WriteLine("connecting to database");
              using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
@@ -97,7 +161,7 @@ namespace fitfam
 
         public void addMember(User user, bool isAdmin)
         {
-            members[user] = isAdmin;
+            members.Add(user, isAdmin);
             //add member to server
         }
 
