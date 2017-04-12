@@ -4,6 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/theme_devicedefault_background">
+  <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -128,4 +136,6 @@
         android:background="@drawable/gold_button"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp" />
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -105,7 +105,7 @@ namespace fitfam
                         { "attending", new AttributeValue { SS = attending_userids } }
                     };
                     awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
-
+                    System.Console.WriteLine("ADDED NEW EVENT");
                 }
             }
         }
@@ -133,7 +133,12 @@ namespace fitfam
                 UpdateExpression = "ADD #A :newAttending"
             };
             var response = dbclient.UpdateItemAsync(request);
-            // TO-DO: error-check response
+
+            //// Check the response.
+            //var attributeList = response.Attributes; // attribute list in the response.
+            //                                         // print attributeList.
+            //Console.WriteLine("\nPrinting item after 'attending' attribute update ............");
+            //PrintItem(attributeList);
         }
 
         public void addTag(string tag)
