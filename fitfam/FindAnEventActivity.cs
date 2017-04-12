@@ -23,7 +23,7 @@ namespace fitfam
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
 
-            var activity = FindViewById<EditText>(Resource.Id.activity);
+            var activity = FindViewById<EditText>(Resource.Id.multiAutoCompleteTextView1);
             var activityTag = "";
             activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {

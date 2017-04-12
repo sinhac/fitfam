@@ -3,99 +3,110 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
-    <LinearLayout
-        android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/theme_devicedefault_background">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:background="@drawable/gold_plate">
-        <ImageView
-            android:src="@drawable/gold_logo"
-            android:layout_width="match_parent"
-            android:layout_height="86.0dp"
-            android:id="@+id/imageView5"
-            android:scaleType="fitCenter"
-            android:background="@drawable/gold_plate" />
+        android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="horizontal"
-            android:id="@+id/linearLayout3"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
-            <ImageButton
-                android:src="@drawable/home"
-                android:id="@+id/imageButton1"
+            android:id="@+id/linearLayout4">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout1"
+                android:background="@drawable/gold_plate">
+                <ImageView
+                    android:src="@drawable/gold_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="86.0dp"
+                    android:id="@+id/imageView5"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/gold_plate" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+                    <ImageButton
+                        android:src="@drawable/home"
+                        android:id="@+id/imageButton1"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/face"
+                        android:id="@+id/imageButton2"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/message"
+                        android:id="@+id/imageButton3"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/clock"
+                        android:id="@+id/imageButton4"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space1"
+                android:layout_marginBottom="36.5dp" />
+            <TextView
+                android:text="Activity"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4" />
+            <EditText
+                android:id="@+id/activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Activity" />
+            <TextView
+                android:text="Location"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cityzip"
+                android:hint="City or Zip Code" />
+            <TextView
+                android:text="Experience Level"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner1"
+                android:prompt="@string/experience_prompt" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="18.5dp"
+                android:id="@+id/space2" />
+            <Button
+                android:text="Find My FitFam!"
+                android:id="@+id/button2"
                 android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/face"
-                android:id="@+id/imageButton2"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/message"
-                android:id="@+id/imageButton3"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/clock"
-                android:id="@+id/imageButton4"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                style="@style/button_text"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
         </LinearLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space1"
-        android:layout_marginBottom="36.5dp" />
-    <TextView
-        android:text="Activity"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4" />
-    <EditText
-        android:id="@+id/activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Activity" />
-    <TextView
-        android:text="Location"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cityzip"
-        android:hint="City or Zip Code" />
-    <TextView
-        android:text="Experience Level"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner1"
-        android:prompt="@string/experience_prompt" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="18.5dp"
-        android:id="@+id/space2" />
-    <Button
-        android:text="Find My FitFam!"
-        android:id="@+id/button2"
-        android:background="@drawable/gold_button"
-        style="@style/button_text"
-        android:layout_width="260.5dp"
-        android:layout_height="65.5dp" />
+    </ScrollView>
 </LinearLayout>
