@@ -2377,26 +2377,8 @@ namespace fitfam
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020139
-			public const int avd_hide_password_1 = 2130837817;
-			
-			// aapt resource value: 0x7f02013a
-			public const int avd_hide_password_2 = 2130837818;
-			
-			// aapt resource value: 0x7f02013b
-			public const int avd_hide_password_3 = 2130837819;
-			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
-			
-			// aapt resource value: 0x7f02013c
-			public const int avd_show_password_1 = 2130837820;
-			
-			// aapt resource value: 0x7f02013d
-			public const int avd_show_password_2 = 2130837821;
-			
-			// aapt resource value: 0x7f02013e
-			public const int avd_show_password_3 = 2130837822;
 			
 			// aapt resource value: 0x7f020055
 			public const int clock = 2130837589;
@@ -3197,8 +3179,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0013
 			public const int button = 2131427347;
 			
-			// aapt resource value: 0x7f0b00a0
-			public const int button1 = 2131427488;
+			// aapt resource value: 0x7f0b00a6
+			public const int button1 = 2131427494;
 			
 			// aapt resource value: 0x7f0b009e
 			public const int button2 = 2131427486;
@@ -3326,8 +3308,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b001c
 			public const int display_always = 2131427356;
 			
-			// aapt resource value: 0x7f0b00a4
-			public const int editText1 = 2131427492;
+			// aapt resource value: 0x7f0b00a3
+			public const int editText1 = 2131427491;
 			
 			// aapt resource value: 0x7f0b0072
 			public const int edit_query = 2131427442;
@@ -3554,11 +3536,11 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00ed
 			public const int mr_volume_slider = 2131427565;
 			
-			// aapt resource value: 0x7f0b00a1
-			public const int multiAutoCompleteTextView1 = 2131427489;
+			// aapt resource value: 0x7f0b00a0
+			public const int multiAutoCompleteTextView1 = 2131427488;
 			
-			// aapt resource value: 0x7f0b00a2
-			public const int multiAutoCompleteTextView2 = 2131427490;
+			// aapt resource value: 0x7f0b00a1
+			public const int multiAutoCompleteTextView2 = 2131427489;
 			
 			// aapt resource value: 0x7f0b002b
 			public const int multiply = 2131427371;
@@ -3785,8 +3767,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b007b
 			public const int submit_area = 2131427451;
 			
-			// aapt resource value: 0x7f0b00a3
-			public const int switch1 = 2131427491;
+			// aapt resource value: 0x7f0b00a2
+			public const int switch1 = 2131427490;
 			
 			// aapt resource value: 0x7f0b0022
 			public const int tabMode = 2131427362;
@@ -3863,11 +3845,11 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00fe
 			public const int time = 2131427582;
 			
-			// aapt resource value: 0x7f0b00a5
-			public const int timePicker1 = 2131427493;
+			// aapt resource value: 0x7f0b00a4
+			public const int timePicker1 = 2131427492;
 			
-			// aapt resource value: 0x7f0b00a6
-			public const int timePicker2 = 2131427494;
+			// aapt resource value: 0x7f0b00a5
+			public const int timePicker2 = 2131427493;
 			
 			// aapt resource value: 0x7f0b0056
 			public const int title = 2131427414;
