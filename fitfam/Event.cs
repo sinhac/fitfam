@@ -86,7 +86,7 @@ namespace fitfam
                 using (var client = awsClient.getDynamoDBClient())
                 {
                     eventId = eventName + creator.UserId + startTime.ToString();
-                    // get list of userids of from list of attending Users
+                    // create list of userids from list of attending Users
                     List<string> attending_userids = new List<string>();
                     for (int i = 0; i < attending.Count; i++)
                     {
@@ -113,7 +113,7 @@ namespace fitfam
         public void addAttending(User attendingUser)
         {
             attending.Add(attendingUser);
-            // create request to add attending user's userId list in database
+            // create request to add attending user's userId to list in database
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
             var request = new UpdateItemRequest
@@ -129,7 +129,7 @@ namespace fitfam
                     {":newAttending",new AttributeValue { S = attendingUser.UserId }},  // userId to be added to list of attending
                 },
 
-                // expression to add user's id to "attending" list
+                // expression to add user's id to "attending" list in database entry
                 UpdateExpression = "ADD #A :newAttending"
             };
             var response = dbclient.UpdateItemAsync(request);
@@ -153,11 +153,66 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newTag",new AttributeValue { S = tag }},  // userId to be added to list of attending
+                    {":newTag",new AttributeValue { S = tag }},  // tag to be added to list of tags
                 },
 
-                // expression to add user's id to "attending" list
+                // expression to add tag to "tags" list in database entry
                 UpdateExpression = "ADD #T :newTag"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+            // TO-DO: error-check response
+        }
+
+
+        public void removeAttending(User attendingUser)
+        {
+            attending.Remove(attendingUser);
+
+            // create request to remove attending user's userId from list in database
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-events",
+                Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventName + creator.UserId + startTime.ToString() } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#A", "attending"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":notAttending",new AttributeValue { S = attendingUser.UserId }},  // userId to be removed from list of attending
+                },
+
+                // expression to remove user's id from "attending" list in database entry
+                UpdateExpression = "DELETE #A :notAttending"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+            // TO-DO: error-check response
+        }
+
+        public void removeTag(string tag)
+        {
+            tags.Remove(tag);
+
+            // create request to remove event tag from tags list in database
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-events",
+                Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventName + creator.UserId + startTime.ToString() } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#T", "tags"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":tagToRemove",new AttributeValue { S = tag }},  // tag to be removed from list of tags
+                },
+
+                // expression to remove tag from "tags" list in database entry
+                UpdateExpression = "DELETE #T :tagToRemove"
             };
             var response = dbclient.UpdateItemAsync(request);
             // TO-DO: error-check response
