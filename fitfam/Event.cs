@@ -118,7 +118,7 @@ namespace fitfam
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
             var request = new UpdateItemRequest
             {
-                TableName = "fitfam-mobilehub-2083376203-event",
+                TableName = "fitfam-mobilehub-2083376203-events",
                 Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventName + creator.UserId + startTime.ToString() } } },
                 ExpressionAttributeNames = new Dictionary<string, string>()
                 {
@@ -145,7 +145,7 @@ namespace fitfam
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
             var request = new UpdateItemRequest
             {
-                TableName = "fitfam-mobilehub-2083376203-event",
+                TableName = "fitfam-mobilehub-2083376203-events",
                 Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventName + creator.UserId + startTime.ToString() } } },
                 ExpressionAttributeNames = new Dictionary<string, string>()
                 {
