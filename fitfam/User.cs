@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Amazon.DynamoDBv2.Model;
+using Amazon.DynamoDBv2.DocumentModel;
 
 namespace fitfam
 {
@@ -84,7 +85,6 @@ namespace fitfam
 
         public User(string userId)
         {
-            //get user data from DB
         }
         
         public void createEntry()
