@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Amazon.DynamoDBv2.Model;
-
+using Amazon;
 
 namespace fitfam
 { 
@@ -86,6 +86,7 @@ namespace fitfam
                 using (var client = awsClient.getDynamoDBClient())
                 {
                     eventId = eventName + creator.UserId + startTime.ToString();
+                    // get list of userids of from list of attending Users
                     List<string> attending_userids = new List<string>();
                     for (int i = 0; i < attending.Count; i++)
                     {
@@ -112,15 +113,54 @@ namespace fitfam
         public void addAttending(User attendingUser)
         {
             attending.Add(attendingUser);
-            // add attending user's userId to database
+            // create request to add attending user's userId list in database
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-event",
+                Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventName + creator.UserId + startTime.ToString() } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#A", "attending"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newAttending",new AttributeValue { S = attendingUser.UserId }},  // userId to be added to list of attending
+                },
 
+                // expression to add user's id to "attending" list
+                UpdateExpression = "ADD #A :newAttending"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+            // TO-DO: error-check response
         }
 
         public void addTag(string tag)
         {
             tags.Add(tag);
-            // add tag to database
 
+            // create request to add event tag to tags list in database
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-event",
+                Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventName + creator.UserId + startTime.ToString() } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#T", "tags"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newTag",new AttributeValue { S = tag }},  // userId to be added to list of attending
+                },
+
+                // expression to add user's id to "attending" list
+                UpdateExpression = "ADD #T :newTag"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+            // TO-DO: error-check response
         }
 
     }
