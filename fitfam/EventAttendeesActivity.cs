@@ -1,16 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 using Android.App;
+using Android.Content;
 using Android.OS;
+using Android.Runtime;
+using Android.Views;
 using Android.Widget;
 
 namespace fitfam
 {
-    [Activity(Label = "EventPage")]
-    public class EventPageActivity : Activity
+    [Activity(Label = "EventAttendeesActivity")]
+    public class EventAttendeesActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.EventPage);
 
             // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -35,7 +42,7 @@ namespace fitfam
 
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
-                StartActivity(typeof(EventDetailsPageActivity));
+                StartActivity(typeof(ProfilePageActivity));
             };
 
         }

@@ -4,15 +4,21 @@ using Android.Widget;
 
 namespace fitfam
 {
-    [Activity(Label = "EventPage")]
-    public class EventPageActivity : Activity
+    [Activity(Label = "Activity1")]
+    public class EventDetailsPageActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.EventPage);
 
             // Create your application here
+            SetContentView(Resource.Layout.EventAttendees);
+
+            Button button1 = FindViewById<Button>(Resource.Id.button1);
+            button1.Click += delegate {
+                StartActivity(typeof(EventAttendeesActivity));
+            };
+
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
@@ -32,12 +38,6 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
-
-            Button button1 = FindViewById<Button>(Resource.Id.button1);
-            button1.Click += delegate {
-                StartActivity(typeof(EventDetailsPageActivity));
-            };
-
         }
     }
 }
