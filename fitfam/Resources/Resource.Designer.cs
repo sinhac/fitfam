@@ -3446,8 +3446,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00d6
 			public const int login_button = 2131427542;
 			
-			// aapt resource value: 0x7f0b0110
-			public const int masked = 2131427600;
+			// aapt resource value: 0x7f0b0111
+			public const int masked = 2131427601;
 			
 			// aapt resource value: 0x7f0b00f9
 			public const int media_actions = 2131427577;
