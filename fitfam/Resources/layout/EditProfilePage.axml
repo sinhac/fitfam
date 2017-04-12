@@ -3,8 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:background="@color/theme_devicedefault_background">
+    android:gravity="center_horizontal">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

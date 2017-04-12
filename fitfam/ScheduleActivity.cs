@@ -32,6 +32,18 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
+
+            var calendarView = FindViewById<CalendarView>(Resource.Id.calendarView1);
+            var textDisplay = FindViewById<TextView>(Resource.Id.textDisplay);
+
+            textDisplay.Text = "Date: ";
+            calendarView.DateChange += (s, e) =>
+            {
+                int day = e.DayOfMonth;
+                int month = e.Month;
+                int year = e.Year;
+                textDisplay.Text = "Date: " + day + "/" + month + "/" + year;
+            };
         }
     }
 }

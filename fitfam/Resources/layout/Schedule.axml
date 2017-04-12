@@ -54,6 +54,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/space1"
         android:layout_marginBottom="20.0dp" />
+    <TextView
+        android:text="The Date"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textDisplay" />
     <CalendarView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

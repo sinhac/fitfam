@@ -9,7 +9,7 @@ namespace fitfam
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.ProfilePage);
+            SetContentView(Resource.Layout.UserProfilePage);
 
             // Create your application here
         }
