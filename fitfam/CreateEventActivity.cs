@@ -37,12 +37,14 @@ namespace fitfam
                 descriptionInput = e.Text.ToString();
             };
 
+            //ADD TAGS HERE
+
             // Create your application here
             Button button1 = FindViewById<Button>(Resource.Id.button1);
 
             button1.Click += delegate {
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, default(DateTime), default(DateTime), true, new List<string>(),new fitfam.User("fakeCreator"));
-                StartActivity(typeof(MatchesActivity));
+                StartActivity(typeof(EventDetailsPageActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);

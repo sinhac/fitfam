@@ -77,9 +77,11 @@ namespace fitfam
             this.startTime = startTime;
             this.endTime = endTime;
             this.publicEvent = publicEvent;
-            this.tags.AddRange(tags);
+            tags.Add("");
+            this.tags = tags;
+            //this.tags.AddRange(tags);
             this.creator = creator;
-            this.addAttending(creator);
+            //this.addAttending(creator);
 
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
@@ -88,10 +90,10 @@ namespace fitfam
                     eventId = eventName + creator.UserId + startTime.ToString();
                     // create list of userids from list of attending Users
                     List<string> attending_userids = new List<string>();
-                    for (int i = 0; i < attending.Count; i++)
+                    /*for (int i = 0; i < attending.Count; i++)
                     {
-                        attending_userids.Add(attending[i].UserId);
-                    }
+                        //attending_userids.Add(attending[i].UserId);
+                    }*/
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "eventId", new AttributeValue { S = eventId} },

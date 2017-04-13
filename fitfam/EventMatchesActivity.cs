@@ -7,15 +7,15 @@ using static Android.Resource;
 
 namespace fitfam
 {
-    [Activity(Label = "matchesActivity")]
-    public class MatchesActivity : Activity
+    [Activity(Label = "EventMatchesActivity")]
+    public class EventMatchesActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.Matches);
+            SetContentView(Resource.Layout.EventMatches);
 
             Button backtosearch_button = FindViewById<Button>(Resource.Id.button1);
 
@@ -47,7 +47,7 @@ namespace fitfam
             button2.Click += delegate {
                 StartActivity(typeof(FamQuickViewActivity));
             };
-            
+
             //num_buttons will be taken from database COUNT(matches)
             int num_buttons = 10;
 
@@ -69,7 +69,7 @@ namespace fitfam
                 button.SetCompoundDrawables(sd.Drawable, null, null, null);
 
                 //Should get fed in from database
-                button.Text = "Soccer Squad";
+                button.Text = "SS Quarter Finals";
 
                 matchButtonLayout.AddView(button);
 
@@ -79,7 +79,7 @@ namespace fitfam
                 matchButtonLayout.AddView(sp);
 
                 button.Click += delegate {
-                    StartActivity(typeof(FamQuickViewActivity));
+                    StartActivity(typeof(EventDetailsPageActivity));
                 };
             };
 

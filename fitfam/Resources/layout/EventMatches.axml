@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:background="@color/theme_devicedefault_background">
   <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -62,31 +62,34 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:id="@+id/space1"
-          android:layout_marginBottom="30.0dp" />
+          android:layout_marginBottom="20.0dp" />
       <TextView
-          android:text="groupName"
+          android:text="Which Events fit you?"
           android:textAppearance="?android:attr/textAppearanceLarge"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:id="@+id/textView1" />
-      <TextView
-          android:text="description"
+          android:id="@+id/textView1"
+          android:layout_marginLeft="15dp"
+          android:layout_marginRight="15dp"
+          android:layout_marginTop="0.0dp" />
+      <Space
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:id="@+id/textView2" />
-      <ImageView
-          android:src="@android:drawable/ic_menu_gallery"
+          android:id="@+id/space2" />
+      <RadioGroup
+          android:minWidth="25px"
+          android:minHeight="25px"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:id="@+id/imageView6" />
-      <Button
-          android:text="Events"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/button1"
-          android:background="@drawable/gold_button"
-          style="@style/button_text"
+          android:id="@+id/radioGroup1"
+          android:orientation="vertical"
           android:gravity="center" />
+      <Button
+          android:text="Back to Search"
+          android:id="@+id/button1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/gold_button" />
     </LinearLayout>
   </ScrollView>
 </LinearLayout>

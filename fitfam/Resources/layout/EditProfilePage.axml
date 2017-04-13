@@ -3,221 +3,239 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
-    <LinearLayout
-        android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/theme_devicedefault_background">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:background="@drawable/gold_plate">
-        <ImageView
-            android:src="@drawable/gold_logo"
-            android:layout_width="match_parent"
-            android:layout_height="86.0dp"
-            android:id="@+id/imageView5"
-            android:scaleType="fitCenter"
-            android:background="@drawable/gold_plate" />
+        android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="horizontal"
-            android:id="@+id/linearLayout3"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
-            <ImageButton
-                android:src="@drawable/home"
-                android:id="@+id/imageButton1"
+            android:id="@+id/linearLayout4">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout1"
+                android:background="@drawable/gold_plate">
+                <ImageView
+                    android:src="@drawable/gold_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="86.0dp"
+                    android:id="@+id/imageView5"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/gold_plate" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+                    <ImageButton
+                        android:src="@drawable/home"
+                        android:id="@+id/imageButton1"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/face"
+                        android:id="@+id/imageButton2"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/message"
+                        android:id="@+id/imageButton3"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/clock"
+                        android:id="@+id/imageButton4"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space1"
+                android:layout_marginBottom="30.0dp" />
+            <TextView
+                android:text="Bio"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4" />
+            <TextView
+                android:hint="Type the bio you want visible on your profile here"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space2"
+                android:layout_marginBottom="15.0dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2">
+                <TextView
+                    android:text="Gender"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <Space
+                    android:layout_width="32.5dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/space3" />
+                <TextView
+                    android:text="Private"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView8" />
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/switch1" />
+                <TextView
+                    android:text="Public"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView7" />
+            </LinearLayout>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioGroup1">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Male"
+                    android:id="@+id/radioButton1" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:id="@+id/radioButton2" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Other"
+                    android:id="@+id/radioButton3" />
+            </RadioGroup>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space2"
+                android:layout_marginBottom="15.0dp" />
+            <TextView
+                android:text="Activities/Interests"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+            <MultiAutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/multiAutoCompleteTextView1"
+                android:hint="Enter activities and interests " />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space2"
+                android:layout_marginBottom="15.0dp" />
+            <TextView
+                android:text="Availability"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3" />
+            <TextView
+                android:text="Sunday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner7" />
+            <TextView
+                android:text="Monday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView14" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner6" />
+            <TextView
+                android:text="Tuesday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner5" />
+            <TextView
+                android:text="Wednesday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView12" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner4" />
+            <TextView
+                android:text="Thursday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView11" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner3" />
+            <TextView
+                android:text="Friday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView10" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner2" />
+            <TextView
+                android:text="Saturday"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView9" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner1" />
+            <Button
+                android:text="SAVE CHANGES"
+                android:id="@+id/save_changes_button"
                 android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/face"
-                android:id="@+id/imageButton2"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/message"
-                android:id="@+id/imageButton3"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/clock"
-                android:id="@+id/imageButton4"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                style="@style/button_text"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
         </LinearLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space1"
-        android:layout_marginBottom="30.0dp" />
-    <TextView
-        android:text="Bio"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4" />
-    <TextView
-        android:hint="Type the bio you want visible on your profile here"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space2"
-        android:layout_marginBottom="15.0dp" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2">
-        <TextView
-            android:text="Gender"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <Space
-            android:layout_width="32.5dp"
-            android:layout_height="match_parent"
-            android:id="@+id/space3" />
-        <TextView
-            android:text="Private"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/textView8" />
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/switch1" />
-        <TextView
-            android:text="Public"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/textView7" />
-    </LinearLayout>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioGroup1">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Male"
-            android:id="@+id/radioButton1" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female"
-            android:id="@+id/radioButton2" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Other"
-            android:id="@+id/radioButton3" />
-    </RadioGroup>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space2"
-        android:layout_marginBottom="15.0dp" />
-    <TextView
-        android:text="Activities/Interests"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
-    <MultiAutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/multiAutoCompleteTextView1"
-        android:hint="Enter activities and interests " />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space2"
-        android:layout_marginBottom="15.0dp" />
-    <TextView
-        android:text="Availability"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
-    <TextView
-        android:text="Sunday"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView15" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner7" />
-    <TextView
-        android:text="Monday"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView14" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner6" />
-    <TextView
-        android:text="Tuesday"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView13" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner5" />
-    <TextView
-        android:text="Wednesday"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView12" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner4" />
-    <TextView
-        android:text="Thursday"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView11" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner3" />
-    <TextView
-        android:text="Friday"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView10" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner2" />
-    <TextView
-        android:text="Saturday"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView9" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner1" />
+    </ScrollView>
 </LinearLayout>

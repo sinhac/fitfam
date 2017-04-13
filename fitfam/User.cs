@@ -95,7 +95,8 @@ namespace fitfam
                 using (var client = awsClient.getDynamoDBClient())
                 {
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>();
-                    awsClient.makePutRequest("fitfam-mobilehub-2083376203-users", item);
+                    var abc = awsClient.makePutRequest("fitfam-mobilehub-2083376203-users", item);
+                    System.Console.WriteLine(abc);
                 }
             }      
         }
