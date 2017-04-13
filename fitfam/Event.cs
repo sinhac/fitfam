@@ -85,14 +85,16 @@ namespace fitfam
             {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    eventId = eventName + creator.UserId + startTime.ToString();
-                    // create list of userids from list of attending Users
-                    List<string> attending_userids = new List<string>();
-                    for (int i = 0; i < attending.Count; i++)
+                    try
                     {
-                        attending_userids.Add(attending[i].UserId);
-                    }
-                    Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
+                        eventId = eventName + creator.UserId + startTime.ToString();
+                        // create list of userids from list of attending Users
+                        List<string> attending_userids = new List<string>();
+                        for (int i = 0; i < attending.Count; i++)
+                        {
+                            attending_userids.Add(attending[i].UserId);
+                        }
+                        Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "eventId", new AttributeValue { S = eventId} },
                         { "eventName", new AttributeValue { S = eventName } },
@@ -104,8 +106,22 @@ namespace fitfam
                         { "tags", new AttributeValue { SS = tags } },
                         { "attending", new AttributeValue { SS = attending_userids } }
                     };
-                    awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
-                    System.Console.WriteLine("ADDED NEW EVENT");
+                        awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
+                        System.Console.WriteLine("ADDED NEW EVENT");
+                    } catch (Exception e)
+                    {
+                        if (e is ResourceNotFoundException)
+                        {
+                            System.Console.WriteLine("REsOURCENOTFOUND");
+                        } else if (e is InternalServerErrorException)
+                        {
+                            System.Console.WriteLine("INTERNALSERVERERROREXCEPTION");
+                        } else if (e is ConditionalCheckFailedException)
+                        {
+                            System.Console.WriteLine("CONDITIONALCHECKFAILED");
+                        }
+                    }
+                   
                 }
             }
         }

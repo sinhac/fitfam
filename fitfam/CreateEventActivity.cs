@@ -29,7 +29,6 @@ namespace fitfam
                 locationInput = e.Text.ToString();
             };
 
-
             var description = FindViewById<EditText>(Resource.Id.editText1);
             var descriptionInput = "";
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
@@ -42,7 +41,7 @@ namespace fitfam
 
             button1.Click += delegate {
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, default(DateTime), default(DateTime), true, new List<string>(),new fitfam.User("fakeCreator"));
-                StartActivity(typeof(MatchesActivity));
+                StartActivity(typeof(EventDetailsPageActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
