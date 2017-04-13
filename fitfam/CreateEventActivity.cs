@@ -29,7 +29,6 @@ namespace fitfam
                 locationInput = e.Text.ToString();
             };
 
-
             var description = FindViewById<EditText>(Resource.Id.editText1);
             var descriptionInput = "";
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
