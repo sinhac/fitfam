@@ -136,11 +136,6 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
 
-            //// Check the response.
-            //var attributeList = response.Attributes; // attribute list in the response.
-            //                                         // print attributeList.
-            //Console.WriteLine("\nPrinting item after 'attending' attribute update ............");
-            //PrintItem(attributeList);
         }
 
         public void addTag(string tag)

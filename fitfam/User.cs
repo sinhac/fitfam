@@ -75,6 +75,26 @@ namespace fitfam
             set {
                 pic = value;
                 // update DB
+                // create request to set pic in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-users",
+                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = username } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#P", "pics"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newPic",new AttributeValue { S = pic }},  // new pic to update user's pic with 
+                },
+
+                    // expression to set pic in database entry
+                    UpdateExpression = "SET #P :newPic"
+                };
+                var response = dbclient.UpdateItemAsync(request);
             }
         }
         private List<Event> sharedEvents;
