@@ -59,6 +59,7 @@ namespace fitfam
         {
              this.groupName = name;
              this.description = description;
+             this.members = new Dictionary<User, bool>();
              this.addMember(creator, true);
             System.Console.WriteLine("connecting to database");
              using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
@@ -97,7 +98,7 @@ namespace fitfam
 
         public void addMember(User user, bool isAdmin)
         {
-            members[user] = isAdmin;
+            members.Add(user, isAdmin);
             //add member to server
         }
 

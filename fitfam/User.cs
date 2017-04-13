@@ -85,6 +85,7 @@ namespace fitfam
 
         public User(string userId)
         {
+            this.userId = userId;
         }
         
         public void createEntry()

@@ -72,18 +72,6 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="0.0dp" />
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Soccer Squad"
-                android:drawableLeft="@drawable/minimightyman"
-                android:textSize="24sp"
-                android:background="@drawable/gold_button"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:drawablePadding="50dp" />
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,6 +84,12 @@
                 android:id="@+id/radioGroup1"
                 android:orientation="vertical"
                 android:gravity="center" />
+            <Button
+                android:text="Back to Search"
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gold_button" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

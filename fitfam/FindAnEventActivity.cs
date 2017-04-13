@@ -40,7 +40,7 @@ namespace fitfam
             Button button2 = FindViewById<Button>(Resource.Id.button2);
 
             button2.Click += delegate {
-                StartActivity(typeof(MatchesActivity));
+                StartActivity(typeof(EventPageActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
