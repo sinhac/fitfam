@@ -2,6 +2,7 @@ using Android.App;
 using Android.OS;
 using Android.Widget;
 using System;
+using System.Collections.Generic;
 
 namespace fitfam
 {
@@ -23,16 +24,30 @@ namespace fitfam
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
 
-            var activity = FindViewById<EditText>(Resource.Id.multiAutoCompleteTextView1);
-            var activityTag = "";
-            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
-            {
-                activityTag = e.Text.ToString();
-            };
+            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView1);
+            var adapter2 = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
+            adapter2.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 
-            var cityZip = FindViewById<EditText>(Resource.Id.cityzip);
+            tags.Adapter = adapter2;
+            tags.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+            var tagsInput = "";
+            //string[] tagsArr;
+            //List<string> tagsList = new List<string>();
+            tags.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                tagsInput = e.Text.ToString();
+            };
+            //char[] delimiters = { ',', '\t', '\n' };
+            //tagsArr = tagsInput.Split(delimiters);
+            //for (int i = 0; i < tagsArr.Length; i++)
+            ///{
+            //    tagsList.Add(tagsArr[i]);
+            //}
+
+            var cityZip = FindViewById<EditText>(Resource.Id.autoCompleteTextView1);
             var cityZipInput = "";
-            activity.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            cityZip.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 cityZipInput = e.Text.ToString();
             };

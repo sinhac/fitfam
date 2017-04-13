@@ -33,7 +33,7 @@ namespace fitfam
             get { return description; }
             set { description = value; }
         }
-        private List<string> tags;
+        private List<string> tags = new List<string>();
         private string location;
         public string Location
         {
@@ -63,7 +63,7 @@ namespace fitfam
         {
             get { return creator; }
         }
-        private List<User> attending;
+        private List<User> attending = new List<User>();
         public List<User> Attending
         {
             get { return attending; }
@@ -77,11 +77,9 @@ namespace fitfam
             this.startTime = startTime;
             this.endTime = endTime;
             this.publicEvent = publicEvent;
-            tags.Add("");
-            this.tags = tags;
-            //this.tags.AddRange(tags);
+            this.tags.AddRange(tags);
             this.creator = creator;
-            //this.addAttending(creator);
+            this.addAttending(creator);
 
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
