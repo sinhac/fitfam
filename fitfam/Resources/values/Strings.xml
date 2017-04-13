@@ -1,22 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">fitfam</string>
-    <string name="experience_prompt">Choose an experience level</string>
-    <string-array name="experience_array">
-      <item>Plebeian (I\'ve never heard of this - I\'ve done this once)</item>
-      <item>Intermediate (I haven\'t done this in a while - I do this occasionally)</item>
-      <item>Olympian (I do this regularly - This is my life)</item>
-    </string-array>
-    <string name="availability_prompt">Choose a preferred workout time</string>
-    <string-array name="availability_array">
-      <item>Early morning (3-6am)</item>
-      <item>Morning (6-9am)</item>
-      <item>Late morning (9-12noon)</item>
-      <item>Afternoon (12-3pm)</item>
-      <item>Late afternoon (3-6pm)</item>
-      <item>Early evening (6-9pm)</item>
-      <item>Evening (9-12midnight)</item>
-      <item>Late evening (12-3am)</item>
-    </string-array>
+  <string name="Hello">Hello World, Click Me!</string>
+  <string name="ApplicationName">fitfam</string>
+  <string name="experience_prompt">Choose an experience level</string>
+  <string-array name="experience_array">
+    <item>Plebeian (I\'ve never heard of this - I\'ve done this once)</item>
+    <item>Intermediate (I haven\'t done this in a while - I do this occasionally)</item>
+    <item>Olympian (I do this regularly - This is my life)</item>
+  </string-array>
+  <string name="availability_prompt">Choose a preferred workout time</string>
+  <string-array name="availability_array">
+    <item>Early morning (3-6am)</item>
+    <item>Morning (6-9am)</item>
+    <item>Late morning (9-12noon)</item>
+    <item>Afternoon (12-3pm)</item>
+    <item>Late afternoon (3-6pm)</item>
+    <item>Early evening (6-9pm)</item>
+    <item>Evening (9-12midnight)</item>
+    <item>Late evening (12-3am)</item>
+  </string-array>
+  <string-array name="ACTIVITIES">
+    <item>Back Packing</item>
+    <item>Ballet</item>
+    <item>Baseball</item>
+    <item>Canoeing</item>
+    <item>Capture the Flag</item>
+    <item>Cheerleading</item>
+    <item>Cut the Grass</item>
+    <item>Dancing</item>
+    <item>Exercise as a Family</item>
+    <item>Exercise Bike</item>
+    <item>Family Walk</item>
+    <item>Four Square</item>
+    <item>Frisbee</item>
+    <item>Frisbee Golf</item>
+    <item>Fun Run</item>
+    <item>Golf</item>
+    <item>Gymnastics</item>
+    <item>Hide and Seek</item>
+    <item>Horseback Riding</item>
+    <item>Karate</item>
+    <item>Mow the Lawn</item>
+    <item>Rake the Lawn</item>
+    <item>Skiing</item>
+    <item>Softball</item>
+    <item>Tag</item>
+    <item>Tai Chi</item>
+    <item>Throw Frisbee</item>
+    <item>Treadmill</item>
+    <item>Vaccuum</item>
+    <item>Volleyball</item>
+    <item>Walking</item>
+    <item>Running</item>
+    <item>Water Aerobics</item>
+    <item>Water Skiing</item>
+    <item>Weight Lifting</item>
+    <item>Wii Fit</item>
+    <item>Yoga</item>
+    <item>Calisthenics</item>
+    <item>Irish Dancing</item>
+    <item>Jump Rope</item>
+    <item>Double Dutch</item>
+    <item>Marathon</item>
+    <item>Pull Ups</item>
+    <item>Rowing</item>
+    <item>Shoveling Snow</item>
+    <item>Zumba</item>
+    <item>Soccer</item>
+    <item>Spinning</item>
+    <item>Surfing</item>
+    <item>Tae Bo</item>
+    <item>Stair Climbing</item>
+    <item>Rock Climbing</item>
+    <item>Tennis</item>
+    <item>Track and Field</item>
+    <item>Triathlon</item>
+    <item>Ultimate Frisbee</item>
+    <item>Football</item>
+    <item>Hunting</item>
+    <item>Hiking</item>
+    <item>Rifling</item>
+    <item>Water Polo</item>
+    <item>Swimming</item>
+    <item>Man Hunt</item>
+    <item>Bowling</item>
+    <item>Boxing</item>
+    <item>Air Hockey</item>
+    <item>Camping</item>
+    <item>Clean the House</item>
+    <item>Community Service</item>
+    <item>Volunteer</item>
+    <item>Cup Stacking</item>
+    <item>Fishing</item>
+    <item>Kite Flying</item>
+    <item>Foosball</item>
+    <item>Billiards</item>
+    <item>Pool</item>
+    <item>Gardening</item>
+    <item>Geocaching</item>
+    <item>Golf</item>
+    <item>Hopscotch</item>
+    <item>Horseshoes</item>
+    <item>Hula Hoop</item>
+    <item>Kids Games</item>
+    <item>Field Day</item>
+    <item>Snowman Building</item>
+    <item>Snowboarding</item>
+    <item>Ice Skating</item>
+    <item>Ice Hockey</item>
+    <item>Floor Hockey</item>
+    <item>Rollerskating</item>
+    <item>Pogo Sticking</item>
+    <item>Paddle Board</item>
+    <item>Paddle Boat</item>
+    <item>Sprinklers</item>
+    <item>Sailing</item>
+    <item>Scuba Diving</item>
+    <item>Snorkeling</item>
+    <item>Shopping</item>
+    <item>Shuffle Board</item>
+    <item>Curling</item>
+    <item>Drag Racing</item>
+    <item>Racing</item>
+    <item>Stretching</item>
+    <item>Target Shooting</item>
+    <item>Table Tennis</item>
+    <item>Trampoline</item>
+    <item>Dog Walking</item>
+    <item>Pokemon Go</item>
+    <item>Football</item>
+    <item>Basketball</item>
+    <item>Rugby</item>
+    <item>Lacrosse</item>
+    <item>Cross-Country</item>
+    <item>Little League</item>
+    <item>Squash</item>
+    <item>Figure Skating</item>
+    <item>Raquetball</item>
+    <item>Pole Vaulting</item>
+    <item>Cycling</item>
+    <item>Biking</item>
+    <item>Jogging</item>
+    <item>Equestrian</item>
+    <item>Fencing</item>
+    <item>Kickboxing</item>
+    <item>Sprinting</item>
+    <item>Running</item>
+    <item>Mountaineering</item>
+    <item>Luge</item>
+    <item>Crouquet</item>
+    <item>Wrestling</item>
+    <item>Cricket</item>
+  </string-array>
 </resources>

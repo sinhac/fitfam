@@ -1,6 +1,7 @@
 using Android.App;
 using Android.OS;
 using Android.Widget;
+using System.Collections.Generic;
 
 namespace fitfam
 {
@@ -29,12 +30,30 @@ namespace fitfam
             {
                 descriptionInput = e.Text.ToString();
             };
-            
+
+            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.actTag);
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+
+            tags.Adapter = adapter;
+            tags.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+            var tagsInput = "";
+            string[] tagsArr;
+            List<string> tagsList = new List<string>();
+            tags.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                tagsInput = e.Text.ToString();
+            };
+            char[] delimiters = { ',', '\t', '\n' };
+            tagsArr = tagsInput.Split(delimiters);
+            for (int i = 0; i < tagsArr.Length; i++)
+            {
+                tagsList.Add(tagsArr[i]);
+            }
+
             Button button2 = FindViewById<Button>(Resource.Id.button2);
             button2.Click += delegate {
-                // var newActivity = new Intent(this, typeof(FamProfileActivity));
-                // newActivity.PutExtra("Fam Name", famNameInput);
-                // StartActivity(newActivity);
                 System.Console.WriteLine("creating fam");
                 Group fam = new Group(famNameInput, descriptionInput, new User("test"));
                 System.Console.WriteLine("Created fam");
