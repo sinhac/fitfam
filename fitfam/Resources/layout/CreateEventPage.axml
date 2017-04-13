@@ -59,7 +59,7 @@
                 </LinearLayout>
             </LinearLayout>
             <TextView
-                p1:hint="Event Name"
+                p1:text="Event Name"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/textView1" />
@@ -67,7 +67,12 @@
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/multiAutoCompleteTextView1"
-                p1:hint="Enter your activity tag" />
+                p1:hint="Enter your event name" />
+            <TextView
+                p1:text="Location"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView2" />
             <MultiAutoCompleteTextView
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
@@ -84,6 +89,17 @@
                 p1:layout_height="wrap_content"
                 p1:id="@+id/editText1"
                 p1:hint="Enter Event Description" />
+            <TextView
+                p1:text="Activity Tags"
+                p1:textAppearance="?android:attr/textAppearanceSmall"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView5" />
+            <MultiAutoCompleteTextView
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/multiAutoCompleteTextView3"
+                p1:hint="Enter activity tags" />
             <TextView
                 p1:text="Select the experience level(s) you would like your event to consist of:"
                 p1:textAppearance="?android:attr/textAppearanceLarge"
@@ -105,23 +121,63 @@
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/checkBox3" />
+          <LinearLayout
+                p1:orientation="vertical"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout6">
+            <TextView
+                p1:text="Choose a date:"
+                p1:textAppearance="?android:attr/textAppearanceLarge"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView8" />
+            <DatePicker
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/datePicker1" />
+            </LinearLayout>
             <Space
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/space2"
                 p1:layout_marginBottom="25.5dp" />
-            <TimePicker
+            <LinearLayout
+                p1:orientation="vertical"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/timePicker1"
-                p1:minWidth="25px"
-                p1:minHeight="25px" />
-            <TimePicker
+                p1:id="@+id/linearLayout6">
+                <TextView
+                    p1:text="Start time:"
+                    p1:textAppearance="?android:attr/textAppearanceLarge"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/textView5" />
+                <TimePicker
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/timePicker1"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px" />
+            </LinearLayout>
+            <LinearLayout
+                p1:orientation="vertical"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/timePicker2"
-                p1:minWidth="25px"
-                p1:minHeight="25px" />
+                p1:id="@+id/linearLayout7">
+                <TextView
+                    p1:text="End time:"
+                    p1:textAppearance="?android:attr/textAppearanceLarge"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/textView6" />
+                <TimePicker
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/timePicker2"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px" />
+            </LinearLayout>
             <Button
                 p1:text="Create Event"
                 p1:id="@+id/button1"

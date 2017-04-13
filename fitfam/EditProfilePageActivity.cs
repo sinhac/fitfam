@@ -12,6 +12,8 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
 
+            SetContentView(Resource.Layout.EditProfilePage);
+
             // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
@@ -95,6 +97,12 @@ namespace fitfam
 
             adapter7.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner7.Adapter = adapter7;
+
+            Button savechanges_button = FindViewById<Button>(Resource.Id.save_changes_button);
+            savechanges_button.Click += delegate
+            {
+                StartActivity(typeof(ProfilePageActivity));
+            };
         }
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {

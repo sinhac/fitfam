@@ -1,6 +1,7 @@
 using Android.App;
 using Android.OS;
 using Android.Widget;
+using System;
 
 namespace fitfam
 {
@@ -32,7 +33,26 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
-            
+
+            Button join = FindViewById<Button>(Resource.Id.button1);
+            join.Click += OnAlertYesNoClicked;
+
+            async void OnAlertYesNoClicked(object sender, EventArgs e)
+            {
+                Android.App.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                AlertDialog alertDialog = builder.Create();
+                alertDialog.SetTitle("Join Request");
+                alertDialog.SetMessage("You are about to send a join request. Would you like to continue?");
+                alertDialog.SetButton("No", (s, ev) =>
+                {
+                    alertDialog.Cancel();
+                });
+                alertDialog.SetButton2("Yes", (s, ev) =>
+                {
+                    
+                });
+                alertDialog.Show();
+            }
         }
     }
 }

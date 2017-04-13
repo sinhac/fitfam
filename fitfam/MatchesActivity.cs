@@ -17,10 +17,10 @@ namespace fitfam
             // Create your application here
             SetContentView(Resource.Layout.Matches);
 
-            Button match_button = FindViewById<Button>(Resource.Id.button1);
+            Button backtosearch_button = FindViewById<Button>(Resource.Id.button1);
 
-            match_button.Click += delegate {
-                StartActivity(typeof(FamQuickViewActivity));
+            backtosearch_button.Click += delegate {
+                StartActivity(typeof(FindAFamFormActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -48,7 +48,9 @@ namespace fitfam
                 StartActivity(typeof(FamQuickViewActivity));
             };
             
+            //num_buttons will be taken from database COUNT(matches)
             int num_buttons = 10;
+
             ViewGroup matchButtonLayout = (ViewGroup)FindViewById(Resource.Id.radioGroup1);  // This is the id of the RadioGroup we defined
             for (var i = 0; i < num_buttons; i++)
             {

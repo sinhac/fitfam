@@ -11,6 +11,8 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
 
+            SetContentView(Resource.Layout.EventAttendees);
+
             // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {

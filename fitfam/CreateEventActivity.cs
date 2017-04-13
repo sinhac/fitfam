@@ -36,6 +36,8 @@ namespace fitfam
                 descriptionInput = e.Text.ToString();
             };
 
+            //ADD TAGS HERE
+
             // Create your application here
             Button button1 = FindViewById<Button>(Resource.Id.button1);
 

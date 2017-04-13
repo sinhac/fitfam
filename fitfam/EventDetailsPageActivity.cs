@@ -12,7 +12,7 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.EventAttendees);
+            SetContentView(Resource.Layout.EventDetailsPage);
 
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {

@@ -1,20 +1,27 @@
 using Android.App;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
-using System;
+using static Android.Resource;
 
 namespace fitfam
 {
-    [Activity(Label = "NotificationActivity")]
-    public class NotificationsActivity : Activity
+    [Activity(Label = "EventMatchesActivity")]
+    public class EventMatchesActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Notifications);
 
             // Create your application here
+            SetContentView(Resource.Layout.EventMatches);
+
+            Button backtosearch_button = FindViewById<Button>(Resource.Id.button1);
+
+            backtosearch_button.Click += delegate {
+                StartActivity(typeof(FindAFamFormActivity));
+            };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
@@ -36,10 +43,15 @@ namespace fitfam
                 StartActivity(typeof(ScheduleActivity));
             };
 
-            //num_buttons will be taken from database COUNT(notifications)
+            Button button2 = FindViewById<Button>(Resource.Id.button1);
+            button2.Click += delegate {
+                StartActivity(typeof(FamQuickViewActivity));
+            };
+
+            //num_buttons will be taken from database COUNT(matches)
             int num_buttons = 10;
 
-            ViewGroup notificationLayout = (ViewGroup)FindViewById(Resource.Id.radioGroup1);  // This is the id of the RadioGroup we defined
+            ViewGroup matchButtonLayout = (ViewGroup)FindViewById(Resource.Id.radioGroup1);  // This is the id of the RadioGroup we defined
             for (var i = 0; i < num_buttons; i++)
             {
                 Button button = new Button(this);
@@ -57,39 +69,21 @@ namespace fitfam
                 button.SetCompoundDrawables(sd.Drawable, null, null, null);
 
                 //Should get fed in from database
-                button.Text = "mightman11";
+                button.Text = "SS Quarter Finals";
 
-                notificationLayout.AddView(button);
+                matchButtonLayout.AddView(button);
 
                 Space sp = new Space(this);
                 sp.SetPadding(padding, padding, padding, padding);
 
-                notificationLayout.AddView(sp);
+                matchButtonLayout.AddView(sp);
 
-                button.Click += OnAlertYesNoClicked;
+                button.Click += delegate {
+                    StartActivity(typeof(EventDetailsPageActivity));
+                };
             };
 
-            async void OnAlertYesNoClicked(object sender, EventArgs e)
-            {
-                Android.App.AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                AlertDialog alertDialog = builder.Create();
-                alertDialog.SetTitle("Join Request");
-                alertDialog.SetMessage("This user would like to join your fam. What would you like to do?");
-                alertDialog.SetButton("Decline", (s, ev) =>
-                {
-                    alertDialog.Cancel();
-                    //decline
-                });
-                alertDialog.SetButton2("Accept", (s, ev) =>
-                {
-                    //accept
-                });
-                alertDialog.SetButton3("View Profile", (s, ev) =>
-                {
-                    StartActivity(typeof(ProfilePageActivity));
-                });
-                alertDialog.Show();
-            }
+
         }
     }
 }
