@@ -121,18 +121,18 @@
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/checkBox3" />
-          <LinearLayout
+            <LinearLayout
                 p1:orientation="vertical"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/linearLayout6">
-            <TextView
-                p1:text="Choose a date:"
-                p1:textAppearance="?android:attr/textAppearanceLarge"
-                p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/textView8" />
-            <DatePicker
+                <TextView
+                    p1:text="Choose a date:"
+                    p1:textAppearance="?android:attr/textAppearanceLarge"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/textView8" />
+                <DatePicker
                     p1:layout_width="match_parent"
                     p1:layout_height="wrap_content"
                     p1:id="@+id/datePicker1" />

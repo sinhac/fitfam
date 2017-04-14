@@ -17,7 +17,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -226,6 +226,7 @@
     <Compile Include="EventDetailsPageActivity.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EventMatchesActivity.cs" />
     <Compile Include="EventPageActivity.cs" />
     <Compile Include="FamDetailsPageActivity.cs">
       <SubType>Code</SubType>
@@ -285,6 +286,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EventAttendees.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventMatches.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

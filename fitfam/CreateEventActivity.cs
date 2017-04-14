@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using System;
@@ -62,8 +63,11 @@ namespace fitfam
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, default(DateTime), default(DateTime), true, tagsList,new fitfam.User("fakeCreator"));
-                StartActivity(typeof(EventDetailsPageActivity));
+                var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
+                eventDetailsActivity.PutExtra("eventId",newEvent.EventId);
+                StartActivity(eventDetailsActivity);
             };
+            
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
@@ -86,7 +90,5 @@ namespace fitfam
             };
             
         }
-
-        
     }
 }
