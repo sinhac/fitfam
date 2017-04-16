@@ -16,8 +16,6 @@ namespace fitfam
 
             string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
 
-            System.Console.WriteLine("EVENT ID IS HEEEEEEEEEEEEEEEEEEEEEEERRRRRRREEEEE22222: "+eventId);
-
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
                 StartActivity(typeof(EventAttendeesActivity));
