@@ -228,6 +228,7 @@
     </Compile>
     <Compile Include="EventMatchesActivity.cs" />
     <Compile Include="EventPageActivity.cs" />
+    <Compile Include="FacebookLoginButtonRenderer.cs" />
     <Compile Include="FamDetailsPageActivity.cs">
       <SubType>Code</SubType>
     </Compile>
