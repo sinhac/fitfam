@@ -9,11 +9,15 @@ namespace fitfam
     [Activity(Label = "FindafamformActivity")]
     public class FindAFamFormActivity : Activity
     {
+
+        private string userId;
         private object spinner_ItemSelected;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            userId = Intent.GetStringExtra("userId") ?? "Data not available";
+
             SetContentView(Resource.Layout.FindAFamForm);
 
             // Create your application here

@@ -12,9 +12,12 @@ namespace fitfam
     [Activity(Label = "CreateEventActivity")]
     public class CreateEventActivity : Activity
     {
+        private string userId;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            userId = Intent.GetStringExtra("userId") ?? "Data not available";
+
             SetContentView(Resource.Layout.CreateEventPage);
 
             /* capture user input for event name, location, and description */

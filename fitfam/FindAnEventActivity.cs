@@ -9,9 +9,12 @@ namespace fitfam
     [Activity(Label = "FindaneventActivity")]
     public class FindAnEventActivity : Activity
     {
+        private string userId;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            userId = Intent.GetStringExtra("userId") ?? "Data not available";
+
             SetContentView(Resource.Layout.FindAnEventForm);
 
             // Create your application here

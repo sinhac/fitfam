@@ -129,12 +129,14 @@ namespace fitfam
         public void OnConnected(Bundle connectionHint)
         {
             mSignInClicked = false;
-
+            Console.WriteLine("Connected");
             if (PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient) != null)
             {
                 IPerson plusUser = PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient);
                 Console.WriteLine(plusUser.DisplayName);
                 Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", plusUser.Id);
+                Console.WriteLine(plusUser.Id);
                 StartActivity(intent);
             }
         }

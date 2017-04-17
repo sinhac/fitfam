@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 
@@ -7,10 +8,16 @@ namespace fitfam
     [Activity(Label = "HomepageActivity")]
     public class HomepageActivity : Activity
     {
+        private string userId;
+        public string UserId
+        {
+            get { return userId; }
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            userId = Intent.GetStringExtra("userId") ?? "Data not available";
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Homepage);
 
@@ -22,19 +29,27 @@ namespace fitfam
             /* redirect user according to button clicked */
 
             find_fam_button.Click += delegate {
-                StartActivity(typeof(FindAFamFormActivity));
+                Intent intent = new Intent(this, typeof(FindAFamFormActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             create_fam_button.Click += delegate {
-                StartActivity(typeof(CreateAFamFormActivity));
+                Intent intent = new Intent(this, typeof(CreateAFamFormActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
-            find_event_button.Click += delegate {   
-                StartActivity(typeof(FindAnEventActivity));
+            find_event_button.Click += delegate {
+                Intent intent = new Intent(this, typeof(FindAnEventActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             create_event_button.Click += delegate {
-                StartActivity(typeof(CreateEventActivity));
+                Intent intent = new Intent(this, typeof(CreateEventActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             /* navbar buttons */
