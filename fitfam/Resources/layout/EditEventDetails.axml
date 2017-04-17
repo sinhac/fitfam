@@ -28,9 +28,9 @@
                     android:background="@drawable/gold_plate" />
                 <LinearLayout
                     android:orientation="horizontal"
+                    android:id="@+id/linearLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout3"
                     android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
@@ -61,72 +61,105 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/space1"
+                android:id="@+id/space2"
                 android:layout_marginBottom="30.0dp" />
             <TextView
-                android:text="Fam Name"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Location: "
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/famNameTextView" />
-            <EditText
-                android:inputType="textPersonName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/famNameEditText"
-                android:hint="Name your new fam" />
-            <TextView
-                android:text="Description"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/descriptionTextView" />
-            <EditText
-                android:inputType="textMultiLine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/descriptionEditText"
-                android:hint="Write a brief description of your new fam here" />
-            <TextView
-                android:text="Tags"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tagsTextView" />
+                android:id="@+id/locationTextView" />
             <MultiAutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/addTagsTextView"
-                android:hint="Add a tag to describe your fam. You can add multiple." />
-            <TextView
-                android:text="Select the experience level(s) you would like your fam to consist of:"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/locationEditView"
+                android:hint="Enter the Location of your fam here" />
+            <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/experienceTextView" />
-            <CheckBox
-                android:text="Plebeian (I've never heard of this - I've done this once)"
+                android:id="@+id/space1"
+                android:layout_marginBottom="30.0dp" />
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/plebeianCheckBox" />
-            <CheckBox
-                android:text="Intermediate (I haven't done this in a while - I do this occasionally)"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/intermediateCheckBox" />
-            <CheckBox
-                android:text="Olympian (I do this regularly - This is my life)"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/olympianCheckBox" />
+                android:id="@+id/linearLayout6">
+                <TextView
+                    android:text="Choose a date: "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dateTextView" />
+                <DatePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datePicker" />
+            </LinearLayout>
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/space2"
                 android:layout_marginBottom="25.5dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout6"
+                android:gravity="center">
+                <TextView
+                    android:text="Edit Start Time: "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startTimeTextView" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startTimeHourSpinner" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startTimeMinuteSpinner" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout7"
+                android:gravity="center">
+                <TextView
+                    android:text="Edit End time: "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endTimeTextView" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endTimeHourSpinner" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endTimeMinuteSpinner" />
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space2"
+                android:layout_marginBottom="25.5dp" />
+            <TextView
+                android:text="Edit event description:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/descriptionTextView" />
+            <EditText
+                android:hint="Edit the description of your event here"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/descriptionEditText" />
             <Button
-                android:text="Create Fam!"
-                android:id="@+id/createFamButton"
+                android:text="SAVE CHANGES"
+                android:id="@+id/saveChangesButton"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
                 android:layout_width="match_parent"

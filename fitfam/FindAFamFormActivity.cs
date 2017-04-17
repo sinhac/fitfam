@@ -61,6 +61,7 @@ namespace fitfam
                 StartActivity(typeof(MatchesActivity));
             };
 
+            /* navbar buttons */
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
@@ -85,7 +86,7 @@ namespace fitfam
         {
             Spinner spinner = (Spinner)sender;
 
-            string toast = string.Format("The experience is {0}", spinner.GetItemAtPosition(e.Position));
+            string toast = string.Format("My experience level is {0}", spinner.GetItemAtPosition(e.Position));
             Toast.MakeText(this, toast, ToastLength.Long).Show();
         }
     }

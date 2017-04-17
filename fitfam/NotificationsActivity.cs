@@ -66,30 +66,30 @@ namespace fitfam
 
                 notificationLayout.AddView(sp);
 
-                button.Click += OnAlertYesNoClicked;
+                //button.Click += OnAlertYesNoClicked;
             };
 
-            async void OnAlertYesNoClicked(object sender, EventArgs e)
-            {
-                Android.App.AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                AlertDialog alertDialog = builder.Create();
-                alertDialog.SetTitle("Join Request");
-                alertDialog.SetMessage("This user would like to join your fam. What would you like to do?");
-                alertDialog.SetButton("Decline", (s, ev) =>
-                {
-                    alertDialog.Cancel();
-                    //decline
-                });
-                alertDialog.SetButton2("Accept", (s, ev) =>
-                {
-                    //accept
-                });
-                alertDialog.SetButton3("View Profile", (s, ev) =>
-                {
-                    StartActivity(typeof(ProfilePageActivity));
-                });
-                alertDialog.Show();
-            }
+            //async void OnAlertYesNoClicked(object sender, EventArgs e)
+            //{
+            //    Android.App.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            //    AlertDialog alertDialog = builder.Create();
+            //    alertDialog.SetTitle("Join Request");
+            //    alertDialog.SetMessage("This user would like to join your fam. What would you like to do?");
+            //    alertDialog.SetButton("Decline", (s, ev) =>
+            //    {
+            //        alertDialog.Cancel();
+            //        //decline
+            //    });
+            //    alertDialog.SetButton2("Accept", (s, ev) =>
+            //    {
+            //        //accept
+            //    });
+            //    alertDialog.SetButton3("View Profile", (s, ev) =>
+            //    {
+            //        StartActivity(typeof(ProfilePageActivity));
+            //    });
+            //    alertDialog.Show();
+            //}
         }
     }
 }

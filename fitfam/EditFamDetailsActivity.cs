@@ -1,19 +1,28 @@
-using Android.App;
-using Android.OS;
-using Android.Widget;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
 
 namespace fitfam
 {
-    [Activity(Label = "FamQuickViewActivity")]
-    public class FamQuickViewActivity : Activity
+    [Activity(Label = "EditFamDetailsActivity")]
+    public class EditFamDetailsActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.FamQuickView);
+            // Create your application here
+            SetContentView(Resource.Layout.EditFamDetails);
 
+            // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
@@ -34,25 +43,18 @@ namespace fitfam
                 StartActivity(typeof(ScheduleActivity));
             };
 
-            Button join = FindViewById<Button>(Resource.Id.button1);
-            //join.Click += OnAlertYesNoClicked;
+            EditText description = FindViewById<EditText>(Resource.Id.editText);
+            var new_description = "";
+            description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                new_description = e.Text.ToString();
+            };
 
-            //async void OnAlertYesNoClicked(object sender, EventArgs e)
-            //{
-            //    Android.App.AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            //    AlertDialog alertDialog = builder.Create();
-            //    alertDialog.SetTitle("Join Request");
-            //    alertDialog.SetMessage("You are about to send a join request. Would you like to continue?");
-            //    alertDialog.SetButton("No", (s, ev) =>
-            //    {
-            //        alertDialog.Cancel();
-            //    });
-            //    alertDialog.SetButton2("Yes", (s, ev) =>
-            //    {
-                    
-            //    });
-            //    alertDialog.Show();
-            //}
+            Button savechanges_button = FindViewById<Button>(Resource.Id.save_changes_button);
+            savechanges_button.Click += delegate
+            {
+                StartActivity(typeof(FamDetailsPageActivity));
+            };
         }
     }
 }
