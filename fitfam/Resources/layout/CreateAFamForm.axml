@@ -34,25 +34,25 @@
                     android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
-                        android:id="@+id/imageButton1"
+                        android:id="@+id/navBarHomeButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/face"
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/navBarProfileButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/message"
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/navBarNotificationsButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/clock"
-                        android:id="@+id/imageButton4"
+                        android:id="@+id/navBarScheduleButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
@@ -68,57 +68,57 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView1" />
+                android:id="@+id/famNameTextView" />
             <EditText
                 android:inputType="textPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/famName"
+                android:id="@+id/famNameEditText"
                 android:hint="Name your new fam" />
             <TextView
                 android:text="Description"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView2" />
+                android:id="@+id/descriptionTextView" />
             <EditText
                 android:inputType="textMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/description"
+                android:id="@+id/descriptionEditText"
                 android:hint="Write a brief description of your new fam here" />
             <TextView
                 android:text="Tags"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView3" />
+                android:id="@+id/tagsTextView" />
             <MultiAutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/actTag"
-                android:hint="Add a tag to your fam. You can add multiple." />
+                android:id="@+id/addTagsTextView"
+                android:hint="Add a tag to describe your fam. You can add multiple." />
             <TextView
                 android:text="Select the experience level(s) you would like your fam to consist of:"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4" />
+                android:id="@+id/experienceTextView" />
             <CheckBox
                 android:text="Plebeian (I've never heard of this - I've done this once)"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/checkBox1" />
+                android:id="@+id/plebeianCheckBox" />
             <CheckBox
                 android:text="Intermediate (I haven't done this in a while - I do this occasionally)"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/checkBox2" />
+                android:id="@+id/intermediateCheckBox" />
             <CheckBox
                 android:text="Olympian (I do this regularly - This is my life)"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/checkBox3" />
+                android:id="@+id/olympianCheckBox" />
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                 android:layout_marginBottom="25.5dp" />
             <Button
                 android:text="Create Fam!"
-                android:id="@+id/button2"
+                android:id="@+id/createFamButton"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
                 android:layout_width="match_parent"

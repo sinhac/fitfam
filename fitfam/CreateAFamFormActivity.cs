@@ -16,21 +16,21 @@ namespace fitfam
             SetContentView(Resource.Layout.CreateAFamForm);
 
             // capture user input for Fam name, description, and tags
-            var famName = FindViewById<EditText>(Resource.Id.famName);
+            var famName = FindViewById<EditText>(Resource.Id.famNameEditText);
             var famNameInput = "";
             famName.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 famNameInput = e.Text.ToString();
             };
 
-            var description = FindViewById<EditText>(Resource.Id.description);
+            var description = FindViewById<EditText>(Resource.Id.descriptionEditText);
             var descriptionInput = "";
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 descriptionInput = e.Text.ToString();
             };
 
-            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.actTag);
+            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.addTagsTextView);
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 
@@ -51,9 +51,9 @@ namespace fitfam
                 tagsList.Add(tagsArr[i]);
             }
 
-            // add user input to new entry in database, then redirect
-            Button button2 = FindViewById<Button>(Resource.Id.button2);
-            button2.Click += delegate {
+            /* add user input to new entry in database, then redirect */
+            Button createFamButton = FindViewById<Button>(Resource.Id.createFamButton);
+            createFamButton.Click += delegate {
                 System.Console.WriteLine("creating fam");
                 Group fam = new Group(famNameInput, descriptionInput, new User("test"));
                 System.Console.WriteLine("Created fam");
@@ -61,23 +61,23 @@ namespace fitfam
             };
 
             /* navbar buttons */
-            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
-            imagebutton1.Click += delegate {
+            ImageButton navBarHomeButton = FindViewById<ImageButton>(Resource.Id.navBarHomeButton);
+            navBarHomeButton.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
             };
 
-            ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
-            imagebutton2.Click += delegate {
+            ImageButton navBarProfileButton = FindViewById<ImageButton>(Resource.Id.navBarProfileButton);
+            navBarProfileButton.Click += delegate {
                 StartActivity(typeof(ProfilePageActivity));
             };
 
-            ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
-            imagebutton3.Click += delegate {
+            ImageButton navBarNotificationsButton = FindViewById<ImageButton>(Resource.Id.navBarNotificationsButton);
+            navBarNotificationsButton.Click += delegate {
                 StartActivity(typeof(NotificationsActivity));
             };
 
-            ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
-            imagebutton4.Click += delegate {
+            ImageButton navBarScheduleButton = FindViewById<ImageButton>(Resource.Id.navBarScheduleButton);
+            navBarScheduleButton.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
         }

@@ -61,6 +61,7 @@ namespace fitfam
                 StartActivity(typeof(MatchesActivity));
             };
 
+            /* navbar buttons */
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));

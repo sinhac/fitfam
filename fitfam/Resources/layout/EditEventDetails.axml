@@ -34,25 +34,25 @@
                     android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
-                        android:id="@+id/imageButton1"
+                        android:id="@+id/navBarHomeButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/face"
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/navBarProfileButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/message"
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/navBarNotificationsButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/clock"
-                        android:id="@+id/imageButton4"
+                        android:id="@+id/navBarScheduleButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
@@ -67,11 +67,11 @@
                 android:text="Location: "
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView7" />
+                android:id="@+id/locationTextView" />
             <MultiAutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/multiAutoCompleteTextView2"
+                android:id="@+id/locationEditView"
                 android:hint="Enter the Location of your fam here" />
             <Space
                 android:layout_width="match_parent"
@@ -88,11 +88,11 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView8" />
+                    android:id="@+id/dateTextView" />
                 <DatePicker
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/datePicker1" />
+                    android:id="@+id/datePicker" />
             </LinearLayout>
             <Space
                 android:layout_width="match_parent"
@@ -110,15 +110,15 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView5" />
+                    android:id="@+id/startTimeTextView" />
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner1" />
+                    android:id="@+id/startTimeHourSpinner" />
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner2" />
+                    android:id="@+id/startTimeMinuteSpinner" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -131,15 +131,15 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView6" />
+                    android:id="@+id/endTimeTextView" />
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner3" />
+                    android:id="@+id/endTimeHourSpinner" />
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner4" />
+                    android:id="@+id/endTimeMinuteSpinner" />
             </LinearLayout>
             <Space
                 android:layout_width="match_parent"
@@ -151,15 +151,15 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4" />
+                android:id="@+id/descriptionTextView" />
             <EditText
                 android:hint="Edit the description of your event here"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText" />
+                android:id="@+id/descriptionEditText" />
             <Button
                 android:text="SAVE CHANGES"
-                android:id="@+id/save_changes_button"
+                android:id="@+id/saveChangesButton"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
                 android:layout_width="match_parent"
