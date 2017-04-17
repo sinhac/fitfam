@@ -25,38 +25,182 @@ namespace fitfam
         public string EventName
         {
             get { return eventName; }
-            set { eventName = value; }
+            set
+            {
+                // update locally
+                eventName = value;
+                // create update request to update event name in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#E", "eventName"},  // attribute to be updated (event name)
+                    },
+                        ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newEventName",new AttributeValue { S = eventName }},  // new event name
+                    },
+
+                    // expression to update event name in database entry
+                    UpdateExpression = "SET #E :newEventName"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
         }
         private string description;
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            set
+            {
+                // update locally
+                description = value;
+                // create update request to update event description in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#D", "description"},  // attribute to be updated (event description)
+                    },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newEventDescription",new AttributeValue { S = description }},  // new event description
+                    },
+
+                    // expression to update event description in database entry
+                    UpdateExpression = "SET #E :newEventDescription"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
         }
         private List<string> tags = new List<string>();
         private string location;
         public string Location
         {
             get { return location; }
-            set { location = value; }
+            set
+            {
+                // update locally
+                location = value;
+                // create update request to update event location in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#L", "location"},  // attribute to be updated (event location)
+                    },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newEventLocation",new AttributeValue { S = location }},  // new event location
+                    },
+
+                    // expression to update event location in database entry
+                    UpdateExpression = "SET #L :newEventLocation"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
         }
         private DateTime startTime; //figure out recurring events
         public DateTime StartTime
         {
             get { return startTime; }
-            set { startTime = value; }
+            set
+            {
+                // update locally
+                startTime = value;
+                // create update request to update event start time in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#S", "startTime"},  // attribute to be updated (event start time)
+                    },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newEventStart",new AttributeValue { S = startTime.ToString() }},  // new event start time
+                    },
+
+                    // expression to update event start time in database entry
+                    UpdateExpression = "SET #S :newEventStart"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
         }
         private DateTime endTime;
         public DateTime EndTime
         {
             get { return endTime; }
-            set { endTime = value; }
+            set
+            {
+                // update locally
+                endTime = value;
+                // create update request to update event end time in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#T", "endTime"},  // attribute to be updated (event end time)
+                    },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newEventEnd",new AttributeValue { S = endTime.ToString() }},  // new event end time
+                    },
+
+                    // expression to update event start time in database entry
+                    UpdateExpression = "SET #T :newEventEnd"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
         }
         private bool publicEvent;
         public bool PublicEvent
         {
             get { return publicEvent; }
-            set { publicEvent = value; }
+            set
+            {
+                // update locally
+                publicEvent = value;
+                // create update request to update event public status in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#P", "publicEvent"},  // attribute to be updated (event public status)
+                    },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newStatus",new AttributeValue { BOOL = publicEvent }},  // new event status
+                    },
+
+                    // expression to update event status in database entry
+                    UpdateExpression = "SET #P :newStatus"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
         }
         private User creator;
         public User Creator
@@ -88,10 +232,7 @@ namespace fitfam
                     eventId = eventName + creator.UserId + startTime.ToString();
                     // create list of userids from list of attending Users
                     List<string> attending_userids = new List<string>();
-                    /*for (int i = 0; i < attending.Count; i++)
-                    {
-                        //attending_userids.Add(attending[i].UserId);
-                    }*/
+                   
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "eventId", new AttributeValue { S = eventId} },
@@ -105,7 +246,6 @@ namespace fitfam
                         { "attending", new AttributeValue { SS = attending_userids } }
                     };
                     awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
-                    System.Console.WriteLine("ADDED NEW EVENT");
                 }
             }
         }

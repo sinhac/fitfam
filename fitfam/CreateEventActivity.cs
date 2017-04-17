@@ -1,3 +1,5 @@
+using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -14,7 +16,7 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateEventPage);
 
-            // Create your application here
+            // capture user input for event name, location, description, tags
             var eventName = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView1);
             var eventNameInput = "";
             eventName.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
@@ -36,7 +38,7 @@ namespace fitfam
                 descriptionInput = e.Text.ToString();
             };
 
-            //ADD TAGS HERE
+            // get tags
             var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView3);
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
@@ -58,13 +60,31 @@ namespace fitfam
                 tagsList.Add(tagsArr[i]);
             }
 
-            // Create your application here
+            // add user input to new entry in database, then redirect 
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, default(DateTime), default(DateTime), true, tagsList,new fitfam.User("fakeCreator"));
+                // =============================  START TEST -- REMOVE  ===============================================
+                AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
+                var request = new GetItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    Key = new Dictionary<string, AttributeValue>()
+                    {
+                        { "eventId", new AttributeValue { S = eventNameInput + "fakeCreator" + default(DateTime).ToString() } }
+                    },
+                };
+                var response = dbclient.GetItemAsync(request);
+                GetItemResponse result = response.Result;
+                var item = result.Item;
+
+                System.Console.WriteLine("SUCCESS: NEW EVENT NAME = " + item[eventNameInput] + ", DESCRIPTION = " + item[descriptionInput] + ", LOCATION = " + item[locationInput] + "\n\n\n");
+                // ================================ END TEST  =======================================================
                 StartActivity(typeof(EventDetailsPageActivity));
             };
 
+            /* navbar buttons */
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));

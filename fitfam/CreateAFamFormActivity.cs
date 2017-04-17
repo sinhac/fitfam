@@ -13,10 +13,9 @@ namespace fitfam
             System.Console.WriteLine("opened createfam form");
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
             SetContentView(Resource.Layout.CreateAFamForm);
 
-            // Create your application here
+            // capture user input for Fam name, description, and tags
             var famName = FindViewById<EditText>(Resource.Id.famName);
             var famNameInput = "";
             famName.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
@@ -52,6 +51,7 @@ namespace fitfam
                 tagsList.Add(tagsArr[i]);
             }
 
+            // add user input to new entry in database, then redirect
             Button button2 = FindViewById<Button>(Resource.Id.button2);
             button2.Click += delegate {
                 System.Console.WriteLine("creating fam");
@@ -60,6 +60,7 @@ namespace fitfam
                 StartActivity(typeof(FamProfileActivity));
             };
 
+            /* navbar buttons */
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
