@@ -62,6 +62,7 @@ namespace fitfam
 
         void mGoogleSignIn_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("clicked");
             if(!mGoogleApiClient.IsConnecting)
             {
                 mSignInClicked = true;
@@ -81,6 +82,7 @@ namespace fitfam
             {
                 try
                 {
+                    Console.WriteLine("has resolution");
                     mIntentInProgress = true;
                     StartIntentSenderForResult(mConnectionResult.Resolution.IntentSender, 0, null, 0, 0, 0);
                 }
@@ -99,6 +101,7 @@ namespace fitfam
 
                 if (resultCode != Result.Ok)
                 {
+                    Console.WriteLine(mGoogleApiClient.IsConnecting);
                     mSignInClicked = false;
                 }
 
