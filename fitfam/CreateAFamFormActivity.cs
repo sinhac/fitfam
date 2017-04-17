@@ -17,6 +17,7 @@ namespace fitfam
             SetContentView(Resource.Layout.CreateAFamForm);
 
             // Create your application here
+            // Fam name
             var famName = FindViewById<EditText>(Resource.Id.famName);
             var famNameInput = "";
             famName.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
@@ -24,6 +25,7 @@ namespace fitfam
                 famNameInput = e.Text.ToString();
             };
 
+            // Fam description
             var description = FindViewById<EditText>(Resource.Id.description);
             var descriptionInput = "";
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
@@ -31,13 +33,12 @@ namespace fitfam
                 descriptionInput = e.Text.ToString();
             };
 
+            // Activity tags
             var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.actTag);
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-
             tags.Adapter = adapter;
             tags.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-
             var tagsInput = "";
             string[] tagsArr;
             List<string> tagsList = new List<string>();
@@ -52,6 +53,7 @@ namespace fitfam
                 tagsList.Add(tagsArr[i]);
             }
 
+            // Create A Fam button
             Button button2 = FindViewById<Button>(Resource.Id.button2);
             button2.Click += delegate {
                 System.Console.WriteLine("creating fam");
@@ -60,6 +62,7 @@ namespace fitfam
                 StartActivity(typeof(FamProfileActivity));
             };
 
+            // Action bar
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
