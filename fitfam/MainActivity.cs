@@ -62,8 +62,10 @@ namespace fitfam
 
         void mGoogleSignIn_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("CLICKED");
             if(!mGoogleApiClient.IsConnecting)
             {
+                Console.WriteLine("CONNECTING");
                 mSignInClicked = true;
                 ResolveSignInError();
             }
@@ -74,6 +76,7 @@ namespace fitfam
             if(mGoogleApiClient.IsConnected)
             {
                 //No need to resolve errors
+                Console.WriteLine("NO ERRORS");
                 return;
             }
 
@@ -81,6 +84,7 @@ namespace fitfam
             {
                 try
                 {
+                    Console.WriteLine("HAS RESOLUTION");
                     mIntentInProgress = true;
                     StartIntentSenderForResult(mConnectionResult.Resolution.IntentSender, 0, null, 0, 0, 0);
                 }
@@ -90,16 +94,29 @@ namespace fitfam
                     mGoogleApiClient.Connect();
                 }
             }
+            else
+            {
+                Console.WriteLine("NO RESOLUTION");
+            }
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             if (requestCode == 0)
             {
-
+                Console.WriteLine(0);
                 if (resultCode != Result.Ok)
                 {
+                    Console.WriteLine("FAIL");
+
                     mSignInClicked = false;
+                }
+
+                else
+                {
+                    Console.WriteLine("SUCCESS");
+                    StartActivity(typeof(HomepageActivity));
+
                 }
 
                 mIntentInProgress = false;
@@ -108,6 +125,10 @@ namespace fitfam
                 {
                     mGoogleApiClient.Connect();
                 }
+            }
+            else
+            {
+                Console.WriteLine(requestCode);
             }
         }
 
@@ -129,12 +150,15 @@ namespace fitfam
         public void OnConnected(Bundle connectionHint)
         {
             mSignInClicked = false;
-
+            Console.WriteLine("CONNECTED");
             if (PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient) != null)
             {
                 IPerson plusUser = PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient);
                 Console.WriteLine(plusUser.DisplayName);
+                
+
             }
+            StartActivity(typeof(HomepageActivity));
         }
 
         public void OnConnectionSuspended(int cause)
