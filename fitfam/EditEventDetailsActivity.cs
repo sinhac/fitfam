@@ -1,27 +1,38 @@
+using System;
 using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Widget;
-using System;
-using System.Collections.Generic;
-using Xamarin.Forms.Platform.Android;
 
 namespace fitfam
 {
-    [Activity(Label = "CreateEventActivity")]
-    public class CreateEventActivity : Activity
+    [Activity(Label = "EditEventDetailsActivity")]
+    public class EditEventDetailsActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.CreateEventPage);
 
             // Create your application here
-            var eventName = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView1);
-            var eventNameInput = "";
-            eventName.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
-            {
-                eventNameInput = e.Text.ToString();
+            SetContentView(Resource.Layout.EditEventDetails);
+
+            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
+            imagebutton1.Click += delegate {
+                StartActivity(typeof(HomepageActivity));
+            };
+
+            ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
+            imagebutton2.Click += delegate {
+                StartActivity(typeof(ProfilePageActivity));
+            };
+
+            ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
+            imagebutton3.Click += delegate {
+                StartActivity(typeof(NotificationsActivity));
+            };
+
+            ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
+            imagebutton4.Click += delegate {
+                StartActivity(typeof(ScheduleActivity));
             };
 
             var location = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView2);
@@ -31,34 +42,12 @@ namespace fitfam
                 locationInput = e.Text.ToString();
             };
 
-            var description = FindViewById<EditText>(Resource.Id.editText1);
+            var description = FindViewById<EditText>(Resource.Id.editText);
             var descriptionInput = "";
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 descriptionInput = e.Text.ToString();
             };
-
-            //ADD TAGS HERE
-            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView3);
-            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            
-            tags.Adapter = adapter;
-            tags.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-
-            var tagsInput = "";
-            string[] tagsArr;
-            List<string> tagsList = new List<string>();
-            tags.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
-            {
-                tagsInput = e.Text.ToString();
-            };
-            char[] delimiters = { ',', '\t', '\n' };
-            tagsArr = tagsInput.Split(delimiters);
-            for(int i = 0; i < tagsArr.Length; i++)
-            {
-                tagsList.Add(tagsArr[i]);
-            }
 
             //Date picker
             DatePicker date = FindViewById<DatePicker>(Resource.Id.datePicker1);
@@ -103,9 +92,8 @@ namespace fitfam
             adapter4.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner4.Adapter = adapter4;
 
-            // Create your application here
-            Button button1 = FindViewById<Button>(Resource.Id.button1);
-            button1.Click += delegate {
+            Button save_changes_button = FindViewById<Button>(Resource.Id.save_changes_button);
+            save_changes_button.Click += delegate {
                 startInput = date.DateTime;
                 string hour = (string)spinner1.GetItemAtPosition(spinner1.SelectedItemPosition);
                 startInput = startInput.AddHours(Convert.ToDouble(hour));
@@ -118,34 +106,14 @@ namespace fitfam
                 minute = (string)spinner4.GetItemAtPosition(spinner4.SelectedItemPosition);
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
 
-                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList,new fitfam.User("fakeCreator"));
-                var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
-                eventDetailsActivity.PutExtra("eventId",newEvent.EventId);
-                StartActivity(eventDetailsActivity);
-            };
-            
-
-            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
-            imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                // Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList, new fitfam.User("fakeCreator"));
+                // var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
+                // eventDetailsActivity.PutExtra("eventId", newEvent.EventId);
+                StartActivity(typeof(EventDetailsPageActivity));
             };
 
-            ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
-            imagebutton2.Click += delegate {
-                StartActivity(typeof(ProfilePageActivity));
-            };
-
-            ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
-            imagebutton3.Click += delegate {
-                StartActivity(typeof(NotificationsActivity));
-            };
-
-            ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
-            imagebutton4.Click += delegate {
-                StartActivity(typeof(ScheduleActivity));
-            };
-            
         }
+
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;

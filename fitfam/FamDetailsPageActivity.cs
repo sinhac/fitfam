@@ -46,6 +46,30 @@ namespace fitfam
             button1.Click += delegate {
                 StartActivity(typeof(EventPageActivity));
             };
+
+            Button button2 = FindViewById<Button>(Resource.Id.button2);
+            button2.Click += delegate {
+                StartActivity(typeof(EventAttendeesActivity));
+            };
+
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
+            if (true)
+            {
+                Button button = new Button(this);
+                button.Id = 3;
+                button.Text = "Edit Fam Details";
+                button.SetBackgroundResource(Resource.Drawable.gold_button);
+                float scale = button.Resources.DisplayMetrics.Density;
+                button.SetHeight((int) (75 * scale + 0.5f));
+                button.SetWidth((int) (500 * scale + 0.5f));
+                int padding = (int)(16 * scale + 0.5f);
+                button.SetPadding(padding, padding, padding, padding);
+                layout.AddView(button);
+
+                button.Click += delegate {
+                    StartActivity(typeof(EditFamDetailsActivity));
+                };
+            }
         }
     }
 }

@@ -143,41 +143,52 @@
                 p1:id="@+id/space2"
                 p1:layout_marginBottom="25.5dp" />
             <LinearLayout
-                p1:orientation="vertical"
+                p1:orientation="horizontal"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout6">
+                p1:id="@+id/linearLayout6"
+                p1:gravity="center">
                 <TextView
                     p1:text="Start time:"
                     p1:textAppearance="?android:attr/textAppearanceLarge"
-                    p1:layout_width="match_parent"
+                    p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
                     p1:id="@+id/textView5" />
-                <TimePicker
-                    p1:layout_width="match_parent"
+                <Spinner
+                    p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
-                    p1:id="@+id/timePicker1"
-                    p1:minWidth="25px"
-                    p1:minHeight="25px" />
+                    p1:id="@+id/spinner1" />
+                <Spinner
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/spinner2" />
             </LinearLayout>
             <LinearLayout
-                p1:orientation="vertical"
+                p1:orientation="horizontal"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout7">
+                p1:id="@+id/linearLayout7"
+                p1:gravity="center">
                 <TextView
                     p1:text="End time:"
                     p1:textAppearance="?android:attr/textAppearanceLarge"
-                    p1:layout_width="match_parent"
+                    p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
                     p1:id="@+id/textView6" />
-                <TimePicker
-                    p1:layout_width="match_parent"
+                <Spinner
+                    p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
-                    p1:id="@+id/timePicker2"
-                    p1:minWidth="25px"
-                    p1:minHeight="25px" />
+                    p1:id="@+id/spinner3" />
+                <Spinner
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/spinner4" />
             </LinearLayout>
+            <Space
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/space2"
+                p1:layout_marginBottom="25.5dp" />
             <Button
                 p1:text="Create Event"
                 p1:id="@+id/button1"

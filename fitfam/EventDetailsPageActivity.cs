@@ -16,8 +16,6 @@ namespace fitfam
 
             string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
 
-            System.Console.WriteLine("EVENT ID IS HEEEEEEEEEEEEEEEEEEEEEEERRRRRRREEEEE22222: "+eventId);
-
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
                 StartActivity(typeof(EventAttendeesActivity));
@@ -42,6 +40,25 @@ namespace fitfam
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
             };
+
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
+            if (true)
+            {
+                Button button = new Button(this);
+                button.Id = 3;
+                button.Text = "Edit Event Details";
+                button.SetBackgroundResource(Resource.Drawable.gold_button);
+                float scale = button.Resources.DisplayMetrics.Density;
+                button.SetHeight((int)(75 * scale + 0.5f));
+                button.SetWidth((int)(500 * scale + 0.5f));
+                int padding = (int)(16 * scale + 0.5f);
+                button.SetPadding(padding, padding, padding, padding);
+                layout.AddView(button);
+
+                button.Click += delegate {
+                    StartActivity(typeof(EditEventDetailsActivity));
+                };
+            }
         }
     }
 }
