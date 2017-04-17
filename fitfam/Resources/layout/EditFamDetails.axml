@@ -28,9 +28,9 @@
                     android:background="@drawable/gold_plate" />
                 <LinearLayout
                     android:orientation="horizontal"
+                    android:id="@+id/linearLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout3"
                     android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
@@ -64,54 +64,23 @@
                 android:id="@+id/space1"
                 android:layout_marginBottom="30.0dp" />
             <TextView
-                android:text="groupName"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Edit fam description:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView1" />
-            <TextView
-                android:text="description"
+                android:id="@+id/textView4" />
+            <EditText
+                android:hint="Edit the description of your fam here"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView2" />
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/space2"
-                android:layout_marginBottom="30.0dp" />
-            <RelativeLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/relativeLayout1">
-                <ImageView
-                    android:src="@drawable/groupOfMightyMen"
-                    android:layout_width="match_parent"
-                    android:layout_height="147.0dp"
-                    android:id="@+id/imageView6"
-                    android:layout_marginLeft="0.0dp" />
-            </RelativeLayout>
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/space3" />
+                android:id="@+id/editText" />
             <Button
-                android:text="Events"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button1"
+                android:text="SAVE CHANGES"
+                android:id="@+id/save_changes_button"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
-                android:gravity="center" />
-            <Button
-                android:text="Members"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:background="@drawable/gold_button"
-                style="@style/button_text"
-                android:gravity="center" />
+                android:layout_height="80dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
