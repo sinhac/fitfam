@@ -68,6 +68,10 @@ namespace fitfam
                 mSignInClicked = true;
                 ResolveSignInError();
             }
+            else
+            {
+                Console.WriteLine("connecting");
+            }
         }
 
         private void ResolveSignInError()
