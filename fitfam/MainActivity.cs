@@ -133,7 +133,9 @@ namespace fitfam
             if (PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient) != null)
             {
                 IPerson plusUser = PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient);
-                Console.WriteLine(plusUser.DisplayName);
+                Console.WriteLine("USER NAME: "+plusUser.DisplayName);
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                StartActivity(intent);
             }
         }
 
