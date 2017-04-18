@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
+using Android.Gms.Tasks;
 
 namespace fitfam
 {
@@ -84,12 +85,15 @@ namespace fitfam
         /// <param name="client">dynamodb client</param>
         /// <param name="request">get request</param>
         /// <returns></returns>
-        public GetItemResponse getItem(Amazon.DynamoDBv2.AmazonDynamoDBClient client, GetItemRequest request)
+        public GetItemResponse getItemAsync(Amazon.DynamoDBv2.AmazonDynamoDBClient client, GetItemRequest request)
         {
-            
+            System.Console.WriteLine("TRE " + request.ToString());
             try
             {
                 var get = client.GetItemAsync(request);
+                System.Console.WriteLine("TRE2 " + get.IsCompleted);
+                System.Threading.Thread.Sleep(50000);
+                //how to
                 return get.Result;
             }
             catch (Exception ex)
@@ -98,6 +102,8 @@ namespace fitfam
                 return null;
             }
         }
+
+  
 
         public UpdateItemResponse updateItem(Amazon.DynamoDBv2.AmazonDynamoDBClient client, UpdateItemRequest request)
         {

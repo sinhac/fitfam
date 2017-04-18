@@ -1,6 +1,11 @@
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.OS;
 using Android.Widget;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace fitfam
 {
@@ -14,7 +19,64 @@ namespace fitfam
             // Create your application here
             SetContentView(Resource.Layout.EventDetailsPage);
 
+
             string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
+
+            System.Console.WriteLine("event" + eventId);
+
+            //===========================STUFFFFFF====================================================
+
+            AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
+            string tableName = "fitfam-mobilehub-2083376203-events";
+
+
+            var request = new GetItemRequest
+            {
+                TableName = tableName,
+                Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+            };
+            //var key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } };
+            //CancellationToken token;
+            //var response = client.GetItemAsync(tableName, key, token);
+            var response = client.getItemAsync(dbclient, request);
+            System.Console.WriteLine("here"+response.ToString());
+            System.Console.WriteLine("here" + response.HttpStatusCode);
+            System.Console.WriteLine("here1" + response.ContentLength);
+            System.Console.WriteLine("here2" + response.IsItemSet);
+
+
+            // Check the response.
+            var result = response.Item;
+            //var attributeMap = result.Item; // Attribute list in the response.
+            //var something = result.Values;
+
+            List<KeyValuePair<string, AttributeValue>> info = new List<KeyValuePair<string, AttributeValue>>();
+            if (result.Count == 0) { System.Console.WriteLine("EMPTYYYYYYYYYYYYYYYYYYY1111111"); }
+            foreach (KeyValuePair<string, AttributeValue> entry in result)
+            {
+                info.Add(entry);
+                System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING "+entry.Key);
+                //System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE" + (string)entry.Value.S);
+                //System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE");
+            }
+
+            /*foreach (KeyValuePair<string, AttributeValue> kvp in info)
+            {
+                System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING "+kvp.Key);
+                System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE" + (string)kvp.Value.S);
+            }*/
+
+            //string Value = "";
+            //Value = string.Join(", ", result.Values.Select(x => x));
+            /*Enumerable.Range(0, /*result.Values.Count*///3).Select(i =>
+            //    Value = string.Join(",", result.Values.Select(x => x)) 
+            //    );*/
+            System.Console.WriteLine("Idddddddddddddddddddddddddddddddd: " + eventId);
+            //System.Console.WriteLine("HEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYY: " + Value);
+
+
+            //===============================STUFFFF=================================================
 
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
