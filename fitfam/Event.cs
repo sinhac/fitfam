@@ -239,11 +239,11 @@ namespace fitfam
                         { "eventName", new AttributeValue { S = eventName } },
                         { "description", new AttributeValue { S = description } },
                         { "location", new AttributeValue { S = location } },
-                        { "startTime", new AttributeValue { S = startTime.ToString() } },
-                        { "endTime", new AttributeValue { S = endTime.ToString() } },
-                        { "publicEvent", new AttributeValue { BOOL = publicEvent } },
-                        { "tags", new AttributeValue { SS = tags } },
-                        { "attending", new AttributeValue { SS = attending_userids } }
+                        //{ "startTime", new AttributeValue { S = startTime.ToString() } },
+                        //{ "endTime", new AttributeValue { S = endTime.ToString() } },
+                        //{ "publicEvent", new AttributeValue { BOOL = publicEvent } },
+                        //{ "tags", new AttributeValue { SS = tags } },
+                        //{ "attending", new AttributeValue { SS = attending_userids } }
                     };
                     awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
                 }

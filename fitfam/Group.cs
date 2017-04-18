@@ -143,17 +143,18 @@ namespace fitfam
                     groupEntry["members"] = membersDoc;
                     table.PutItemAsync(groupEntry);
                     System.Console.WriteLine("wrote to database");
-                    /*
+                    
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "groupId", new AttributeValue { S = groupId} },
                         { "groupName", new AttributeValue { S = groupName } },
                         { "description", new AttributeValue { S = description } },
-                        { "members", new AttributeValue { M = } }
+                        //{ "members", new AttributeValue { M = } }
 
                     };
-                    awsClient.putItem(client, awsClient.makePutRequest(, item));
-                    */
+                    awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-groups", item));
+
+
                 }
              }
             

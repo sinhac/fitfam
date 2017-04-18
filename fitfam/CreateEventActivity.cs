@@ -122,7 +122,7 @@ namespace fitfam
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList,new fitfam.User("fakeCreator"));
                 
                 // =============================  START TEST -- TO BE REMOVED  ===============================================
-                AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
+               /* AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
                 var request = new GetItemRequest
                 {
@@ -137,7 +137,7 @@ namespace fitfam
                 var item = result.Item;
 
                 System.Console.WriteLine("SUCCESS: NEW EVENT NAME = " + item[eventNameInput] + ", DESCRIPTION = " + item[descriptionInput] + ", LOCATION = " + item[locationInput] + "\n\n\n");
-                // ================================ END TEST  =======================================================
+                */// ================================ END TEST  =======================================================
 
                 var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
                 eventDetailsActivity.PutExtra("eventId",newEvent.EventId);
