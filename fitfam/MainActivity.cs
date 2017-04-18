@@ -103,6 +103,8 @@ namespace fitfam
                 {
                     Console.WriteLine(mGoogleApiClient.IsConnecting);
                     mSignInClicked = false;
+                   // ResolveSignInError();
+
                 }
 
                 mIntentInProgress = false;
