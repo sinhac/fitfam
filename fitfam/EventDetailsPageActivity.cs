@@ -62,7 +62,7 @@ namespace fitfam
                 System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING " + kvp.Key);
                 //System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE" + kvp.Value);
                 var value = kvp.Value;
-                eventNameInput = value.S;
+                //eventNameInput = value.S;
                 System.Console.WriteLine(
                     "VALUUUUE: "+kvp.Key + " " +
                     (value.S == null ? "" : "S=[" + value.S + "]") +

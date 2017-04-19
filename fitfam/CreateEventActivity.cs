@@ -121,7 +121,7 @@ namespace fitfam
                 minute = (string)spinner4.GetItemAtPosition(spinner4.SelectedItemPosition);
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
 
-                var creator = new User(userId);
+                var creator = new User(userId, true);
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList, creator );
                 
                 // =============================  START TEST -- TO BE REMOVED  ===============================================
