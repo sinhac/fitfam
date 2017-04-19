@@ -63,17 +63,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/space1"
                 android:layout_marginBottom="30.0dp" />
-            <TextView
-                android:text="groupName"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView1" />
-            <TextView
-                android:text="description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView2" />
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,22 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/space3" />
-            <Button
-                android:text="Events"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button1"
-                android:background="@drawable/gold_button"
-                style="@style/button_text"
-                android:gravity="center" />
-            <Button
-                android:text="Members"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:background="@drawable/gold_button"
-                style="@style/button_text"
-                android:gravity="center" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
