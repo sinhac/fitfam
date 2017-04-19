@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Amazon.DynamoDBv2.Model;
 using Amazon;
+using Amazon.DynamoDBv2;
 
 namespace fitfam
 { 
@@ -212,6 +213,11 @@ namespace fitfam
         {
             get { return attending; }
         }
+        private List<string> shared = new List<string>();
+        public List<string> Shared
+        {
+            get { return shared; }
+        }
 
         public Event(string name, string description, string location, DateTime startTime, DateTime endTime, bool publicEvent, List<string> tags, User creator)
         {
@@ -248,6 +254,32 @@ namespace fitfam
                     awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
                 }
             }
+        }
+
+        public Event(string eventId)
+        {
+            //pull info 
+            AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
+            string tableName = "fitfam-mobilehub-2083376203-events";
+            var Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } };
+            Dictionary<string, AttributeValue> eventInfo = new Dictionary<string, AttributeValue>();
+            var request = client.makeGetRequest(tableName, Key);
+            SetValues(client, dbclient, request);
+        }
+
+        private async void SetValues(AWSClient client, AmazonDynamoDBClient dbclient, GetItemRequest request)
+        {
+            var eventInfo = await client.GetItemAsync(dbclient, request);
+            this.eventName = eventInfo["eventName"].S;
+            this.description = eventInfo["description"].S;
+            this.location = eventInfo["location"].S;
+            this.startTime = Convert.ToDateTime(eventInfo["startTime"].S);
+            this.endTime = Convert.ToDateTime(eventInfo["endTime"].S);
+            this.publicEvent = eventInfo["publicEvent"].BOOL;
+            this.tags = eventInfo["tags"].SS.ToList<string>();
+            this.creator = new User(eventInfo["creator"].S, true);
+            this.shared = eventInfo["shared"].SS.ToList<string>();
         }
 
         public void addAttending(User attendingUser)

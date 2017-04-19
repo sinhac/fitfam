@@ -118,6 +118,11 @@ namespace fitfam
             get { return eventList; }
         }
 
+        public Group(string groupId)
+        {
+
+        }
+
         public Group(string name, string description, User creator)
         {
              this.groupName = name;
