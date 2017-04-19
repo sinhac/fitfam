@@ -165,6 +165,26 @@ namespace fitfam
                             case "experienceLevels":
                                 experienceLevels = kvp.Value.SS.ToList();
                                 break;
+                            case "groupName":
+                                groupName = kvp.Value.S;
+                                break;
+                            case "members":
+                                var membersMap = kvp.Value.M;
+                                foreach (var keyVal in membersMap)
+                                {
+                                    members.Add(new User(keyVal.Key,false), keyVal.Value.BOOL);
+                                }
+                                break;
+                            case "pic":
+                                pic = kvp.Value.S;
+                                break;
+                            case "tags":
+                                tags = kvp.Value.SS.ToList();
+                                break;
+                            default:
+                                Console.WriteLine("Group fucked up");
+                                break;
+
 
                         }
                     }
@@ -274,6 +294,8 @@ namespace fitfam
             var response = dbclient.UpdateItemAsync(request);
             //add member to server
         }
+
+        public void removeMember
 
 
     }
