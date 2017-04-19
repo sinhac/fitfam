@@ -49,6 +49,7 @@ namespace fitfam
             AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
             string tableName = "fitfam-mobilehub-2083376203-groups";
             string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
+            string userId = Intent.GetStringExtra("userId") ?? "null";
             var request = new GetItemRequest
             {
                 TableName = tableName,
@@ -144,6 +145,8 @@ namespace fitfam
 
                 var famProfileActivity = new Intent(this, typeof(FamProfileActivity));
                 famProfileActivity.PutExtra("groupId", groupId);
+                Group g = new Group(groupId);
+                g.addJoinRequest(new User(userId, false));
                 StartActivity(famProfileActivity);
             };
 
