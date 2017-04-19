@@ -9,15 +9,19 @@ namespace fitfam
     public class HomepageActivity : Activity
     {
         private string userId;
-        public string UserId
-        {
-            get { return userId; }
-        }
+        private string gender;
+        private string pic;
+        private string location;
+        private string username;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            userId = Intent.GetStringExtra("userId") ?? "Null"; 
+            userId = Intent.GetStringExtra("userId") ?? null;
+            gender = Intent.GetStringExtra("gender") ?? null;
+            pic = Intent.GetStringExtra("pic") ?? null;
+            location = Intent.GetStringExtra("location") ?? null;
+            username = Intent.GetStringExtra("username") ?? null;
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Homepage);
 

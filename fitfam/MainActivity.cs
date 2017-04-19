@@ -136,6 +136,10 @@ namespace fitfam
                 Console.WriteLine("USER NAME: "+plusUser.DisplayName);
                 Intent intent = new Intent(this, typeof(HomepageActivity));
                 intent.PutExtra("userId", plusUser.Id);
+                intent.PutExtra("username", plusUser.DisplayName);
+                intent.PutExtra("gender", plusUser.Gender);
+                intent.PutExtra("pic", plusUser.Image.Url);
+                intent.PutExtra("location", plusUser.CurrentLocation);
                 StartActivity(intent);
             }
         }

@@ -31,7 +31,7 @@ namespace fitfam
         {
             get { return activities; }
         }
-        private Dictionary<string, bool> availability;
+        private Dictionary<string, bool> availability = new Dictionary<string, bool>();
         public Dictionary<string, bool> Availability
         {
             get { return availability; }
@@ -45,7 +45,29 @@ namespace fitfam
         public string Bio
         {
             get { return bio; }
-            set { bio = value; }
+            set
+            {
+                bio = value;
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-users",
+                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#B", "bio"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newBio",new AttributeValue { S = bio }},  // new pic to update user's pic with 
+                },
+
+                    // expression to set pic in database entry
+                    UpdateExpression = "SET #B :newBio"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
         }
         private string experienceLevel; //change to enum type
         public string ExperienceLevel
@@ -53,12 +75,12 @@ namespace fitfam
             get { return experienceLevel; }
             set { experienceLevel = value; }
         }
-        private List<Group> fitFams;
+        private List<Group> fitFams = new List<Group>();
         public List<Group> FitFams
         {
             get { return fitFams; }
         }
-        private List<User> friends;
+        private List<User> friends = new List<User>();
         public List<User> Friends
         {
             get { return friends; }
@@ -67,6 +89,11 @@ namespace fitfam
         public string Gender
         {
             get { return gender; }
+        }
+        private List<Event> joinedEvents = new List<Event>();
+        public List<Event> JoinedEvents
+        {
+            get { return joinedEvents; }
         }
         private string pic;
         public string Pic
@@ -81,10 +108,10 @@ namespace fitfam
                 var request = new UpdateItemRequest
                 {
                     TableName = "fitfam-mobilehub-2083376203-users",
-                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = username } } },
+                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
                     ExpressionAttributeNames = new Dictionary<string, string>()
                 {
-                    {"#P", "pics"},  // attribute to be updated
+                    {"#P", "pic"},  // attribute to be updated
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
@@ -97,19 +124,58 @@ namespace fitfam
                 var response = dbclient.UpdateItemAsync(request);
             }
         }
-        private List<Event> sharedEvents;
+        private List<Event> sharedEvents = new List<Event>();
         public List<Event> SharedEvents
         {
             get { return sharedEvents; }
         }
+        private string location;
+        public string Location
+        {
+            get { return location; }
+            set
+            {
+                location = value;
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-users",
+                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#L", "location"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newLocation",new AttributeValue { S = location }},  // new pic to update user's pic with 
+                },
 
-        public User(string userId)
+                    // expression to set pic in database entry
+                    UpdateExpression = "SET #L :newLocation"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+        }
+
+
+        public User(string userId, string gender, string pic, string location, string username)
         {
             this.userId = userId;
-            this.setValues();
+            this.gender = gender;
+            this.pic = pic;
+            this.location = location;
+            this.username = username;
+            setValues(true);
+        }
+
+        public User(string userId, bool mainUser)
+        {
+            this.userId = userId;
+            this.setValues(mainUser);
         }
         
-        private async void setValues()
+        private async void setValues(bool mainUser)
         {
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
@@ -126,7 +192,74 @@ namespace fitfam
                     }
                     else
                     {
+                        foreach (KeyValuePair<string, AttributeValue> kvp in userInfo)
+                        {
+                            switch (kvp.Key)
+                            {
+                                case "activities":
+                                    activities = kvp.Value.SS.ToList<string>();
+                                    break;
+                                case "availability":
+                                    this.availabilitySet = true;
+                                    var availabilityMap = kvp.Value.M;
+                                    foreach (var keyval in availabilityMap)
+                                    {
+                                        availability.Add(keyval.Key, keyval.Value.BOOL);
+                                    }
+                                    break;
+                                case "bio":
+                                    bio = kvp.Value.S;
+                                    break;
+                                case "experienceLevel":
+                                    experienceLevel = kvp.Value.S;
+                                    break;
+                                case "fitFams":
+                                    var fitFamList = kvp.Value.SS.ToList<string>();
+                                    foreach (var groupId in fitFamList)
+                                    {
+                                        fitFams.Add(new Group(groupId));
+                                    }
+                                    break;
+                                case "friends":
+                                    if (mainUser)
+                                    {
+                                        var friendsList = kvp.Value.SS.ToList<string>();
+                                        foreach (var friendId in friendsList)
+                                        {
+                                            friends.Add(new User(friendId, false));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        friends = null;
+                                    }
+                                    break;
+                                case "gender":
+                                    gender = kvp.Value.S;
+                                    break;
+                                case "joinedEvents":
+                                    var joinedEventList = kvp.Value.SS.ToList<string>();
+                                    foreach (var eventId in joinedEventList)
+                                    {
+                                        joinedEvents.Add(new Event(eventId));
+                                    }
+                                    break;
+                                case "pic":
+                                    pic = kvp.Value.S;
+                                    break;
+                                case "sharedEvents":
+                                    var sharedEventsList = kvp.Value.SS.ToList<string>();
+                                    foreach (var eventId in sharedEventsList)
+                                    {
+                                        sharedEvents.Add(new Event(eventId));
+                                    }
+                                    break;               
+                                default:
+                                    Console.WriteLine("done fucked up");
+                                    break;
 
+                            }
+                        }
                     }
                 }
             }
@@ -138,15 +271,26 @@ namespace fitfam
             {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>();
-                    var abc = awsClient.makePutRequest("fitfam-mobilehub-2083376203-users", item);
-                    System.Console.WriteLine(abc);
+                    var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-users");
+                    var userDoc = new Document();
+                    userDoc["userId"] = userId;
+                    userDoc["activities"] = new List<string>();
+                    userDoc["fitFams"] = new List<string>();
+                    userDoc["friends"] = new List<string>();
+                    userDoc["gender"] = gender;
+                    userDoc["joinedEvents"] = new List<string>();
+                    userDoc["pic"] = pic;
+                    userDoc["sharedEvents"] = new List<string>();
+                    userDoc["location"] = location;
+                    userDoc["username"] = username;
+                    table.PutItemAsync(userDoc);                 
                 }
             }      
         }
 
         public void addFam(string groupId)
         {
+            
             //var newGroup = new Group(groupId);
 
         }
