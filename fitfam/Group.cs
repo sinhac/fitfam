@@ -118,17 +118,60 @@ namespace fitfam
             get { return eventList; }
         }
 
+        private List<string> experienceLevels = new List<string>();
+        public List<string> ExperienceLevels
+        {
+            get { return experienceLevels; }
+        }
+        public void addExperienceLevel(string level)
+        {
+            //do this shit later
+        }
         public Group(string groupId)
         {
-
+            this.groupId = groupId;
         }
 
-        public Group(string name, string description, User creator)
+        public async void setValues()
+        {
+            using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+            {
+                using (var client = awsClient.getDynamoDBClient())
+                {
+                    var key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } };
+                    var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
+                    Dictionary<string, AttributeValue> groupInfo = new Dictionary<string, AttributeValue>();
+                    var task = await awsClient.GetItemAsync(client, request);
+                    groupInfo = task;
+                    foreach (KeyValuePair<string, AttributeValue> kvp in groupInfo)
+                    {
+                        switch (kvp.Key)
+                        {
+                            case "description":
+                                description = kvp.Value.S;
+                                break;
+                            case "eventList":
+                                var eventIdList = kvp.Value.SS.ToList<string>();
+                                foreach (var eventId in eventIdList)
+                                {
+                                    eventList.Add(new Event(eventId));
+                                }
+                                break;
+                            case "experienceLevels":
+                                experienceLevels = kvp.Value.SS.ToList();
+                                break;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        public Group(string name, string description, User creator, Dictionary<User, bool> members)
         {
              this.groupName = name;
              this.description = description;
-            this.members = new Dictionary<User, bool>();
-             this.addMember(creator, true);
+            this.members = new Dictionary<User, bool>(members);
             System.Console.WriteLine("connecting to database");
              using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
              {
@@ -189,6 +232,25 @@ namespace fitfam
         public void addMember(User user, bool isAdmin)
         {
             members.Add(user, isAdmin);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#M", ":newMember"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newMember", new AttributeValue { M = new Dictionary<string, AttributeValue>() { { user.UserId, new AttributeValue { BOOL = isAdmin } } } } }  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "ADD #M :newMember"
+            };
+            var response = dbclient.UpdateItemAsync(request);
             //add member to server
         }
 

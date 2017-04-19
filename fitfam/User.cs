@@ -125,14 +125,33 @@ namespace fitfam
         {
             get { return fitFams; }
         }
-        public void addFitFam(Group)
+        public void addFitFam(Group group)
         {
+            fitFams.Add(group);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-users",
+                Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#G", "fitFams"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":neFitFam",new AttributeValue { S = group.GroupId }},  // new activity to update user's activities with 
+                },
 
+                // activity added to list in database entry
+                UpdateExpression = "ADD #G :newFitFam"
+            };
+            var response = dbclient.UpdateItemAsync(request);
         }
-        private Group friends = new List<User>();
-        public List<User> Friends
+        private Group userFam;
+        public Group UserFam
         {
-            get { return friends; }
+            get { return userFam; }
         }
         private string gender;
         public string Gender
@@ -143,6 +162,29 @@ namespace fitfam
         public List<Event> JoinedEvents
         {
             get { return joinedEvents; }
+        }
+        public void addJoinedEvent(Event joinedEvent)
+        {
+            joinedEvents.Add(joinedEvent);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-users",
+                Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#JE", "joinedEvents"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newJoinedEvent",new AttributeValue { S = joinedEvent.EventId }},  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "ADD #JE :newJoinedEvent"
+            };
+            var response = dbclient.UpdateItemAsync(request);
         }
         private string pic;
         public string Pic
@@ -177,6 +219,29 @@ namespace fitfam
         public List<Event> SharedEvents
         {
             get { return sharedEvents; }
+        }
+        public void addSharedEvent(Event sharedEvent)
+        {
+            sharedEvents.Add(sharedEvent);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-users",
+                Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#SE", "sharedEvent"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newSharedEvent",new AttributeValue { S = sharedEvent.EventId }},  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "ADD #SE :newSharedEvent"
+            };
+            var response = dbclient.UpdateItemAsync(request);
         }
         private string location;
         public string Location
@@ -279,15 +344,19 @@ namespace fitfam
                                 case "friends":
                                     if (mainUser)
                                     {
+                                        var members = new Dictionary<User, bool>();
+                                        members.Add(this, true);
+                                        var groupId = userId + "My Fam";
+                                        userFam = new Group(groupId);
                                         var friendsList = kvp.Value.SS.ToList<string>();
                                         foreach (var friendId in friendsList)
-                                        {
-                                            friends.Add(new User(friendId, false));
+                                        {                                        
+                                            userFam.addMember(new User(friendId, false), false);   
                                         }
                                     }
                                     else
                                     {
-                                        friends = null;
+                                        userFam = null;
                                     }
                                     break;
                                 case "gender":
@@ -353,7 +422,10 @@ namespace fitfam
                         Console.WriteLine("EXXXCEPTION: {0}, {1}", ex.ToString(), ex.Message);
                     }
                 }
-            }      
+            }
+            var members = new Dictionary<User, bool>();
+            members.Add(this, true);
+            userFam = new Group("My Fam", "These are other FitFam users you have connected with", this, members);
         }
 
         public void addFam(string groupId)
