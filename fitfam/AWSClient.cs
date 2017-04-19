@@ -185,6 +185,17 @@ namespace fitfam
             return request;
         }
 
+        public QueryRequest makeQueryRequest(string tablename, string names, Dictionary<string, AttributeValue> values)
+        {
+            var request = new QueryRequest
+            {
+                TableName = tablename,
+                KeyConditionExpression = names,
+                ExpressionAttributeValues = values
+            };
+            return request;
+        }
+
         public void Dispose()
         {
             publicKey = null;

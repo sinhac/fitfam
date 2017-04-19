@@ -56,7 +56,7 @@ namespace fitfam
             Button createFamButton = FindViewById<Button>(Resource.Id.createFamButton);
             createFamButton.Click += delegate {
                 System.Console.WriteLine("creating fam");
-                var creator = new User(userId);
+                var creator = new User(userId, true);
                 Group fam = new Group(famNameInput, descriptionInput, creator);
                 System.Console.WriteLine("Created fam");
                 StartActivity(typeof(FamProfileActivity));

@@ -171,27 +171,34 @@ namespace fitfam
 
         public User(string userId, bool mainUser)
         {
+            Console.WriteLine("making user");
             this.userId = userId;
             this.setValues(mainUser);
         }
         
         private async void setValues(bool mainUser)
         {
+            Console.WriteLine("setting values");
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    var key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } };
-                    var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-users", key);
-                    Dictionary<string, AttributeValue> userInfo = new Dictionary<string, AttributeValue>();
-                    var task = await awsClient.GetItemAsync(client, request);
-                    userInfo = task;
-                    if (task.Values.Count == 0)
+                    var expression = new Dictionary<string, AttributeValue> { { ":v_userId", new AttributeValue { S = userId } } };
+                    var requestQuery = awsClient.makeQueryRequest("fitfam-mobilehub-2083376203-users", "userId = :v_userId", expression);
+                    var response = await client.QueryAsync(requestQuery);
+                    
+                    Console.WriteLine("got response");
+                    if (response.Count == 0)
                     {
                         createEntry();
                     }
                     else
                     {
+                        var key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } };
+                        var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-users", key);
+                        Dictionary<string, AttributeValue> userInfo = new Dictionary<string, AttributeValue>();
+                        var task = await awsClient.GetItemAsync(client, request);
+                        userInfo = task;
                         foreach (KeyValuePair<string, AttributeValue> kvp in userInfo)
                         {
                             switch (kvp.Key)
@@ -265,25 +272,37 @@ namespace fitfam
             }
         }
 
-        public void createEntry()
+        public async void createEntry()
         {
+            Console.WriteLine("making entry");
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-users");
-                    var userDoc = new Document();
-                    userDoc["userId"] = userId;
-                    userDoc["activities"] = new List<string>();
-                    userDoc["fitFams"] = new List<string>();
-                    userDoc["friends"] = new List<string>();
-                    userDoc["gender"] = gender;
-                    userDoc["joinedEvents"] = new List<string>();
-                    userDoc["pic"] = pic;
-                    userDoc["sharedEvents"] = new List<string>();
-                    userDoc["location"] = location;
-                    userDoc["username"] = username;
-                    table.PutItemAsync(userDoc);                 
+                    Console.WriteLine("writing to database");
+                   
+                    try
+                    {
+                        var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-users");
+                        var userDoc = new Document();
+                        userDoc["userId"] = this.userId;
+                        userDoc["activities"] = new List<string>();
+                        userDoc["fitFams"] = new List<string>();
+                        userDoc["friends"] = new List<string>();
+                        userDoc["gender"] = this.gender;
+                        userDoc["joinedEvents"] = new List<string>();
+                        userDoc["pic"] = pic;
+                        userDoc["sharedEvents"] = new List<string>();
+                        userDoc["location"] = this.location;
+                        userDoc["username"] = this.username;
+                        var response = await table.PutItemAsync(userDoc);
+                        Console.WriteLine("made entry {0}", response);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("EXXXCEPTION: {0}, {1}", ex.ToString(), ex.Message);
+                    }
                 }
             }      
         }
