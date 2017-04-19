@@ -92,7 +92,7 @@ namespace fitfam
                 builder.AddScope(PlusClass.ScopePlusLogin);
 
                 mGoogleApiClient = builder.Build();
-
+                mGoogleApiClient.Connect();
 
                 Button button = new Button(this);
                 //Does not change
@@ -107,7 +107,7 @@ namespace fitfam
                 layout.AddView(button);
                 button.Click += delegate
                 {
-                    mGoogleApiClient.Disconnect();
+                    mGoogleApiClient.ClearDefaultAccountAndReconnect();
                     StartActivity(typeof(MainActivity));
                 };
                 //button.Click += mGoogleSignOut_Click;
