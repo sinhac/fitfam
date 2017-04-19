@@ -116,6 +116,27 @@ namespace fitfam
                 StartActivity(typeof(EventAttendeesActivity));
             };
 
+            Button joinButton = new Button(this);
+            joinButton.Id = 5;
+            //joinButton.Text = "Join "+eventInfo["eventName"].S;
+            joinButton.Text = "join event";
+            joinButton.SetTextColor(Color.Black);
+            joinButton.SetBackgroundResource(Resource.Drawable.gold_button);
+            //float scale = joinButton.Resources.DisplayMetrics.Density;
+            joinButton.SetHeight((int)(75 * scale + 0.5f));
+            joinButton.SetWidth((int)(500 * scale + 0.5f));
+            //int padding = (int)(16 * scale + 0.5f);
+            joinButton.SetPadding(padding, padding, padding, padding);
+            layout.AddView(joinButton);
+
+            joinButton.Click += delegate {
+                var eventMatchesActivity = new Intent(this, typeof(EventMatchesActivity));
+                eventMatchesActivity.PutExtra("eventId", eventId);
+                StartActivity(eventMatchesActivity);
+                //StartActivity(typeof(EventMatchesActivity));
+            };
+
+            /* navbar buttons */
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));

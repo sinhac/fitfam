@@ -13,14 +13,16 @@ namespace fitfam
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your application here
             SetContentView(Resource.Layout.EventMatches);
 
-            Button backtosearch_button = FindViewById<Button>(Resource.Id.button1);
+            string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
+            string toast = string.Format("You have been added to {0}", eventId);
+            Toast.MakeText(this, toast, ToastLength.Long).Show();
+
+            Button backtosearch_button = FindViewById<Button>(Resource.Id.backToSearchButton);
 
             backtosearch_button.Click += delegate {
-                StartActivity(typeof(FindAFamFormActivity));
+                StartActivity(typeof(FindAnEventActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -41,11 +43,6 @@ namespace fitfam
             ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
             imagebutton4.Click += delegate {
                 StartActivity(typeof(ScheduleActivity));
-            };
-
-            Button button2 = FindViewById<Button>(Resource.Id.button1);
-            button2.Click += delegate {
-                StartActivity(typeof(FamQuickViewActivity));
             };
 
             //num_buttons will be taken from database COUNT(matches)
