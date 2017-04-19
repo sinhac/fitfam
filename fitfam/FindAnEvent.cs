@@ -44,7 +44,7 @@ namespace fitfam
         }
         public FindAnEvent(User user, List<string> tags, DateTime startTime, DateTime endTime)
         {
-            //getEventUtils(tags, location, experience);
+            // getEventUtils(tags, location, experience);
             var utilsArr = utils.ToArray();
             Array.Sort(utilsArr, (a, b) => a.util.CompareTo(b.util));
             Array.Copy(utilsArr, matches, utils.Count);

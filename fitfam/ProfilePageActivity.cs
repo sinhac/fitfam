@@ -16,6 +16,7 @@ namespace fitfam
     public class ProfilePageActivity : Activity
     {
         private string userId;
+        private string profileId;
         GoogleApiClient mGoogleApiClient;
         private SignInButton mGoogleSignOut;
         private bool mIntentInProgress;
@@ -27,9 +28,10 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "Null";
+            profileId = Intent.GetStringExtra("profileId") ?? "Null";
             SetContentView(Resource.Layout.UserProfilePage);
-            User currentUser = new User(userId, true);
-            System.Console.WriteLine("User " + userId+ " Name "+currentUser.Username);
+            User currentUser = new User(profileId, true);
+            System.Console.WriteLine("User " + profileId + " Name "+currentUser.Username);
 
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
             TextView name = new TextView(this);
@@ -50,14 +52,6 @@ namespace fitfam
             myfams_button.Click += delegate
             {
                 StartActivity(typeof(FamProfileActivity));
-            };
-
-            Button editprofile_button = FindViewById<Button>(Resource.Id.editProfileButton);
-            editprofile_button.Click += delegate
-            {
-                Intent intent = new Intent(this, typeof(EditProfilePageActivity));
-                intent.PutExtra("userId", userId);
-                StartActivity(intent);
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -81,8 +75,16 @@ namespace fitfam
             };
 
 
-            if (true/*EVENTUALLY INPUT DATA REGARDING OWNERSHIP/ADMIN*/)
+            if (userId == profileId)
             {
+                Button editprofile_button = FindViewById<Button>(Resource.Id.editProfileButton);
+                editprofile_button.Click += delegate
+                {
+                    Intent intent = new Intent(this, typeof(EditProfilePageActivity));
+                    intent.PutExtra("userId", userId);
+                    StartActivity(intent);
+                };
+
                 GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
                 //builder.AddConnectionCallbacks(this);
                 //builder.AddOnConnectionFailedListener(this);
@@ -90,7 +92,7 @@ namespace fitfam
                 builder.AddScope(PlusClass.ScopePlusLogin);
 
                 mGoogleApiClient = builder.Build();
-
+                mGoogleApiClient.Connect();
 
                 Button button = new Button(this);
                 //Does not change
@@ -103,7 +105,11 @@ namespace fitfam
                 button.Text = "Log Out";
 
                 layout.AddView(button);
-
+                button.Click += delegate
+                {
+                    mGoogleApiClient.ClearDefaultAccountAndReconnect();
+                    StartActivity(typeof(MainActivity));
+                };
                 //button.Click += mGoogleSignOut_Click;
 
 

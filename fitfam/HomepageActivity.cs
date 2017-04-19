@@ -44,12 +44,16 @@ namespace fitfam
                 StartActivity(intent);
             };
 
-            find_event_button.Click += delegate {   
-                StartActivity(typeof(FindAnEventActivity));
+            find_event_button.Click += delegate {
+                Intent intent = new Intent(this, typeof(FindAnEventActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             create_event_button.Click += delegate {
-                StartActivity(typeof(CreateEventActivity));
+                Intent intent = new Intent(this, typeof(CreateEventActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             /* navbar buttons */
@@ -62,6 +66,7 @@ namespace fitfam
             imagebutton2.Click += delegate {
                 Intent intent = new Intent(this, typeof(ProfilePageActivity));
                 intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
                 StartActivity(intent);
             };
 

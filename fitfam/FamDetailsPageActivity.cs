@@ -55,8 +55,9 @@ namespace fitfam
                 Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
             };
 
-            Dictionary<string, AttributeValue> eventInfo = new Dictionary<string, AttributeValue>();
-            var groupInfo = await client.GetItemAsync(dbclient, request);
+            Dictionary<string, AttributeValue> groupInfo = new Dictionary<string, AttributeValue>();
+            var task = await client.GetItemAsync(dbclient, request);
+            groupInfo = task;
             List<string> groupInformation = new List<string>();
             foreach (KeyValuePair<string, AttributeValue> kvp in groupInfo)
             {
@@ -76,36 +77,18 @@ namespace fitfam
 
             //===============================STUFFFF=================================================
 
-            if (groupInformation.Count == 0)
-            {
-                System.Console.WriteLine("UGGGGGGGGGGGGGHHHHHHHHHHHHH");
-            } else
-            {
-                System.Console.WriteLine("YAAAAAAAAAAAAAAAAAY");
-            }
-
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
             // Group ID
-            if (groupInformation.Count > 0)
-            {
-
-            }
             // Group Name
-            if (groupInformation.Count > 1)
-            {
-                TextView textView1 = new TextView(this);
-                textView1.Text = groupInformation[1];
-                textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
-                layout.AddView(textView1);
-            }
+            TextView textView1 = new TextView(this);
+            textView1.Text = groupInfo["groupName"].S;
+            textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
+            layout.AddView(textView1);
             // Group Description
-            if (groupInformation.Count > 2)
-            {
-                TextView textView2 = new TextView(this);
-                textView2.Text = ("Location: " + groupInformation[2]);
-                textView2.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
-                layout.AddView(textView2);
-            }
+            TextView textView2 = new TextView(this);
+            textView2.Text = ("Description: " + groupInfo["description"].S);
+            textView2.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+            layout.AddView(textView2);
             if (groupInformation.Count > 3)
             {
                 //should at some point implement members and events
@@ -145,8 +128,24 @@ namespace fitfam
                 StartActivity(typeof(EventAttendeesActivity));
             };
 
+            Button joinFamButton = new Button(this);
+            joinFamButton.Id = 5;
+            joinFamButton.Text = ("Join "+ groupInfo["groupName"].S);
+            joinFamButton.SetTextColor(Color.Black);
+            joinFamButton.SetBackgroundResource(Resource.Drawable.gold_button);
+            float scale3 = joinFamButton.Resources.DisplayMetrics.Density;
+            joinFamButton.SetHeight((int)(75 * scale2 + 0.5f));
+            joinFamButton.SetWidth((int)(500 * scale2 + 0.5f));
+            int padding3 = (int)(16 * scale2 + 0.5f);
+            joinFamButton.SetPadding(padding, padding, padding, padding);
+            layout.AddView(joinFamButton);
 
-            
+            button2.Click += delegate {
+                StartActivity(typeof(EventAttendeesActivity));
+            };
+
+
+
 
             // LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
             if (true)

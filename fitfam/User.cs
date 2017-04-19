@@ -415,6 +415,8 @@ namespace fitfam
         {
             Console.WriteLine("making user");
             this.userId = userId;
+            var userFamId = userId + "My Fam";
+            userFam = new Group(userFamId);
             this.setValues(mainUser);
         }
         
@@ -441,6 +443,7 @@ namespace fitfam
                         Dictionary<string, AttributeValue> userInfo = new Dictionary<string, AttributeValue>();
                         var task = await awsClient.GetItemAsync(client, request);
                         userInfo = task;
+                       
                         foreach (KeyValuePair<string, AttributeValue> kvp in userInfo)
                         {
                             switch (kvp.Key)
@@ -474,8 +477,7 @@ namespace fitfam
                                     {
                                         var members = new Dictionary<User, bool>();
                                         members.Add(this, true);
-                                        var groupId = userId + "My Fam";
-                                        userFam = new Group(groupId);
+                                       
                                         var friendsList = kvp.Value.SS.ToList<string>();
                                         foreach (var friendId in friendsList)
                                         {                                        
@@ -567,6 +569,18 @@ namespace fitfam
                 var userGroup = new Group(groupId);
                 userGroup.addMember(user, false);
             }
+        }
+
+        public void attendingEvent(Event evnt)
+        {
+            addJoinedEvent(evnt);
+            evnt.addAttending(this);
+        }
+
+        public void notAttendingEvent(Event evnt)
+        {
+            removeJoinedEvent(evnt);
+            evnt.removeAttending(this);
         }
     }
 }
