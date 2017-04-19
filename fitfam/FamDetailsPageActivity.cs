@@ -9,18 +9,61 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 
 namespace fitfam
 {
     [Activity(Label = "FamDetailsPageActivity")]
     public class FamDetailsPageActivity : Activity
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
+            string famId = Intent.GetStringExtra("famId") ?? "Data not available";
+
+
             // Create your application here
             SetContentView(Resource.Layout.FamDetailsPage);
+
+            AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
+            string tableName = "fitfam-mobilehub-2083376203-groups";
+
+            var request = new GetItemRequest
+            {
+                TableName = tableName,
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = famId } } },
+            };
+
+            Dictionary<string, AttributeValue> famInfo = new Dictionary<string, AttributeValue>();
+            if (famInfo.Count == 0)
+            {
+                System.Console.WriteLine("No fam info");
+            }
+            famInfo = await client.GetItemAsync(dbclient, request);
+
+            if (famInfo.Values.Count > 0)
+            {
+                System.Console.WriteLine("Successfully created fam");
+            }
+
+            string famNameInput = "";
+            foreach (KeyValuePair<string, AttributeValue> kvp in famInfo)
+            {
+                System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING " + kvp.Key);
+                //System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE" + kvp.Value);
+                var value = kvp.Value;
+                //eventNameInput = value.S;
+                System.Console.WriteLine(
+                    "VALUUUUE: " + kvp.Key + " " +
+                    (value.S == null ? "" : "S=[" + value.S + "]") +
+                    (value.N == null ? "" : "N=[" + value.N + "]") +
+                    (value.SS == null ? "" : "SS=[" + string.Join(",", value.SS.ToArray()) + "]") +
+                    (value.NS == null ? "" : "NS=[" + string.Join(",", value.NS.ToArray()) + "]")
+                    );
+            }
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
