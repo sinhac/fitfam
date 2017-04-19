@@ -80,7 +80,7 @@ namespace fitfam
                 }
             }
         }
-        private List<string> tags;
+        private List<string> tags = new List<string>();
         public List<string> Tags
         {
             get { return tags; }
@@ -112,7 +112,7 @@ namespace fitfam
                 }
             }
         }
-        private Dictionary<User, bool> members; //true means they are an admin
+        private Dictionary<User, bool> members = new Dictionary<User, bool>(); //true means they are an admin
         public Dictionary<User, bool> Members
         {
             get { return members; }
@@ -154,7 +154,7 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
         }
-        private List<Event> eventList;
+        private List<Event> eventList = new List<Event>();
         public List<Event> EventList
         {
             get { return eventList; }

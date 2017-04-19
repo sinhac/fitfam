@@ -173,7 +173,7 @@ namespace fitfam
                 var response = dbclient.UpdateItemAsync(request);
             }
         }
-        private bool publicEvent;
+        private bool publicEvent = false;
         public bool PublicEvent
         {
             get { return publicEvent; }
@@ -227,18 +227,19 @@ namespace fitfam
             this.startTime = startTime;
             this.endTime = endTime;
             this.publicEvent = publicEvent;
-            this.tags.AddRange(tags);
+            this.tags = new List<string>(tags);
             this.creator = creator;
             this.addAttending(creator);
-
+            Console.WriteLine("tag count: {0}", this.tags.Count);
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    eventId = eventName + creator.UserId + startTime.ToString();
+                    eventId = creator.UserId + eventName + startTime.ToString();
                     // create list of userids from list of attending Users
                     List<string> attending_userids = new List<string>();
-
+                    attending_userids.Add(creator.UserId);
+                    this.tags.Add("test");
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "eventId", new AttributeValue { S = eventId} },
@@ -247,9 +248,9 @@ namespace fitfam
                         { "location", new AttributeValue { S = location } },
                         { "startTime", new AttributeValue { S = startTime.ToString() } },
                         { "endTime", new AttributeValue { S = endTime.ToString() } },
-                        //{ "publicEvent", new AttributeValue { BOOL = publicEvent } },
-                        //{ "tags", new AttributeValue { SS = tags } },
-                        //{ "attending", new AttributeValue { SS = attending_userids } }
+                        { "publicEvent", new AttributeValue { BOOL = publicEvent } },
+                    //    { "tags", new AttributeValue { SS = this.tags } },
+                        { "attending", new AttributeValue { SS = attending_userids } }
                     };
                     System.Console.WriteLine("after attending");
                     awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
