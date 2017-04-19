@@ -247,7 +247,7 @@ namespace fitfam
                         { "location", new AttributeValue { S = location } },
                         { "startTime", new AttributeValue { S = startTime.ToString() } },
                         { "endTime", new AttributeValue { S = endTime.ToString() } },
-                        //{ "publicEvent", new AttributeValue { BOOL = publicEvent } },
+                        { "publicEvent", new AttributeValue { BOOL = publicEvent } },
                         //{ "tags", new AttributeValue { SS = tags } },
                         //{ "attending", new AttributeValue { SS = attending_userids } }
                     };
@@ -394,7 +394,7 @@ namespace fitfam
                 },
 
                 // expression to add tag to "tags" list in database entry
-                UpdateExpression = "ADD #T :newTag"
+                UpdateExpression = expression
             };
             var response = dbclient.UpdateItemAsync(request);
             // TO-DO: error-check response
