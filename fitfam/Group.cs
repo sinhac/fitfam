@@ -16,6 +16,11 @@ namespace fitfam
 {
     class Group
     {
+        private string creatorId;
+        public string CreatorId
+        {
+            get { return creatorId; }
+        }
         private string groupId;
         public string GroupId
         {
@@ -169,63 +174,79 @@ namespace fitfam
 
         public Group(string name, string description, User creator, Dictionary<User, bool> members)
         {
-             this.groupName = name;
-             this.description = description;
+            this.groupName = name;
+            this.description = description;
             this.members = new Dictionary<User, bool>(members);
-            System.Console.WriteLine("connecting to database");
-             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+            groupId = creator.UserId + GroupName;
+            creatorId = creator.UserId;
+            writeGroup();
+            /* if (awsClient.GetItemAsync(client, request) == null)
              {
-                System.Console.WriteLine("connected to database");
-                using (var client = awsClient.getDynamoDBClient())
-                {
-                    System.Console.WriteLine("writing to database");
-                    var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups");
-                    
-                    groupId = creator.UserId + GroupName;
-                    var groupEntry = new Document();
-                    groupEntry["groupId"] = groupId;
-                    groupEntry["groupName"] = groupName;
-                    groupEntry["description"] = description;
-                    var membersDoc = new Document();
-                    membersDoc[creator.UserId] = true;
-                    groupEntry["members"] = membersDoc;
-                    Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
-                    key.Add("groupId", new AttributeValue { S = groupId });
-                    var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
-                    if (awsClient.GetItemAsync(client, request) == null)
-                    {
-                        table.PutItemAsync(groupEntry);
-                        System.Console.WriteLine("wrote to database");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Choose a new group name");
-                    }
-                    /*
-                    Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
-                    {
-                        { "groupId", new AttributeValue { S = groupId} },
-                        { "groupName", new AttributeValue { S = groupName } },
-                        { "description", new AttributeValue { S = description } },
-                        //{ "members", new AttributeValue { M = } }
 
-                    };
-                    Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
-                    key.Add("groupId", new AttributeValue { S = groupId });
-                    var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
-                    if (awsClient.GetItemAsync(client, request) == null)
-                    {
-                        awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-groups", item));
-                    }
-                    else
-                    {
-                        Console.WriteLine("Choose a new group name");
-                    }
-                    */
-
-
-                }
              }
+             else
+             {
+                 Console.WriteLine("Choose a new group name");
+             }*/
+            /*
+            Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
+            {
+                { "groupId", new AttributeValue { S = groupId} },
+                { "groupName", new AttributeValue { S = groupName } },
+                { "description", new AttributeValue { S = description } },
+                //{ "members", new AttributeValue { M = } }
+
+            };
+            Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
+            key.Add("groupId", new AttributeValue { S = groupId });
+            var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
+            if (awsClient.GetItemAsync(client, request) == null)
+            {
+                awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-groups", item));
+            }
+            else
+            {
+                Console.WriteLine("Choose a new group name");
+            }
+            */
+
+        }
+
+        private async void writeGroup()
+        {
+            try
+            {
+                System.Console.WriteLine("connecting to database");
+                using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+                {
+                    System.Console.WriteLine("connected to database");
+                    using (var client = awsClient.getDynamoDBClient())
+                    {
+                        System.Console.WriteLine("writing to database");
+                        var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups");
+
+
+                        var groupEntry = new Document();
+                        groupEntry["groupId"] = groupId;
+                        groupEntry["groupName"] = groupName;
+                        groupEntry["description"] = description;
+                        var membersDoc = new Document();
+                        membersDoc[creatorId] = true;
+                        groupEntry["members"] = membersDoc;
+                        Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
+                        key.Add("groupId", new AttributeValue { S = groupId });
+
+                        var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
+                        var response = await table.PutItemAsync(groupEntry);
+                        System.Console.WriteLine("wrote to database");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("EXCEPTION: {0}\n{1}", ex.Message, ex.ToString());
+            }
             
         }
 
