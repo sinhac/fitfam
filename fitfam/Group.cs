@@ -165,6 +165,26 @@ namespace fitfam
                             case "experienceLevels":
                                 experienceLevels = kvp.Value.SS.ToList();
                                 break;
+                            case "groupName":
+                                groupName = kvp.Value.S;
+                                break;
+                            case "members":
+                                var membersMap = kvp.Value.M;
+                                foreach (var keyVal in membersMap)
+                                {
+                                    members.Add(new User(keyVal.Key,false), keyVal.Value.BOOL);
+                                }
+                                break;
+                            case "pic":
+                                pic = kvp.Value.S;
+                                break;
+                            case "tags":
+                                tags = kvp.Value.SS.ToList();
+                                break;
+                            default:
+                                Console.WriteLine("Group fucked up");
+                                break;
+
 
                         }
                     }
@@ -261,7 +281,7 @@ namespace fitfam
                 Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
                 ExpressionAttributeNames = new Dictionary<string, string>()
                 {
-                    {"#M", ":newMember"},  // attribute to be updated
+                    {"#M", "members"},  // attribute to be updated
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
@@ -273,6 +293,30 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
             //add member to server
+        }
+
+        public void removeMember(User user)
+        {
+            members.Remove(user);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#M", "members"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":oldMember", new AttributeValue { S = user.UserId }  }  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "DELETE #M :newMember"
+            };
+            var response = dbclient.UpdateItemAsync(request);
         }
 
 
