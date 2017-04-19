@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 
@@ -7,10 +8,16 @@ namespace fitfam
     [Activity(Label = "HomepageActivity")]
     public class HomepageActivity : Activity
     {
+        private string userId;
+        public string UserId
+        {
+            get { return userId; }
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            userId = Intent.GetStringExtra("userId") ?? "Null"; 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Homepage);
 
@@ -26,7 +33,9 @@ namespace fitfam
             };
 
             create_fam_button.Click += delegate {
-                StartActivity(typeof(CreateAFamFormActivity));
+                Intent intent = new Intent(this, typeof(CreateAFamFormActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             find_event_button.Click += delegate {   

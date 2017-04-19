@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
+using Android.Gms.Tasks;
+using System.Threading.Tasks;
 
 namespace fitfam
 {
@@ -59,7 +61,16 @@ namespace fitfam
         /// <returns></returns>
         public Table getTable(Amazon.DynamoDBv2.AmazonDynamoDBClient client, string table)
         {
-            return Table.LoadTable(client, table);
+            Table T = null;
+            try
+            {
+                 T = Table.LoadTable(client, table);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error getting table: {0}", ex.Message);
+            }
+            return T;
         }
         /// <summary>
         /// Executes put item request
@@ -84,20 +95,33 @@ namespace fitfam
         /// <param name="client">dynamodb client</param>
         /// <param name="request">get request</param>
         /// <returns></returns>
-        public GetItemResponse getItem(Amazon.DynamoDBv2.AmazonDynamoDBClient client, GetItemRequest request)
+        public async System.Threading.Tasks.Task<Dictionary<string, AttributeValue> > GetItemAsync(Amazon.DynamoDBv2.AmazonDynamoDBClient client, GetItemRequest request)
         {
-            
+            Task<GetItemResponse> taskresponse = client.GetItemAsync(request);
+
+            GetItemResponse response = await taskresponse;
+
+            return response.Item;
+        }
+
+        /*public async Task<Dictionary<string, AttributeValue>> LongRunningOperation(Amazon.DynamoDBv2.AmazonDynamoDBClient client, GetItemRequest request)
+        {
+            System.Console.WriteLine("TRE " + request.ToString());
             try
             {
                 var get = client.GetItemAsync(request);
-                return get.Result;
+                System.Console.WriteLine("TRE2 " + get.IsCompleted);
+                //System.Threading.Thread.Sleep(50000);
+                //how to
+                return get.Result.Item;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
             }
-        }
+        }*/
+
 
         public UpdateItemResponse updateItem(Amazon.DynamoDBv2.AmazonDynamoDBClient client, UpdateItemRequest request)
         {

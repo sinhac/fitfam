@@ -133,7 +133,7 @@ namespace fitfam
                     System.Console.WriteLine("writing to database");
                     var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups");
                     
-                    groupId = groupName + creator.UserId;
+                    groupId = creator.UserId + GroupName;
                     var groupEntry = new Document();
                     groupEntry["groupId"] = groupId;
                     groupEntry["groupName"] = groupName;
@@ -141,9 +141,19 @@ namespace fitfam
                     var membersDoc = new Document();
                     membersDoc[creator.UserId] = true;
                     groupEntry["members"] = membersDoc;
-                    table.PutItemAsync(groupEntry);
-                    System.Console.WriteLine("wrote to database");
-                    
+                    Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
+                    key.Add("groupId", new AttributeValue { S = groupId });
+                    var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
+                    if (awsClient.GetItemAsync(client, request) == null)
+                    {
+                        table.PutItemAsync(groupEntry);
+                        System.Console.WriteLine("wrote to database");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Choose a new group name");
+                    }
+                    /*
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "groupId", new AttributeValue { S = groupId} },
@@ -152,7 +162,18 @@ namespace fitfam
                         //{ "members", new AttributeValue { M = } }
 
                     };
-                    awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-groups", item));
+                    Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
+                    key.Add("groupId", new AttributeValue { S = groupId });
+                    var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
+                    if (awsClient.GetItemAsync(client, request) == null)
+                    {
+                        awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-groups", item));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Choose a new group name");
+                    }
+                    */
 
 
                 }
