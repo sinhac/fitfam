@@ -364,12 +364,23 @@ namespace fitfam
             joinRequests.Remove(user);
             addMember(user, false);
             user.addFitFam(this);
-        } 
+        }
+
+        public void rejectJoinRequest(User user)
+        {
+            joinRequests.Remove(user);
+        }
 
         public void makeAdmin(User user)
         {
             removeMember(user);
             addMember(user, true);
+        }
+
+        public void removeAdmin(User user)
+        {
+            removeMember(user);
+            addMember(user, false);
         }
 
         public void makeEvent(Event newEvent)

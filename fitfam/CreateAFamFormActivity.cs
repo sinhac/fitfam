@@ -64,6 +64,7 @@ namespace fitfam
                 System.Console.WriteLine("Created fam");
                 var famDetailsActivity = new Intent(this, typeof(FamDetailsPageActivity));
                 famDetailsActivity.PutExtra("groupId", fam.GroupId);
+                famDetailsActivity.PutExtra("userID", userId);
                 StartActivity(famDetailsActivity);
             };
 
