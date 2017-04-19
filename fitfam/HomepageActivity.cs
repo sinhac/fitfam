@@ -66,6 +66,7 @@ namespace fitfam
             imagebutton2.Click += delegate {
                 Intent intent = new Intent(this, typeof(ProfilePageActivity));
                 intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
                 StartActivity(intent);
             };
 

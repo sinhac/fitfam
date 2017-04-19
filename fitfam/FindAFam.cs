@@ -13,8 +13,30 @@ using Amazon.DynamoDBv2.Model;
 
 namespace fitfam
 {
+    struct FamUtil
+    {
+        public string groupId;
+        public int util;
+        public FamUtil(User user, List<string> tags, string id, List<string> eventTags, List<string> expLevels)
+        {
+            groupId = id;
+            util = 0;
+            if (expLevels.Contains(user.ExperienceLevel))
+            {
+                util += 2;
+            }
+            foreach (var tag in tags)
+            {
+                if (eventTags.Contains(tag))
+                {
+                    util += 1;
+                }
+            }
+        }
+    }
     class FindAFam
     {
+        private List<FamUtil> utils = new List<FamUtil>();
         public FindAFam(User user, List<string> tags)
         {
 
