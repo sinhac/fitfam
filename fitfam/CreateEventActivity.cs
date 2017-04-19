@@ -12,9 +12,11 @@ namespace fitfam
     [Activity(Label = "CreateEventActivity")]
     public class CreateEventActivity : Activity
     {
+        private string userId;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            userId = Intent.GetStringExtra("userId") ?? "Null";
             SetContentView(Resource.Layout.CreateEventPage);
 
             /* capture user input for event name, location, and description */
@@ -119,7 +121,8 @@ namespace fitfam
                 minute = (string)spinner4.GetItemAtPosition(spinner4.SelectedItemPosition);
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
 
-                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList,new fitfam.User("fakeCreator"));
+                var creator = new User(userId);
+                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList, creator );
                 
                 // =============================  START TEST -- TO BE REMOVED  ===============================================
                /* AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
