@@ -103,7 +103,11 @@ namespace fitfam
                 button.Text = "Log Out";
 
                 layout.AddView(button);
-
+                button.Click += delegate
+                {
+                    mGoogleApiClient.Disconnect();
+                    StartActivity(typeof(MainActivity));
+                };
                 //button.Click += mGoogleSignOut_Click;
 
 
