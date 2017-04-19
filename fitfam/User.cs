@@ -40,7 +40,7 @@ namespace fitfam
             }
             else
             {
-                expression = "ADD #A :newActivity";
+                expression = "ADD #A  :newActivity";
             }
             activities.Add(activity);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
@@ -290,7 +290,7 @@ namespace fitfam
                 },
 
                     // expression to set pic in database entry
-                    UpdateExpression = "SET = #P :newPic"
+                    UpdateExpression = "SET #P = :newPic"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -555,6 +555,18 @@ namespace fitfam
             var members = new Dictionary<User, bool>();
             members.Add(this, true);
             userFam = new Group("My Fam", "These are other FitFam users you have connected with", this, members);
+        }
+
+        public void acceptJoinRequest(User user, Group group)
+        {
+            group.acceptJoinRequest(user);
+            if (group.GroupName == "My Fam")
+            {
+                //add user to the other users my fam group
+                var groupId = user.userId + "My Fam";
+                var userGroup = new Group(groupId);
+                userGroup.addMember(user, false);
+            }
         }
     }
 }
