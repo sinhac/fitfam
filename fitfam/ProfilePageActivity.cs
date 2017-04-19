@@ -29,6 +29,7 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "Null";
             profileId = Intent.GetStringExtra("profileId") ?? "Null";
+            
             SetContentView(Resource.Layout.UserProfilePage);
             User currentUser = new User(profileId, true);
             System.Console.WriteLine("User " + profileId + " Name "+currentUser.Username);
@@ -36,11 +37,12 @@ namespace fitfam
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
             TextView name = new TextView(this);
             //name.Text = "Shannon";
-            name.Text = currentUser.Username;
+            name.Text = Intent.GetStringExtra("username") ?? "";
             layout.AddView(name);
 
             TextView bio = new TextView(this);
-            bio.Text = currentUser.Bio;
+            bio.Text = Intent.GetStringExtra("bio") ?? "";
+            //Console.WriteLine("PROFILE BIO {0}", currentUser.Bio);
             layout.AddView(bio);
 
             TextView activities = new TextView(this);

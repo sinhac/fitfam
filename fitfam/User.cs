@@ -419,7 +419,7 @@ namespace fitfam
             userFam = new Group(userFamId);
             this.setValues(mainUser);
         }
-        
+
         private async void setValues(bool mainUser)
         {
             Console.WriteLine("setting values");
@@ -429,8 +429,8 @@ namespace fitfam
                 {
                     var expression = new Dictionary<string, AttributeValue> { { ":v_userId", new AttributeValue { S = userId } } };
                     var requestQuery = awsClient.makeQueryRequest("fitfam-mobilehub-2083376203-users", "userId = :v_userId", expression);
-                    var response = await client.QueryAsync(requestQuery);
-                    
+                    var task = await client.QueryAsync(requestQuery);
+                    var response = task;
                     Console.WriteLine("got response");
                     if (response.Count == 0)
                     {
@@ -441,8 +441,8 @@ namespace fitfam
                         var key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } };
                         var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-users", key);
                         Dictionary<string, AttributeValue> userInfo = new Dictionary<string, AttributeValue>();
-                        var task = await awsClient.GetItemAsync(client, request);
-                        userInfo = task;
+                        var _task = await awsClient.GetItemAsync(client, request);
+                        userInfo = _task;
                        
                         foreach (KeyValuePair<string, AttributeValue> kvp in userInfo)
                         {
@@ -461,6 +461,7 @@ namespace fitfam
                                     break;
                                 case "bio":
                                     bio = kvp.Value.S;
+                                    Console.WriteLine("BIO {0}", bio);
                                     break;
                                 case "experienceLevel":
                                     experienceLevel = kvp.Value.S;
