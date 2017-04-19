@@ -110,12 +110,13 @@ namespace fitfam
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
                 startInput = date.DateTime;
+                endInput = date.DateTime;
+
                 string hour = (string)spinner1.GetItemAtPosition(spinner1.SelectedItemPosition);
                 startInput = startInput.AddHours(Convert.ToDouble(hour));
                 string minute = (string)spinner2.GetItemAtPosition(spinner2.SelectedItemPosition);
                 startInput = startInput.AddMinutes(Convert.ToDouble(minute));
 
-                endInput = date.DateTime;
                 hour = (string)spinner3.GetItemAtPosition(spinner3.SelectedItemPosition);
                 endInput = endInput.AddHours(Convert.ToDouble(hour));
                 minute = (string)spinner4.GetItemAtPosition(spinner4.SelectedItemPosition);
@@ -124,24 +125,6 @@ namespace fitfam
                 var creator = new User(userId, true);
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList, creator );
                 
-                // =============================  START TEST -- TO BE REMOVED  ===============================================
-               /* AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
-                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
-                var request = new GetItemRequest
-                {
-                    TableName = "fitfam-mobilehub-2083376203-events",
-                    Key = new Dictionary<string, AttributeValue>()
-                    {
-                        { "eventId", new AttributeValue { S = eventNameInput + "fakeCreator" + default(DateTime).ToString() } }
-                    },
-                };
-                var response = dbclient.GetItemAsync(request);
-                GetItemResponse result = response.Result;
-                var item = result.Item;
-
-                System.Console.WriteLine("SUCCESS: NEW EVENT NAME = " + item[eventNameInput] + ", DESCRIPTION = " + item[descriptionInput] + ", LOCATION = " + item[locationInput] + "\n\n\n");
-                */// ================================ END TEST  =======================================================
-
                 var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
                 eventDetailsActivity.PutExtra("eventId",newEvent.EventId);
                 StartActivity(eventDetailsActivity);

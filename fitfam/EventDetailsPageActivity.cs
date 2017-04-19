@@ -1,6 +1,7 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Android.App;
+using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
@@ -85,40 +86,29 @@ namespace fitfam
 
 
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
-            // Event ID
-            if (eventInformation.Count > 0)
-            {
-                
-            }
             // Event Name
-            if (eventInformation.Count > 1)
-            {
-                TextView textView1 = new TextView(this);
-                textView1.Text = eventInformation[1];
-                textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
-                layout.AddView(textView1);
-            }
+            TextView textView1 = new TextView(this);
+            textView1.Text = eventInfo["eventName"].S;
+            textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
+            layout.AddView(textView1);
+
             // Event Location
-            if (eventInformation.Count > 2)
-            {
-                TextView textView2 = new TextView(this);
-                textView2.Text = ("Location: " + eventInformation[2]);
-                textView2.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
-                layout.AddView(textView2);
-            }
+            TextView textView2 = new TextView(this);
+            textView2.Text = ("Location: " + eventInfo["location"].S);
+            textView2.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+            layout.AddView(textView2);
+            
             // Event Description
-            if (eventInformation.Count > 3)
-            {
-                TextView textView3 = new TextView(this);
-                textView3.Text = ("Description: " + eventInformation[3]);
-                textView3.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
-                layout.AddView(textView3);
-            }
+            TextView textView3 = new TextView(this);
+            textView3.Text = ("Description: " + eventInfo["description"].S);
+            textView3.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+            layout.AddView(textView3);
+
             if (eventInformation.Count > 4)
             {
                 //should at some point implement startTime - endTime
             }
-
+            // */
             Button button4 = new Button(this);
             button4.Id = 4;
             button4.Text = "Attendees";
@@ -161,7 +151,7 @@ namespace fitfam
                 Button button = new Button(this);
                 button.Id = 3;
                 button.Text = "Edit Event Details";
-                button4.SetTextColor(Color.Black);
+                button.SetTextColor(Color.Black);
                 button.SetBackgroundResource(Resource.Drawable.gold_button);
                 // float scale = button.Resources.DisplayMetrics.Density;
                 button.SetHeight((int)(75 * scale + 0.5f));
@@ -171,7 +161,9 @@ namespace fitfam
                 layout.AddView(button);
 
                 button.Click += delegate {
-                    StartActivity(typeof(EditEventDetailsActivity));
+                    var editEventDetailsActivity = new Intent(this, typeof(EditEventDetailsActivity));
+                    editEventDetailsActivity.PutExtra("eventId", eventId);
+                    StartActivity(editEventDetailsActivity);
                 };
             }
         }
