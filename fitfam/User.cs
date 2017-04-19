@@ -31,6 +31,29 @@ namespace fitfam
         {
             get { return activities; }
         }
+        public void addActivity(string activity)
+        {
+            activities.Add(activity);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-users",
+                Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#A", "activities"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newActivity",new AttributeValue { S = activity }},  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "ADD #A :newActivity"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }
         private Dictionary<string, bool> availability = new Dictionary<string, bool>();
         public Dictionary<string, bool> Availability
         {
@@ -60,7 +83,7 @@ namespace fitfam
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newBio",new AttributeValue { S = bio }},  // new pic to update user's pic with 
+                    {":newBio",new AttributeValue { S = bio }},  // new bio to update user's bio with 
                 },
 
                     // expression to set pic in database entry
@@ -73,14 +96,40 @@ namespace fitfam
         public string ExperienceLevel
         {
             get { return experienceLevel; }
-            set { experienceLevel = value; }
+            set
+            {
+                experienceLevel = value;
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-users",
+                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#E", "experienceLevel"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newExperienceLevel",new AttributeValue { S = experienceLevel }},  // new bio to update user's bio with 
+                },
+
+                    // expression to set pic in database entry
+                    UpdateExpression = "SET #E :newExperienceLevel"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
         }
         private List<Group> fitFams = new List<Group>();
         public List<Group> FitFams
         {
             get { return fitFams; }
         }
-        private List<User> friends = new List<User>();
+        public void addFitFam(Group)
+        {
+
+        }
+        private Group friends = new List<User>();
         public List<User> Friends
         {
             get { return friends; }
