@@ -286,7 +286,15 @@ namespace fitfam
 
         public void addAttending(User attendingUser)
         {
-            System.Console.WriteLine("started add attending "+ attendingUser.UserId);
+            String expression;
+            if (attending.Count == 0)
+            {
+                expression = "SET #A = :newAttending";
+            }
+            else
+            {
+                expression = "ADD #A :newAttending";
+            }
             attending.Add(attendingUser);
             // create request to add attending user's userId to list in database
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
@@ -305,7 +313,7 @@ namespace fitfam
                 },
 
                 // expression to add user's id to "attending" list in database entry
-                UpdateExpression = "ADD #A :newAttending"
+                UpdateExpression = expression
             };
             var response = dbclient.UpdateItemAsync(request);
             System.Console.WriteLine("finished add attending");
@@ -313,6 +321,15 @@ namespace fitfam
 
         public void addTag(string tag)
         {
+            String expression;
+            if (tags.Count == 0)
+            {
+                expression = "SET #A = :newTag";
+            }
+            else
+            {
+                expression = "ADD #A :newTag";
+            }
             tags.Add(tag);
             // create request to add event tag to tags list in database
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);

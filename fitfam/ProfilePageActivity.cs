@@ -28,6 +28,16 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "Null";
             SetContentView(Resource.Layout.UserProfilePage);
+            User currentUser = new User(userId, true);
+
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
+            TextView name = new TextView(this);
+            name.Text = currentUser.Username;
+            layout.AddView(name);
+
+            TextView bio = new TextView(this);
+            bio.Text = currentUser.Bio;
+            layout.AddView(bio);
 
             // Create your application here
             Button myfams_button = FindViewById<Button>(Resource.Id.myFamButton);
@@ -55,7 +65,6 @@ namespace fitfam
 
                 mGoogleApiClient = builder.Build();
 
-                LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
 
                 Button button = new Button(this);
                 //Does not change

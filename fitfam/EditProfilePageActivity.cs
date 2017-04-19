@@ -30,7 +30,6 @@ namespace fitfam
                 activityInput = e.Text.ToString();
             };
 
-            //user.bio = newbio
 
             // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
