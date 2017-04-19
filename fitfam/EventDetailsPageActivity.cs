@@ -12,7 +12,7 @@ namespace fitfam
     [Activity(Label = "Activity1")]
     public class EventDetailsPageActivity : Activity
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -39,44 +39,46 @@ namespace fitfam
             //var key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } };
             //CancellationToken token;
             //var response = client.GetItemAsync(tableName, key, token);
-            var response = client.getItemAsync(dbclient, request);
-            System.Console.WriteLine("here"+response.ToString());
-            System.Console.WriteLine("here" + response.HttpStatusCode);
-            System.Console.WriteLine("here1" + response.ContentLength);
-            System.Console.WriteLine("here2" + response.IsItemSet);
+            //var task = client.GetItemAsync(dbclient, request);
+            //GetItemResponse response = client.GetItemAsync(dbclient, request);
 
-
-            // Check the response.
-            var result = response.Item;
-            //var attributeMap = result.Item; // Attribute list in the response.
-            //var something = result.Values;
-
-            List<KeyValuePair<string, AttributeValue>> info = new List<KeyValuePair<string, AttributeValue>>();
-            if (result.Count == 0) { System.Console.WriteLine("EMPTYYYYYYYYYYYYYYYYYYY1111111"); }
-            foreach (KeyValuePair<string, AttributeValue> entry in result)
+            //Dictionary<string, AttributeValue> eventInfo = await client.GetItemAsync(dbclient, request);
+            Dictionary<string, AttributeValue> eventInfo = new Dictionary<string, AttributeValue>();
+            if (eventInfo.Count == 0)
             {
-                info.Add(entry);
-                System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING "+entry.Key);
-                //System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE" + (string)entry.Value.S);
-                //System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE");
+                System.Console.WriteLine("NOOOOOOOOOOOOOOOOOO KEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYS111111111111");
+            }
+            var task = await client.GetItemAsync(dbclient, request);
+            eventInfo = task;
+           
+            if (task.Values.Count > 0)
+            {
+                System.Console.WriteLine("SUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
             }
 
-            /*foreach (KeyValuePair<string, AttributeValue> kvp in info)
+            string eventNameInput = "";
+            foreach (KeyValuePair<string, AttributeValue> kvp in eventInfo)
             {
-                System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING "+kvp.Key);
-                System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE" + (string)kvp.Value.S);
-            }*/
+                System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING " + kvp.Key);
+                //System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE" + kvp.Value);
+                var value = kvp.Value;
+                eventNameInput = value.S;
+                System.Console.WriteLine(
+                    "VALUUUUE: "+kvp.Key + " " +
+                    (value.S == null ? "" : "S=[" + value.S + "]") +
+                    (value.N == null ? "" : "N=[" + value.N + "]") +
+                    (value.SS == null ? "" : "SS=[" + string.Join(",", value.SS.ToArray()) + "]") +
+                    (value.NS == null ? "" : "NS=[" + string.Join(",", value.NS.ToArray()) + "]")
+                    );
+            }
 
-            //string Value = "";
-            //Value = string.Join(", ", result.Values.Select(x => x));
-            /*Enumerable.Range(0, /*result.Values.Count*///3).Select(i =>
-            //    Value = string.Join(",", result.Values.Select(x => x)) 
-            //    );*/
             System.Console.WriteLine("Idddddddddddddddddddddddddddddddd: " + eventId);
             //System.Console.WriteLine("HEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYY: " + Value);
 
 
             //===============================STUFFFF=================================================
+
+            
 
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
