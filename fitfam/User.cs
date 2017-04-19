@@ -568,5 +568,17 @@ namespace fitfam
                 userGroup.addMember(user, false);
             }
         }
+
+        public void attendingEvent(Event evnt)
+        {
+            addJoinedEvent(evnt);
+            evnt.addAttending(this);
+        }
+
+        public void notAttendingEvent(Event evnt)
+        {
+            removeJoinedEvent(evnt);
+            evnt.removeAttending(this);
+        }
     }
 }
