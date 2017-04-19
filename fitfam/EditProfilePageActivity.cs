@@ -1,3 +1,5 @@
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -10,7 +12,7 @@ namespace fitfam
     public class EditProfilePageActivity : Activity
     {
         private string userId;
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "Null";
@@ -150,5 +152,6 @@ namespace fitfam
             string toast = string.Format("The preferred availability is {0}", spinner.GetItemAtPosition(e.Position));
             Toast.MakeText(this, toast, ToastLength.Long).Show();
         }
+
     }
 }

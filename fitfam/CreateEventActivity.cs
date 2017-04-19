@@ -109,6 +109,9 @@ namespace fitfam
             /* add user input to new entry in database, then redirect */
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
+                //BOOST INPUT 
+                float boost = 0;
+
                 startInput = date.DateTime;
                 endInput = date.DateTime;
 
@@ -123,7 +126,7 @@ namespace fitfam
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
                 Console.WriteLine("userId: {0}", userId);
                 var creator = new User(userId, true);
-                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, false, tagsList, creator );
+                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, false, tagsList, creator, boost );
                 Console.WriteLine(creator.UserId);
                 var userFam = creator.UserFam;
                 userFam.makeEvent(newEvent);
