@@ -245,6 +245,7 @@
     <Compile Include="FamProfileActivity.cs" />
     <Compile Include="FamQuickViewActivity.cs" />
     <Compile Include="FindAFamFormActivity.cs" />
+    <Compile Include="FindAnEvent.cs" />
     <Compile Include="FindAnEventActivity.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="HomepageActivity.cs" />
