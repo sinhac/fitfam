@@ -121,10 +121,13 @@ namespace fitfam
                 endInput = endInput.AddHours(Convert.ToDouble(hour));
                 minute = (string)spinner4.GetItemAtPosition(spinner4.SelectedItemPosition);
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
-
+                Console.WriteLine("userId: {0}", userId);
                 var creator = new User(userId, true);
-                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList, creator );
-                
+                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, false, tagsList, creator );
+                Console.WriteLine(creator.UserId);
+                var userFam = creator.UserFam;
+                userFam.makeEvent(newEvent);
+
                 var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
                 eventDetailsActivity.PutExtra("eventId",newEvent.EventId);
                 StartActivity(eventDetailsActivity);
