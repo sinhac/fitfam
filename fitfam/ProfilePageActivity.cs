@@ -15,6 +15,7 @@ namespace fitfam
     [Activity(Label = "ProfilePageActivity")]
     public class ProfilePageActivity : Activity
     {
+        private string userId;
         GoogleApiClient mGoogleApiClient;
         private SignInButton mGoogleSignOut;
         private bool mIntentInProgress;
@@ -25,7 +26,18 @@ namespace fitfam
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            userId = Intent.GetStringExtra("userId") ?? "Null";
             SetContentView(Resource.Layout.UserProfilePage);
+            User currentUser = new User(userId, true);
+
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
+            TextView name = new TextView(this);
+            name.Text = currentUser.Username;
+            layout.AddView(name);
+
+            TextView bio = new TextView(this);
+            bio.Text = currentUser.Bio;
+            layout.AddView(bio);
 
             // Create your application here
             Button myfams_button = FindViewById<Button>(Resource.Id.myFamButton);
@@ -37,7 +49,9 @@ namespace fitfam
             Button editprofile_button = FindViewById<Button>(Resource.Id.editProfileButton);
             editprofile_button.Click += delegate
             {
-                StartActivity(typeof(EditProfilePageActivity));
+                Intent intent = new Intent(this, typeof(EditProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -71,7 +85,6 @@ namespace fitfam
 
                 mGoogleApiClient = builder.Build();
 
-                LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
 
                 Button button = new Button(this);
                 //Does not change

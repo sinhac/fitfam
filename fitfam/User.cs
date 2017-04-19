@@ -26,13 +26,22 @@ namespace fitfam
         {
             get { return username; }
         }
-        private List<string> activities;
+        private List<string> activities = new List<string>();
         public List<string> Activities
         {
             get { return activities; }
         }
         public void addActivity(string activity)
         {
+            String expression;
+            if (activities.Count == 0)
+            {
+                expression = "SET #A = :newActivity";
+            }
+            else
+            {
+                expression = "ADD #A :newActivity";
+            }
             activities.Add(activity);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
@@ -48,9 +57,8 @@ namespace fitfam
                 {
                     {":newActivity",new AttributeValue { S = activity }},  // new activity to update user's activities with 
                 },
-
                 // activity added to list in database entry
-                UpdateExpression = "ADD #A :newActivity"
+                UpdateExpression = expression
             };
             var response = dbclient.UpdateItemAsync(request);
         }
@@ -70,26 +78,33 @@ namespace fitfam
             get { return bio; }
             set
             {
+                Console.WriteLine("setting bio");
                 bio = value;
-                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
-                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
-                var request = new UpdateItemRequest
+                using (AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1))
                 {
-                    TableName = "fitfam-mobilehub-2083376203-users",
-                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
-                    ExpressionAttributeNames = new Dictionary<string, string>()
-                {
-                    {"#B", "bio"},  // attribute to be updated
-                },
-                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
-                {
-                    {":newBio",new AttributeValue { S = bio }},  // new bio to update user's bio with 
-                },
+                    using (var dbclient = awsclient.getDynamoDBClient())
+                    {
+                        var request = new UpdateItemRequest
+                        {
+                            TableName = "fitfam-mobilehub-2083376203-users",
+                            Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                            ExpressionAttributeNames = new Dictionary<string, string>()
+                            {
+                                {"#B", "bio"},  // attribute to be updated
+                            },
+                            ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                            {
+                                {":newBio",new AttributeValue { S = bio }},  // new bio to update user's bio with 
+                            },
 
-                    // expression to set pic in database entry
-                    UpdateExpression = "SET #B :newBio"
-                };
-                var response = dbclient.UpdateItemAsync(request);
+                            // expression to set pic in database entry
+                            UpdateExpression = "SET = #B = :newBio"
+                        };
+                        UpdateItemAsync(dbclient, request);
+                    }
+                        
+                }
+                
             }
         }
         private string experienceLevel; //change to enum type
@@ -115,7 +130,7 @@ namespace fitfam
                 },
 
                     // expression to set pic in database entry
-                    UpdateExpression = "SET #E :newExperienceLevel"
+                    UpdateExpression = "SET = #E :newExperienceLevel"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -127,6 +142,15 @@ namespace fitfam
         }
         public void addFitFam(Group group)
         {
+            string expression;
+            if (fitFams.Count == 0)
+            {
+                expression = "SET #G = :newFitFam";
+            }
+            else
+            {
+                expression = "ADD #G :newFitFam";
+            }
             fitFams.Add(group);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
@@ -140,11 +164,11 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":neFitFam",new AttributeValue { S = group.GroupId }},  // new activity to update user's activities with 
+                    {":newFitFam",new AttributeValue { S = group.GroupId }},  // new activity to update user's activities with 
                 },
 
                 // activity added to list in database entry
-                UpdateExpression = "ADD #G :newFitFam"
+                UpdateExpression = expression
             };
             var response = dbclient.UpdateItemAsync(request);
         }
@@ -165,6 +189,15 @@ namespace fitfam
         }
         public void addJoinedEvent(Event joinedEvent)
         {
+            string expression;
+            if (joinedEvents.Count == 0)
+            {
+                expression = "SET #JE = :newJoinedEvent";
+            }
+            else
+            {
+                expression = "ADD #JE :newJoinedEvent";
+            }
             joinedEvents.Add(joinedEvent);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
@@ -182,7 +215,7 @@ namespace fitfam
                 },
 
                 // activity added to list in database entry
-                UpdateExpression = "ADD #JE :newJoinedEvent"
+                UpdateExpression = expression
             };
             var response = dbclient.UpdateItemAsync(request);
         }
@@ -210,7 +243,7 @@ namespace fitfam
                 },
 
                     // expression to set pic in database entry
-                    UpdateExpression = "SET #P :newPic"
+                    UpdateExpression = "SET = #P :newPic"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -222,6 +255,15 @@ namespace fitfam
         }
         public void addSharedEvent(Event sharedEvent)
         {
+            string expression;
+            if (sharedEvents.Count == 0)
+            {
+                expression = "SET #SE = :newSharedEvent";
+            }
+            else
+            {
+                expression = "ADD #SE :newSharedEvent";
+            }
             sharedEvents.Add(sharedEvent);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
@@ -239,7 +281,7 @@ namespace fitfam
                 },
 
                 // activity added to list in database entry
-                UpdateExpression = "ADD #SE :newSharedEvent"
+                UpdateExpression = expression
             };
             var response = dbclient.UpdateItemAsync(request);
         }
@@ -266,12 +308,26 @@ namespace fitfam
                 },
 
                     // expression to set pic in database entry
-                    UpdateExpression = "SET #L :newLocation"
+                    UpdateExpression = "SET = #L :newLocation"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
         }
 
+        private async void UpdateItemAsync(Amazon.DynamoDBv2.AmazonDynamoDBClient client, UpdateItemRequest request)
+        {
+            try
+            {
+                var response = await client.UpdateItemAsync(request);
+                Console.WriteLine("bio updated");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("UPDATE EXCEPTION: {0}, {1}", ex.Message, ex.ToString());
+            }
+            
+            //return response;
+        } 
 
         public User(string userId, string gender, string pic, string location, string username)
         {
@@ -413,6 +469,7 @@ namespace fitfam
                         userDoc["sharedEvents"] = new List<string>();
                         userDoc["location"] = this.location;
                         userDoc["username"] = this.username;
+                        userDoc["bio"] = " ";
                         var response = await table.PutItemAsync(userDoc);
                         Console.WriteLine("made entry {0}", response);
 
