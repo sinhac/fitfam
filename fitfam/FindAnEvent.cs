@@ -42,7 +42,7 @@ namespace fitfam
         {
             get { return matches; }
         }
-        public FindAnEvent(List<string> tags, string location, string experience)
+        public FindAnEvent(User user, List<string> tags, DateTime startTime, DateTime endTime)
         {
             getEventUtils(tags, location, experience);
             var utilsArr = utils.ToArray();

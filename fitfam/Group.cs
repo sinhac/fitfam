@@ -146,7 +146,7 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newRequest", new AttributeValue { M = new Dictionary<string, AttributeValue>() { { user.UserId, new AttributeValue { BOOL = isAdmin } } } } }  // new activity to update user's activities with 
+                    {":newRequest", new AttributeValue { S = user.UserId } } // new activity to update user's activities with 
                 },
 
                 // activity added to list in database entry
@@ -370,6 +370,15 @@ namespace fitfam
         {
             removeMember(user);
             addMember(user, true);
+        }
+
+        public void makeEvent(Event newEvent)
+        {
+            eventList.Add(newEvent);
+            foreach (var member in members.Keys)
+            {
+                member.addSharedEvent(newEvent);
+            }
         }
 
     }
