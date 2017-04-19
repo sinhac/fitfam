@@ -1,6 +1,7 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Android.App;
+using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
@@ -77,6 +78,7 @@ namespace fitfam
             textView1.Text = eventInfo["eventName"].S;
             textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
             layout.AddView(textView1);
+
             // Event Location
             TextView textView2 = new TextView(this);
             textView2.Text = ("Location: " + eventInfo["location"].S);
@@ -140,7 +142,7 @@ namespace fitfam
                 Button button = new Button(this);
                 button.Id = 3;
                 button.Text = "Edit Event Details";
-                button4.SetTextColor(Color.Black);
+                button.SetTextColor(Color.Black);
                 button.SetBackgroundResource(Resource.Drawable.gold_button);
                 // float scale = button.Resources.DisplayMetrics.Density;
                 button.SetHeight((int)(75 * scale + 0.5f));
