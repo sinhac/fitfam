@@ -106,8 +106,32 @@ namespace fitfam
         public User(string userId)
         {
             this.userId = userId;
+            this.setValues();
         }
         
+        private async void setValues()
+        {
+            using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+            {
+                using (var client = awsClient.getDynamoDBClient())
+                {
+                    var key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } };
+                    var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-users", key);
+                    Dictionary<string, AttributeValue> userInfo = new Dictionary<string, AttributeValue>();
+                    var task = await awsClient.GetItemAsync(client, request);
+                    userInfo = task;
+                    if (task.Values.Count == 0)
+                    {
+                        createEntry();
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+        }
+
         public void createEntry()
         {
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
