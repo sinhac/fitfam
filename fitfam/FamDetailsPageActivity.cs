@@ -140,8 +140,11 @@ namespace fitfam
             joinFamButton.SetPadding(padding, padding, padding, padding);
             layout.AddView(joinFamButton);
 
-            button2.Click += delegate {
-                StartActivity(typeof(EventAttendeesActivity));
+            joinFamButton.Click += delegate {
+
+                var famProfileActivity = new Intent(this, typeof(FamProfileActivity));
+                famProfileActivity.PutExtra("groupId", groupId);
+                StartActivity(famProfileActivity);
             };
 
 
