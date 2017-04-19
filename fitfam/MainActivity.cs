@@ -137,7 +137,7 @@ namespace fitfam
                 Intent intent = new Intent(this, typeof(HomepageActivity));
                 intent.PutExtra("userId", plusUser.Id);
                 intent.PutExtra("username", plusUser.DisplayName);
-                intent.PutExtra("gender", plusUser.Gender);
+                intent.PutExtra("gender", plusUser.Gender.ToString());
                 intent.PutExtra("pic", plusUser.Image.Url);
                 intent.PutExtra("location", plusUser.CurrentLocation);
                 StartActivity(intent);

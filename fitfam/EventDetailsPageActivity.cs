@@ -27,8 +27,9 @@ namespace fitfam
 
             System.Console.WriteLine("event" + eventId);
 
+            Event thisEvent = new Event(eventId);
             //===========================STUFFFFFF====================================================
-
+            /*
             AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
             AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
             string tableName = "fitfam-mobilehub-2083376203-events";
@@ -40,13 +41,13 @@ namespace fitfam
                 Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
             };
 
-            Dictionary<string, AttributeValue> eventInfo = new Dictionary<string, AttributeValue>();
-            if (eventInfo.Count == 0)
-            {
-                System.Console.WriteLine("NOOOOOOOOOOOOOOOOOO KEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYS111111111111");
-            }
+            //Dictionary<string, AttributeValue> eventInfo = new Dictionary<string, AttributeValue>();
+           // if (eventInfo.Count == 0)
+           // {
+           //     System.Console.WriteLine("NOOOOOOOOOOOOOOOOOO KEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYS111111111111");
+           // }
             var task = await client.GetItemAsync(dbclient, request);
-            eventInfo = task;
+            var eventInfo = new Dictionary<string, AttributeValue>(task);
 
             if (task.Values.Count > 0)
             {
@@ -68,39 +69,60 @@ namespace fitfam
             }
 
             System.Console.WriteLine("Idddddddddddddddddddddddddddddddd: " + eventId);
-
+            */
 
             //===============================STUFFFF=================================================
+            
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
             try
             {
-                LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
                 // Event Name
                 TextView textView1 = new TextView(this);
-                textView1.Text = eventInfo["eventName"].S;
+                //textView1.Text = eventInfo["eventName"].S;
+                textView1.Text = thisEvent.EventName;
                 textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
                 layout.AddView(textView1);
-
+            } catch (Exception ex) { Console.WriteLine("eventName"); }
+            try
+            {
                 // Event Location
                 TextView textView2 = new TextView(this);
-                textView2.Text = ("Location: " + eventInfo["location"].S);
+                //textView2.Text = ("Location: " + eventInfo["location"].S);
+                textView2.Text = thisEvent.Location;
                 textView2.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
                 layout.AddView(textView2);
+            }
+            catch (Exception ex) { Console.WriteLine("location"); }
+            try
+            {
                 // Description
                 TextView textView3 = new TextView(this);
-                textView3.Text = ("Description: " + eventInfo["description"].S);
+                // textView3.Text = ("Description: " + eventInfo["description"].S);
+                textView3.Text = thisEvent.Description;
                 textView3.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
                 layout.AddView(textView3);
+            }
+            catch (Exception ex) { Console.WriteLine("description"); }
+            try {
                 // Start time
                 TextView textView4 = new TextView(this);
-                textView4.Text = ("Start Time: " + eventInfo["startTime"].S);
+                //  textView4.Text = ("Start Time: " + eventInfo["startTime"].S);
+                textView4.Text = thisEvent.StartTime.ToString();
                 textView4.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
                 layout.AddView(textView4);
-                // End time
-                TextView textView5 = new TextView(this);
-                textView5.Text = ("End Time: " + eventInfo["endTime"].S);
+            } catch (Exception ex) { Console.WriteLine("starttime"); }
+            try
+            {
+            // End time
+            TextView textView5 = new TextView(this);
+                //  textView5.Text = ("End Time: " + eventInfo["endTime"].S);
+                textView5.Text = thisEvent.EndTime.ToString();
                 textView5.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
                 layout.AddView(textView5);
-
+            }
+            catch (Exception ex) { Console.WriteLine("endtime"); }
+            try
+            {
                 Button button4 = new Button(this);
                 button4.Id = 4;
                 button4.Text = "Attendees";
@@ -156,13 +178,15 @@ namespace fitfam
                         StartActivity(typeof(EditEventDetailsActivity));
                     };
                 }
+           
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("EXCEPTION: {0}\n{1}", ex.Message, ex.StackTrace);
+                Console.WriteLine("Exception: {0}\n{1}", ex.Message, ex.Source);
             }
 
-            
+
+
         }
     }
 }

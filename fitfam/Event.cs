@@ -249,7 +249,7 @@ namespace fitfam
                         { "startTime", new AttributeValue { S = startTime.ToString() } },
                         { "endTime", new AttributeValue { S = endTime.ToString() } },
                         { "publicEvent", new AttributeValue { BOOL = publicEvent } },
-                    //    { "tags", new AttributeValue { SS = this.tags } },
+                        { "tags", new AttributeValue { SS = this.tags } },
                         { "attending", new AttributeValue { SS = attending_userids } }
                     };
                     System.Console.WriteLine("after attending");
@@ -273,25 +273,73 @@ namespace fitfam
 
         private async void SetValues(AWSClient client, AmazonDynamoDBClient dbclient, GetItemRequest request)
         {
-            var eventInfo = await client.GetItemAsync(dbclient, request);
-            this.eventName = eventInfo["eventName"].S;
-            this.description = eventInfo["description"].S;
-            this.location = eventInfo["location"].S;
-            this.startTime = Convert.ToDateTime(eventInfo["startTime"].S);
-            this.endTime = Convert.ToDateTime(eventInfo["endTime"].S);
-            this.publicEvent = eventInfo["publicEvent"].BOOL;
-            this.tags = eventInfo["tags"].SS.ToList<string>();
-            this.creator = new User(eventInfo["creator"].S, true);
-            var sharedList = eventInfo["shared"].SS.ToList<string>();
-            foreach (var userId in sharedList)
+            try
             {
-                shared.Add(new User(userId, false));
-            }
-            var attendingList = eventInfo["attending"].SS.ToList();
-            foreach (var userId in attendingList)
+                var task = await client.GetItemAsync(dbclient, request);
+                var eventInfo = task;
+                /*this.eventName = eventInfo["eventName"].S;
+                this.description = eventInfo["description"].S;
+                this.location = eventInfo["location"].S;
+                this.startTime = Convert.ToDateTime(eventInfo["startTime"].S);
+                this.endTime = Convert.ToDateTime(eventInfo["endTime"].S);
+                this.publicEvent = eventInfo["publicEvent"].BOOL;
+                this.tags = eventInfo["tags"].SS.ToList<string>();
+                this.creator = new User(eventInfo["creator"].S, true);
+                var sharedList = eventInfo["shared"].SS.ToList<string>();*/
+                foreach(KeyValuePair<string, AttributeValue>kvp in eventInfo)
+                {
+                    switch(kvp.Key)
+                    {
+                        case "eventName":
+                            eventName = kvp.Value.S;
+                            break;
+                        case "description":
+                            description = kvp.Value.S;
+                            break;
+                        case "location":
+                            location = kvp.Value.S;
+                            break;
+                        case "startTime":
+                            startTime = Convert.ToDateTime(kvp.Value.S);
+                            break;
+                        case "endTime":
+                            endTime = Convert.ToDateTime(kvp.Value.S);
+                            break;
+                        case "publicEvent":
+                            PublicEvent = kvp.Value.BOOL;
+                            break;
+                        case "tags":
+                            tags = kvp.Value.SS.ToList();
+                            break;
+                        case "creator":
+                            creator = new User(kvp.Value.S, true);
+                            break;
+                        case "attendees":
+                            var attendingMap = kvp.Value.M;
+                            foreach (var keyVal in attendingMap)
+                            {
+                                attending.Add(new User(keyVal.Key, false));
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Event fucked up");
+                            break;
+                    }
+                }
+                /*foreach (var userId in sharedList)
+                {
+                    shared.Add(new User(userId, false));
+                }
+                var attendingList = eventInfo["attending"].SS.ToList();
+                foreach (var userId in attendingList)
+                {
+                    attending.Add(new User(userId, false));
+                }*/
+            } catch (Exception ex)
             {
-                attending.Add(new User(userId, false));
+                Console.WriteLine("Exception: {0}\n{1}", ex.Message, ex.Source);
             }
+            
         }
 
         public void addAttending(User attendingUser)
