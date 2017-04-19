@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using System.Collections.Generic;
@@ -59,7 +60,9 @@ namespace fitfam
                 var creator = new User(userId, true);
                 Group fam = new Group(famNameInput, descriptionInput, creator);
                 System.Console.WriteLine("Created fam");
-                StartActivity(typeof(FamProfileActivity));
+                var famDetailsActivity = new Intent(this, typeof(FamDetailsPageActivity));
+                famDetailsActivity.PutExtra("groupId", fam.GroupId);
+                StartActivity(famDetailsActivity);
             };
 
             /* navbar buttons */

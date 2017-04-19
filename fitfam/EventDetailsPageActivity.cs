@@ -1,6 +1,7 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Android.App;
+using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using System.Collections.Generic;
@@ -36,13 +37,7 @@ namespace fitfam
                 TableName = tableName,
                 Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
             };
-            //var key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } };
-            //CancellationToken token;
-            //var response = client.GetItemAsync(tableName, key, token);
-            //var task = client.GetItemAsync(dbclient, request);
-            //GetItemResponse response = client.GetItemAsync(dbclient, request);
 
-            //Dictionary<string, AttributeValue> eventInfo = await client.GetItemAsync(dbclient, request);
             Dictionary<string, AttributeValue> eventInfo = new Dictionary<string, AttributeValue>();
             if (eventInfo.Count == 0)
             {
@@ -50,21 +45,31 @@ namespace fitfam
             }
             var task = await client.GetItemAsync(dbclient, request);
             eventInfo = task;
-           
+
             if (task.Values.Count > 0)
             {
                 System.Console.WriteLine("SUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
             }
 
-            string eventNameInput = "";
+            List<string> eventInformation = new List<string>();
             foreach (KeyValuePair<string, AttributeValue> kvp in eventInfo)
             {
                 System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING " + kvp.Key);
-                //System.Console.WriteLine("VALUUUUUUUUUUUUUUUUUUUUE" + kvp.Value);
                 var value = kvp.Value;
-                //eventNameInput = value.S;
+
+                if (value.S == null)
+                {
+
+                } else {
+                    eventInformation.Add(value.S);
+                }
+                if (value.N == null) { } else { }
+                if (value.SS == null) { } else { }
+                if (value.NS == null) { } else { }
+
+
                 System.Console.WriteLine(
-                    "VALUUUUE: "+kvp.Key + " " +
+                    "VALUUUUE: " + kvp.Key + " " +
                     (value.S == null ? "" : "S=[" + value.S + "]") +
                     (value.N == null ? "" : "N=[" + value.N + "]") +
                     (value.SS == null ? "" : "SS=[" + string.Join(",", value.SS.ToArray()) + "]") +
@@ -78,10 +83,55 @@ namespace fitfam
 
             //===============================STUFFFF=================================================
 
-            
 
-            Button button1 = FindViewById<Button>(Resource.Id.button1);
-            button1.Click += delegate {
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
+            // Event ID
+            if (eventInformation.Count > 0)
+            {
+                
+            }
+            // Event Name
+            if (eventInformation.Count > 1)
+            {
+                TextView textView1 = new TextView(this);
+                textView1.Text = eventInformation[1];
+                textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
+                layout.AddView(textView1);
+            }
+            // Event Location
+            if (eventInformation.Count > 2)
+            {
+                TextView textView2 = new TextView(this);
+                textView2.Text = ("Location: " + eventInformation[2]);
+                textView2.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+                layout.AddView(textView2);
+            }
+            // Event Description
+            if (eventInformation.Count > 3)
+            {
+                TextView textView3 = new TextView(this);
+                textView3.Text = ("Description: " + eventInformation[3]);
+                textView3.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+                layout.AddView(textView3);
+            }
+            if (eventInformation.Count > 4)
+            {
+                //should at some point implement startTime - endTime
+            }
+
+            Button button4 = new Button(this);
+            button4.Id = 4;
+            button4.Text = "Attendees";
+            button4.SetTextColor(Color.Black);
+            button4.SetBackgroundResource(Resource.Drawable.gold_button);
+            float scale = button4.Resources.DisplayMetrics.Density;
+            button4.SetHeight((int)(75 * scale + 0.5f));
+            button4.SetWidth((int)(500 * scale + 0.5f));
+            int padding = (int)(16 * scale + 0.5f);
+            button4.SetPadding(padding, padding, padding, padding);
+            layout.AddView(button4);
+
+            button4.Click += delegate {
                 StartActivity(typeof(EventAttendeesActivity));
             };
 
@@ -105,17 +155,18 @@ namespace fitfam
                 StartActivity(typeof(ScheduleActivity));
             };
 
-            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
+            // LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
             if (true)
             {
                 Button button = new Button(this);
                 button.Id = 3;
                 button.Text = "Edit Event Details";
+                button4.SetTextColor(Color.Black);
                 button.SetBackgroundResource(Resource.Drawable.gold_button);
-                float scale = button.Resources.DisplayMetrics.Density;
+                // float scale = button.Resources.DisplayMetrics.Density;
                 button.SetHeight((int)(75 * scale + 0.5f));
                 button.SetWidth((int)(500 * scale + 0.5f));
-                int padding = (int)(16 * scale + 0.5f);
+                // int padding = (int)(16 * scale + 0.5f);
                 button.SetPadding(padding, padding, padding, padding);
                 layout.AddView(button);
 
