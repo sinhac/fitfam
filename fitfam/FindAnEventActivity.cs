@@ -15,7 +15,7 @@ namespace fitfam
             SetContentView(Resource.Layout.FindAnEventForm);
 
             // Create your application here
-            Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner1);
+            Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner5);
 
             spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
             var adapter = ArrayAdapter.CreateFromResource(
@@ -52,9 +52,67 @@ namespace fitfam
                 cityZipInput = e.Text.ToString();
             };
 
-            Button button2 = FindViewById<Button>(Resource.Id.button2);
+            //Date picker
+            DatePicker dateStart = FindViewById<DatePicker>(Resource.Id.datePicker1);
+            DatePicker dateEnd = FindViewById<DatePicker>(Resource.Id.datePicker2);
+            DateTime startInput;
+            DateTime endInput;
 
-            button2.Click += delegate {
+            //Time spinner
+            Spinner startHourSpinner = FindViewById<Spinner>(Resource.Id.spinner1);
+
+            startHourSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            var startHourAdapter = ArrayAdapter.CreateFromResource(
+                    this, Resource.Array.hour_array, Android.Resource.Layout.SimpleSpinnerItem);
+
+            startHourAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            startHourSpinner.Adapter = startHourAdapter;
+
+            Spinner startMinSpinner = FindViewById<Spinner>(Resource.Id.spinner2);
+
+            startMinSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            var startMinAdapter = ArrayAdapter.CreateFromResource(
+                    this, Resource.Array.minute_array, Android.Resource.Layout.SimpleSpinnerItem);
+
+            startMinAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            startMinSpinner.Adapter = startMinAdapter;
+
+            // End
+            Spinner endHourSpinner = FindViewById<Spinner>(Resource.Id.spinner3);
+
+            endHourSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            var endHourAdapter = ArrayAdapter.CreateFromResource(
+                    this, Resource.Array.hour_array, Android.Resource.Layout.SimpleSpinnerItem);
+
+            endHourAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            endHourSpinner.Adapter = endHourAdapter;
+
+            Spinner endMinSpinner = FindViewById<Spinner>(Resource.Id.spinner4);
+
+            endMinSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            var endMinAdapter = ArrayAdapter.CreateFromResource(
+                    this, Resource.Array.minute_array, Android.Resource.Layout.SimpleSpinnerItem);
+
+            endMinAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            endMinSpinner.Adapter = endMinAdapter;
+
+            Button findEventButton = FindViewById<Button>(Resource.Id.button2);
+
+            findEventButton.Click += delegate {
+                startInput = dateStart.DateTime;
+                endInput = dateEnd.DateTime;
+
+                string hour = (string)startHourSpinner.GetItemAtPosition(startHourSpinner.SelectedItemPosition);
+                startInput = startInput.AddHours(Convert.ToDouble(hour));
+                string minute = (string)startMinSpinner.GetItemAtPosition(startMinSpinner.SelectedItemPosition);
+                startInput = startInput.AddMinutes(Convert.ToDouble(minute));
+
+                hour = (string)endHourSpinner.GetItemAtPosition(endHourSpinner.SelectedItemPosition);
+                endInput = endInput.AddHours(Convert.ToDouble(hour));
+                minute = (string)endMinSpinner.GetItemAtPosition(endMinSpinner.SelectedItemPosition);
+                endInput = endInput.AddMinutes(Convert.ToDouble(minute));
+
+                //Pass user, list of tags, start time, end time to FindAnEvent
                 StartActivity(typeof(EventMatchesActivity));
             };
 

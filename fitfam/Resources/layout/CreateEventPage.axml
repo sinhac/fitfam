@@ -84,10 +84,10 @@
                 p1:id="@+id/switch1"
                 p1:text="Make Public" />
             <TextView
-              p1:text="Description"
-              p1:layout_width="match_parent"
-              p1:layout_height="wrap_content"
-              p1:id="@+id/textView7" />
+                p1:text="Description"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView7" />
             <EditText
                 p1:inputType="textMultiLine"
                 p1:layout_width="match_parent"

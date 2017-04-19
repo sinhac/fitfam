@@ -12,7 +12,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout4">
+            android:id="@+id/linearLayout4"
+            android:gravity="center_horizontal">
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -84,18 +85,91 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/autoCompleteTextView1"
-                android:hint="City or Zip Code" />
+                android:hint="City or Zip Code"/>
             <TextView
-                android:text="Experience Level"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView3" />
+                  android:text="Experience Level"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textView3" />
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner1"
+                android:id="@+id/spinner5"
                 android:prompt="@string/experience_prompt" />
+            <TextView
+                android:text="When is the earliest you are available?"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8" />
+            <DatePicker
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/datePicker1" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space2"
+                android:layout_marginBottom="25.5dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout6"
+                android:gravity="center">
+              <TextView
+                  android:text="Start time:"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textView5" />
+              <Spinner
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/spinner1" />
+              <Spinner
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/spinner2" />
+            </LinearLayout>
+            <TextView
+                android:text="When is the latest you are available?"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView9" />
+            <DatePicker
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/datePicker2" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space3"
+                android:layout_marginBottom="25.5dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout7"
+                android:gravity="center">
+              <TextView
+                  android:text=" time:"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textView6" />
+              <Spinner
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/spinner3" />
+              <Spinner
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/spinner4" />
+            </LinearLayout>
+            
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="16.0dp"
