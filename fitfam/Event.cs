@@ -278,7 +278,7 @@ namespace fitfam
             this.endTime = Convert.ToDateTime(eventInfo["endTime"].S);
             this.publicEvent = eventInfo["publicEvent"].BOOL;
             this.tags = eventInfo["tags"].SS.ToList<string>();
-            this.creator = User(eventInfo["creator"], true);
+            this.creator = new User(eventInfo["creator"].S, true);
             this.shared = eventInfo["shared"].SS.ToList<string>();
         }
 
