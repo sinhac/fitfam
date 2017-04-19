@@ -238,20 +238,22 @@ namespace fitfam
                     eventId = eventName + creator.UserId + startTime.ToString();
                     // create list of userids from list of attending Users
                     List<string> attending_userids = new List<string>();
-                   
+
                     Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
                     {
                         { "eventId", new AttributeValue { S = eventId} },
                         { "eventName", new AttributeValue { S = eventName } },
                         { "description", new AttributeValue { S = description } },
                         { "location", new AttributeValue { S = location } },
-                        //{ "startTime", new AttributeValue { S = startTime.ToString() } },
-                        //{ "endTime", new AttributeValue { S = endTime.ToString() } },
+                        { "startTime", new AttributeValue { S = startTime.ToString() } },
+                        { "endTime", new AttributeValue { S = endTime.ToString() } },
                         //{ "publicEvent", new AttributeValue { BOOL = publicEvent } },
                         //{ "tags", new AttributeValue { SS = tags } },
                         //{ "attending", new AttributeValue { SS = attending_userids } }
                     };
+                    System.Console.WriteLine("after attending");
                     awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
+                    System.Console.WriteLine("after put item");
                 }
             }
         }
@@ -284,6 +286,7 @@ namespace fitfam
 
         public void addAttending(User attendingUser)
         {
+            System.Console.WriteLine("started add attending "+ attendingUser.UserId);
             attending.Add(attendingUser);
             // create request to add attending user's userId to list in database
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
@@ -305,13 +308,12 @@ namespace fitfam
                 UpdateExpression = "ADD #A :newAttending"
             };
             var response = dbclient.UpdateItemAsync(request);
-
+            System.Console.WriteLine("finished add attending");
         }
 
         public void addTag(string tag)
         {
             tags.Add(tag);
-
             // create request to add event tag to tags list in database
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();

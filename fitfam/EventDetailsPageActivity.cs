@@ -51,22 +51,10 @@ namespace fitfam
                 System.Console.WriteLine("SUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
             }
 
-            List<string> eventInformation = new List<string>();
             foreach (KeyValuePair<string, AttributeValue> kvp in eventInfo)
             {
                 System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING " + kvp.Key);
                 var value = kvp.Value;
-
-                if (value.S == null)
-                {
-
-                } else {
-                    eventInformation.Add(value.S);
-                }
-                if (value.N == null) { } else { }
-                if (value.SS == null) { } else { }
-                if (value.NS == null) { } else { }
-
 
                 System.Console.WriteLine(
                     "VALUUUUE: " + kvp.Key + " " +
@@ -78,46 +66,37 @@ namespace fitfam
             }
 
             System.Console.WriteLine("Idddddddddddddddddddddddddddddddd: " + eventId);
-            //System.Console.WriteLine("HEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYY: " + Value);
 
 
             //===============================STUFFFF=================================================
 
 
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
-            // Event ID
-            if (eventInformation.Count > 0)
-            {
-                
-            }
             // Event Name
-            if (eventInformation.Count > 1)
-            {
-                TextView textView1 = new TextView(this);
-                textView1.Text = eventInformation[1];
-                textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
-                layout.AddView(textView1);
-            }
+            TextView textView1 = new TextView(this);
+            textView1.Text = eventInfo["eventName"].S;
+            textView1.SetTextAppearance(this, Android.Resource.Style.TextAppearanceLarge);
+            layout.AddView(textView1);
             // Event Location
-            if (eventInformation.Count > 2)
-            {
-                TextView textView2 = new TextView(this);
-                textView2.Text = ("Location: " + eventInformation[2]);
-                textView2.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
-                layout.AddView(textView2);
-            }
-            // Event Description
-            if (eventInformation.Count > 3)
-            {
-                TextView textView3 = new TextView(this);
-                textView3.Text = ("Description: " + eventInformation[3]);
-                textView3.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
-                layout.AddView(textView3);
-            }
-            if (eventInformation.Count > 4)
-            {
-                //should at some point implement startTime - endTime
-            }
+            TextView textView2 = new TextView(this);
+            textView2.Text = ("Location: " + eventInfo["location"].S);
+            textView2.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+            layout.AddView(textView2);
+            // Description
+            TextView textView3 = new TextView(this);
+            textView3.Text = ("Description: " + eventInfo["description"].S);
+            textView3.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+            layout.AddView(textView3);
+            // Start time
+            TextView textView4 = new TextView(this);
+            textView4.Text = ("Start Time: " + eventInfo["startTime"].S);
+            textView4.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+            layout.AddView(textView4);
+            // End time
+            TextView textView5 = new TextView(this);
+            textView5.Text = ("End Time: " + eventInfo["endTime"].S);
+            textView5.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
+            layout.AddView(textView5);
 
             Button button4 = new Button(this);
             button4.Id = 4;

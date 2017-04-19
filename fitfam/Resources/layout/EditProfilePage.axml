@@ -69,6 +69,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView4" />
+            <EditText
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bioEdit" />
             <TextView
                 android:hint="Type the bio you want visible on your profile here"
                 android:layout_width="match_parent"
@@ -146,7 +151,7 @@
             <MultiAutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/multiAutoCompleteTextView1"
+                android:id="@+id/activityEdit"
                 android:hint="Enter activities and interests " />
             <Space
                 android:layout_width="match_parent"

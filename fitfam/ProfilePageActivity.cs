@@ -15,6 +15,7 @@ namespace fitfam
     [Activity(Label = "ProfilePageActivity")]
     public class ProfilePageActivity : Activity
     {
+        private string userId;
         GoogleApiClient mGoogleApiClient;
         private SignInButton mGoogleSignOut;
         private bool mIntentInProgress;
@@ -25,6 +26,7 @@ namespace fitfam
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            userId = Intent.GetStringExtra("userId") ?? "Null";
             SetContentView(Resource.Layout.UserProfilePage);
 
             // Create your application here
@@ -37,7 +39,9 @@ namespace fitfam
             Button editprofile_button = FindViewById<Button>(Resource.Id.editProfileButton);
             editprofile_button.Click += delegate
             {
-                StartActivity(typeof(EditProfilePageActivity));
+                Intent intent = new Intent(this, typeof(EditProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
 

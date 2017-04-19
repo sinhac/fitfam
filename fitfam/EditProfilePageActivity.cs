@@ -8,11 +8,29 @@ namespace fitfam
     [Activity(Label = "EditProfilePage")]
     public class EditProfilePageActivity : Activity
     {
+        private string userId;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            userId = Intent.GetStringExtra("userId") ?? "Null";
             SetContentView(Resource.Layout.EditProfilePage);
+
+            var bioEdit = FindViewById<EditText>(Resource.Id.bioEdit);
+            var bioEditInput = "";
+            bioEdit.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                bioEditInput = e.Text.ToString();
+            };
+            User currentUser = new User(userId, true);
+
+            var activities = FindViewById<MultiAutoCompleteTextView>(Resource.Id.activityEdit);
+            var activityInput = "";
+            activities.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                activityInput = e.Text.ToString();
+            };
+
+            //user.bio = newbio
 
             // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -101,6 +119,9 @@ namespace fitfam
             Button savechanges_button = FindViewById<Button>(Resource.Id.save_changes_button);
             savechanges_button.Click += delegate
             {
+                currentUser.Bio = bioEditInput;
+                currentUser.addActivity(activityInput);
+
                 StartActivity(typeof(ProfilePageActivity));
             };
         }
