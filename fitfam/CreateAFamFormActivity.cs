@@ -58,7 +58,9 @@ namespace fitfam
             createFamButton.Click += delegate {
                 System.Console.WriteLine("creating fam");
                 var creator = new User(userId, true);
-                Group fam = new Group(famNameInput, descriptionInput, creator);
+                var members = new Dictionary<User, bool>();
+                members.Add(creator, true);
+                Group fam = new Group(famNameInput, descriptionInput, creator, members);
                 System.Console.WriteLine("Created fam");
                 var famDetailsActivity = new Intent(this, typeof(FamDetailsPageActivity));
                 famDetailsActivity.PutExtra("groupId", fam.GroupId);
