@@ -120,5 +120,11 @@ namespace fitfam
                 }
             }      
         }
+
+        public void addFam(string groupId)
+        {
+            //var newGroup = new Group(groupId);
+
+        }
     }
 }

@@ -8,11 +8,12 @@ namespace fitfam
     [Activity(Label = "CreateafamformActivity")]
     public class CreateAFamFormActivity : Activity
     {
+        private string userId;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             System.Console.WriteLine("opened createfam form");
             base.OnCreate(savedInstanceState);
-
+            userId = Intent.GetStringExtra("userId") ?? "Null";
             SetContentView(Resource.Layout.CreateAFamForm);
 
             // capture user input for Fam name, description, and tags
@@ -55,7 +56,8 @@ namespace fitfam
             Button createFamButton = FindViewById<Button>(Resource.Id.createFamButton);
             createFamButton.Click += delegate {
                 System.Console.WriteLine("creating fam");
-                Group fam = new Group(famNameInput, descriptionInput, new User("test"));
+                var creator = new User(userId);
+                Group fam = new Group(famNameInput, descriptionInput, creator);
                 System.Console.WriteLine("Created fam");
                 StartActivity(typeof(FamProfileActivity));
             };

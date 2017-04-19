@@ -61,7 +61,16 @@ namespace fitfam
         /// <returns></returns>
         public Table getTable(Amazon.DynamoDBv2.AmazonDynamoDBClient client, string table)
         {
-            return Table.LoadTable(client, table);
+            Table T = null;
+            try
+            {
+                 T = Table.LoadTable(client, table);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error getting table: {0}", ex.Message);
+            }
+            return T;
         }
         /// <summary>
         /// Executes put item request
