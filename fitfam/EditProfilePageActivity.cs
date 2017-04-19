@@ -2,6 +2,7 @@ using Android.App;
 using Android.OS;
 using Android.Widget;
 using System;
+using System.Collections.Generic;
 
 namespace fitfam
 {
@@ -24,11 +25,25 @@ namespace fitfam
             User currentUser = new User(userId, true);
 
             var activities = FindViewById<MultiAutoCompleteTextView>(Resource.Id.activityEdit);
-            var activityInput = "";
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            activities.Adapter = adapter;
+            activities.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+            var activitiesInput = "";
+            string[] activitiesArr;
+            List<string> activitiesList = new List<string>();
+            activities.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                activitiesInput = e.Text.ToString();
+            };
+            char[] delimiters = { ',', '\t', '\n' };
+            activitiesArr = activitiesInput.Split(delimiters);
+            
+            /*var activityInput = "";
             activities.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 activityInput = e.Text.ToString();
-            };
+            };*/
 
 
             // Create your application here
@@ -119,8 +134,12 @@ namespace fitfam
             savechanges_button.Click += delegate
             {
                 currentUser.Bio = bioEditInput;
-                currentUser.addActivity(activityInput);
 
+                foreach (string act in activitiesArr)
+                {
+                    currentUser.addActivity(act);
+                }
+                
                 StartActivity(typeof(ProfilePageActivity));
             };
         }

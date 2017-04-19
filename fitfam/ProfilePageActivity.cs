@@ -29,15 +29,21 @@ namespace fitfam
             userId = Intent.GetStringExtra("userId") ?? "Null";
             SetContentView(Resource.Layout.UserProfilePage);
             User currentUser = new User(userId, true);
+            System.Console.WriteLine("User " + userId+ " Name "+currentUser.Username);
 
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
             TextView name = new TextView(this);
+            //name.Text = "Shannon";
             name.Text = currentUser.Username;
             layout.AddView(name);
 
             TextView bio = new TextView(this);
             bio.Text = currentUser.Bio;
             layout.AddView(bio);
+
+            TextView activities = new TextView(this);
+            activities.Text = ("Activities: " + string.Join(", ", currentUser.Activities));
+            layout.AddView(activities);
 
             // Create your application here
             Button myfams_button = FindViewById<Button>(Resource.Id.myFamButton);

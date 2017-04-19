@@ -40,7 +40,7 @@ namespace fitfam
             }
             else
             {
-                expression = "ADD #A :newActivity";
+                expression = "ADD #A  :newActivity";
             }
             activities.Add(activity);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
@@ -98,7 +98,7 @@ namespace fitfam
                             },
 
                             // expression to set pic in database entry
-                            UpdateExpression = "SET = #B = :newBio"
+                            UpdateExpression = "SET #B = :newBio"
                         };
                         UpdateItemAsync(dbclient, request);
                     }
@@ -130,7 +130,7 @@ namespace fitfam
                 },
 
                     // expression to set pic in database entry
-                    UpdateExpression = "SET = #E :newExperienceLevel"
+                    UpdateExpression = "SET #E = :newExperienceLevel"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -243,7 +243,7 @@ namespace fitfam
                 },
 
                     // expression to set pic in database entry
-                    UpdateExpression = "SET = #P :newPic"
+                    UpdateExpression = "SET #P = :newPic"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -308,7 +308,7 @@ namespace fitfam
                 },
 
                     // expression to set pic in database entry
-                    UpdateExpression = "SET = #L :newLocation"
+                    UpdateExpression = "SET #L = :newLocation"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
