@@ -292,7 +292,8 @@ namespace fitfam
                 UpdateExpression = "ADD #M :newMember"
             };
             var response = dbclient.UpdateItemAsync(request);
-            //add member to server
+
+            user.addFitFam(this);
         }
 
         public void removeMember(User user)
@@ -317,6 +318,8 @@ namespace fitfam
                 UpdateExpression = "DELETE #M :newMember"
             };
             var response = dbclient.UpdateItemAsync(request);
+
+            user.removeFitFam(this);
         }
 
 

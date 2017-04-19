@@ -108,7 +108,7 @@ namespace fitfam
                     },
 
                     // expression to update event location in database entry
-                    UpdateExpression = "SET #L :newEventLocation"
+                    UpdateExpression = "SET #L = :newEventLocation"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -138,7 +138,7 @@ namespace fitfam
                     },
 
                     // expression to update event start time in database entry
-                    UpdateExpression = "SET #S :newEventStart"
+                    UpdateExpression = "SET #S = :newEventStart"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -168,7 +168,7 @@ namespace fitfam
                     },
 
                     // expression to update event start time in database entry
-                    UpdateExpression = "SET #T :newEventEnd"
+                    UpdateExpression = "SET #T = :newEventEnd"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -198,7 +198,7 @@ namespace fitfam
                     },
 
                     // expression to update event status in database entry
-                    UpdateExpression = "SET #P :newStatus"
+                    UpdateExpression = "SET #P = :newStatus"
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
@@ -213,8 +213,8 @@ namespace fitfam
         {
             get { return attending; }
         }
-        private List<string> shared = new List<string>();
-        public List<string> Shared
+        private List<User> shared = new List<User>();
+        public List<User> Shared
         {
             get { return shared; }
         }
@@ -281,7 +281,16 @@ namespace fitfam
             this.publicEvent = eventInfo["publicEvent"].BOOL;
             this.tags = eventInfo["tags"].SS.ToList<string>();
             this.creator = new User(eventInfo["creator"].S, true);
-            this.shared = eventInfo["shared"].SS.ToList<string>();
+            var sharedList = eventInfo["shared"].SS.ToList<string>();
+            foreach (var userId in sharedList)
+            {
+                shared.Add(new User(userId, false));
+            }
+            var attendingList = eventInfo["attending"].SS.ToList();
+            foreach (var userId in attendingList)
+            {
+                attending.Add(new User(userId, false));
+            }
         }
 
         public void addAttending(User attendingUser)
@@ -317,6 +326,43 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
             System.Console.WriteLine("finished add attending");
+            attendingUser.addJoinedEvent(this);
+        }
+
+        public void addShared(User sharedUser)
+        {
+            String expression;
+            if (attending.Count == 0)
+            {
+                expression = "SET #S = :newShared";
+            }
+            else
+            {
+                expression = "ADD #S :newShared";
+            }
+            shared.Add(sharedUser);
+            // create request to add attending user's userId to list in database
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-events",
+                Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventName + creator.UserId + startTime.ToString() } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#S", "shared"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newShared",new AttributeValue { S = sharedUser.UserId }},  // userId to be added to list of attending
+                },
+
+                // expression to add user's id to "attending" list in database entry
+                UpdateExpression = expression
+            };
+            var response = dbclient.UpdateItemAsync(request);
+            System.Console.WriteLine("finished add shared");
+            sharedUser.addSharedEvent(this);
         }
 
         public void addTag(string tag)
@@ -379,6 +425,35 @@ namespace fitfam
                 UpdateExpression = "DELETE #A :notAttending"
             };
             var response = dbclient.UpdateItemAsync(request);
+            attendingUser.removeJoinedEvent(this);
+            // TO-DO: error-check response
+        }
+
+        public void removeShared(User sharedUser)
+        {
+            shared.Remove(sharedUser);
+
+            // create request to remove attending user's userId from list in database
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-events",
+                Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventName + creator.UserId + startTime.ToString() } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#S", "shared"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":notShared",new AttributeValue { S = sharedUser.UserId }},  // userId to be removed from list of attending
+                },
+
+                // expression to remove user's id from "attending" list in database entry
+                UpdateExpression = "DELETE #S :notShared"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+            sharedUser.removeJoinedEvent(this);
             // TO-DO: error-check response
         }
 
@@ -407,6 +482,32 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
             // TO-DO: error-check response
+        }
+
+        public void Delete()
+        {
+            foreach (var user in shared)
+            {
+                user.removeSharedEvent(this);
+            }
+            foreach (var user in attending)
+            {
+                user.removeJoinedEvent(this);
+            }
+           /* using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+            {
+                using (var client = awsClient.getDynamoDBClient())
+                {
+}
+                    DeleteItemRequest request = new DeleteItemRequest
+                    {
+                        TableName = "fitfam-mobilehub-2083376203-events",
+                        Key = new Dictionary<string, AttributeValue>() { HashKeyElement = new AttributeValue { S = "eventId" } }
+                    };
+                }
+            }*/
+
+
         }
 
     }

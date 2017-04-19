@@ -43,7 +43,6 @@ namespace fitfam
 
             /* get tags */
             var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView3);
-            tags.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             
@@ -112,6 +111,7 @@ namespace fitfam
             button1.Click += delegate {
                 startInput = date.DateTime;
                 endInput = date.DateTime;
+
                 string hour = (string)spinner1.GetItemAtPosition(spinner1.SelectedItemPosition);
                 startInput = startInput.AddHours(Convert.ToDouble(hour));
                 string minute = (string)spinner2.GetItemAtPosition(spinner2.SelectedItemPosition);
@@ -124,7 +124,7 @@ namespace fitfam
 
                 var creator = new User(userId, true);
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, true, tagsList, creator );
-
+                
                 var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
                 eventDetailsActivity.PutExtra("eventId",newEvent.EventId);
                 StartActivity(eventDetailsActivity);

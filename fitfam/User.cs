@@ -100,7 +100,7 @@ namespace fitfam
                             // expression to set pic in database entry
                             UpdateExpression = "SET #B = :newBio"
                         };
-                        UpdateItemAsync(dbclient, request);
+                        var response = dbclient.UpdateItemAsync(request);
                     }
                         
                 }
@@ -172,6 +172,29 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
         }
+        public void removeFitFam(Group group)
+        {
+            fitFams.Remove(group);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-users",
+                Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#G", "fitFams"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":oldFitFam",new AttributeValue { S = group.GroupId }},  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "DELETE #G :oldFitFam"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }
         private Group userFam;
         public Group UserFam
         {
@@ -219,6 +242,30 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
         }
+        public void removeJoinedEvent(Event joinedEvent)
+        {
+            joinedEvents.Remove(joinedEvent);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-users",
+                Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#JE", "joinedEvents"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":oldJoinedEvent",new AttributeValue { S = joinedEvent.EventId }},  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "DELETE #JE :oldJoinedEvent"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }
+
         private string pic;
         public string Pic
         {
@@ -285,6 +332,31 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
         }
+        public void removeSharedEvent(Event sharedEvent)
+        {
+          
+            sharedEvents.Remove(sharedEvent);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-users",
+                Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#SE", "sharedEvent"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":oldSharedEvent",new AttributeValue { S = sharedEvent.EventId }},  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "DELETE #SE oldSharedEvent"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }
+
         private string location;
         public string Location
         {
@@ -483,13 +555,6 @@ namespace fitfam
             var members = new Dictionary<User, bool>();
             members.Add(this, true);
             userFam = new Group("My Fam", "These are other FitFam users you have connected with", this, members);
-        }
-
-        public void addFam(string groupId)
-        {
-            
-            //var newGroup = new Group(groupId);
-
         }
     }
 }
