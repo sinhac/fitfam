@@ -117,6 +117,43 @@ namespace fitfam
         {
             get { return members; }
         }
+        private List<User> joinRequests = new List<User>();
+        public List<User> JoinRequests
+        {
+            get { return joinRequests; }
+        }
+        public async void addJoinRequest(User user)
+        {
+            string expression;
+            if (joinRequests.Count == 0)
+            {
+                expression = "SET #JR = :newRequest";
+            }
+            else
+            {
+                expression = "ADD #JR :newRequest";
+            }
+            joinRequests.Add(user);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#JR", "joinRequests"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newRequest", new AttributeValue { M = new Dictionary<string, AttributeValue>() { { user.UserId, new AttributeValue { BOOL = isAdmin } } } } }  // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = expression
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }
         private List<Event> eventList;
         public List<Event> EventList
         {
@@ -322,6 +359,18 @@ namespace fitfam
             user.removeFitFam(this);
         }
 
+        public void acceptJoinRequest(User user)
+        {
+            joinRequests.Remove(user);
+            addMember(user, false);
+            user.addFitFam(this);
+        } 
+
+        public void makeAdmin(User user)
+        {
+            removeMember(user);
+            addMember(user, true);
+        }
 
     }
 }

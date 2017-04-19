@@ -556,5 +556,17 @@ namespace fitfam
             members.Add(this, true);
             userFam = new Group("My Fam", "These are other FitFam users you have connected with", this, members);
         }
+
+        public void acceptJoinRequest(User user, Group group)
+        {
+            group.acceptJoinRequest(user);
+            if (group.GroupName == "My Fam")
+            {
+                //add user to the other users my fam group
+                var groupId = user.userId + "My Fam";
+                var userGroup = new Group(groupId);
+                userGroup.addMember(user, false);
+            }
+        }
     }
 }
