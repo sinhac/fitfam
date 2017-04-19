@@ -43,7 +43,7 @@ namespace fitfam
                         EventUtil newUtil = new EventUtil(eventId, tags, eventTags, experience, experienceLevels);
                         if (newUtil.util > 2)
                         {
-                            utils.Add(newUtil);
+                            // utils.Add(newUtil);
                         }
 
                     }
