@@ -557,16 +557,16 @@ namespace fitfam
             }
             var members = new Dictionary<User, bool>();
             members.Add(this, true);
-            userFam = new Group(String.Format("{0}'s Fam", this.username), "These are other FitFam users you have connected with", this, members);
+            userFam = new Group(String.Format("{0}'s Fam", this.username), "These are other FitFam users you have connected with", this, members, 0);
         }
 
         public void acceptJoinRequest(User user, Group group)
         {
             group.acceptJoinRequest(user);
-            if (group.GroupName == "My Fam")
+            if (group.GroupName == this.username + "'s Fam")
             {
                 //add user to the other users my fam group
-                var groupId = user.userId + "My Fam";
+                var groupId = user.userId + user.username + "'s Fam";
                 var userGroup = new Group(groupId);
                 userGroup.addMember(user, false);
             }
