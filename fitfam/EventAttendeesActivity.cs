@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 
@@ -12,10 +13,14 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.EventAttendees);
+            var userId = Intent.GetStringExtra("userId");
 
             // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
+                Android.Content.Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
                 StartActivity(typeof(HomepageActivity));
             };
 

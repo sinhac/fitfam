@@ -13,6 +13,7 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
             // Create your application here
             SetContentView(Resource.Layout.FamProfile);
+            var userId = Intent.GetStringExtra("userId");
 
             string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
             string userId = Intent.GetStringExtra("userId") ?? "Data not available";
@@ -24,7 +25,9 @@ namespace fitfam
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);

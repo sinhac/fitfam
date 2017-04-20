@@ -32,7 +32,9 @@ namespace fitfam
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);

@@ -25,12 +25,15 @@ namespace fitfam
             userId = Intent.GetStringExtra("userId") ?? "null";
             User user = new User(userId, false);
             SetContentView(Resource.Layout.FamDetailsPage);
+            var userId = Intent.GetStringExtra("userId");
 
 
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
