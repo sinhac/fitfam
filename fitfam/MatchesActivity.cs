@@ -9,6 +9,7 @@ using Android.Widget;
 using System.Collections.Generic;
 using static Android.Resource;
 using System;
+using Android.Content;
 
 namespace fitfam
 {
@@ -19,7 +20,7 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             string[] matches = Intent.GetStringArrayExtra("matches");
-            
+            Console.WriteLine("Maaaaaaaaaaaaaatches "+matches.Length);
             // Create your application here
             SetContentView(Resource.Layout.Matches);
 
@@ -51,7 +52,7 @@ namespace fitfam
 
             Button button2 = FindViewById<Button>(Resource.Id.button1);
             button2.Click += delegate {
-                StartActivity(typeof(FamQuickViewActivity));
+                StartActivity(typeof(FindAFamFormActivity));
             };
             
             //num_buttons will be taken from database COUNT(matches)
@@ -102,7 +103,9 @@ namespace fitfam
 
                     button.Click += delegate
                     {
-                        StartActivity(typeof(FamQuickViewActivity));
+                        Intent intent = new Intent(this, typeof(FamQuickViewActivity));
+                        intent.PutExtra("groupId", groupInfo["groupId"].S);
+                        StartActivity(intent);
                     };
                 }
                 catch (Exception ex)

@@ -557,7 +557,7 @@ namespace fitfam
             }
             var members = new Dictionary<User, bool>();
             members.Add(this, true);
-            userFam = new Group(String.Format("{0}'s Fam", this.username), "These are other FitFam users you have connected with", this, members, 0);
+            userFam = new Group(String.Format("{0}'s Fam", this.username), "These are other FitFam users you have connected with", this, members, activities, 0);
         }
 
         public void acceptJoinRequest(User user, Group group)

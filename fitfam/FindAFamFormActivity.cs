@@ -1,3 +1,4 @@
+using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -13,7 +14,7 @@ namespace fitfam
         private object spinner_ItemSelected;
         private string userId;
         private User user;
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "null";
@@ -46,12 +47,7 @@ namespace fitfam
             {
                 tagsInput = e.Text.ToString();
             };
-            char[] delimiters = { ',', '\t', '\n' };
-            tagsArr = tagsInput.Split(delimiters);
-            for (int i = 0; i < tagsArr.Length; i++)
-            {
-                tagsList.Add(tagsArr[i]);
-            }
+            
 
             var cityZip = FindViewById<EditText>(Resource.Id.cityzip);
             var cityZipInput = "";
@@ -61,11 +57,94 @@ namespace fitfam
             };
 
             Button button2 = FindViewById<Button>(Resource.Id.button2);
-            button2.Click += delegate {
+            button2.Click += async delegate {
                 var experienceLevel = (string)spinner.GetItemAtPosition(spinner.SelectedItemPosition);
-                FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel);
+                var results = new List<string>();
+                var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                var client = awsClient.getDynamoDBClient();
+
+                char[] delimiters = { ',', '\t', '\n' };
+                tagsArr = tagsInput.Split(delimiters);
+                for (int i = 0; i < tagsArr.Length; i++)
+                {
+                    tagsList.Add(tagsArr[i]);
+                }
+
+                var request = new ScanRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    //ProjectionExpression = "groupId, tags, experienceLevels"
+                };
+                var response = await client.ScanAsync(request);
+                var result = response.Items;
+
+
+                /*Console.WriteLine("INPUT TAGSSSSSSSSSSSSSSSSSSS");
+                foreach(var thing in tagsList)
+                {
+                    Console.WriteLine("Thiiiiiiiiiing " + thing);
+                }*/
+                int numRows = 0;
+                foreach (Dictionary<string, AttributeValue> item in result)
+                {
+                    numRows++;
+                    int numMatches = 0;
+                    string groupId = item["groupId"].S;
+                    //Console.WriteLine("Idddddd " + groupId);
+
+                    foreach (var kvp in item)
+                    {
+                        if (kvp.Key == "tags")
+                        {
+                            var groupTags = kvp.Value.L;
+                            Console.WriteLine("GROUP TAGSSSSSSSSSSSSSSSSSSS22222222");
+                            foreach (var thing2 in groupTags)
+                            {
+                                Console.WriteLine("Thiiiiiiiiiing2222 " + thing2);
+                            }
+                            foreach (var t in groupTags)
+                            {
+                                string s = t.S;
+                                foreach (string tag in tagsList)
+                                {
+                                    Console.WriteLine(s + " compared to " + tag);
+                                    if (s.ToLower() == tag.ToLower())
+                                    {
+                                        Console.WriteLine("THE SAME! " + s + " " + tag);
+                                        numMatches++;
+                                    }
+                                }
+                            }
+                        }
+                        if (kvp.Key == "experienceLevel")
+                        {
+                            Console.WriteLine("FOUND EXPERIENCE LEVEL");
+                            var experienceLevels = kvp.Value.L;
+                            Console.WriteLine("countttttttttt " + kvp.Value.SS);
+                            int numExp = 0;
+                            foreach (var e in experienceLevels)
+                            {
+                                string s = e.S;
+                                numExp++;
+                                Console.WriteLine("First letters " + s[0] + " " + experienceLevel[0]);
+                                if (s[0] == experienceLevel[0])
+                                {
+                                    numMatches++;
+                                }
+                            }
+                            Console.WriteLine("nummmmmmmmmmmm " + numExp);
+                        }
+                    }
+                    if(numMatches >= 2)
+                    {
+                        results.Add(item["groupId"].S);
+                    }
+                }
+
+                //FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel);
                 Intent intent = new Intent(this, typeof(MatchesActivity));
-                var results = famSearch.FamSearchResults;            
+                //var results = famSearch.FamSearchResults;    
+                Console.WriteLine("Nuuuuuuuuuuumber of matches: " + results.Count);
                 intent.PutExtra("matches", results.ToArray());
                 StartActivity(intent);
             };

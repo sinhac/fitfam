@@ -368,11 +368,12 @@ namespace fitfam
             }
         }
 
-        public Group(string name, string description, User creator, Dictionary<User, bool> members, double boost)
+        public Group(string name, string description, User creator, Dictionary<User, bool> members, List<string> tags, double boost)
         {
             this.groupName = name;
             this.description = description;
             this.members = new Dictionary<User, bool>(members);
+            this.tags = new List<string>(tags);
             this.boost = boost;
             groupId = creator.UserId + GroupName;
             creatorId = creator.UserId;
@@ -430,6 +431,7 @@ namespace fitfam
                         var membersDoc = new Document();
                         membersDoc[creatorId] = true;
                         groupEntry["members"] = membersDoc;
+                     //   groupEntry["tags"] = tags;
                         Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
                         key.Add("groupId", new AttributeValue { S = groupId });
 

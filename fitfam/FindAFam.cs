@@ -31,11 +31,15 @@ namespace fitfam
             {
                 foreach (var tag in tags)
                 {
-
-                    if (eventTags.Contains(tag))
+                    foreach(var eventTag in eventTags)
                     {
-                        matches += 1;
+                        if (tag == eventTag)
+                        {
+                            matches += 1;
+
+                        }
                     }
+
                 }
                 util += (2 * matches) / totalTags;
             }
@@ -43,6 +47,7 @@ namespace fitfam
             {
                 util += boost;
             }
+            Console.WriteLine("util {0}", util);
            
         }
     }
@@ -67,22 +72,76 @@ namespace fitfam
                 {
                     var request = new ScanRequest
                     {
-                        TableName = "fitfam-mobilehub-2083376203-groups"
+                        TableName = "fitfam-mobilehub-2083376203-groups",
+                        ProjectionExpression = "groupId, tags, experienceLevels"
                     };
                     var response = await client.ScanAsync(request);
                     var result = response.Items;
 
+                    
                     foreach (Dictionary<string, AttributeValue> item in result)
                     {
-                        var groupId = item["groupId"].S;
-                        var groupTags = item["tags"].SS.ToList();
-                        var groupExperienceLevels = item["experienceLevels"].SS.ToList();
-                        double boost = Convert.ToDouble(item["boost"].N);
-                        FamUtil newUtil = new FamUtil(user, tags, experienceLevel, groupId, groupTags, groupExperienceLevels, boost);
-                        if (newUtil.util > 1)
+                        /*int numMatches = 0;
+                        string groupId = item["groupId"].S;
+                        Console.WriteLine("Idddddd " + groupId);
+
+                        foreach( var kvp in item)
                         {
+                            if(kvp.Key == "tags")
+                            {
+                                var groupTags = kvp.Value.SS;
+                                foreach(string t in groupTags)
+                                {
+                                    foreach(string tag in tags)
+                                    {
+                                        if(t == tag) {
+                                            numMatches++;
+                                        }
+                                    }
+                                }
+                            }
+                            if(kvp.Key == "experienceLevel")
+                            {
+                                var experienceLevels = kvp.Value.SS;
+                                foreach(string e in experienceLevels)
+                                {
+                                    if(e[0] == experienceLevel[0])
+                                    {
+                                        numMatches++;
+                                    }
+                                }
+                            }
+                        }*/
+                        double boost = 0;
+                        string groupId = item["groupId"].S;
+                        var groupTags = new List<string>();
+                        var groupExperienceLevels = new List<string>();
+                        foreach (var kvp in item)
+                        {
+                            switch (kvp.Key)
+                            {
+                                case "tags":
+                                    Console.WriteLine("Tags");
+                                    Console.WriteLine(kvp.Value.SS.Count);
+                                    foreach (var tag in kvp.Value.SS)
+                                    {
+                                        groupTags.Add(tag);
+                                        Console.WriteLine(tag);
+                                    }
+                                    break;
+                                case "experienceLevels":
+                                    Console.WriteLine("levels");
+                                    foreach (var level in kvp.Value.SS)
+                                    {
+                                        groupExperienceLevels.Add(level);
+                                    }
+                                    break;
+                            }
+                            FamUtil newUtil = new FamUtil(user, tags, experienceLevel, groupId, groupTags, groupExperienceLevels, boost);
                             utils.Add(newUtil);
                         }
+
+
                     }
                 }
             }

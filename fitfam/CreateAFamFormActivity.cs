@@ -66,14 +66,19 @@ namespace fitfam
                 {
                     tagsList.Add(myTI.ToLower(tagsArr[i]));
                 }
-
+               
                 System.Console.WriteLine("creating fam");
                 var creator = new User(userId, true);
                 var members = new Dictionary<User, bool>();
                 members.Add(creator, true);
                 if(boostInput == "") { boostInput = "0"; }
                 double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
-                Group fam = new Group(famNameInput, descriptionInput, creator, members, boost);
+                Group fam = new Group(famNameInput, descriptionInput, creator, members, tagsList, boost);
+                foreach (var tag in tagsList)
+                {
+                    fam.addTag(tag);
+                }
+
                 System.Console.WriteLine("Created fam");
                 var famDetailsActivity = new Intent(this, typeof(FamDetailsPageActivity));
                 famDetailsActivity.PutExtra("groupId", fam.GroupId);

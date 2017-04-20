@@ -29,7 +29,8 @@
                     android:orientation="horizontal"
                     android:id="@+id/linearLayout5"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
                         android:id="@+id/imageButton1"
@@ -88,7 +89,7 @@
                             android:id="@+id/textView1"
                             android:layout_marginLeft="10dp" />
                         <TextView
-                            android:text="Members: 5"
+                            android:text="Members: 0"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
