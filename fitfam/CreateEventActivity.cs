@@ -117,7 +117,8 @@ namespace fitfam
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
                 //BOOST INPUT 
-                double boost = Convert.ToDouble(boostInput);
+                if (boostInput == "") { boostInput = "0"; }
+                double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
 
                 startInput = date.DateTime;
                 endInput = date.DateTime;

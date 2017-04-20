@@ -69,7 +69,8 @@ namespace fitfam
                 var creator = new User(userId, true);
                 var members = new Dictionary<User, bool>();
                 members.Add(creator, true);
-                double boost = Convert.ToDouble(boostInput);
+                if(boostInput == "") { boostInput = "0"; }
+                double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
                 Group fam = new Group(famNameInput, descriptionInput, creator, members, boost);
                 System.Console.WriteLine("Created fam");
                 var famDetailsActivity = new Intent(this, typeof(FamDetailsPageActivity));
