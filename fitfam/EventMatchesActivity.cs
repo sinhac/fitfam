@@ -16,6 +16,10 @@ namespace fitfam
             SetContentView(Resource.Layout.EventMatches);
 
             string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
+            string userId = Intent.GetStringExtra("userId") ?? "null";
+            User newAttendingUser = new User(userId,false);
+            newAttendingUser.attendingEvent(new Event(eventId));
+
             string toast = string.Format("You have been added to {0}", eventId);
             Toast.MakeText(this, toast, ToastLength.Long).Show();
 

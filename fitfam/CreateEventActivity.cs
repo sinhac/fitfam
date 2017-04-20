@@ -153,6 +153,7 @@ namespace fitfam
 
                 var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
                 eventDetailsActivity.PutExtra("eventId",newEvent.EventId);
+                eventDetailsActivity.PutExtra("userId", userId);
                 StartActivity(eventDetailsActivity);
             };
             

@@ -446,7 +446,7 @@ namespace fitfam
             {
                 Console.WriteLine("EXCEPTION: {0}\n{1}", ex.Message, ex.ToString());
             }
-            
+       
         }
 
         public void addMember(User user, bool isAdmin)
@@ -534,5 +534,27 @@ namespace fitfam
             }
         }
 
+        public static async void editDescription(string groupId, string newDescription)
+        {
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#D", "description"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newDescription", new AttributeValue { S = newDescription }  }  // new description to update group's description with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "SET #D :newDescription"
+            };
+            var response = await dbclient.UpdateItemAsync(request);
+        }
     }
 }
