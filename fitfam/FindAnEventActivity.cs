@@ -17,7 +17,7 @@ namespace fitfam
             SetContentView(Resource.Layout.FindAnEventForm);
 
             string userId = Intent.GetStringExtra("userId");
-
+            User user = new User(userId, false);
             // Create your application here
             Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner5);
 
@@ -198,7 +198,14 @@ namespace fitfam
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
             imagebutton2.Click += delegate {
-                StartActivity(typeof(ProfilePageActivity));
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("bio", user.Bio);
+                intent.PutExtra("username", user.Username);
+                intent.PutExtra("gender", user.Gender);
+                //intent.Put("activities", user.Activities);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);

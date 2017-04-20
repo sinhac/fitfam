@@ -18,11 +18,15 @@ namespace fitfam
     [Activity(Label = "FamDetailsPageActivity")]
     public class FamDetailsPageActivity : Activity
     {
+        private string userId;
         protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            userId = Intent.GetStringExtra("userId") ?? "null";
+            User user = new User(userId, false);
             SetContentView(Resource.Layout.FamDetailsPage);
+
+
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
@@ -31,7 +35,14 @@ namespace fitfam
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
             imagebutton2.Click += delegate {
-                StartActivity(typeof(ProfilePageActivity));
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("bio", user.Bio);
+                intent.PutExtra("username", user.Username);
+                intent.PutExtra("gender", user.Gender);
+                //intent.Put("activities", user.Activities);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
@@ -48,7 +59,6 @@ namespace fitfam
             AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
             string tableName = "fitfam-mobilehub-2083376203-groups";
             string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
-            string userId = Intent.GetStringExtra("userId") ?? "null";
             var request = new GetItemRequest
             {
                 TableName = tableName,

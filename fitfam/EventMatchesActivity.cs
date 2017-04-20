@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Util;
 using Android.Views;
@@ -36,7 +37,14 @@ namespace fitfam
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
             imagebutton2.Click += delegate {
-                StartActivity(typeof(ProfilePageActivity));
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("bio", newAttendingUser.Bio);
+                intent.PutExtra("username", newAttendingUser.Username);
+                intent.PutExtra("gender", newAttendingUser.Gender);
+                //intent.Put("activities", user.Activities);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);

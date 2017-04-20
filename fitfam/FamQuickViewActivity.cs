@@ -1,6 +1,7 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Android.App;
+using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
@@ -12,13 +13,18 @@ namespace fitfam
     [Activity(Label = "FamQuickViewActivity")]
     public class FamQuickViewActivity : Activity
     {
+        Group thisGroup;
+        User thisUser;
         protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.FamQuickView);
             String groupId = Intent.GetStringExtra("groupId");
-
+            String userId = Intent.GetStringExtra("userId");
+            Console.WriteLine("userid {0}", userId);
+            thisGroup = new Group(groupId);
+            thisUser = new User(userId, false);
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
@@ -26,7 +32,14 @@ namespace fitfam
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
             imagebutton2.Click += delegate {
-                StartActivity(typeof(ProfilePageActivity));
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("bio", thisUser.Bio);
+                intent.PutExtra("username", thisUser.Username);
+                intent.PutExtra("gender", thisUser.Gender);
+                //intent.Put("activities", user.Activities);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
@@ -79,7 +92,33 @@ namespace fitfam
                 
 
                 Button join = FindViewById<Button>(Resource.Id.button1);
+                join.Click += delegate {
+                    Console.WriteLine("Adding user to group {0}, {1}", thisGroup.GroupId, thisUser.UserId);
+                    thisGroup.addMember(thisUser, false);
+                    thisUser.addFitFam(thisGroup);
+                    Intent intent = new Intent(this, typeof(FamDetailsPageActivity));
+                    intent.PutExtra("groupId", groupInfo["groupId"].S);
+                    intent.PutExtra("userId", userId);
+                    intent.PutExtra("myEvent", false);
+                    StartActivity(intent);
+                };
 
+                //async void OnAlertYesNoClicked(object sender, EventArgs e)
+                //{
+                //    Android.App.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                //    AlertDialog alertDialog = builder.Create();
+                //    alertDialog.SetTitle("Join Request");
+                //    alertDialog.SetMessage("You are about to send a join request. Would you like to continue?");
+                //    alertDialog.SetButton("No", (s, ev) =>
+                //    {
+                //        alertDialog.Cancel();
+                //    });
+                //    alertDialog.SetButton2("Yes", (s, ev) =>
+                //    {
+
+                //    });
+                //    alertDialog.Show();
+                //}
             }
             catch (Exception ex)
             {

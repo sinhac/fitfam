@@ -12,11 +12,13 @@ namespace fitfam
     public class CreateAFamFormActivity : Activity
     {
         private string userId;
+        private User creator;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             System.Console.WriteLine("opened createfam form");
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "Null";
+            creator = new User(userId, true);
             SetContentView(Resource.Layout.CreateAFamForm);
 
             // capture user input for Fam name, description, and tags
@@ -68,7 +70,7 @@ namespace fitfam
                 }
                
                 System.Console.WriteLine("creating fam");
-                var creator = new User(userId, true);
+                
                 var members = new Dictionary<User, bool>();
                 members.Add(creator, true);
                 if(boostInput == "") { boostInput = "0"; }

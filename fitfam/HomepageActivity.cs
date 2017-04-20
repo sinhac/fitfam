@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using System;
 
 namespace fitfam
 {
@@ -19,6 +20,7 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "null";
+            Console.WriteLine("home userId {0}", userId);
             var genderInt = Intent.GetIntExtra("gender", -1);
             switch (genderInt)
             {
@@ -51,7 +53,9 @@ namespace fitfam
             /* redirect user according to button clicked */
 
             find_fam_button.Click += delegate {
-                StartActivity(typeof(FindAFamFormActivity));
+                Intent intent = new Intent(this, typeof(FindAFamFormActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             create_fam_button.Click += delegate {

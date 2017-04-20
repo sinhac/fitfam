@@ -256,31 +256,52 @@ namespace fitfam
             if (experienceLevels.Count == 0)
             {
                 expression = "SET #EL = :newLevel";
+                experienceLevels.Add(level);
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#EL", "experienceLevels"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newLevel", new AttributeValue { SS = new List<string> { level } } } // new activity to update user's activities with 
+                },
+
+                    // activity added to list in database entry
+                    UpdateExpression = expression
+                };
+                var response = dbclient.UpdateItemAsync(request);
             }
             else
             {
                 expression = "ADD #EL :newLevel";
-            }
-            experienceLevels.Add(level);
-            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
-            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
-            var request = new UpdateItemRequest
-            {
-                TableName = "fitfam-mobilehub-2083376203-groups",
-                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
-                ExpressionAttributeNames = new Dictionary<string, string>()
+                experienceLevels.Add(level);
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
                 {
                     {"#EL", "experienceLevels"},  // attribute to be updated
                 },
-                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
                     {":newLevel", new AttributeValue { S = level } } // new activity to update user's activities with 
                 },
 
-                // activity added to list in database entry
-                UpdateExpression = expression
-            };
-            var response = dbclient.UpdateItemAsync(request);
+                    // activity added to list in database entry
+                    UpdateExpression = expression
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+           
         }
 
         public void removeExperienceLevel(string level)
