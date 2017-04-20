@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Amazon.DynamoDBv2.Model;
 using Amazon.DynamoDBv2.DocumentModel;
+using System.Globalization;
 
 namespace fitfam
 {
@@ -191,6 +192,35 @@ namespace fitfam
         {
             get { return eventList; }
         }
+        private double boost;
+        public double Boost
+        {
+            set
+            {
+                boost = value;
+                // create update request to update event start time in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#B", "boost"},  // attribute to be updated (event start time)
+                    },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newBoost",new AttributeValue { N = boost.ToString() }},  // new event start time
+                    },
+
+                    // expression to update event start time in database entry
+                    UpdateExpression = "SET #B = :newBoost"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+            get { return boost; }
+        }
 
         private List<string> experienceLevels = new List<string>();
         public List<string> ExperienceLevels
@@ -303,22 +333,24 @@ namespace fitfam
                             case "tags":
                                 tags = kvp.Value.SS.ToList();
                                 break;
+                            case "boost":
+                                boost = Convert.ToDouble(kvp.Value.N);
+                                break;
                             default:
                                 Console.WriteLine("Group fucked up");
                                 break;
-
-
                         }
                     }
                 }
             }
         }
 
-        public Group(string name, string description, User creator, Dictionary<User, bool> members)
+        public Group(string name, string description, User creator, Dictionary<User, bool> members, double boost)
         {
             this.groupName = name;
             this.description = description;
             this.members = new Dictionary<User, bool>(members);
+            this.boost = boost;
             groupId = creator.UserId + GroupName;
             creatorId = creator.UserId;
             writeGroup();
