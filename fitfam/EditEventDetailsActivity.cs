@@ -2,6 +2,7 @@ using System;
 using Android.App;
 using Android.OS;
 using Android.Widget;
+using Android.Content;
 
 namespace fitfam
 {
@@ -11,12 +12,15 @@ namespace fitfam
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            var userId = Intent.GetStringExtra("userId");
 
             SetContentView(Resource.Layout.EditEventDetails);
 
             ImageButton navBarHomeButton = FindViewById<ImageButton>(Resource.Id.navBarHomeButton);
             navBarHomeButton.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton navBarProfileButton = FindViewById<ImageButton>(Resource.Id.navBarProfileButton);

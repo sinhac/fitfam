@@ -23,10 +23,13 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.FamDetailsPage);
+            var userId = Intent.GetStringExtra("userId");
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
@@ -48,7 +51,6 @@ namespace fitfam
             AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
             string tableName = "fitfam-mobilehub-2083376203-groups";
             string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
-            string userId = Intent.GetStringExtra("userId") ?? "null";
             var request = new GetItemRequest
             {
                 TableName = tableName,

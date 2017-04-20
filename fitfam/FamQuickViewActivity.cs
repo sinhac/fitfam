@@ -1,6 +1,7 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Android.App;
+using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
@@ -18,10 +19,13 @@ namespace fitfam
 
             SetContentView(Resource.Layout.FamQuickView);
             String groupId = Intent.GetStringExtra("groupId");
+            var userId = Intent.GetStringExtra("userId");
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);

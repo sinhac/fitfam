@@ -15,6 +15,7 @@ namespace fitfam
         private string userId;
         private User user;
         protected async override void OnCreate(Bundle savedInstanceState)
+
         {
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "null";

@@ -89,7 +89,9 @@ namespace fitfam
             /* navbar buttons */
             ImageButton navBarHomeButton = FindViewById<ImageButton>(Resource.Id.navBarHomeButton);
             navBarHomeButton.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton navBarProfileButton = FindViewById<ImageButton>(Resource.Id.navBarProfileButton);

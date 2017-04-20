@@ -21,7 +21,6 @@ namespace fitfam
 
             SetContentView(Resource.Layout.EventDetailsPage);
 
-
             string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
             string userId = Intent.GetStringExtra("userId") ?? "null";
 
@@ -140,7 +139,9 @@ namespace fitfam
             /* navbar buttons */
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
                 ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);

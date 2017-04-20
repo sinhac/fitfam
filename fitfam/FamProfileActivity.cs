@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 
@@ -12,6 +13,7 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
             // Create your application here
             SetContentView(Resource.Layout.FamProfile);
+            var userId = Intent.GetStringExtra("userId");
 
             string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
             string toast = string.Format("You have been added to {0}", groupId);
@@ -19,7 +21,9 @@ namespace fitfam
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
