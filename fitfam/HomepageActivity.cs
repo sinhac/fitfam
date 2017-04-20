@@ -19,7 +19,22 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "null";
-            gender = Intent.GetStringExtra("gender") ?? "null";
+            var genderInt = Intent.GetIntExtra("gender", -1);
+            switch (genderInt)
+            {
+                case 0:
+                    gender = "MALE";
+                    break;
+                case 1:
+                    gender = "FEMALE";
+                    break;
+                case 2:
+                    gender = "OTHER";
+                    break;
+                default:
+                    gender = "null";
+                    break;
+            }
             pic = Intent.GetStringExtra("pic") ?? "null";
             location = Intent.GetStringExtra("location") ?? "null";
             username = Intent.GetStringExtra("username") ?? "null";

@@ -28,11 +28,11 @@ namespace fitfam
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.Main);
+            SetContentView(Resource.Layout.Main);
 
             mGoogleSignIn = FindViewById<SignInButton>(Resource.Id.sign_in_button);
             mGoogleSignIn.Click += mGoogleSignIn_Click;
-            
+
 
             GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
             builder.AddConnectionCallbacks(this);
@@ -47,7 +47,7 @@ namespace fitfam
             // and attach an event to it
             Button login_button = FindViewById<Button>(Resource.Id.login_button);
             Button signup_button = FindViewById<Button>(Resource.Id.signup_button);
-            
+
             login_button.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
             };
@@ -62,7 +62,7 @@ namespace fitfam
 
         void mGoogleSignIn_Click(object sender, EventArgs e)
         {
-            if(!mGoogleApiClient.IsConnecting)
+            if (!mGoogleApiClient.IsConnecting)
             {
                 mSignInClicked = true;
                 ResolveSignInError();
@@ -71,13 +71,13 @@ namespace fitfam
 
         private void ResolveSignInError()
         {
-            if(mGoogleApiClient.IsConnected)
+            if (mGoogleApiClient.IsConnected)
             {
                 //No need to resolve errors
                 return;
             }
 
-            if(mConnectionResult.HasResolution)
+            if (mConnectionResult.HasResolution)
             {
                 try
                 {
@@ -133,7 +133,7 @@ namespace fitfam
             if (PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient) != null)
             {
                 IPerson plusUser = PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient);
-                Console.WriteLine("USER NAME: "+plusUser.DisplayName);
+                Console.WriteLine("USER NAME: " + plusUser.DisplayName);
                 Intent intent = new Intent(this, typeof(HomepageActivity));
                 intent.PutExtra("userId", plusUser.Id);
                 intent.PutExtra("username", plusUser.DisplayName);

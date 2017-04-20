@@ -110,9 +110,6 @@ namespace fitfam
                     mGoogleApiClient.ClearDefaultAccountAndReconnect();
                     StartActivity(typeof(MainActivity));
                 };
-                //button.Click += mGoogleSignOut_Click;
-
-
             }
 
         }
