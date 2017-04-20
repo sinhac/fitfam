@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Xamarin.Forms.Platform.Android;
 
 namespace fitfam
@@ -13,10 +14,12 @@ namespace fitfam
     public class CreateEventActivity : Activity
     {
         private string userId;
+        private User creator;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "Null";
+            creator = new User(userId, true);
             SetContentView(Resource.Layout.CreateEventPage);
 
             /* capture user input for event name, location, and description */
@@ -50,19 +53,13 @@ namespace fitfam
             tags.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
             var tagsInput = "";
-            string[] tagsArr;
             List<string> tagsList = new List<string>();
             tags.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 tagsInput = e.Text.ToString();
+                Console.WriteLine(tagsInput);
             };
-            char[] delimiters = { ',', '\t', '\n' };
-            tagsArr = tagsInput.Split(delimiters);
-            for(int i = 0; i < tagsArr.Length; i++)
-            {
-                tagsList.Add(tagsArr[i]);
-            }
-
+            
             //Date picker
             DatePicker date = FindViewById<DatePicker>(Resource.Id.datePicker1);
             DateTime startInput;
@@ -106,9 +103,20 @@ namespace fitfam
             adapter4.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner4.Adapter = adapter4;
 
+            EditText boostText = FindViewById<EditText>(Resource.Id.editText2);
+            var boostInput = "";
+            boostText.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                boostInput = e.Text.ToString();
+            };
+
             /* add user input to new entry in database, then redirect */
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
+                //BOOST INPUT 
+                if (boostInput == "") { boostInput = "0"; }
+                double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
+
                 startInput = date.DateTime;
                 endInput = date.DateTime;
 
@@ -117,13 +125,28 @@ namespace fitfam
                 string minute = (string)spinner2.GetItemAtPosition(spinner2.SelectedItemPosition);
                 startInput = startInput.AddMinutes(Convert.ToDouble(minute));
 
+                char[] delimiters = { ',' };
+                string[] tagsArr = tagsInput.Split(delimiters);
+                Console.WriteLine("tagsArr count {0}", tagsArr.Length);
+                TextInfo myTI = new CultureInfo("en-US",false).TextInfo;
+                for (int i = 0; i < tagsArr.Length; i++)
+                {
+                    Console.WriteLine(tagsArr[i]);
+                    tagsList.Add(myTI.ToLower(tagsArr[i]));
+                }
+
+
                 hour = (string)spinner3.GetItemAtPosition(spinner3.SelectedItemPosition);
                 endInput = endInput.AddHours(Convert.ToDouble(hour));
                 minute = (string)spinner4.GetItemAtPosition(spinner4.SelectedItemPosition);
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
                 Console.WriteLine("userId: {0}", userId);
-                var creator = new User(userId, true);
-                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, false, tagsList, creator );
+                Console.WriteLine("Event: {0} {1} {2} {3} {4}", eventNameInput, descriptionInput, locationInput, startInput, endInput);
+                foreach(var t in tagsList)
+                {
+                    Console.WriteLine(t);
+                }
+                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, false, tagsList, creator, boost );
                 Console.WriteLine(creator.UserId);
                 var userFam = creator.UserFam;
                 userFam.makeEvent(newEvent);

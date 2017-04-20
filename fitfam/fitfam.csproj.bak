@@ -17,7 +17,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -244,9 +244,7 @@
     </Compile>
     <Compile Include="FamProfileActivity.cs" />
     <Compile Include="FamQuickViewActivity.cs" />
-    <Compile Include="FindAFam.cs" />
     <Compile Include="FindAFamFormActivity.cs" />
-    <Compile Include="FindAnEvent.cs" />
     <Compile Include="FindAnEventActivity.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="HomepageActivity.cs" />

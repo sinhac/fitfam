@@ -9,6 +9,9 @@ using Android.Gms.Common.Apis;
 using Android.Gms.Common;
 using Android.Gms.Plus;
 using Android.Gms.Plus.Model.People;
+using Amazon.DynamoDBv2;
+using System.Collections.Generic;
+using Amazon.DynamoDBv2.Model;
 
 namespace fitfam
 {
@@ -24,23 +27,35 @@ namespace fitfam
         private bool mInfoPopulated;
         private ConnectionResult mConnectionResult;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             userId = Intent.GetStringExtra("userId") ?? "Null";
             profileId = Intent.GetStringExtra("profileId") ?? "Null";
+            
+            AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
+            string tableName = "fitfam-mobilehub-2083376203-users";
+            var Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } };
+            var request = client.makeGetRequest(tableName, Key);
+            var task = await client.GetItemAsync(dbclient, request);
+
             SetContentView(Resource.Layout.UserProfilePage);
             User currentUser = new User(profileId, true);
-            System.Console.WriteLine("User " + profileId + " Name "+currentUser.Username);
+            System.Console.WriteLine("User " + profileId + " Name "+task["username"]);
+
+            TextView username = FindViewById<TextView>(Resource.Id.textView1);
+            username.Text = task["username"].S;
 
             LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
             TextView name = new TextView(this);
             //name.Text = "Shannon";
-            name.Text = currentUser.Username;
+            name.Text = task["username"].S;
             layout.AddView(name);
 
             TextView bio = new TextView(this);
-            bio.Text = currentUser.Bio;
+            bio.Text = task["bio"].S;
+            //Console.WriteLine("PROFILE BIO {0}", currentUser.Bio);
             layout.AddView(bio);
 
             TextView activities = new TextView(this);
@@ -110,9 +125,6 @@ namespace fitfam
                     mGoogleApiClient.ClearDefaultAccountAndReconnect();
                     StartActivity(typeof(MainActivity));
                 };
-                //button.Click += mGoogleSignOut_Click;
-
-
             }
 
         }

@@ -194,6 +194,21 @@
                 p1:layout_height="wrap_content"
                 p1:id="@+id/space2"
                 p1:layout_marginBottom="25.5dp" />
+            <TextView
+                p1:text="Boost Value"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView7" />
+            <EditText
+                p1:inputType="number"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/editText2" />
+            <Space
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/space2"
+                p1:layout_marginBottom="25.5dp" />
             <Button
                 p1:text="Create Event"
                 p1:id="@+id/button1"

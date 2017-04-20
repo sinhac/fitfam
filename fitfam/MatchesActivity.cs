@@ -1,19 +1,25 @@
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.OS;
 using Android.Util;
 using Android.Views;
+using Android.Graphics;
 using Android.Widget;
+using System.Collections.Generic;
 using static Android.Resource;
+using System;
 
 namespace fitfam
 {
     [Activity(Label = "matchesActivity")]
     public class MatchesActivity : Activity
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            string[] matches = Intent.GetStringArrayExtra("matches");
+            
             // Create your application here
             SetContentView(Resource.Layout.Matches);
 
@@ -52,7 +58,7 @@ namespace fitfam
             int num_buttons = 10;
 
             ViewGroup matchButtonLayout = (ViewGroup)FindViewById(Resource.Id.radioGroup1);  // This is the id of the RadioGroup we defined
-            for (var i = 0; i < num_buttons; i++)
+            for (var i = 0; i < matches.Length; i++)
             {
                 Button button = new Button(this);
                 //Does not change
@@ -68,22 +74,42 @@ namespace fitfam
                 Android.Graphics.Drawables.ScaleDrawable sd = new Android.Graphics.Drawables.ScaleDrawable(drawable, 0, (int)(drawable.IntrinsicWidth * scale + 0.5f), (int)(drawable.IntrinsicHeight * scale + 0.5f));
                 button.SetCompoundDrawables(sd.Drawable, null, null, null);
 
-                //Should get fed in from database
-                button.Text = "Soccer Squad";
-
-                matchButtonLayout.AddView(button);
-
-                Space sp = new Space(this);
-                sp.SetPadding(padding, padding, padding, padding);
-
-                matchButtonLayout.AddView(sp);
-
-                button.Click += delegate {
-                    StartActivity(typeof(FamQuickViewActivity));
+                // Group objects grabbed using groupIds in database
+                AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
+                string tableName = "fitfam-mobilehub-2083376203-groups";
+                var request = new GetItemRequest
+                {
+                    TableName = tableName,
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = matches[i] } } },
                 };
-            };
 
+                Dictionary<string, AttributeValue> groupInfo = new Dictionary<string, AttributeValue>();
+                var task = await client.GetItemAsync(dbclient, request);
+                groupInfo = task;
+                try
+                {
+                    LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
+                    // Group Name
+                    button.Text = groupInfo["groupName"].S;
+                    button.SetTextColor(Android.Graphics.Color.Black);
+                    matchButtonLayout.AddView(button);
 
+                    Space sp = new Space(this);
+                    sp.SetPadding(padding, padding, padding, padding);
+
+                    matchButtonLayout.AddView(sp);
+
+                    button.Click += delegate
+                    {
+                        StartActivity(typeof(FamQuickViewActivity));
+                    };
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine("EXCEPTION: {0}\n{1}", ex.Message, ex.StackTrace);
+                }
+            }
         }
     }
 }
