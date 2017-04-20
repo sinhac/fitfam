@@ -16,17 +16,20 @@ namespace fitfam
     struct FamUtil
     {
         public string groupId;
-        public int util;
+        public float util;
         public FamUtil(User user, List<string> tags, string id, List<string> eventTags, List<string> expLevels)
         {
             groupId = id;
             util = 0;
             if (expLevels.Contains(user.ExperienceLevel))
             {
-                util += 2;
+                util += 1;
             }
+            var matches = 0;
+            var totalTags = tags.Count + eventTags.Count;
             foreach (var tag in tags)
             {
+                 
                 if (eventTags.Contains(tag))
                 {
                     util += 1;
@@ -37,11 +40,12 @@ namespace fitfam
     class FindAFam
     {
         private List<FamUtil> utils = new List<FamUtil>();
-        public FindAFam(User user, List<string> tags)
+        public FindAFam(User user, List<string> tags, List<string> experienceLevels, float boost)
         {
+            getFamUtils(user, tags, experienceLevels, boost);
 
         }
-        private async void getFamUtils(List<string> tags, string location, string experience)
+        private async void getFamUtils(User user, List<string> tags, List<string> experienceLevels)
         {
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
