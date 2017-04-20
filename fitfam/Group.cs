@@ -80,10 +80,42 @@ namespace fitfam
                 }
             }
         }
+
         private List<string> tags = new List<string>();
         public List<string> Tags
         {
             get { return tags; }
+        }
+        public void addTag(string tag)
+        {
+            string expression;
+            if (tags.Count == 0)
+            {
+                expression = "SET #A = :newActivity";
+            }
+            else
+            {
+                expression = "ADD #A  :newActivity";
+            }
+            tags.Add(tag);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#T", "tags"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newTag",new AttributeValue { S = tag }},  // new activity to update user's activities with 
+                },
+                // activity added to list in database entry
+                UpdateExpression = expression
+            };
+            var response = dbclient.UpdateItemAsync(request);
         }
         private string pic;
         public string Pic
@@ -167,8 +199,61 @@ namespace fitfam
         }
         public void addExperienceLevel(string level)
         {
-            //do this shit later
+            string expression;
+            if (experienceLevels.Count == 0)
+            {
+                expression = "SET #EL = :newLevel";
+            }
+            else
+            {
+                expression = "ADD #EL :newLevel";
+            }
+            experienceLevels.Add(level);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#EL", "experienceLevels"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newLevel", new AttributeValue { S = level } } // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = expression
+            };
+            var response = dbclient.UpdateItemAsync(request);
         }
+
+        public void removeExperienceLevel(string level)
+        {
+            experienceLevels.Remove(level);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#EL", "experienceLevels"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":oldLevel", new AttributeValue { S = level } } // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "DELETE #EL :oldLevel"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }
+
         public Group(string groupId)
         {
             this.groupId = groupId;

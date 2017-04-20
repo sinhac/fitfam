@@ -133,6 +133,7 @@ namespace fitfam
                     UpdateExpression = "SET #E = :newExperienceLevel"
                 };
                 var response = dbclient.UpdateItemAsync(request);
+                
             }
         }
         private List<Group> fitFams = new List<Group>();
@@ -543,7 +544,7 @@ namespace fitfam
                         userDoc["sharedEvents"] = new List<string>();
                         userDoc["location"] = this.location;
                         userDoc["username"] = this.username;
-                        userDoc["bio"] = " ";
+                        userDoc["bio"] = "";
                         var response = await table.PutItemAsync(userDoc);
                         Console.WriteLine("made entry {0}", response);
 
@@ -556,7 +557,7 @@ namespace fitfam
             }
             var members = new Dictionary<User, bool>();
             members.Add(this, true);
-            userFam = new Group("My Fam", "These are other FitFam users you have connected with", this, members);
+            userFam = new Group(String.Format("{0}'s Fam", this.username), "These are other FitFam users you have connected with", this, members);
         }
 
         public void acceptJoinRequest(User user, Group group)
