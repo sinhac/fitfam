@@ -54,7 +54,6 @@ namespace fitfam
                 tagsList.Add(tagsArr[i]);
             }
 
-
             EditText boostText = FindViewById<EditText>(Resource.Id.boost);
             var boostInput = "";
             boostText.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>

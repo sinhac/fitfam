@@ -29,7 +29,7 @@ namespace fitfam
 
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
-
+            
 
 
             var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView1);
@@ -62,6 +62,7 @@ namespace fitfam
 
             Button button2 = FindViewById<Button>(Resource.Id.button2);
             button2.Click += delegate {
+                var experienceLevel = (string)spinner.GetItemAtPosition(spinner.SelectedItemPosition);
                 FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel, boost);
                 Intent intent = new Intent(this, typeof(MatchesActivity));
                 var results = famSearch.FamSearchResults;            
