@@ -19,11 +19,11 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
             SetContentView(Resource.Layout.EventDetailsPage);
 
 
             string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
+            string userId = Intent.GetStringExtra("userId") ?? "null";
 
             System.Console.WriteLine("event" + eventId);
 
@@ -133,8 +133,8 @@ namespace fitfam
             joinButton.Click += delegate {
                 var eventMatchesActivity = new Intent(this, typeof(EventMatchesActivity));
                 eventMatchesActivity.PutExtra("eventId", eventId);
+                eventMatchesActivity.PutExtra("userId", userId);
                 StartActivity(eventMatchesActivity);
-                //StartActivity(typeof(EventMatchesActivity));
             };
 
             /* navbar buttons */

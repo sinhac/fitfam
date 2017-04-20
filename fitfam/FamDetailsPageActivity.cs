@@ -22,7 +22,6 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
             SetContentView(Resource.Layout.FamDetailsPage);
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
@@ -162,7 +161,9 @@ namespace fitfam
                 layout.AddView(button);
 
                 button.Click += delegate {
-                    StartActivity(typeof(EditFamDetailsActivity));
+                    var intent = new Intent(this, typeof(EditFamDetailsActivity));
+                    intent.PutExtra("groupId", groupId);
+                    StartActivity(intent);
                 };
             }
         }

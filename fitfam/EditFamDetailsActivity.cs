@@ -19,10 +19,8 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
             SetContentView(Resource.Layout.EditFamDetails);
 
-            // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 StartActivity(typeof(HomepageActivity));
@@ -43,6 +41,7 @@ namespace fitfam
                 StartActivity(typeof(ScheduleActivity));
             };
 
+            string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
             EditText description = FindViewById<EditText>(Resource.Id.editText);
             var new_description = "";
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
@@ -53,6 +52,7 @@ namespace fitfam
             Button savechanges_button = FindViewById<Button>(Resource.Id.save_changes_button);
             savechanges_button.Click += delegate
             {
+                //Group.editDescription(groupId, new_description);
                 StartActivity(typeof(FamDetailsPageActivity));
             };
         }

@@ -14,7 +14,7 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Notifications);
 
-            // Create your application here
+            // navbar buttons
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
