@@ -53,12 +53,12 @@ namespace fitfam
         {
             get { return famSearchResults; }
         }
-        public FindAFam(User user, List<string> tags, string experienceLevel, double boost)
+        public FindAFam(User user, List<string> tags, string experienceLevel)
         {
-            getFamUtils(user, tags, experienceLevel, boost);
+            getFamUtils(user, tags, experienceLevel);
 
         }
-        private async void getFamUtils(User user, List<string> tags, string experienceLevel, double boost)
+        private async void getFamUtils(User user, List<string> tags, string experienceLevel)
         {
             List<FamUtil> utils = new List<FamUtil>();
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
@@ -77,6 +77,7 @@ namespace fitfam
                         var groupId = item["groupId"].S;
                         var groupTags = item["tags"].SS.ToList();
                         var groupExperienceLevels = item["experienceLevels"].SS.ToList();
+                        double boost = Convert.ToDouble(item["boost"].N);
                         FamUtil newUtil = new FamUtil(user, tags, experienceLevel, groupId, groupTags, groupExperienceLevels, boost);
                         if (newUtil.util > 1)
                         {
