@@ -119,6 +119,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/olympianCheckBox" />
+            <TextView
+                android:text="Boost Value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/boostText" />
+            <EditText
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/boost" />
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

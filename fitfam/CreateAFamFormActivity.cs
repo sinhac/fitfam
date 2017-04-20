@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using System;
 using System.Collections.Generic;
 
 namespace fitfam
@@ -53,6 +54,14 @@ namespace fitfam
                 tagsList.Add(tagsArr[i]);
             }
 
+
+            EditText boostText = FindViewById<EditText>(Resource.Id.boost);
+            var boostInput = "";
+            boostText.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                boostInput = e.Text.ToString();
+            };
+
             /* add user input to new entry in database, then redirect */
             Button createFamButton = FindViewById<Button>(Resource.Id.createFamButton);
             createFamButton.Click += delegate {
@@ -60,7 +69,8 @@ namespace fitfam
                 var creator = new User(userId, true);
                 var members = new Dictionary<User, bool>();
                 members.Add(creator, true);
-                Group fam = new Group(famNameInput, descriptionInput, creator, members);
+                double boost = Convert.ToDouble(boostInput);
+                Group fam = new Group(famNameInput, descriptionInput, creator, members, boost);
                 System.Console.WriteLine("Created fam");
                 var famDetailsActivity = new Intent(this, typeof(FamDetailsPageActivity));
                 famDetailsActivity.PutExtra("groupId", fam.GroupId);

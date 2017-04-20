@@ -218,8 +218,8 @@ namespace fitfam
         {
             get { return shared; }
         }
-        private float boost;
-        public float Boost
+        private double boost;
+        public double Boost
         {
             set
             {
@@ -248,7 +248,7 @@ namespace fitfam
             get { return boost; }
         }
 
-        public Event(string name, string description, string location, DateTime startTime, DateTime endTime, bool publicEvent, List<string> tags, User creator, float boost)
+        public Event(string name, string description, string location, DateTime startTime, DateTime endTime, bool publicEvent, List<string> tags, User creator, double boost)
         {
             this.eventName = name;
             this.description = description;
