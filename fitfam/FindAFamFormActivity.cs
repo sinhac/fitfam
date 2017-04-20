@@ -79,29 +79,19 @@ namespace fitfam
                 var result = response.Items;
 
 
-                /*Console.WriteLine("INPUT TAGSSSSSSSSSSSSSSSSSSS");
-                foreach(var thing in tagsList)
-                {
-                    Console.WriteLine("Thiiiiiiiiiing " + thing);
-                }*/
+
                 int numRows = 0;
                 foreach (Dictionary<string, AttributeValue> item in result)
                 {
                     numRows++;
                     int numMatches = 0;
                     string groupId = item["groupId"].S;
-                    //Console.WriteLine("Idddddd " + groupId);
 
                     foreach (var kvp in item)
                     {
                         if (kvp.Key == "tags")
                         {
                             var groupTags = kvp.Value.L;
-                            Console.WriteLine("GROUP TAGSSSSSSSSSSSSSSSSSSS22222222");
-                            foreach (var thing2 in groupTags)
-                            {
-                                Console.WriteLine("Thiiiiiiiiiing2222 " + thing2);
-                            }
                             foreach (var t in groupTags)
                             {
                                 string s = t.S;
@@ -110,7 +100,6 @@ namespace fitfam
                                     Console.WriteLine(s + " compared to " + tag);
                                     if (s.ToLower() == tag.ToLower())
                                     {
-                                        Console.WriteLine("THE SAME! " + s + " " + tag);
                                         numMatches++;
                                     }
                                 }
@@ -118,21 +107,17 @@ namespace fitfam
                         }
                         if (kvp.Key == "experienceLevel")
                         {
-                            Console.WriteLine("FOUND EXPERIENCE LEVEL");
                             var experienceLevels = kvp.Value.L;
-                            Console.WriteLine("countttttttttt " + kvp.Value.SS);
                             int numExp = 0;
                             foreach (var e in experienceLevels)
                             {
                                 string s = e.S;
                                 numExp++;
-                                Console.WriteLine("First letters " + s[0] + " " + experienceLevel[0]);
                                 if (s[0] == experienceLevel[0])
                                 {
                                     numMatches++;
                                 }
                             }
-                            Console.WriteLine("nummmmmmmmmmmm " + numExp);
                         }
                     }
                     if(numMatches >= 2)
@@ -144,15 +129,17 @@ namespace fitfam
                 //FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel);
                 Intent intent = new Intent(this, typeof(MatchesActivity));
                 //var results = famSearch.FamSearchResults;    
-                Console.WriteLine("Nuuuuuuuuuuumber of matches: " + results.Count);
                 intent.PutExtra("matches", results.ToArray());
+                intent.PutExtra("userId", userId);
                 StartActivity(intent);
             };
 
             /* navbar buttons */
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);
             };
 
             ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);

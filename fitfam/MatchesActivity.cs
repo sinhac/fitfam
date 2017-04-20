@@ -20,7 +20,7 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             string[] matches = Intent.GetStringArrayExtra("matches");
-            Console.WriteLine("Maaaaaaaaaaaaaatches "+matches.Length);
+            string userId = Intent.GetStringExtra("userId");
             // Create your application here
             SetContentView(Resource.Layout.Matches);
 
@@ -105,6 +105,8 @@ namespace fitfam
                     {
                         Intent intent = new Intent(this, typeof(FamQuickViewActivity));
                         intent.PutExtra("groupId", groupInfo["groupId"].S);
+                        intent.PutExtra("userId", userId);
+                        intent.PutExtra("myEvent", false);
                         StartActivity(intent);
                     };
                 }

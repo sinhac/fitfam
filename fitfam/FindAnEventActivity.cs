@@ -1,4 +1,6 @@
+using Amazon.DynamoDBv2.Model;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using System;
@@ -13,6 +15,8 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.FindAnEventForm);
+
+            string userId = Intent.GetStringExtra("userId");
 
             // Create your application here
             Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner5);
@@ -32,8 +36,8 @@ namespace fitfam
             tags.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
             var tagsInput = "";
-            //string[] tagsArr;
-            //List<string> tagsList = new List<string>();
+            string[] tagsArr;
+            List<string> tagsList = new List<string>();
             tags.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 tagsInput = e.Text.ToString();
@@ -99,6 +103,15 @@ namespace fitfam
             Button findEventButton = FindViewById<Button>(Resource.Id.button2);
 
             findEventButton.Click += delegate {
+                char[] delimiters = { ',', '\t', '\n' };
+                tagsArr = tagsInput.Split(delimiters);
+                for (int i = 0; i < tagsArr.Length; i++)
+                {
+                    tagsList.Add(tagsArr[i]);
+                }
+
+                var experienceLevel = (string)spinner.GetItemAtPosition(spinner.SelectedItemPosition);
+
                 startInput = dateStart.DateTime;
                 endInput = dateEnd.DateTime;
 
@@ -112,8 +125,70 @@ namespace fitfam
                 minute = (string)endMinSpinner.GetItemAtPosition(endMinSpinner.SelectedItemPosition);
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
 
-                //Pass user, list of tags, start time, end time to FindAnEvent
-                StartActivity(typeof(EventMatchesActivity));
+                /*var results = new List<string>();
+                var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                var client = awsClient.getDynamoDBClient();
+
+                var request = new ScanRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    //ProjectionExpression = "groupId, tags, experienceLevels"
+                };
+                var response = await client.ScanAsync(request);
+                var result = response.Items;
+
+
+                foreach (Dictionary<string, AttributeValue> item in result)
+                {
+                    int numMatches = 0;
+                    string groupId = item["groupId"].S;
+
+                    foreach (var kvp in item)
+                    {
+                        if (kvp.Key == "tags")
+                        {
+                            var groupTags = kvp.Value.L;
+                            foreach (var t in groupTags)
+                            {
+                                string s = t.S;
+                                foreach (string tag in tagsList)
+                                {
+                                    Console.WriteLine(s + " compared to " + tag);
+                                    if (s.ToLower() == tag.ToLower())
+                                    {
+                                        numMatches++;
+                                    }
+                                }
+                            }
+                        }
+                        if (kvp.Key == "experienceLevel")
+                        {
+                            var experienceLevels = kvp.Value.L;
+                            int numExp = 0;
+                            foreach (var e in experienceLevels)
+                            {
+                                string s = e.S;
+                                numExp++;
+                                if (s[0] == experienceLevel[0])
+                                {
+                                    numMatches++;
+                                }
+                            }
+                        }
+                    }
+                    if (numMatches >= 2)
+                    {
+                        results.Add(item["groupId"].S);
+                    }
+                }
+
+                //FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel);
+                Intent intent = new Intent(this, typeof(EventMatchesActivity));
+                //var results = famSearch.FamSearchResults;    
+                intent.PutExtra("matches", results.ToArray());
+                intent.PutExtra("userId", userId);
+                StartActivity(intent);*/
+                //StartActivity(typeof(EventMatchesActivity));
             };
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);

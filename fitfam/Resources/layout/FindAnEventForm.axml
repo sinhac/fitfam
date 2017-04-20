@@ -85,13 +85,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/autoCompleteTextView1"
-                android:hint="City or Zip Code"/>
+                android:hint="City or Zip Code" />
             <TextView
-                  android:text="Experience Level"
-                  android:textAppearance="?android:attr/textAppearanceLarge"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textView3" />
+                android:text="Experience Level"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3" />
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,20 +118,20 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout6"
                 android:gravity="center">
-              <TextView
-                  android:text="Start time:"
-                  android:textAppearance="?android:attr/textAppearanceLarge"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textView5" />
-              <Spinner
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/spinner1" />
-              <Spinner
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/spinner2" />
+                <TextView
+                    android:text="Start time:"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView5" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner1" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner2" />
             </LinearLayout>
             <TextView
                 android:text="When is the latest you are available?"
@@ -154,22 +154,21 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout7"
                 android:gravity="center">
-              <TextView
-                  android:text=" time:"
-                  android:textAppearance="?android:attr/textAppearanceLarge"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textView6" />
-              <Spinner
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/spinner3" />
-              <Spinner
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/spinner4" />
+                <TextView
+                    android:text="End time:"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView6" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner3" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner4" />
             </LinearLayout>
-            
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="16.0dp"
