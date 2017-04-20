@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace fitfam
 {
@@ -41,18 +42,12 @@ namespace fitfam
             tags.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
             var tagsInput = "";
-            string[] tagsArr;
             List<string> tagsList = new List<string>();
             tags.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 tagsInput = e.Text.ToString();
             };
-            char[] delimiters = { ',', '\t', '\n' };
-            tagsArr = tagsInput.Split(delimiters);
-            for (int i = 0; i < tagsArr.Length; i++)
-            {
-                tagsList.Add(tagsArr[i]);
-            }
+            
 
             EditText boostText = FindViewById<EditText>(Resource.Id.boost);
             var boostInput = "";
@@ -64,6 +59,14 @@ namespace fitfam
             /* add user input to new entry in database, then redirect */
             Button createFamButton = FindViewById<Button>(Resource.Id.createFamButton);
             createFamButton.Click += delegate {
+                TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+                char[] delimiters = { ',', '\t', '\n' };
+                string[] tagsArr = tagsInput.Split(delimiters);
+                for (int i = 0; i < tagsArr.Length; i++)
+                {
+                    tagsList.Add(myTI.ToLower(tagsArr[i]));
+                }
+
                 System.Console.WriteLine("creating fam");
                 var creator = new User(userId, true);
                 var members = new Dictionary<User, bool>();

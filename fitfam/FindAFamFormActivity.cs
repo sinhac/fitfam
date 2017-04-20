@@ -63,7 +63,7 @@ namespace fitfam
             Button button2 = FindViewById<Button>(Resource.Id.button2);
             button2.Click += delegate {
                 var experienceLevel = (string)spinner.GetItemAtPosition(spinner.SelectedItemPosition);
-                FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel, boost);
+                FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel);
                 Intent intent = new Intent(this, typeof(MatchesActivity));
                 var results = famSearch.FamSearchResults;            
                 intent.PutExtra("matches", results.ToArray());

@@ -92,11 +92,11 @@ namespace fitfam
             string expression;
             if (tags.Count == 0)
             {
-                expression = "SET #A = :newActivity";
+                expression = "SET #T = :newTag";
             }
             else
             {
-                expression = "ADD #A  :newActivity";
+                expression = "ADD #T  :newTag";
             }
             tags.Add(tag);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
@@ -118,6 +118,29 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
         }
+        public void removeTag(string tag)
+        {
+            tags.Remove(tag);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#T", "tags"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":oldTag",new AttributeValue { S = tag }},  // new activity to update user's activities with 
+                },
+                // activity added to list in database entry
+                UpdateExpression = "DELETE #T :oldTag"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }
+
         private string pic;
         public string Pic
         {

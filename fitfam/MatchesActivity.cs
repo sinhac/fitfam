@@ -19,6 +19,7 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             string[] matches = Intent.GetStringArrayExtra("matches");
+            
             // Create your application here
             SetContentView(Resource.Layout.Matches);
 
