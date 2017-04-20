@@ -32,9 +32,10 @@ namespace fitfam
                     gender = "OTHER";
                     break;
                 default:
-                    gender = "null";
+                    gender = "Null";
                     break;
             }
+
             pic = Intent.GetStringExtra("pic") ?? "null";
             location = Intent.GetStringExtra("location") ?? "null";
             username = Intent.GetStringExtra("username") ?? "null";
@@ -82,6 +83,10 @@ namespace fitfam
                 Intent intent = new Intent(this, typeof(ProfilePageActivity));
                 intent.PutExtra("userId", userId);
                 intent.PutExtra("profileId", userId);
+                intent.PutExtra("bio", user.Bio);
+                intent.PutExtra("username", user.Username);
+                intent.PutExtra("gender", user.Gender);
+                //intent.Put("activities", user.Activities);
                 StartActivity(intent);
             };
 

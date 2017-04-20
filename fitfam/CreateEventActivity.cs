@@ -106,9 +106,20 @@ namespace fitfam
             adapter4.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner4.Adapter = adapter4;
 
+            EditText boostText = FindViewById<EditText>(Resource.Id.editText2);
+            var boostInput = "";
+            boostText.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                boostInput = e.Text.ToString();
+            };
+
             /* add user input to new entry in database, then redirect */
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {
+                //BOOST INPUT 
+                if (boostInput == "") { boostInput = "0"; }
+                double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
+
                 startInput = date.DateTime;
                 endInput = date.DateTime;
 
@@ -123,7 +134,7 @@ namespace fitfam
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
                 Console.WriteLine("userId: {0}", userId);
                 var creator = new User(userId, true);
-                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, false, tagsList, creator );
+                Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, false, tagsList, creator, boost );
                 Console.WriteLine(creator.UserId);
                 var userFam = creator.UserFam;
                 userFam.makeEvent(newEvent);

@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using System;
@@ -10,10 +11,13 @@ namespace fitfam
     public class FindAFamFormActivity : Activity
     {
         private object spinner_ItemSelected;
-
+        private string userId;
+        private User user;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            userId = Intent.GetStringExtra("userId") ?? "null";
+            user = new User(userId, true);
             SetContentView(Resource.Layout.FindAFamForm);
 
             // Create your application here
@@ -36,18 +40,18 @@ namespace fitfam
             tags.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
             var tagsInput = "";
-            //string[] tagsArr;
-            //List<string> tagsList = new List<string>();
+            string[] tagsArr;
+            List<string> tagsList = new List<string>();
             tags.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 tagsInput = e.Text.ToString();
             };
-            //char[] delimiters = { ',', '\t', '\n' };
-            //tagsArr = tagsInput.Split(delimiters);
-            //for (int i = 0; i < tagsArr.Length; i++)
-            //{
-            //    tagsList.Add(tagsArr[i]);
-            //}
+            char[] delimiters = { ',', '\t', '\n' };
+            tagsArr = tagsInput.Split(delimiters);
+            for (int i = 0; i < tagsArr.Length; i++)
+            {
+                tagsList.Add(tagsArr[i]);
+            }
 
             var cityZip = FindViewById<EditText>(Resource.Id.cityzip);
             var cityZipInput = "";
@@ -58,7 +62,11 @@ namespace fitfam
 
             Button button2 = FindViewById<Button>(Resource.Id.button2);
             button2.Click += delegate {
-                StartActivity(typeof(MatchesActivity));
+                FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel, boost);
+                Intent intent = new Intent(this, typeof(MatchesActivity));
+                var results = famSearch.FamSearchResults;            
+                intent.PutExtra("matches", results.ToArray());
+                StartActivity(intent);
             };
 
             /* navbar buttons */

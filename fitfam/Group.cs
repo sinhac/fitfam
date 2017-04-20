@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Amazon.DynamoDBv2.Model;
 using Amazon.DynamoDBv2.DocumentModel;
+using System.Globalization;
 
 namespace fitfam
 {
@@ -80,10 +81,42 @@ namespace fitfam
                 }
             }
         }
+
         private List<string> tags = new List<string>();
         public List<string> Tags
         {
             get { return tags; }
+        }
+        public void addTag(string tag)
+        {
+            string expression;
+            if (tags.Count == 0)
+            {
+                expression = "SET #A = :newActivity";
+            }
+            else
+            {
+                expression = "ADD #A  :newActivity";
+            }
+            tags.Add(tag);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#T", "tags"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newTag",new AttributeValue { S = tag }},  // new activity to update user's activities with 
+                },
+                // activity added to list in database entry
+                UpdateExpression = expression
+            };
+            var response = dbclient.UpdateItemAsync(request);
         }
         private string pic;
         public string Pic
@@ -159,6 +192,35 @@ namespace fitfam
         {
             get { return eventList; }
         }
+        private double boost;
+        public double Boost
+        {
+            set
+            {
+                boost = value;
+                // create update request to update event start time in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#B", "boost"},  // attribute to be updated (event start time)
+                    },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newBoost",new AttributeValue { N = boost.ToString() }},  // new event start time
+                    },
+
+                    // expression to update event start time in database entry
+                    UpdateExpression = "SET #B = :newBoost"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+            get { return boost; }
+        }
 
         private List<string> experienceLevels = new List<string>();
         public List<string> ExperienceLevels
@@ -167,8 +229,61 @@ namespace fitfam
         }
         public void addExperienceLevel(string level)
         {
-            //do this shit later
+            string expression;
+            if (experienceLevels.Count == 0)
+            {
+                expression = "SET #EL = :newLevel";
+            }
+            else
+            {
+                expression = "ADD #EL :newLevel";
+            }
+            experienceLevels.Add(level);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#EL", "experienceLevels"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newLevel", new AttributeValue { S = level } } // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = expression
+            };
+            var response = dbclient.UpdateItemAsync(request);
         }
+
+        public void removeExperienceLevel(string level)
+        {
+            experienceLevels.Remove(level);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-groups",
+                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#EL", "experienceLevels"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":oldLevel", new AttributeValue { S = level } } // new activity to update user's activities with 
+                },
+
+                // activity added to list in database entry
+                UpdateExpression = "DELETE #EL :oldLevel"
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }
+
         public Group(string groupId)
         {
             this.groupId = groupId;
@@ -218,22 +333,24 @@ namespace fitfam
                             case "tags":
                                 tags = kvp.Value.SS.ToList();
                                 break;
+                            case "boost":
+                                boost = Convert.ToDouble(kvp.Value.N);
+                                break;
                             default:
                                 Console.WriteLine("Group fucked up");
                                 break;
-
-
                         }
                     }
                 }
             }
         }
 
-        public Group(string name, string description, User creator, Dictionary<User, bool> members)
+        public Group(string name, string description, User creator, Dictionary<User, bool> members, double boost)
         {
             this.groupName = name;
             this.description = description;
             this.members = new Dictionary<User, bool>(members);
+            this.boost = boost;
             groupId = creator.UserId + GroupName;
             creatorId = creator.UserId;
             writeGroup();

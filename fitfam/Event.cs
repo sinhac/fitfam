@@ -218,8 +218,37 @@ namespace fitfam
         {
             get { return shared; }
         }
+        private double boost;
+        public double Boost
+        {
+            set
+            {
+                boost = value;
+                // create update request to update event start time in database
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                    Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                    {
+                        {"#B", "boost"},  // attribute to be updated (event start time)
+                    },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    {
+                        {":newBoost",new AttributeValue { N = boost.ToString() }},  // new event start time
+                    },
 
-        public Event(string name, string description, string location, DateTime startTime, DateTime endTime, bool publicEvent, List<string> tags, User creator)
+                    // expression to update event start time in database entry
+                    UpdateExpression = "SET #B = :newBoost"
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+            get { return boost; }
+        }
+
+        public Event(string name, string description, string location, DateTime startTime, DateTime endTime, bool publicEvent, List<string> tags, User creator, double boost)
         {
             this.eventName = name;
             this.description = description;
@@ -230,6 +259,7 @@ namespace fitfam
             this.tags = new List<string>(tags);
             this.creator = creator;
             this.addAttending(creator);
+            this.boost = boost;
             Console.WriteLine("tag count: {0}", this.tags.Count);
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
