@@ -13,10 +13,9 @@ namespace fitfam
             base.OnCreate(savedInstanceState);
             // Create your application here
             SetContentView(Resource.Layout.FamProfile);
-            var userId = Intent.GetStringExtra("userId");
+            var userId = Intent.GetStringExtra("userId") ?? "Data not available";
 
             string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
-            string userId = Intent.GetStringExtra("userId") ?? "Data not available";
             User user = new User(userId, true);
 
             Group g = new Group(groupId);

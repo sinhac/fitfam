@@ -19,12 +19,11 @@ namespace fitfam
         protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.Matches);
+
             string[] matches = Intent.GetStringArrayExtra("matches");
             string userId = Intent.GetStringExtra("userId");
             User user = new User(userId, false);
-            // Create your application here
-            SetContentView(Resource.Layout.Matches);
-            var userId = Intent.GetStringExtra("userId");
 
             Button backtosearch_button = FindViewById<Button>(Resource.Id.button1);
 

@@ -22,12 +22,11 @@ namespace fitfam
         protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            userId = Intent.GetStringExtra("userId") ?? "null";
-            User user = new User(userId, false);
+
             SetContentView(Resource.Layout.FamDetailsPage);
-            var userId = Intent.GetStringExtra("userId");
 
-
+            var userId = Intent.GetStringExtra("userId") ?? "null";
+            User user = new User(userId, false);
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
