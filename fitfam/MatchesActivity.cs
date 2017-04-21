@@ -31,19 +31,21 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Matches);
+            System.Console.WriteLine("Made it to matches!");
 
-            string[] matches = Intent.GetStringArrayExtra("matches");
-            string userId = Intent.GetStringExtra("userId");
-            User user = new User(userId, false);
-            
             // get information from previous page
-            userId = Intent.GetStringExtra("userId") ?? "null";
+            string[] matches = Intent.GetStringArrayExtra("matches");
+            string userId = Intent.GetStringExtra("userId") ?? "null";
+            User user = new User(userId, false);
             var pic = Intent.GetStringExtra("pic") ?? "null";
             var location = Intent.GetStringExtra("location") ?? "null";
             var username = Intent.GetStringExtra("username") ?? "null";
             var genderInt = Intent.GetIntExtra("gender", -1);
             var profileId = Intent.GetStringExtra("profileId") ?? "Null";
+            System.Console.WriteLine("Size of matches: "+ matches.Length +"  userId: " + userId + "  pic: " + pic + "  location: " + location + "  userName: " + username + "  gender: " + genderInt + "  profileId: " + profileId);
 
+
+            System.Console.WriteLine("Almost made it to action bar");
             // navbar buttons
             ImageButton homepageButton = FindViewById<ImageButton>(Resource.Id.homepageButton);
             homepageButton.Click += delegate
@@ -57,7 +59,8 @@ namespace fitfam
                 intent.PutExtra("gender", genderInt);
                 StartActivity(intent);
             };
-
+            // THIS IS WHERE IT STOPS WORKING, IT NEVER PRINTS MADE IT PAST PROFILE BUTTON BUT IT PRINTS ALMOST MADE IT TO ACTION BAR
+            System.Console.WriteLine("Made it past profile button");
             ImageButton profileButton = FindViewById<ImageButton>(Resource.Id.profileButton);
             profileButton.Click += delegate
             {
@@ -101,12 +104,19 @@ namespace fitfam
             Button backtosearch_button = FindViewById<Button>(Resource.Id.button1);
 
             backtosearch_button.Click += delegate {
-                StartActivity(typeof(FindAFamFormActivity));
+                Intent intent = new Intent(this, typeof(FindAFamFormActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
             };
             
             //num_buttons will be taken from database COUNT(matches)
-            int num_buttons = 10;
-
+            int num_buttons = matches.Length;
+            System.Console.WriteLine("Made it this far");
             ViewGroup matchButtonLayout = (ViewGroup)FindViewById(Resource.Id.radioGroup1);  // This is the id of the RadioGroup we defined
             for (var i = 0; i < matches.Length; i++)
             {
@@ -133,7 +143,7 @@ namespace fitfam
                     TableName = tableName,
                     Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = matches[i] } } },
                 };
-
+                System.Console.WriteLine("but did I make it this far?");
                 Dictionary<string, AttributeValue> groupInfo = new Dictionary<string, AttributeValue>();
                 var task = await client.GetItemAsync(dbclient, request);
                 groupInfo = task;
@@ -166,6 +176,7 @@ namespace fitfam
                 }
                 catch (Exception ex)
                 {
+                    System.Console.WriteLine("SO IT NEVER ENTERED TRY :((");
                     System.Console.WriteLine("EXCEPTION: {0}\n{1}", ex.Message, ex.StackTrace);
                 }
             }

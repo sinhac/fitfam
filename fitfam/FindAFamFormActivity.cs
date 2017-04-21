@@ -125,10 +125,12 @@ namespace fitfam
             // button that routes to the matches page when ready to find groups
             Button findFamButton = FindViewById<Button>(Resource.Id.findFamButton);
             findFamButton.Click += async delegate {
+                System.Console.WriteLine("Entered button click");
                 var experienceLevel = (string)experienceSpinner.GetItemAtPosition(experienceSpinner.SelectedItemPosition);
                 var results = new List<string>();
                 var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 var client = awsClient.getDynamoDBClient();
+                System.Console.WriteLine("Finished basic business");
 
                 char[] delimiters = { ',', '\t', '\n' };
                 tagsArr = tagsInput.Split(delimiters);
@@ -136,6 +138,7 @@ namespace fitfam
                 {
                     tagsList.Add(tagsArr[i]);
                 }
+                System.Console.WriteLine("Finished tags array, size " + tagsList.Count);
 
                 var request = new ScanRequest
                 {
@@ -143,6 +146,7 @@ namespace fitfam
                 };
                 var response = await client.ScanAsync(request);
                 var result = response.Items;
+                System.Console.WriteLine("Looking for results");
 
                 // algorithm to find matches
                 int numRows = 0;
@@ -187,11 +191,15 @@ namespace fitfam
                     }
                     if(numMatches >= 2)
                     {
+                        System.Console.WriteLine("Number of matches found: " + numMatches);
                         results.Add(item["groupId"].S);
+                        System.Console.WriteLine("added to group? I think? Size of results: " + results.Count);
                     }
                 }
+                System.Console.WriteLine("Made it past the for loop.");
 
                 Intent intent = new Intent(this, typeof(MatchesActivity));
+                System.Console.WriteLine("Starting intent stuff");
                 intent.PutExtra("matches", results.ToArray());
                 intent.PutExtra("userId", userId);
                 intent.PutExtra("profileId", userId);
@@ -199,6 +207,7 @@ namespace fitfam
                 intent.PutExtra("location", location);
                 intent.PutExtra("username", username);
                 intent.PutExtra("gender", user.Gender);
+                System.Console.WriteLine("Ended intent stuff, heading to activity");
                 StartActivity(intent);
             };
         }
