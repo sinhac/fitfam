@@ -34,25 +34,25 @@
                     p1:gravity="center">
                     <ImageButton
                         p1:src="@drawable/home"
-                        p1:id="@+id/imageButton1"
+                        p1:id="@+id/homepageButton"
                         p1:background="@drawable/gold_button"
                         p1:layout_width="wrap_content"
                         p1:layout_height="match_parent" />
                     <ImageButton
                         p1:src="@drawable/face"
-                        p1:id="@+id/imageButton2"
+                        p1:id="@+id/profileButton"
                         p1:background="@drawable/gold_button"
                         p1:layout_width="wrap_content"
                         p1:layout_height="match_parent" />
                     <ImageButton
                         p1:src="@drawable/message"
-                        p1:id="@+id/imageButton3"
+                        p1:id="@+id/notificationsButton"
                         p1:background="@drawable/gold_button"
                         p1:layout_width="wrap_content"
                         p1:layout_height="match_parent" />
                     <ImageButton
                         p1:src="@drawable/clock"
-                        p1:id="@+id/imageButton4"
+                        p1:id="@+id/scheduleButton"
                         p1:background="@drawable/gold_button"
                         p1:layout_width="wrap_content"
                         p1:layout_height="match_parent" />
@@ -66,7 +66,7 @@
             <MultiAutoCompleteTextView
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/multiAutoCompleteTextView1"
+                p1:id="@+id/eventName"
                 p1:hint="Enter your event name" />
             <TextView
                 p1:text="Location"
@@ -76,7 +76,7 @@
             <MultiAutoCompleteTextView
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/multiAutoCompleteTextView2"
+                p1:id="@+id/location"
                 p1:hint="Enter the Location" />
             <Switch
                 p1:layout_width="match_parent"
@@ -92,7 +92,7 @@
                 p1:inputType="textMultiLine"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/editText1"
+                p1:id="@+id/description"
                 p1:hint="Enter Event Description" />
             <TextView
                 p1:text="Activity Tags"
@@ -103,7 +103,7 @@
             <MultiAutoCompleteTextView
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/multiAutoCompleteTextView3"
+                p1:id="@+id/activityTags"
                 p1:hint="Enter activity tags" />
             <TextView
                 p1:text="Select the experience level(s) you would like your event to consist of:"
@@ -162,11 +162,11 @@
                 <Spinner
                     p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
-                    p1:id="@+id/spinner1" />
+                    p1:id="@+id/startHour" />
                 <Spinner
                     p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
-                    p1:id="@+id/spinner2" />
+                    p1:id="@+id/startMin" />
             </LinearLayout>
             <LinearLayout
                 p1:orientation="horizontal"
@@ -183,11 +183,11 @@
                 <Spinner
                     p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
-                    p1:id="@+id/spinner3" />
+                    p1:id="@+id/endHour" />
                 <Spinner
                     p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
-                    p1:id="@+id/spinner4" />
+                    p1:id="@+id/endMin" />
             </LinearLayout>
             <Space
                 p1:layout_width="match_parent"
@@ -203,7 +203,7 @@
                 p1:inputType="number"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/editText2" />
+                p1:id="@+id/boostEditText" />
             <Space
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                 p1:layout_marginBottom="25.5dp" />
             <Button
                 p1:text="Create Event"
-                p1:id="@+id/button1"
+                p1:id="@+id/createEventButton"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:background="@drawable/gold_button" />

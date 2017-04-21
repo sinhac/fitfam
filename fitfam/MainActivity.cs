@@ -10,29 +10,39 @@ using Android.Gms.Common;
 using Android.Gms.Plus;
 using Android.Gms.Plus.Model.People;
 
+/*
+ * FitFam 
+ * 
+ * Ehsan Ahmed, Jessa Marie Barre, Shannon Fisher, 
+ * Josh Jacobson, Korey Prendergast, Chandrika Sinha
+ * 4/20/2017
+ * 
+ * MainActivity: The initial page
+ * Uses Google's sign up functionality
+ * 
+ */
+
 namespace fitfam
 {
     [Activity(Label = "fitfam", MainLauncher = true, Icon = "@drawable/mightyMan")]
     public class MainActivity : Activity, GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener
-    {
+    {   
+        // private member variables
         private GoogleApiClient mGoogleApiClient;
-        //private IGoogleApiClient mGoogleApiClient;
         private SignInButton mGoogleSignIn;
         private bool mIntentInProgress;
         private bool mSignInClicked;
         private bool mInfoPopulated;
         private ConnectionResult mConnectionResult;
 
+        // initial user interface and begin functions
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
             mGoogleSignIn = FindViewById<SignInButton>(Resource.Id.sign_in_button);
             mGoogleSignIn.Click += mGoogleSignIn_Click;
-
 
             GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
             builder.AddConnectionCallbacks(this);
@@ -40,26 +50,10 @@ namespace fitfam
             builder.AddApi(PlusClass.API);
             builder.AddScope(PlusClass.ScopePlusProfile);
             builder.AddScope(PlusClass.ScopePlusLogin);
-
             mGoogleApiClient = builder.Build();
-
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button login_button = FindViewById<Button>(Resource.Id.login_button);
-            Button signup_button = FindViewById<Button>(Resource.Id.signup_button);
-
-            login_button.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
-            };
-
-            signup_button.Click += delegate {
-                StartActivity(typeof(HomepageActivity));
-            };
-
-            //var request = new Amazon.Runtime.AmazonWebServiceRequest;
-            //var request = new Amazon.DynamoDBv2.AmazonDynamoDBRequest();
         }
 
+        // initial signal to connect to the Google API and sign in
         void mGoogleSignIn_Click(object sender, EventArgs e)
         {
             if (!mGoogleApiClient.IsConnecting)
@@ -69,11 +63,12 @@ namespace fitfam
             }
         }
 
+        // if client is connected, no need to resolve errors
+        // else attempt to reolve by sending for result
         private void ResolveSignInError()
         {
             if (mGoogleApiClient.IsConnected)
             {
-                //No need to resolve errors
                 return;
             }
 
@@ -92,11 +87,12 @@ namespace fitfam
             }
         }
 
+        // shows whether signing in was succesful
+        // attempts to reconnect
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             if (requestCode == 0)
             {
-
                 if (resultCode != Result.Ok)
                 {
                     mSignInClicked = false;
@@ -111,12 +107,14 @@ namespace fitfam
             }
         }
 
+        // calls Google API to attempt connection on start
         protected override void OnStart()
         {
             base.OnStart();
             mGoogleApiClient.Connect();
         }
 
+        // disconnects Google connection on stop
         protected override void OnStop()
         {
             base.OnStop();
@@ -126,6 +124,7 @@ namespace fitfam
             }
         }
 
+        // passes Google user IDs and information to other pages
         public void OnConnected(Bundle connectionHint)
         {
             mSignInClicked = false;
@@ -133,7 +132,6 @@ namespace fitfam
             if (PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient) != null)
             {
                 IPerson plusUser = PlusClass.PeopleApi.GetCurrentPerson(mGoogleApiClient);
-                Console.WriteLine("USER NAME: " + plusUser.DisplayName);
                 Intent intent = new Intent(this, typeof(HomepageActivity));
                 intent.PutExtra("userId", plusUser.Id);
                 intent.PutExtra("username", plusUser.DisplayName);
@@ -144,24 +142,23 @@ namespace fitfam
             }
         }
 
+        // handles code if connection takes too long
         public void OnConnectionSuspended(int cause)
         {
             throw new NotImplementedException();
         }
 
+        // handles connection failures
+        // stores connection result for future
+        // resolves errors until user is signed in
         public void OnConnectionFailed(ConnectionResult result)
         {
             if (!mIntentInProgress)
             {
-                // Store the ConnectionResult so that we can use 
-                // it later when the user clicks 'sign-in'
                 mConnectionResult = result;
 
                 if (mSignInClicked)
                 {
-                    // The user has already clicked 'sign-in' 
-                    // so we attempt to resolve all errors 
-                    // until the user is signed in
                     ResolveSignInError();
                 }
             }

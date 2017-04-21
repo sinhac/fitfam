@@ -34,25 +34,25 @@
                     android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
-                        android:id="@+id/imageButton1"
+                        android:id="@+id/homepageButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/face"
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/profileButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/message"
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/notificationsButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/clock"
-                        android:id="@+id/imageButton4"
+                        android:id="@+id/scheduleButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
@@ -64,7 +64,7 @@
                 android:id="@+id/space1"
                 android:layout_marginBottom="20.0dp" />
             <Button
-                android:id="@+id/find_fam_button"
+                android:id="@+id/findFamButton"
                 android:text="FIND A FAM"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
@@ -72,7 +72,7 @@
                 android:layout_height="80dp" />
             <Button
                 android:text="CREATE A FAM"
-                android:id="@+id/create_fam_button"
+                android:id="@+id/createFamButton"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
                 android:layout_width="match_parent"
@@ -84,14 +84,14 @@
                 android:layout_marginBottom="10.0dp" />
             <Button
                 android:text="FIND EVENT"
-                android:id="@+id/find_event_button"
+                android:id="@+id/findEventButton"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
                 android:layout_width="match_parent"
                 android:layout_height="80dp" />
             <Button
                 android:text="CREATE EVENT"
-                android:id="@+id/create_event_button"
+                android:id="@+id/createEventButton"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
                 android:layout_width="match_parent"

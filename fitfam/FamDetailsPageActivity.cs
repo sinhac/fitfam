@@ -13,6 +13,17 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Android.Graphics;
 
+/*
+ * FitFam 
+ * 
+ * Ehsan Ahmed, Jessa Marie Barre, Shannon Fisher, 
+ * Josh Jacobson, Korey Prendergast, Chandrika Sinha
+ * 4/20/2017
+ * 
+ * FamDetailsPageActivity: the page that shows details about the group
+ * 
+ */
+
 namespace fitfam
 {
     [Activity(Label = "FamDetailsPageActivity")]

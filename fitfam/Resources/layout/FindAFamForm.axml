@@ -34,25 +34,25 @@
                     android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
-                        android:id="@+id/imageButton1"
+                        android:id="@+id/homepageButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/face"
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/profileButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/message"
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/notificationsButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/clock"
-                        android:id="@+id/imageButton4"
+                        android:id="@+id/scheduleButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
@@ -73,18 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter an activity of interest"
-                android:id="@+id/multiAutoCompleteTextView1" />
-            <TextView
-                android:text="Location"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView5" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/cityzip"
-                android:hint="City or Zip Code" />
+                android:id="@+id/activityTags" />
             <TextView
                 android:text="Experience Level"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -94,7 +83,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner1"
+                android:id="@+id/experienceSpinner"
                 android:prompt="@string/experience_prompt" />
             <Space
                 android:layout_width="match_parent"
@@ -102,7 +91,7 @@
                 android:id="@+id/space2" />
             <Button
                 android:text="Find My FitFam!"
-                android:id="@+id/button2"
+                android:id="@+id/findFamButton"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
                 android:layout_width="match_parent"

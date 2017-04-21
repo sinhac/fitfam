@@ -8,44 +8,121 @@ using System.Collections.Generic;
 using System.Globalization;
 using Xamarin.Forms.Platform.Android;
 
+/*
+ * FitFam 
+ * 
+ * Ehsan Ahmed, Jessa Marie Barre, Shannon Fisher, 
+ * Josh Jacobson, Korey Prendergast, Chandrika Sinha
+ * 4/20/2017
+ * 
+ * CreateAnEventActivity: create an event
+ * user can make a new event that other users can join using this form
+ * 
+ */
+
 namespace fitfam
 {
     [Activity(Label = "CreateEventActivity")]
     public class CreateEventActivity : Activity
     {
+        // private member variables
         private string userId;
         private User creator;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            userId = Intent.GetStringExtra("userId") ?? "Null";
-            creator = new User(userId, true);
             SetContentView(Resource.Layout.CreateEventPage);
 
-            /* capture user input for event name, location, and description */
-            var eventName = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView1);
+            // get information from previous page
+            userId = Intent.GetStringExtra("userId") ?? "null";
+            var pic = Intent.GetStringExtra("pic") ?? "null";
+            var location = Intent.GetStringExtra("location") ?? "null";
+            var username = Intent.GetStringExtra("username") ?? "null";
+            var genderInt = Intent.GetIntExtra("gender", -1);
+            var profileId = Intent.GetStringExtra("profileId") ?? "Null";
+            creator = new User(userId, true);
+
+            // navbar buttons
+            ImageButton homepageButton = FindViewById<ImageButton>(Resource.Id.homepageButton);
+            homepageButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+            ImageButton profileButton = FindViewById<ImageButton>(Resource.Id.profileButton);
+            profileButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("username", username);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+            ImageButton notificationsButton = FindViewById<ImageButton>(Resource.Id.notificationsButton);
+            notificationsButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(NotificationsActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+
+            };
+
+            ImageButton scheduleButton = FindViewById<ImageButton>(Resource.Id.scheduleButton);
+            scheduleButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ScheduleActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+            // capture user input for event name
+            var eventName = FindViewById<MultiAutoCompleteTextView>(Resource.Id.eventName);
             var eventNameInput = "";
             eventName.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 eventNameInput = e.Text.ToString();
             };
 
-            var location = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView2);
+            // capture user input for event location
+            var locationText = FindViewById<MultiAutoCompleteTextView>(Resource.Id.location);
             var locationInput = "";
-            location.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            locationText.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 locationInput = e.Text.ToString();
             };
 
-            var description = FindViewById<EditText>(Resource.Id.editText1);
+            // capture user input for event description
+            var description = FindViewById<EditText>(Resource.Id.description);
             var descriptionInput = "";
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 descriptionInput = e.Text.ToString();
             };
 
-            /* get tags */
-            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView3);
+            // capture user input for preferred activity tags
+            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.activityTags);
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             
@@ -59,75 +136,77 @@ namespace fitfam
                 tagsInput = e.Text.ToString();
                 Console.WriteLine(tagsInput);
             };
+
+            // enter code for collecting experience level
             
-            //Date picker
+            // date picker
             DatePicker date = FindViewById<DatePicker>(Resource.Id.datePicker1);
             DateTime startInput;
             DateTime endInput;
 
-            //Time spinner
-            Spinner spinner1 = FindViewById<Spinner>(Resource.Id.spinner1);
+            // start time
+            Spinner startHour = FindViewById<Spinner>(Resource.Id.startHour);
 
-            spinner1.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            startHour.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
             var adapter1 = ArrayAdapter.CreateFromResource(
                     this, Resource.Array.hour_array, Android.Resource.Layout.SimpleSpinnerItem);
 
             adapter1.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spinner1.Adapter = adapter1;
+            startHour.Adapter = adapter1;
 
-            Spinner spinner2 = FindViewById<Spinner>(Resource.Id.spinner2);
+            Spinner startMin = FindViewById<Spinner>(Resource.Id.startMin);
 
-            spinner2.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            startMin.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
             var adapter2 = ArrayAdapter.CreateFromResource(
                     this, Resource.Array.minute_array, Android.Resource.Layout.SimpleSpinnerItem);
 
             adapter2.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spinner2.Adapter = adapter2;
+            startMin.Adapter = adapter2;
 
-            //End time
-            Spinner spinner3 = FindViewById<Spinner>(Resource.Id.spinner3);
+            // end time
+            Spinner endHour = FindViewById<Spinner>(Resource.Id.endHour);
 
-            spinner3.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            endHour.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
             var adapter3 = ArrayAdapter.CreateFromResource(
                     this, Resource.Array.hour_array, Android.Resource.Layout.SimpleSpinnerItem);
 
             adapter3.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spinner3.Adapter = adapter3;
+            endHour.Adapter = adapter3;
 
-            Spinner spinner4 = FindViewById<Spinner>(Resource.Id.spinner4);
+            Spinner endMin = FindViewById<Spinner>(Resource.Id.endMin);
 
-            spinner4.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            endMin.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
             var adapter4 = ArrayAdapter.CreateFromResource(
                     this, Resource.Array.minute_array, Android.Resource.Layout.SimpleSpinnerItem);
 
             adapter4.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spinner4.Adapter = adapter4;
+            endMin.Adapter = adapter4;
 
-            EditText boostText = FindViewById<EditText>(Resource.Id.editText2);
+            // boost functionality for user to input money
+            EditText boostText = FindViewById<EditText>(Resource.Id.boostEditText);
             var boostInput = "";
             boostText.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
                 boostInput = e.Text.ToString();
             };
 
-            /* add user input to new entry in database, then redirect */
-            Button button1 = FindViewById<Button>(Resource.Id.button1);
-            button1.Click += delegate {
-                //BOOST INPUT 
+            // add user input to new entry in database, then redirect */
+            Button createEventButton = FindViewById<Button>(Resource.Id.createEventButton);
+            createEventButton.Click += delegate {
+                // boost input
                 if (boostInput == "") { boostInput = "0"; }
                 double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
 
                 startInput = date.DateTime;
                 endInput = date.DateTime;
 
-                string hour = (string)spinner1.GetItemAtPosition(spinner1.SelectedItemPosition);
+                string hour = (string)startHour.GetItemAtPosition(startHour.SelectedItemPosition);
                 startInput = startInput.AddHours(Convert.ToDouble(hour));
-                string minute = (string)spinner2.GetItemAtPosition(spinner2.SelectedItemPosition);
+                string minute = (string)startMin.GetItemAtPosition(startMin.SelectedItemPosition);
                 startInput = startInput.AddMinutes(Convert.ToDouble(minute));
 
                 char[] delimiters = { ',' };
                 string[] tagsArr = tagsInput.Split(delimiters);
-                Console.WriteLine("tagsArr count {0}", tagsArr.Length);
                 TextInfo myTI = new CultureInfo("en-US",false).TextInfo;
                 for (int i = 0; i < tagsArr.Length; i++)
                 {
@@ -136,55 +215,30 @@ namespace fitfam
                 }
 
 
-                hour = (string)spinner3.GetItemAtPosition(spinner3.SelectedItemPosition);
+                hour = (string)endHour.GetItemAtPosition(endHour.SelectedItemPosition);
                 endInput = endInput.AddHours(Convert.ToDouble(hour));
-                minute = (string)spinner4.GetItemAtPosition(spinner4.SelectedItemPosition);
+                minute = (string)endMin.GetItemAtPosition(endMin.SelectedItemPosition);
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
-                Console.WriteLine("userId: {0}", userId);
-                Console.WriteLine("Event: {0} {1} {2} {3} {4}", eventNameInput, descriptionInput, locationInput, startInput, endInput);
-                foreach(var t in tagsList)
-                {
-                    Console.WriteLine(t);
-                }
                 Event newEvent = new Event(eventNameInput, descriptionInput, locationInput, startInput, endInput, false, tagsList, creator, boost );
-                Console.WriteLine(creator.UserId);
                 var userFam = creator.UserFam;
                 userFam.makeEvent(newEvent);
 
-                var eventDetailsActivity = new Intent(this, typeof(EventDetailsPageActivity));
-                eventDetailsActivity.PutExtra("eventId",newEvent.EventId);
-                eventDetailsActivity.PutExtra("userId", userId);
-                StartActivity(eventDetailsActivity);
-            };
-            
-            /* navbar buttons */
-            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
-            imagebutton1.Click += delegate {
-                Intent intent = new Intent(this, typeof(HomepageActivity));
+                var intent = new Intent(this, typeof(EventDetailsPageActivity));
+                intent.PutExtra("eventId",newEvent.EventId);
                 intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
                 StartActivity(intent);
             };
-
-            ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
-            imagebutton2.Click += delegate {
-                StartActivity(typeof(ProfilePageActivity));
-            };
-
-            ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
-            imagebutton3.Click += delegate {
-                StartActivity(typeof(NotificationsActivity));
-            };
-
-            ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
-            imagebutton4.Click += delegate {
-                StartActivity(typeof(ScheduleActivity));
-            };
-            
         }
+
+        // spinner helper
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
-
         }
     }
 }

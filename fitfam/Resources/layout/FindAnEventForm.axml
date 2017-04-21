@@ -35,25 +35,25 @@
                     android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
-                        android:id="@+id/imageButton1"
+                        android:id="@+id/homepageButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/face"
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/profileButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/message"
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/notificationsButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/clock"
-                        android:id="@+id/imageButton4"
+                        android:id="@+id/scheduleButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
@@ -73,19 +73,8 @@
             <MultiAutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/multiAutoCompleteTextView1"
+                android:id="@+id/activityTags"
                 android:hint="Activity" />
-            <TextView
-                android:text="Location"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView2" />
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/autoCompleteTextView1"
-                android:hint="City or Zip Code" />
             <TextView
                 android:text="Experience Level"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -106,7 +95,7 @@
             <DatePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/datePicker1" />
+                android:id="@+id/startDate" />
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,11 +116,11 @@
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner1" />
+                    android:id="@+id/startHour" />
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner2" />
+                    android:id="@+id/startMin" />
             </LinearLayout>
             <TextView
                 android:text="When is the latest you are available?"
@@ -142,7 +131,7 @@
             <DatePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/datePicker2" />
+                android:id="@+id/endDate" />
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,11 +152,11 @@
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner3" />
+                    android:id="@+id/endHour" />
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner4" />
+                    android:id="@+id/endMin" />
             </LinearLayout>
             <Space
                 android:layout_width="match_parent"
@@ -175,7 +164,7 @@
                 android:id="@+id/space2" />
             <Button
                 android:text="Find Events!"
-                android:id="@+id/button2"
+                android:id="@+id/findEventButton"
                 android:background="@drawable/gold_button"
                 style="@style/button_text"
                 android:layout_width="260.5dp"

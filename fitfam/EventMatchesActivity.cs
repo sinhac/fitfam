@@ -6,6 +6,17 @@ using Android.Views;
 using Android.Widget;
 using static Android.Resource;
 
+/*
+ * FitFam 
+ * 
+ * Ehsan Ahmed, Jessa Marie Barre, Shannon Fisher, 
+ * Josh Jacobson, Korey Prendergast, Chandrika Sinha
+ * 4/20/2017
+ * 
+ * EventMatchesActivity: Shows the events that have been found from search
+ * 
+ */
+
 namespace fitfam
 {
     [Activity(Label = "EventMatchesActivity")]
@@ -45,7 +56,6 @@ namespace fitfam
                 intent.PutExtra("bio", newAttendingUser.Bio);
                 intent.PutExtra("username", newAttendingUser.Username);
                 intent.PutExtra("gender", newAttendingUser.Gender);
-                //intent.Put("activities", user.Activities);
                 StartActivity(intent);
             };
 

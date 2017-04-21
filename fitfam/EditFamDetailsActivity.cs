@@ -18,33 +18,72 @@ namespace fitfam
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.EditFamDetails);
-            var userId = Intent.GetStringExtra("userId");
 
-            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
-            imagebutton1.Click += delegate {
+            // get information from previous page
+            string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
+            var userId = Intent.GetStringExtra("userId") ?? "null";
+            var pic = Intent.GetStringExtra("pic") ?? "null";
+            var location = Intent.GetStringExtra("location") ?? "null";
+            var username = Intent.GetStringExtra("username") ?? "null";
+            var genderInt = Intent.GetIntExtra("gender", -1);
+            var profileId = Intent.GetStringExtra("profileId") ?? "Null";
+
+            // navbar buttons
+            ImageButton homepageButton = FindViewById<ImageButton>(Resource.Id.homepageButton);
+            homepageButton.Click += delegate
+            {
                 Intent intent = new Intent(this, typeof(HomepageActivity));
                 intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
                 StartActivity(intent);
             };
 
-            ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
-            imagebutton2.Click += delegate {
-                StartActivity(typeof(ProfilePageActivity));
+            ImageButton profileButton = FindViewById<ImageButton>(Resource.Id.profileButton);
+            profileButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("username", username);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
             };
 
-            ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
-            imagebutton3.Click += delegate {
-                StartActivity(typeof(NotificationsActivity));
+            ImageButton notificationsButton = FindViewById<ImageButton>(Resource.Id.notificationsButton);
+            notificationsButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(NotificationsActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+
             };
 
-            ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
-            imagebutton4.Click += delegate {
-                StartActivity(typeof(ScheduleActivity));
+            ImageButton scheduleButton = FindViewById<ImageButton>(Resource.Id.scheduleButton);
+            scheduleButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ScheduleActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
             };
 
-            string groupId = Intent.GetStringExtra("groupId") ?? "Data not available";
+
             EditText description = FindViewById<EditText>(Resource.Id.editText);
             var new_description = "";
             description.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
@@ -56,7 +95,14 @@ namespace fitfam
             savechanges_button.Click += delegate
             {
                 //Group.editDescription(groupId, new_description);
-                StartActivity(typeof(FamDetailsPageActivity));
+                Intent intent = new Intent(this, typeof(FamDetailsPageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
             };
         }
     }

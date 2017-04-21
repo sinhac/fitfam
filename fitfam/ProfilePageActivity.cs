@@ -13,11 +13,24 @@ using Amazon.DynamoDBv2;
 using System.Collections.Generic;
 using Amazon.DynamoDBv2.Model;
 
+/*
+ * FitFam 
+ * 
+ * Ehsan Ahmed, Jessa Marie Barre, Shannon Fisher, 
+ * Josh Jacobson, Korey Prendergast, Chandrika Sinha
+ * 4/20/2017
+ * 
+ * ProfilePageActivity: The profile page
+ * User can see and edit user profile
+ * 
+ */
+
 namespace fitfam
 {
     [Activity(Label = "ProfilePageActivity")]
     public class ProfilePageActivity : Activity
     {
+        // private member variables
         private string userId;
         private string profileId;
         GoogleApiClient mGoogleApiClient;
@@ -30,11 +43,74 @@ namespace fitfam
         protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            userId = Intent.GetStringExtra("userId") ?? "Null";
+            SetContentView(Resource.Layout.UserProfilePage);
+
+            // get information from previous page
+            userId = Intent.GetStringExtra("userId") ?? "null";
+            var pic = Intent.GetStringExtra("pic") ?? "null";
+            var location = Intent.GetStringExtra("location") ?? "null";
+            var username = Intent.GetStringExtra("username") ?? "null";
+            var genderInt = Intent.GetIntExtra("gender", -1);
             profileId = Intent.GetStringExtra("profileId") ?? "Null";
+
+            // navbar buttons
+            ImageButton homepageButton = FindViewById<ImageButton>(Resource.Id.homepageButton);
+            homepageButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+            ImageButton profileButton = FindViewById<ImageButton>(Resource.Id.profileButton);
+            profileButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("username", username);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+            ImageButton notificationsButton = FindViewById<ImageButton>(Resource.Id.notificationsButton);
+            notificationsButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(NotificationsActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+
+            };
+
+            ImageButton scheduleButton = FindViewById<ImageButton>(Resource.Id.scheduleButton);
+            scheduleButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ScheduleActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+
+            // get info from user table and display on page
             try
             {
-               
                 AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
                 string tableName = "fitfam-mobilehub-2083376203-users";
@@ -42,98 +118,66 @@ namespace fitfam
                 var request = client.makeGetRequest(tableName, Key);
                 var task = await client.GetItemAsync(dbclient, request);
 
-                SetContentView(Resource.Layout.UserProfilePage);
                 User currentUser = new User(profileId, true);
-                System.Console.WriteLine("User " + profileId + " Name " + task["username"]);
-
-                TextView username = FindViewById<TextView>(Resource.Id.textView1);
-                username.Text = task["username"].S;
+                
+                TextView userName = FindViewById<TextView>(Resource.Id.textView1);
+                userName.Text = task["username"].S;
 
                 LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
                 TextView name = new TextView(this);
-                //name.Text = "Shannon";
                 name.Text = task["username"].S;
                 layout.AddView(name);
 
                 TextView bio = new TextView(this);
                 bio.Text = task["bio"].S;
-                //Console.WriteLine("PROFILE BIO {0}", currentUser.Bio);
                 layout.AddView(bio);
-                /*
-                TextView activities = new TextView(this);
-                activities.Text = ("Activities: " + string.Join(", ", currentUser.Activities));
-                layout.AddView(activities);
-                */
-                // Create your application here
-                Button myfams_button = FindViewById<Button>(Resource.Id.myFamButton);
-                myfams_button.Click += delegate
+
+                Button myFamsButton = FindViewById<Button>(Resource.Id.myFamsButton);
+                myFamsButton.Click += delegate
                 {
-                    StartActivity(typeof(FamProfileActivity));
-                };
-
-                ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
-                imagebutton1.Click += delegate {
-
-                    Intent intent = new Intent(this, typeof(HomepageActivity));
-                    intent.PutExtra("userId", userId);
-                    Console.WriteLine("go home");
-                    StartActivity(intent);
-                };
-
-                ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
-                imagebutton2.Click += delegate {
-                    Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                    Intent intent = new Intent(this, typeof(FamProfileActivity));
                     intent.PutExtra("userId", userId);
                     intent.PutExtra("profileId", userId);
-                    intent.PutExtra("bio", bio.Text);
-                    intent.PutExtra("username", username.Text);
-                    //  intent.PutExtra("gender", );
-                    //intent.Put("activities", user.Activities);
+                    intent.PutExtra("pic", pic);
+                    intent.PutExtra("location", location);
+                    intent.PutExtra("username", username);
+                    intent.PutExtra("gender", genderInt);
                     StartActivity(intent);
                 };
 
-                ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
-                imagebutton3.Click += delegate {
-                    StartActivity(typeof(NotificationsActivity));
-                };
-
-                ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
-                imagebutton4.Click += delegate {
-                    StartActivity(typeof(ScheduleActivity));
-                };
-
-
+                
                 if (userId == profileId)
                 {
-                    Button editprofile_button = FindViewById<Button>(Resource.Id.editProfileButton);
-                    editprofile_button.Click += delegate
+                    Button editProfileButton = FindViewById<Button>(Resource.Id.editProfileButton);
+                    editProfileButton.Click += delegate
                     {
                         Intent intent = new Intent(this, typeof(EditProfilePageActivity));
                         intent.PutExtra("userId", userId);
+                        intent.PutExtra("profileId", userId);
+                        intent.PutExtra("pic", pic);
+                        intent.PutExtra("location", location);
+                        intent.PutExtra("username", username);
+                        intent.PutExtra("gender", genderInt);
                         StartActivity(intent);
                     };
 
                     GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
-                    //builder.AddConnectionCallbacks(this);
-                    //builder.AddOnConnectionFailedListener(this);
                     builder.AddApi(PlusClass.API);
                     builder.AddScope(PlusClass.ScopePlusLogin);
 
                     mGoogleApiClient = builder.Build();
                     mGoogleApiClient.Connect();
 
-                    Button button = new Button(this);
-                    //Does not change
-                    button.Id = 1;
-                    button.SetBackgroundResource(Resource.Drawable.gold_plate); // This is a custom button drawable, defined in XML 
-                    float scale = button.Resources.DisplayMetrics.Density;
-                    button.SetHeight((int)(75 * scale + 0.5f));
-                    button.SetWidth((int)(400 * scale + 0.5f));
+                    Button logoutButton = new Button(this);
+                    logoutButton.Id = 1;
+                    logoutButton.SetBackgroundResource(Resource.Drawable.gold_plate);
+                    float scale = logoutButton.Resources.DisplayMetrics.Density;
+                    logoutButton.SetHeight((int)(75 * scale + 0.5f));
+                    logoutButton.SetWidth((int)(400 * scale + 0.5f));
                     int padding = (int)(16 * scale + 0.5f);
-                    button.Text = "Log Out";
-
-                    layout.AddView(button);
-                    button.Click += delegate
+                    logoutButton.Text = "Log Out";
+                    layout.AddView(logoutButton);
+                    logoutButton.Click += delegate
                     {
                         mGoogleApiClient.ClearDefaultAccountAndReconnect();
                         StartActivity(typeof(MainActivity));
@@ -142,15 +186,15 @@ namespace fitfam
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception {0}\n\n\n\n{1}", ex.Message, ex.Source);
                 Intent intent = new Intent(this, typeof(HomepageActivity));
                 intent.PutExtra("userId", userId);
-                Console.WriteLine("go home fitfam you're drunk");
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
                 StartActivity(intent);
             }
-            
-
         }
-        
     }
 }

@@ -15,7 +15,6 @@ namespace fitfam
             SetContentView(Resource.Layout.EventAttendees);
             var userId = Intent.GetStringExtra("userId");
 
-            // Create your application here
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
             imagebutton1.Click += delegate {
                 Android.Content.Intent intent = new Intent(this, typeof(HomepageActivity));

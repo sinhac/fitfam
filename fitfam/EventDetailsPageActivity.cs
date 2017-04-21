@@ -25,8 +25,7 @@ namespace fitfam
             string userId = Intent.GetStringExtra("userId") ?? "null";
 
             System.Console.WriteLine("event" + eventId);
-
-            //===========================STUFFFFFF====================================================
+            
 
             AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
             AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
@@ -40,36 +39,9 @@ namespace fitfam
             };
 
             Dictionary<string, AttributeValue> eventInfo = new Dictionary<string, AttributeValue>();
-            if (eventInfo.Count == 0)
-            {
-                System.Console.WriteLine("NOOOOOOOOOOOOOOOOOO KEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYS111111111111");
-            }
             var task = await client.GetItemAsync(dbclient, request);
             eventInfo = task;
 
-            if (task.Values.Count > 0)
-            {
-                System.Console.WriteLine("SUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
-            }
-
-            foreach (KeyValuePair<string, AttributeValue> kvp in eventInfo)
-            {
-                System.Console.WriteLine("THIIIIIIIIIIIIIIIIIIING " + kvp.Key);
-                var value = kvp.Value;
-
-                System.Console.WriteLine(
-                    "VALUUUUE: " + kvp.Key + " " +
-                    (value.S == null ? "" : "S=[" + value.S + "]") +
-                    (value.N == null ? "" : "N=[" + value.N + "]") +
-                    (value.SS == null ? "" : "SS=[" + string.Join(",", value.SS.ToArray()) + "]") +
-                    (value.NS == null ? "" : "NS=[" + string.Join(",", value.NS.ToArray()) + "]")
-                    );
-            }
-
-            System.Console.WriteLine("Idddddddddddddddddddddddddddddddd: " + eventId);
-
-
-            //===============================STUFFFF=================================================
             try
             {
                 LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);

@@ -381,7 +381,6 @@ namespace fitfam
                                 boost = Convert.ToDouble(kvp.Value.N);
                                 break;
                             default:
-                                Console.WriteLine("Group fucked up");
                                 break;
                         }
                     }

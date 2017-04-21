@@ -6,36 +6,98 @@ using Android.Widget;
 using System;
 using System.Collections.Generic;
 
+/*
+ * FitFam 
+ * 
+ * Ehsan Ahmed, Jessa Marie Barre, Shannon Fisher, 
+ * Josh Jacobson, Korey Prendergast, Chandrika Sinha
+ * 4/20/2017
+ * 
+ * FindAFamFormActivity: The page to search for groups aka "fams"
+ * Search for fams using filters such as activity
+ * 
+ */
+
 namespace fitfam
 {
     [Activity(Label = "FindafamformActivity")]
     public class FindAFamFormActivity : Activity
     {
+        // private member variables
         private object spinner_ItemSelected;
         private string userId;
         private User user;
-        protected async override void OnCreate(Bundle savedInstanceState)
 
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            userId = Intent.GetStringExtra("userId") ?? "null";
-            Console.WriteLine("matches userid {0}", userId);
-            user = new User(userId, true);
             SetContentView(Resource.Layout.FindAFamForm);
 
-            // Create your application here
-            Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner1);
+            // get information from previous page
+            userId = Intent.GetStringExtra("userId") ?? "null";
+            var pic = Intent.GetStringExtra("pic") ?? "null";
+            var location = Intent.GetStringExtra("location") ?? "null";
+            var username = Intent.GetStringExtra("username") ?? "null";
+            var genderInt = Intent.GetIntExtra("gender", -1);
+            var profileId = Intent.GetStringExtra("profileId") ?? "Null";
+            user = new User(userId, true);
 
-            spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
-            var adapter = ArrayAdapter.CreateFromResource(
-                    this, Resource.Array.experience_array, Android.Resource.Layout.SimpleSpinnerItem);
+            // navbar buttons
+            ImageButton homepageButton = FindViewById<ImageButton>(Resource.Id.homepageButton);
+            homepageButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
 
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spinner.Adapter = adapter;
-            
+            ImageButton profileButton = FindViewById<ImageButton>(Resource.Id.profileButton);
+            profileButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("username", username);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
 
+            ImageButton notificationsButton = FindViewById<ImageButton>(Resource.Id.notificationsButton);
+            notificationsButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(NotificationsActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
 
-            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.multiAutoCompleteTextView1);
+            };
+
+            ImageButton scheduleButton = FindViewById<ImageButton>(Resource.Id.scheduleButton);
+            scheduleButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ScheduleActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+            // set the preferred activities
+            var tags = FindViewById<MultiAutoCompleteTextView>(Resource.Id.activityTags);
             var adapter2 = ArrayAdapter.CreateFromResource(this, Resource.Array.ACTIVITIES, Android.Resource.Layout.SimpleSpinnerItem);
             adapter2.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 
@@ -49,18 +111,21 @@ namespace fitfam
             {
                 tagsInput = e.Text.ToString();
             };
+
+            // choose the experience level
+            Spinner experienceSpinner = FindViewById<Spinner>(Resource.Id.experienceSpinner);
+
+            experienceSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(Spinner_ItemSelected);
+            var adapter = ArrayAdapter.CreateFromResource(
+                    this, Resource.Array.experience_array, Android.Resource.Layout.SimpleSpinnerItem);
+
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            experienceSpinner.Adapter = adapter;
             
-
-            var cityZip = FindViewById<EditText>(Resource.Id.cityzip);
-            var cityZipInput = "";
-            cityZip.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
-            {
-                cityZipInput = e.Text.ToString();
-            };
-
-            Button button2 = FindViewById<Button>(Resource.Id.button2);
-            button2.Click += async delegate {
-                var experienceLevel = (string)spinner.GetItemAtPosition(spinner.SelectedItemPosition);
+            // button that routes to the matches page when ready to find groups
+            Button findFamButton = FindViewById<Button>(Resource.Id.findFamButton);
+            findFamButton.Click += async delegate {
+                var experienceLevel = (string)experienceSpinner.GetItemAtPosition(experienceSpinner.SelectedItemPosition);
                 var results = new List<string>();
                 var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 var client = awsClient.getDynamoDBClient();
@@ -75,13 +140,11 @@ namespace fitfam
                 var request = new ScanRequest
                 {
                     TableName = "fitfam-mobilehub-2083376203-groups",
-                    //ProjectionExpression = "groupId, tags, experienceLevels"
                 };
                 var response = await client.ScanAsync(request);
                 var result = response.Items;
 
-
-
+                // algorithm to find matches
                 int numRows = 0;
                 foreach (Dictionary<string, AttributeValue> item in result)
                 {
@@ -128,50 +191,22 @@ namespace fitfam
                     }
                 }
 
-                //FindAFam famSearch = new FindAFam(user, tagsList, experienceLevel);
                 Intent intent = new Intent(this, typeof(MatchesActivity));
-                //var results = famSearch.FamSearchResults;    
                 intent.PutExtra("matches", results.ToArray());
                 intent.PutExtra("userId", userId);
-                StartActivity(intent);
-            };
-
-            /* navbar buttons */
-            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
-            imagebutton1.Click += delegate {
-                Intent intent = new Intent(this, typeof(HomepageActivity));
-                intent.PutExtra("userId", userId);
-                StartActivity(intent);
-            };
-
-            ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
-            imagebutton2.Click += delegate {
-                Intent intent = new Intent(this, typeof(ProfilePageActivity));
-                intent.PutExtra("userId", userId);
                 intent.PutExtra("profileId", userId);
-                intent.PutExtra("bio", user.Bio);
-                intent.PutExtra("username", user.Username);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
                 intent.PutExtra("gender", user.Gender);
-                //intent.Put("activities", user.Activities);
                 StartActivity(intent);
-            };
-
-            ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
-            imagebutton3.Click += delegate {
-                StartActivity(typeof(NotificationsActivity));
-            };
-
-            ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
-            imagebutton4.Click += delegate {
-                StartActivity(typeof(ScheduleActivity));
             };
         }
+
+        // function that helps spinner work
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
-
-            string toast = string.Format("My experience level is {0}", spinner.GetItemAtPosition(e.Position));
-            Toast.MakeText(this, toast, ToastLength.Long).Show();
         }
     }
 }

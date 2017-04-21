@@ -574,7 +574,6 @@ namespace fitfam
                                     }
                                     break;               
                                 default:
-                                    Console.WriteLine("done fucked up");
                                     break;
 
                             }

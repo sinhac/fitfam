@@ -33,25 +33,25 @@
                     android:gravity="center">
                     <ImageButton
                         android:src="@drawable/home"
-                        android:id="@+id/imageButton1"
+                        android:id="@+id/homepageButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/face"
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/profileButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/message"
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/notificationsButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageButton
                         android:src="@drawable/clock"
-                        android:id="@+id/imageButton4"
+                        android:id="@+id/scheduleButton"
                         android:background="@drawable/gold_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
