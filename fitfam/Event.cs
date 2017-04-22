@@ -111,7 +111,7 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newTag",new AttributeValue { S = tag }},  // new activity to update user's activities with 
+                    {":newTag",new AttributeValue { S = tag }},  // new activity to add to event tags 
                 },
                 // activity added to list in database entry
                 UpdateExpression = expression
@@ -133,9 +133,9 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":oldTag",new AttributeValue { S = tag }},  // new activity to update user's activities with 
+                    {":oldTag",new AttributeValue { S = tag }},  // new tag to remove from event tags  
                 },
-                // activity added to list in database entry
+                // tag removed from list in database entry
                 UpdateExpression = "DELETE #T :oldTag"
             };
             var response = dbclient.UpdateItemAsync(request);
@@ -317,7 +317,7 @@ namespace fitfam
             this.creator = creator;
             this.addAttending(creator);
             this.boost = boost;
-            Console.WriteLine("tag count: {0}", this.tags.Count);
+
             using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
             {
                 using (var client = awsClient.getDynamoDBClient())
@@ -339,9 +339,7 @@ namespace fitfam
                         { "tags", new AttributeValue { SS = this.tags } },
                         { "attending", new AttributeValue { SS = attending_userids } }
                     };
-                    System.Console.WriteLine("after attending");
                     awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
-                    System.Console.WriteLine("after put item");
                 }
             }
         }
@@ -429,7 +427,7 @@ namespace fitfam
                 expression = "ADD #S :newShared";
             }
             shared.Add(sharedUser);
-            // create request to add attending user's userId to list in database
+
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
             var request = new UpdateItemRequest
@@ -442,10 +440,9 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newShared",new AttributeValue { S = sharedUser.UserId }},  // userId to be added to list of attending
+                    {":newShared",new AttributeValue { S = sharedUser.UserId }},  
                 },
 
-                // expression to add user's id to "attending" list in database entry
                 UpdateExpression = expression
             };
             var response = dbclient.UpdateItemAsync(request);
@@ -480,7 +477,6 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
             attendingUser.removeJoinedEvent(this);
-            // TO-DO: error-check response
         }
 
         public void removeShared(User sharedUser)
@@ -508,7 +504,6 @@ namespace fitfam
             };
             var response = dbclient.UpdateItemAsync(request);
             sharedUser.removeJoinedEvent(this);
-            // TO-DO: error-check response
         }
 
       

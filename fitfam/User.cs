@@ -146,10 +146,8 @@ namespace fitfam
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newExperienceLevel",new AttributeValue { S = experienceLevel }},  // new bio to update user's bio with 
+                    {":newExperienceLevel",new AttributeValue { S = experienceLevel }},  
                 },
-
-                    // expression to set pic in database entry
                     UpdateExpression = "SET #E = :newExperienceLevel"
                 };
                 var response = dbclient.UpdateItemAsync(request);
@@ -180,10 +178,10 @@ namespace fitfam
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newFitFam",new AttributeValue { SS = new List<string>{ group.GroupId } }},  // new activity to update user's activities with 
+                    {":newFitFam",new AttributeValue { SS = new List<string>{ group.GroupId } }},  
                 },
 
-                    // activity added to list in database entry
+                    // fitFam added to list in database entry
                     UpdateExpression = expression
                 };
                 var response = dbclient.UpdateItemAsync(request);
@@ -204,10 +202,8 @@ namespace fitfam
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newFitFam",new AttributeValue { S = group.GroupId }},  // new activity to update user's activities with 
+                    {":newFitFam",new AttributeValue { S = group.GroupId }}, 
                 },
-
-                    // activity added to list in database entry
                     UpdateExpression = expression
                 };
                 var response = dbclient.UpdateItemAsync(request);
@@ -272,10 +268,9 @@ namespace fitfam
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newJoinedEvent",new AttributeValue { SS = new List<string>{ joinedEvent.EventId } }},  // new activity to update user's activities with 
+                    {":newJoinedEvent",new AttributeValue { SS = new List<string>{ joinedEvent.EventId } }},  
                 },
 
-                    // activity added to list in database entry
                     UpdateExpression = expression
                 };
                 var response = dbclient.UpdateItemAsync(request);
@@ -296,10 +291,8 @@ namespace fitfam
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newJoinedEvent",new AttributeValue { S = joinedEvent.EventId }},  // new activity to update user's activities with 
+                    {":newJoinedEvent",new AttributeValue { S = joinedEvent.EventId }},  
                 },
-
-                    // activity added to list in database entry
                     UpdateExpression = expression
                 };
                 var response = dbclient.UpdateItemAsync(request);
@@ -388,10 +381,10 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newSharedEvent",new AttributeValue { S = sharedEvent.EventId }},  // new activity to update user's activities with 
+                    {":newSharedEvent",new AttributeValue { S = sharedEvent.EventId }},  
                 },
 
-                // activity added to list in database entry
+                // event added to list in database entry
                 UpdateExpression = expression
             };
             var response = dbclient.UpdateItemAsync(request);
@@ -412,10 +405,10 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":oldSharedEvent",new AttributeValue { S = sharedEvent.EventId }},  // new activity to update user's activities with 
+                    {":oldSharedEvent",new AttributeValue { S = sharedEvent.EventId }}, 
                 },
 
-                // activity added to list in database entry
+                // shared event added to list in database entry
                 UpdateExpression = "DELETE #SE oldSharedEvent"
             };
             var response = dbclient.UpdateItemAsync(request);
@@ -440,10 +433,10 @@ namespace fitfam
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newLocation",new AttributeValue { S = location }},  // new pic to update user's pic with 
+                    {":newLocation",new AttributeValue { S = location }},  
                 },
 
-                    // expression to set pic in database entry
+                    // expression to set location in database entry
                     UpdateExpression = "SET #L = :newLocation"
                 };
                 var response = dbclient.UpdateItemAsync(request);
