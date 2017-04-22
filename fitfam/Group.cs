@@ -245,18 +245,18 @@ namespace fitfam
             get { return boost; }
         }
 
-        private List<string> experienceLevels = new List<string>();
-        public List<string> ExperienceLevels
+        private List<string> experienceLevel = new List<string>();
+        public List<string> ExperienceLevel
         {
-            get { return experienceLevels; }
+            get { return experienceLevel; }
         }
         public void addExperienceLevel(string level)
         {
             string expression;
-            if (experienceLevels.Count == 0)
+            if (experienceLevel.Count == 0)
             {
                 expression = "SET #EL = :newLevel";
-                experienceLevels.Add(level);
+                experienceLevel.Add(level);
                 AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
                 var request = new UpdateItemRequest
@@ -265,11 +265,11 @@ namespace fitfam
                     Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
                     ExpressionAttributeNames = new Dictionary<string, string>()
                 {
-                    {"#EL", "experienceLevels"},  // attribute to be updated
+                    {"#EL", "experienceLevel"},  // attribute to be updated
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newLevel", new AttributeValue { SS = new List<string> { level } } } // new activity to update user's activities with 
+                    {":newLevel", new AttributeValue { SS = new List<string> { level } } }  
                 },
 
                     // activity added to list in database entry
@@ -280,7 +280,7 @@ namespace fitfam
             else
             {
                 expression = "ADD #EL :newLevel";
-                experienceLevels.Add(level);
+                experienceLevel.Add(level);
                 AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
                 var request = new UpdateItemRequest
@@ -289,7 +289,7 @@ namespace fitfam
                     Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
                     ExpressionAttributeNames = new Dictionary<string, string>()
                 {
-                    {"#EL", "experienceLevels"},  // attribute to be updated
+                    {"#EL", "experienceLevel"},  // attribute to be updated
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
@@ -306,7 +306,7 @@ namespace fitfam
 
         public void removeExperienceLevel(string level)
         {
-            experienceLevels.Remove(level);
+            experienceLevel.Remove(level);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
             Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
             var request = new UpdateItemRequest
@@ -315,14 +315,14 @@ namespace fitfam
                 Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
                 ExpressionAttributeNames = new Dictionary<string, string>()
                 {
-                    {"#EL", "experienceLevels"},  // attribute to be updated
+                    {"#EL", "experienceLevel"},  // attribute to be updated
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":oldLevel", new AttributeValue { S = level } } // new activity to update user's activities with 
+                    {":oldLevel", new AttributeValue { S = level } } 
                 },
 
-                // activity added to list in database entry
+                // level removed from list in database entry
                 UpdateExpression = "DELETE #EL :oldLevel"
             };
             var response = dbclient.UpdateItemAsync(request);
@@ -358,8 +358,8 @@ namespace fitfam
                                     eventList.Add(new Event(eventId));
                                 }
                                 break;
-                            case "experienceLevels":
-                                experienceLevels = kvp.Value.SS.ToList();
+                            case "experienceLevel":
+                                experienceLevel = kvp.Value.SS.ToList();
                                 break;
                             case "groupName":
                                 groupName = kvp.Value.S;
@@ -571,7 +571,7 @@ namespace fitfam
                     {":newDescription", new AttributeValue { S = newDescription }  }  // new description to update group's description with 
                 },
 
-                // activity added to list in database entry
+                // description changed in database entry
                 UpdateExpression = "SET #D :newDescription"
             };
             var response = await dbclient.UpdateItemAsync(request);

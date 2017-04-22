@@ -114,13 +114,6 @@ namespace fitfam
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             experienceSpinner.Adapter = adapter;
 
-            char[] delimiters = { ',', '\t', '\n' };
-            tagsArr = tagsInput.Split(delimiters);
-            for (int i = 0; i < tagsArr.Length; i++)
-            {
-                tagsList.Add(tagsArr[i]);
-            }
-
             //Date picker
             DatePicker dateStart = FindViewById<DatePicker>(Resource.Id.startDate);
             DatePicker dateEnd = FindViewById<DatePicker>(Resource.Id.endDate);
@@ -167,9 +160,10 @@ namespace fitfam
 
             // Find Events button functionality
             Button findEventButton = FindViewById<Button>(Resource.Id.findEventButton);
-            findEventButton.Click += delegate
+            findEventButton.Click += async delegate
             {
                 // tags
+                char[] delimiters = { ',', '\t', '\n' };
                 tagsArr = tagsInput.Split(delimiters);
                 for (int i = 0; i < tagsArr.Length; i++)
                 {
@@ -195,7 +189,69 @@ namespace fitfam
                 minute = (string)endMinSpinner.GetItemAtPosition(endMinSpinner.SelectedItemPosition);
                 endInput = endInput.AddMinutes(Convert.ToDouble(minute));
 
+                var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                var client = awsClient.getDynamoDBClient();
+
+                var request = new ScanRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-events",
+                };
+                var response = await client.ScanAsync(request);
+                var result = response.Items;
+                System.Console.WriteLine("Looking for event matches");
+
+                var results = new List<string>();
+
+                // algorithm to find matches
+                int numRows = 0;
+                foreach (Dictionary<string, AttributeValue> item in result)
+                {
+                    numRows++;
+                    int numMatches = 0;
+                    string eventId = item["eventId"].S;
+
+                    foreach (var kvp in item)
+                    {
+                        if (kvp.Key == "tags")
+                        {
+                            var eventTags = kvp.Value.L;
+                            foreach (var t in eventTags)
+                            {
+                                string s = t.S;
+                                foreach (string tag in tagsList)
+                                {
+                                    Console.WriteLine(s + " compared to " + tag);
+                                    if (s.ToLower() == tag.ToLower())
+                                    {
+                                        numMatches++;
+                                    }
+                                }
+                            }
+                        }
+                        if (kvp.Key == "experienceLevel")
+                        {
+                            var experienceLevels = kvp.Value.L;
+                            int numExp = 0;
+                            foreach (var e in experienceLevels)
+                            {
+                                string s = e.S;
+                                numExp++;
+                                if (s == experienceLevel)
+                                {
+                                    numMatches++;
+                                }
+                            }
+                        }
+                    }
+                    if (numMatches >= 2)
+                    {
+                        System.Console.WriteLine("Number of event matches found: " + numMatches);
+                        results.Add(item["eventId"].S);
+                    }
+                }
+
                 Intent intent = new Intent(this, typeof(EventMatchesActivity));
+                intent.PutExtra("matches", results.ToArray());
                 intent.PutExtra("userId", userId);
                 intent.PutExtra("profileId", userId);
                 intent.PutExtra("pic", pic);

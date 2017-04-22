@@ -145,6 +145,7 @@ namespace fitfam
         // handles code if connection takes too long
         public void OnConnectionSuspended(int cause)
         {
+            Console.WriteLine("CONNECTION SUSPENDED: cause " + cause);
             throw new NotImplementedException();
         }
 
