@@ -2272,26 +2272,8 @@ namespace fitfam
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020130
-			public const int avd_hide_password_1 = 2130837808;
-			
-			// aapt resource value: 0x7f020131
-			public const int avd_hide_password_2 = 2130837809;
-			
-			// aapt resource value: 0x7f020132
-			public const int avd_hide_password_3 = 2130837810;
-			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
-			
-			// aapt resource value: 0x7f020133
-			public const int avd_show_password_1 = 2130837811;
-			
-			// aapt resource value: 0x7f020134
-			public const int avd_show_password_2 = 2130837812;
-			
-			// aapt resource value: 0x7f020135
-			public const int avd_show_password_3 = 2130837813;
 			
 			// aapt resource value: 0x7f020055
 			public const int clock = 2130837589;
@@ -3188,8 +3170,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0123
 			public const int editProfileButton = 2131427619;
 			
-			// aapt resource value: 0x7f0b00c9
-			public const int editText = 2131427529;
+			// aapt resource value: 0x7f0b00c5
+			public const int editText = 2131427525;
 			
 			// aapt resource value: 0x7f0b006d
 			public const int edit_query = 2131427437;
@@ -3290,17 +3272,17 @@ namespace fitfam
 			// aapt resource value: 0x7f0b004d
 			public const int image = 2131427405;
 			
-			// aapt resource value: 0x7f0b00c5
-			public const int imageButton1 = 2131427525;
-			
-			// aapt resource value: 0x7f0b00c6
-			public const int imageButton2 = 2131427526;
-			
 			// aapt resource value: 0x7f0b00c7
-			public const int imageButton3 = 2131427527;
+			public const int imageButton1 = 2131427527;
 			
 			// aapt resource value: 0x7f0b00c8
-			public const int imageButton4 = 2131427528;
+			public const int imageButton2 = 2131427528;
+			
+			// aapt resource value: 0x7f0b00c9
+			public const int imageButton3 = 2131427529;
+			
+			// aapt resource value: 0x7f0b00ca
+			public const int imageButton4 = 2131427530;
 			
 			// aapt resource value: 0x7f0b00ea
 			public const int imageView1 = 2131427562;
@@ -3548,8 +3530,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00c4
 			public const int saveChangesButton = 2131427524;
 			
-			// aapt resource value: 0x7f0b00ca
-			public const int save_changes_button = 2131427530;
+			// aapt resource value: 0x7f0b00c6
+			public const int save_changes_button = 2131427526;
 			
 			// aapt resource value: 0x7f0b0081
 			public const int scheduleButton = 2131427457;

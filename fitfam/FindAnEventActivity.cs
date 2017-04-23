@@ -174,20 +174,20 @@ namespace fitfam
                 var experienceLevel = (string)experienceSpinner.GetItemAtPosition(experienceSpinner.SelectedItemPosition);
 
                 // date
-                startInput = dateStart.DateTime;
-                endInput = dateEnd.DateTime;
+                //startInput = dateStart.DateTime;
+                //endInput = dateEnd.DateTime;
 
-                // start time
-                string hour = (string)startHourSpinner.GetItemAtPosition(startHourSpinner.SelectedItemPosition);
-                startInput = startInput.AddHours(Convert.ToDouble(hour));
-                string minute = (string)startMinSpinner.GetItemAtPosition(startMinSpinner.SelectedItemPosition);
-                startInput = startInput.AddMinutes(Convert.ToDouble(minute));
+                //// start time
+                //string hour = (string)startHourSpinner.GetItemAtPosition(startHourSpinner.SelectedItemPosition);
+                //startInput = startInput.AddHours(Convert.ToDouble(hour));
+                //string minute = (string)startMinSpinner.GetItemAtPosition(startMinSpinner.SelectedItemPosition);
+                //startInput = startInput.AddMinutes(Convert.ToDouble(minute));
 
-                // end time
-                hour = (string)endHourSpinner.GetItemAtPosition(endHourSpinner.SelectedItemPosition);
-                endInput = endInput.AddHours(Convert.ToDouble(hour));
-                minute = (string)endMinSpinner.GetItemAtPosition(endMinSpinner.SelectedItemPosition);
-                endInput = endInput.AddMinutes(Convert.ToDouble(minute));
+                //// end time
+                //hour = (string)endHourSpinner.GetItemAtPosition(endHourSpinner.SelectedItemPosition);
+                //endInput = endInput.AddHours(Convert.ToDouble(hour));
+                //minute = (string)endMinSpinner.GetItemAtPosition(endMinSpinner.SelectedItemPosition);
+                //endInput = endInput.AddMinutes(Convert.ToDouble(minute));
 
                 var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 var client = awsClient.getDynamoDBClient();
