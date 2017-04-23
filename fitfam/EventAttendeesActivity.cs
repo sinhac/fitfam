@@ -11,32 +11,72 @@ namespace fitfam
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.EventAttendees);
-            var userId = Intent.GetStringExtra("userId");
 
-            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
-            imagebutton1.Click += delegate {
-                Android.Content.Intent intent = new Intent(this, typeof(HomepageActivity));
+            // get information from previous page
+            string userId = Intent.GetStringExtra("userId") ?? "null";
+            User user = new User(userId, false);
+            var pic = Intent.GetStringExtra("pic") ?? "null";
+            var location = Intent.GetStringExtra("location") ?? "null";
+            var username = Intent.GetStringExtra("username") ?? "null";
+            var genderInt = Intent.GetIntExtra("gender", -1);
+            var profileId = Intent.GetStringExtra("profileId") ?? "Null";
+
+            // navbar buttons
+            ImageButton homepageButton = FindViewById<ImageButton>(Resource.Id.homepageButton);
+            homepageButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(HomepageActivity));
                 intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
                 StartActivity(intent);
-                StartActivity(typeof(HomepageActivity));
             };
 
-            ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
-            imagebutton2.Click += delegate {
-                StartActivity(typeof(ProfilePageActivity));
+            ImageButton profileButton = FindViewById<ImageButton>(Resource.Id.profileButton);
+            profileButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("username", username);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
             };
 
-            ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
-            imagebutton3.Click += delegate {
-                StartActivity(typeof(NotificationsActivity));
+            ImageButton notificationsButton = FindViewById<ImageButton>(Resource.Id.notificationsButton);
+            notificationsButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(NotificationsActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+
             };
 
-            ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
-            imagebutton4.Click += delegate {
-                StartActivity(typeof(ScheduleActivity));
+            ImageButton scheduleButton = FindViewById<ImageButton>(Resource.Id.scheduleButton);
+            scheduleButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ScheduleActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
             };
+
+
 
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += delegate {

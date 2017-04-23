@@ -228,7 +228,7 @@ namespace fitfam
                                 }
                             }
                         }
-                        if (kvp.Key == "experienceLevel")
+                        else if (kvp.Key == "experienceLevel")
                         {
                             var experienceLevels = kvp.Value.L;
                             int numExp = 0;
@@ -237,6 +237,17 @@ namespace fitfam
                                 string s = e.S;
                                 numExp++;
                                 if (s == experienceLevel)
+                                {
+                                    numMatches++;
+                                }
+                            }
+                        }
+                        else if (kvp.Key == "description")
+                        {
+                            var desc = kvp.Value.S;
+                            foreach (string tag in tagsList)
+                            {
+                                if (desc.ToLower().Contains(tag))
                                 {
                                     numMatches++;
                                 }
