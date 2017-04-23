@@ -236,7 +236,7 @@ namespace fitfam
                             {
                                 string s = e.S;
                                 numExp++;
-                                if (s == experienceLevel)
+                                if (s[0] == experienceLevel[0])
                                 {
                                     numMatches++;
                                 }

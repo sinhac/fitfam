@@ -118,6 +118,7 @@ namespace fitfam
             //num_buttons will be taken from database COUNT(matches)
             int num_buttons = matches.Length;
 
+            System.Console.WriteLine("MAAAAAAAAAAAAAAAAAAAATCHES " + matches.Length);
             ViewGroup matchButtonLayout = (ViewGroup)FindViewById(Resource.Id.radioGroup1);  // This is the id of the RadioGroup we defined
             for (var i = 0; i < matches.Length; i++)
             {

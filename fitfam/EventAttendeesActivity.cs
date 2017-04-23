@@ -21,7 +21,7 @@ namespace fitfam
             var username = Intent.GetStringExtra("username") ?? "null";
             var genderInt = Intent.GetIntExtra("gender", -1);
             var profileId = Intent.GetStringExtra("profileId") ?? "Null";
-            creator = new User(userId, true);
+            User creator = new User(userId, true);
 
             // navbar buttons
             ImageButton homepageButton = FindViewById<ImageButton>(Resource.Id.homepageButton);
