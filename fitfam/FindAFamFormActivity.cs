@@ -160,10 +160,10 @@ namespace fitfam
                     {
                         if (kvp.Key == "tags")
                         {
-                            var groupTags = kvp.Value.L;
+                            var groupTags = kvp.Value.SS;
                             foreach (var t in groupTags)
                             {
-                                string s = t.S;
+                                string s = t;
                                 foreach (string tag in tagsList)
                                 {
                                     Console.WriteLine(s + " compared to " + tag);
@@ -176,11 +176,11 @@ namespace fitfam
                         }
                         if (kvp.Key == "experienceLevel")
                         {
-                            var experienceLevels = kvp.Value.L;
+                            var experienceLevels = kvp.Value.SS;
                             int numExp = 0;
                             foreach (var e in experienceLevels)
                             {
-                                string s = e.S;
+                                string s = e;
                                 numExp++;
                                 if (s[0] == experienceLevel[0])
                                 {
