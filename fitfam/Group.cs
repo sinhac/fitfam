@@ -43,14 +43,14 @@ namespace fitfam
                         {
                             {"#GN", "groupName" }
                         };
-                            var attrVals = new Dictionary<string, AttributeValue>()
+                        var attrVals = new Dictionary<string, AttributeValue>()
                         {
                             {":groupNameValue", new AttributeValue {S = groupName} }
                         };
                         var expression = "SET #GN = :groupNameValue";
                         var request = awsClient.makeUpdateRequest("fitfam-mobilehub-2083376203-groups", key, attrNames, attrVals, expression);
                         client.UpdateItemAsync(request);
-                    }                
+                    }
                 }
             }
         }
@@ -93,30 +93,50 @@ namespace fitfam
             if (tags.Count == 0)
             {
                 expression = "SET #T = :newTag";
+                tags.Add(tag);
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#T", "tags"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newTag",new AttributeValue { L = new List<AttributeValue>() { new AttributeValue { S = tag } } }},  // new activity to update user's activities with 
+                },
+                    // activity added to list in database entry
+                    UpdateExpression = expression
+                };
+                var response = dbclient.UpdateItemAsync(request);
             }
             else
             {
                 expression = "ADD #T  :newTag";
-            }
-            tags.Add(tag);
-            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
-            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
-            var request = new UpdateItemRequest
-            {
-                TableName = "fitfam-mobilehub-2083376203-groups",
-                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
-                ExpressionAttributeNames = new Dictionary<string, string>()
+                tags.Add(tag);
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
                 {
                     {"#T", "tags"},  // attribute to be updated
                 },
-                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
                     {":newTag",new AttributeValue { S = tag }},  // new activity to update user's activities with 
                 },
-                // activity added to list in database entry
-                UpdateExpression = expression
-            };
-            var response = dbclient.UpdateItemAsync(request);
+                    // activity added to list in database entry
+                    UpdateExpression = expression
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+
         }
         public void removeTag(string tag)
         {
@@ -184,31 +204,52 @@ namespace fitfam
             if (joinRequests.Count == 0)
             {
                 expression = "SET #JR = :newRequest";
+                joinRequests.Add(user);
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#JR", "joinRequests"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newRequest", new AttributeValue { L = new List<AttributeValue> { new AttributeValue{ S = user.UserId } } } } // new activity to update user's activities with 
+                },
+
+                    // activity added to list in database entry
+                    UpdateExpression = expression
+                };
+                var response = dbclient.UpdateItemAsync(request);
             }
             else
             {
                 expression = "ADD #JR :newRequest";
-            }
-            joinRequests.Add(user);
-            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
-            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
-            var request = new UpdateItemRequest
-            {
-                TableName = "fitfam-mobilehub-2083376203-groups",
-                Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
-                ExpressionAttributeNames = new Dictionary<string, string>()
+                joinRequests.Add(user);
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-groups",
+                    Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
                 {
                     {"#JR", "joinRequests"},  // attribute to be updated
                 },
-                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
                     {":newRequest", new AttributeValue { S = user.UserId } } // new activity to update user's activities with 
                 },
 
-                // activity added to list in database entry
-                UpdateExpression = expression
-            };
-            var response = dbclient.UpdateItemAsync(request);
+                    // activity added to list in database entry
+                    UpdateExpression = expression
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+
         }
         private List<Event> eventList = new List<Event>();
         public List<Event> EventList
@@ -269,7 +310,7 @@ namespace fitfam
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newLevel", new AttributeValue { SS = new List<string> { level } } }  
+                    {":newLevel", new AttributeValue { L = new List<AttributeValue> { new AttributeValue { S = level } } } }
                 },
 
                     // activity added to list in database entry
@@ -301,7 +342,7 @@ namespace fitfam
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
-           
+
         }
 
         public void removeExperienceLevel(string level)
@@ -319,7 +360,7 @@ namespace fitfam
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":oldLevel", new AttributeValue { S = level } } 
+                    {":oldLevel", new AttributeValue { S = level } }
                 },
 
                 // level removed from list in database entry
@@ -352,14 +393,17 @@ namespace fitfam
                                 description = kvp.Value.S;
                                 break;
                             case "eventList":
-                                var eventIdList = kvp.Value.SS.ToList<string>();
+                                var eventIdList = kvp.Value.L;
                                 foreach (var eventId in eventIdList)
                                 {
-                                    eventList.Add(new Event(eventId));
+                                    eventList.Add(new Event(eventId.S));
                                 }
                                 break;
                             case "experienceLevel":
-                                experienceLevel = kvp.Value.SS.ToList();
+                                foreach (var item in kvp.Value.L)
+                                {
+                                    experienceLevel.Add(item.S);
+                                }
                                 break;
                             case "groupName":
                                 groupName = kvp.Value.S;
@@ -368,14 +412,17 @@ namespace fitfam
                                 var membersMap = kvp.Value.M;
                                 foreach (var keyVal in membersMap)
                                 {
-                                    members.Add(new User(keyVal.Key,false), keyVal.Value.BOOL);
+                                    members.Add(new User(keyVal.Key, false), keyVal.Value.BOOL);
                                 }
                                 break;
                             case "pic":
                                 pic = kvp.Value.S;
                                 break;
                             case "tags":
-                                tags = kvp.Value.SS.ToList();
+                                foreach (var item in kvp.Value.L)
+                                {
+                                    tags.Add(item.S);
+                                }
                                 break;
                             case "boost":
                                 boost = Convert.ToDouble(kvp.Value.N);
@@ -440,24 +487,34 @@ namespace fitfam
                     System.Console.WriteLine("connected to database");
                     using (var client = awsClient.getDynamoDBClient())
                     {
-                        System.Console.WriteLine("writing to database");
-                        var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups");
+                        try
+                        {
+                            System.Console.WriteLine("writing to database");
+                            var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups");
 
 
-                        var groupEntry = new Document();
-                        groupEntry["groupId"] = groupId;
-                        groupEntry["groupName"] = groupName;
-                        groupEntry["description"] = description;
-                        var membersDoc = new Document();
-                        membersDoc[creatorId] = true;
-                        groupEntry["members"] = membersDoc;
-                     //   groupEntry["tags"] = tags;
-                        Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
-                        key.Add("groupId", new AttributeValue { S = groupId });
+                            var groupEntry = new Document();
+                            groupEntry["groupId"] = groupId;
+                            groupEntry["groupName"] = groupName;
+                            groupEntry["description"] = description;
+                            var membersDoc = new Document();
+                            membersDoc[creatorId] = true;
+                            groupEntry["members"] = membersDoc;
+                            groupEntry["tags"] = tags;
+                            Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
+                            key.Add("groupId", new AttributeValue { S = groupId });
+                            //     groupEntry["experienceLevel"] = experienceLevel;
+                            var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
+                            var response = await table.PutItemAsync(groupEntry);
+                            System.Console.WriteLine("wrote to database");
 
-                        var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
-                        var response = await table.PutItemAsync(groupEntry);
-                        System.Console.WriteLine("wrote to database");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Group Exception: {0}\n{1}", ex.Message, ex.Source);
+                        }
+
 
                     }
                 }
@@ -466,7 +523,7 @@ namespace fitfam
             {
                 Console.WriteLine("EXCEPTION: {0}\n{1}", ex.Message, ex.ToString());
             }
-       
+
         }
 
         public void addMember(User user, bool isAdmin)
