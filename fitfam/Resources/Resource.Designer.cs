@@ -3020,8 +3020,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0119
 			public const int actions = 2131427609;
 			
-			// aapt resource value: 0x7f0b00d0
-			public const int activityEdit = 2131427536;
+			// aapt resource value: 0x7f0b00cc
+			public const int activityEdit = 2131427532;
 			
 			// aapt resource value: 0x7f0b009a
 			public const int activityTags = 2131427482;
@@ -3053,14 +3053,14 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0015
 			public const int auto = 2131427349;
 			
-			// aapt resource value: 0x7f0b00e0
-			public const int backToSearchButton = 2131427552;
+			// aapt resource value: 0x7f0b00dc
+			public const int backToSearchButton = 2131427548;
 			
 			// aapt resource value: 0x7f0b0028
 			public const int beginning = 2131427368;
 			
-			// aapt resource value: 0x7f0b00cb
-			public const int bioEdit = 2131427531;
+			// aapt resource value: 0x7f0b00c7
+			public const int bioEdit = 2131427527;
 			
 			// aapt resource value: 0x7f0b008e
 			public const int boost = 2131427470;
@@ -3077,11 +3077,11 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00ad
 			public const int button1 = 2131427501;
 			
-			// aapt resource value: 0x7f0b00e2
-			public const int button2 = 2131427554;
+			// aapt resource value: 0x7f0b00de
+			public const int button2 = 2131427550;
 			
-			// aapt resource value: 0x7f0b00e3
-			public const int button3 = 2131427555;
+			// aapt resource value: 0x7f0b00df
+			public const int button3 = 2131427551;
 			
 			// aapt resource value: 0x7f0b0052
 			public const int buttonPanel = 2131427410;
@@ -3224,8 +3224,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0033
 			public const int enterAlwaysCollapsed = 2131427379;
 			
-			// aapt resource value: 0x7f0b00e1
-			public const int eventDetailsButton = 2131427553;
+			// aapt resource value: 0x7f0b00dd
+			public const int eventDetailsButton = 2131427549;
 			
 			// aapt resource value: 0x7f0b0093
 			public const int eventName = 2131427475;
@@ -3293,17 +3293,17 @@ namespace fitfam
 			// aapt resource value: 0x7f0b004d
 			public const int image = 2131427405;
 			
-			// aapt resource value: 0x7f0b00c7
-			public const int imageButton1 = 2131427527;
+			// aapt resource value: 0x7f0b00e1
+			public const int imageButton1 = 2131427553;
 			
-			// aapt resource value: 0x7f0b00c8
-			public const int imageButton2 = 2131427528;
+			// aapt resource value: 0x7f0b00e2
+			public const int imageButton2 = 2131427554;
 			
-			// aapt resource value: 0x7f0b00c9
-			public const int imageButton3 = 2131427529;
+			// aapt resource value: 0x7f0b00e3
+			public const int imageButton3 = 2131427555;
 			
-			// aapt resource value: 0x7f0b00ca
-			public const int imageButton4 = 2131427530;
+			// aapt resource value: 0x7f0b00e4
+			public const int imageButton4 = 2131427556;
 			
 			// aapt resource value: 0x7f0b00eb
 			public const int imageView1 = 2131427563;
@@ -3524,20 +3524,20 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0064
 			public const int radio = 2131427428;
 			
-			// aapt resource value: 0x7f0b00cd
-			public const int radioButton1 = 2131427533;
+			// aapt resource value: 0x7f0b00c9
+			public const int radioButton1 = 2131427529;
 			
-			// aapt resource value: 0x7f0b00ce
-			public const int radioButton2 = 2131427534;
+			// aapt resource value: 0x7f0b00ca
+			public const int radioButton2 = 2131427530;
 			
-			// aapt resource value: 0x7f0b00cf
-			public const int radioButton3 = 2131427535;
+			// aapt resource value: 0x7f0b00cb
+			public const int radioButton3 = 2131427531;
 			
-			// aapt resource value: 0x7f0b00cc
-			public const int radioGroup1 = 2131427532;
+			// aapt resource value: 0x7f0b00c8
+			public const int radioGroup1 = 2131427528;
 			
-			// aapt resource value: 0x7f0b00e4
-			public const int relativeLayout1 = 2131427556;
+			// aapt resource value: 0x7f0b00e0
+			public const int relativeLayout1 = 2131427552;
 			
 			// aapt resource value: 0x7f0b003c
 			public const int right = 2131427388;
@@ -3653,26 +3653,26 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0053
 			public const int spacer = 2131427411;
 			
-			// aapt resource value: 0x7f0b00df
-			public const int spinner1 = 2131427551;
-			
-			// aapt resource value: 0x7f0b00dd
-			public const int spinner2 = 2131427549;
-			
 			// aapt resource value: 0x7f0b00db
-			public const int spinner3 = 2131427547;
+			public const int spinner1 = 2131427547;
 			
 			// aapt resource value: 0x7f0b00d9
-			public const int spinner4 = 2131427545;
+			public const int spinner2 = 2131427545;
 			
 			// aapt resource value: 0x7f0b00d7
-			public const int spinner5 = 2131427543;
+			public const int spinner3 = 2131427543;
 			
 			// aapt resource value: 0x7f0b00d5
-			public const int spinner6 = 2131427541;
+			public const int spinner4 = 2131427541;
 			
 			// aapt resource value: 0x7f0b00d3
-			public const int spinner7 = 2131427539;
+			public const int spinner5 = 2131427539;
+			
+			// aapt resource value: 0x7f0b00d1
+			public const int spinner6 = 2131427537;
+			
+			// aapt resource value: 0x7f0b00cf
+			public const int spinner7 = 2131427535;
 			
 			// aapt resource value: 0x7f0b0008
 			public const int split_action_bar = 2131427336;
@@ -3746,29 +3746,29 @@ namespace fitfam
 			// aapt resource value: 0x7f0b0092
 			public const int textView1 = 2131427474;
 			
-			// aapt resource value: 0x7f0b00dc
-			public const int textView10 = 2131427548;
-			
-			// aapt resource value: 0x7f0b00da
-			public const int textView11 = 2131427546;
-			
 			// aapt resource value: 0x7f0b00d8
-			public const int textView12 = 2131427544;
+			public const int textView10 = 2131427544;
 			
 			// aapt resource value: 0x7f0b00d6
-			public const int textView13 = 2131427542;
+			public const int textView11 = 2131427542;
 			
 			// aapt resource value: 0x7f0b00d4
-			public const int textView14 = 2131427540;
+			public const int textView12 = 2131427540;
 			
 			// aapt resource value: 0x7f0b00d2
-			public const int textView15 = 2131427538;
+			public const int textView13 = 2131427538;
+			
+			// aapt resource value: 0x7f0b00d0
+			public const int textView14 = 2131427536;
+			
+			// aapt resource value: 0x7f0b00ce
+			public const int textView15 = 2131427534;
 			
 			// aapt resource value: 0x7f0b0094
 			public const int textView2 = 2131427476;
 			
-			// aapt resource value: 0x7f0b00d1
-			public const int textView3 = 2131427537;
+			// aapt resource value: 0x7f0b00cd
+			public const int textView3 = 2131427533;
 			
 			// aapt resource value: 0x7f0b009b
 			public const int textView4 = 2131427483;
@@ -3785,8 +3785,8 @@ namespace fitfam
 			// aapt resource value: 0x7f0b00a0
 			public const int textView8 = 2131427488;
 			
-			// aapt resource value: 0x7f0b00de
-			public const int textView9 = 2131427550;
+			// aapt resource value: 0x7f0b00da
+			public const int textView9 = 2131427546;
 			
 			// aapt resource value: 0x7f0b00b9
 			public const int text_input_password_toggle = 2131427513;

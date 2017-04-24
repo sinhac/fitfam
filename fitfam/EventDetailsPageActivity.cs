@@ -12,25 +12,81 @@ using System.Threading;
 
 namespace fitfam
 {
-    [Activity(Label = "Activity1")]
+    [Activity(Label = "Event Details")]
     public class EventDetailsPageActivity : Activity
     {
         protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.EventDetailsPage);
-
-            string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
+         
+            // get information from previous page
             string userId = Intent.GetStringExtra("userId") ?? "null";
+            User user = new User(userId, false);
+            var pic = Intent.GetStringExtra("pic") ?? "null";
+            var location = Intent.GetStringExtra("location") ?? "null";
+            var username = Intent.GetStringExtra("username") ?? "null";
+            var genderInt = Intent.GetIntExtra("gender", -1);
+            var profileId = Intent.GetStringExtra("profileId") ?? "Null";
+            string eventId = Intent.GetStringExtra("eventId") ?? "Data not available";
 
-            System.Console.WriteLine("event" + eventId);
-            
+            // navbar buttons
+            ImageButton homepageButton = FindViewById<ImageButton>(Resource.Id.homepageButton);
+            homepageButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(HomepageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+            ImageButton profileButton = FindViewById<ImageButton>(Resource.Id.profileButton);
+            profileButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ProfilePageActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("username", username);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
+
+            ImageButton notificationsButton = FindViewById<ImageButton>(Resource.Id.notificationsButton);
+            notificationsButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(NotificationsActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+
+            };
+
+            ImageButton scheduleButton = FindViewById<ImageButton>(Resource.Id.scheduleButton);
+            scheduleButton.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(ScheduleActivity));
+                intent.PutExtra("userId", userId);
+                intent.PutExtra("profileId", userId);
+                intent.PutExtra("pic", pic);
+                intent.PutExtra("location", location);
+                intent.PutExtra("username", username);
+                intent.PutExtra("gender", genderInt);
+                StartActivity(intent);
+            };
 
             AWSClient client = new AWSClient(Amazon.RegionEndpoint.USEast1);
             AmazonDynamoDBClient dbclient = client.getDynamoDBClient();
             string tableName = "fitfam-mobilehub-2083376203-events";
-
 
             var request = new GetItemRequest
             {
@@ -72,20 +128,28 @@ namespace fitfam
                 textView5.SetTextAppearance(this, Android.Resource.Style.TextAppearanceMedium);
                 layout.AddView(textView5);
 
-                Button button4 = new Button(this);
-                button4.Id = 4;
-                button4.Text = "Attendees";
-                button4.SetTextColor(Color.Black);
-                button4.SetBackgroundResource(Resource.Drawable.gold_button);
-                float scale = button4.Resources.DisplayMetrics.Density;
-                button4.SetHeight((int)(75 * scale + 0.5f));
-                button4.SetWidth((int)(500 * scale + 0.5f));
+                Button attendeesButton = new Button(this);
+                attendeesButton.Id = 4;
+                attendeesButton.Text = "Attendees";
+                attendeesButton.SetTextColor(Color.Black);
+                attendeesButton.SetBackgroundResource(Resource.Drawable.gold_button);
+                float scale = attendeesButton.Resources.DisplayMetrics.Density;
+                attendeesButton.SetHeight((int)(75 * scale + 0.5f));
+                attendeesButton.SetWidth((int)(500 * scale + 0.5f));
                 int padding = (int)(16 * scale + 0.5f);
-                button4.SetPadding(padding, padding, padding, padding);
-                layout.AddView(button4);
+                attendeesButton.SetPadding(padding, padding, padding, padding);
+                layout.AddView(attendeesButton);
 
-                button4.Click += delegate {
-                    StartActivity(typeof(EventAttendeesActivity));
+                attendeesButton.Click += delegate {
+                    Intent intent = new Intent(this, typeof(EventAttendeesActivity));
+                    intent.PutExtra("eventId", eventId);
+                    intent.PutExtra("userId", userId);
+                    intent.PutExtra("profileId", userId);
+                    intent.PutExtra("pic", pic);
+                    intent.PutExtra("location", location);
+                    intent.PutExtra("username", username);
+                    intent.PutExtra("gender", genderInt);
+                    StartActivity(intent);
                 };
 
             Button joinButton = new Button(this);
@@ -108,28 +172,7 @@ namespace fitfam
                 StartActivity(eventMatchesActivity);
             };
 
-            /* navbar buttons */
-            ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);
-            imagebutton1.Click += delegate {
-                Intent intent = new Intent(this, typeof(HomepageActivity));
-                intent.PutExtra("userId", userId);
-                StartActivity(intent);
-            };
-
-                ImageButton imagebutton2 = FindViewById<ImageButton>(Resource.Id.imageButton2);
-                imagebutton2.Click += delegate {
-                    StartActivity(typeof(ProfilePageActivity));
-                };
-
-                ImageButton imagebutton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
-                imagebutton3.Click += delegate {
-                    StartActivity(typeof(NotificationsActivity));
-                };
-
-                ImageButton imagebutton4 = FindViewById<ImageButton>(Resource.Id.imageButton4);
-                imagebutton4.Click += delegate {
-                    StartActivity(typeof(ScheduleActivity));
-                };
+         
 
                 // LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.linearLayout4);
                 if (true)

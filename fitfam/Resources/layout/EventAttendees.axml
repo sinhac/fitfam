@@ -5,90 +5,76 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:background="@color/theme_devicedefault_background">
-    <LinearLayout
-        android:orientation="vertical"
+  <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:background="@drawable/gold_plate">
-        <ImageView
-            android:src="@drawable/gold_logo"
-            android:layout_width="match_parent"
-            android:layout_height="86.0dp"
-            android:id="@+id/imageView5"
-            android:scaleType="fitCenter"
-            android:background="@drawable/gold_plate" />
+        android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3"
-            android:gravity="center">
-            <ImageButton
-                android:src="@drawable/home"
-                android:id="@+id/homepageButton"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/face"
-                android:id="@+id/profileButton"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/message"
-                android:id="@+id/notificationsButton"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:src="@drawable/clock"
-                android:id="@+id/scheduleButton"
-                android:background="@drawable/gold_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space1"
-        android:layout_marginBottom="30.0dp" />
-    <TextView
-        android:text="eventName"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
-    <TextView
-        android:text="Attendees:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
-    <Button
-        android:text="Person 1"
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:drawableLeft="@drawable/minimightyman"
-        android:textSize="24sp"
-        android:background="@drawable/gold_button"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:drawablePadding="50dp" />
-    <Button
-        android:text="Person 2"
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:drawableLeft="@drawable/minimightyman"
-        android:textSize="24sp"
-        android:background="@drawable/gold_button"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:drawablePadding="50dp" />
+            android:id="@+id/linearLayout4">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout1"
+                android:background="@drawable/gold_plate">
+                <ImageView
+                    android:src="@drawable/gold_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="86.0dp"
+                    android:id="@+id/imageView5"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/gold_plate" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout3"
+                    android:gravity="center">
+                    <ImageButton
+                        android:src="@drawable/home"
+                        android:id="@+id/homepageButton"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/face"
+                        android:id="@+id/profileButton"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/message"
+                        android:id="@+id/notificationsButton"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <ImageButton
+                        android:src="@drawable/clock"
+                        android:id="@+id/scheduleButton"
+                        android:background="@drawable/gold_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/space1"
+                android:layout_marginBottom="30.0dp" />
+            <TextView
+                android:text="eventName"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView1" />
+            <TextView
+                android:text="Attendees:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3" />
+          </LinearLayout>
+    </ScrollView>
 </LinearLayout>
