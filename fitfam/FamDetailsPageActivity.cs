@@ -37,6 +37,7 @@ namespace fitfam
             SetContentView(Resource.Layout.FamDetailsPage);
 
             var userId = Intent.GetStringExtra("userId") ?? "null";
+            Console.WriteLine("userId {0}", userId);
             User user = new User(userId, false);
 
             ImageButton imagebutton1 = FindViewById<ImageButton>(Resource.Id.imageButton1);

@@ -1,3 +1,4 @@
+using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -141,7 +142,11 @@ namespace fitfam
                 string[] tagsArr = tagsInput.Split(delimiters);
                 for (int i = 0; i < tagsArr.Length; i++)
                 {
-                    tagsList.Add(myTI.ToLower(tagsArr[i]));
+                    if (tagsArr[i] != " ")
+                    {
+                        tagsList.Add(myTI.ToLower(tagsArr[i]));
+                        Console.WriteLine(tagsArr[i]);
+                    }
                 }
                 
                 var members = new Dictionary<User, bool>();
@@ -149,11 +154,11 @@ namespace fitfam
                 if(boostInput == "") { boostInput = "0"; }
                 double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
                 Group fam = new Group(famNameInput, descriptionInput, creator, members, tagsList, boost);
-                foreach (var tag in tagsList)
+                /*foreach (var tag in tagsList)
                 {
                     fam.addTag(tag);
-                }
-
+                }*/
+                creator.addFitFam(fam);
                 var intent = new Intent(this, typeof(FamDetailsPageActivity));
                 intent.PutExtra("groupId", fam.GroupId);
                 intent.PutExtra("userId", userId);

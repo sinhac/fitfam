@@ -487,24 +487,34 @@ namespace fitfam
                     System.Console.WriteLine("connected to database");
                     using (var client = awsClient.getDynamoDBClient())
                     {
-                        System.Console.WriteLine("writing to database");
-                        var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups");
+                        try
+                        {
+                            System.Console.WriteLine("writing to database");
+                            var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-groups");
 
 
-                        var groupEntry = new Document();
-                        groupEntry["groupId"] = groupId;
-                        groupEntry["groupName"] = groupName;
-                        groupEntry["description"] = description;
-                        var membersDoc = new Document();
-                        membersDoc[creatorId] = true;
-                        groupEntry["members"] = membersDoc;
-                     //   groupEntry["tags"] = tags;
-                        Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
-                        key.Add("groupId", new AttributeValue { S = groupId });
+                            var groupEntry = new Document();
+                            groupEntry["groupId"] = groupId;
+                            groupEntry["groupName"] = groupName;
+                            groupEntry["description"] = description;
+                            var membersDoc = new Document();
+                            membersDoc[creatorId] = true;
+                            groupEntry["members"] = membersDoc;
+                            groupEntry["tags"] = tags;
+                            Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
+                            key.Add("groupId", new AttributeValue { S = groupId });
+                       //     groupEntry["experienceLevel"] = experienceLevel;
+                            var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
+                            var response = await table.PutItemAsync(groupEntry);
+                            System.Console.WriteLine("wrote to database");
 
-                        var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
-                        var response = await table.PutItemAsync(groupEntry);
-                        System.Console.WriteLine("wrote to database");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Group Exception: {0}\n{1}", ex.Message, ex.Source);
+                        }
+                       
 
                     }
                 }

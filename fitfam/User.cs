@@ -211,6 +211,59 @@ namespace fitfam
             
             
         }
+        public void addFitFam(string groupId)
+        {
+            string expression;
+            if (fitFams.Count == 0)
+            {
+                expression = "SET #G = :newFitFam";
+                fitFams.Add(new Group(groupId));
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-users",
+                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#G", "fitFams"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newFitFam",new AttributeValue { SS = new List<string>{ groupId } }},
+                },
+
+                    // fitFam added to list in database entry
+                    UpdateExpression = expression
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+            else
+            {
+                expression = "ADD #G :newFitFam";
+                fitFams.Add(new Group(groupId));
+                AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+                Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+                var request = new UpdateItemRequest
+                {
+                    TableName = "fitfam-mobilehub-2083376203-users",
+                    Key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } },
+                    ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#G", "fitFams"},  // attribute to be updated
+                },
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newFitFam",new AttributeValue { S = groupId }},
+                },
+                    UpdateExpression = expression
+                };
+                var response = dbclient.UpdateItemAsync(request);
+            }
+
+
+        }
+
         public void removeFitFam(Group group)
         {
             fitFams.Remove(group);
@@ -495,81 +548,92 @@ namespace fitfam
                     }
                     else
                     {
-                        var key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } };
-                        var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-users", key);
-                        Dictionary<string, AttributeValue> userInfo = new Dictionary<string, AttributeValue>();
-                        var task = await awsClient.GetItemAsync(client, request);
-                        userInfo = task;
-                       
-                        foreach (KeyValuePair<string, AttributeValue> kvp in userInfo)
+                        try
                         {
-                            switch (kvp.Key)
+                            var key = new Dictionary<string, AttributeValue>() { { "userId", new AttributeValue { S = userId } } };
+                            var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-users", key);
+                            Dictionary<string, AttributeValue> userInfo = new Dictionary<string, AttributeValue>();
+                            var task = await awsClient.GetItemAsync(client, request);
+                            userInfo = task;
+                            Console.WriteLine("getting values");
+                            foreach (KeyValuePair<string, AttributeValue> kvp in userInfo)
                             {
-                                case "activities":
-                                    activities = kvp.Value.SS.ToList<string>();
-                                    break;
-                                case "availability":
-                                    this.availabilitySet = true;
-                                    var availabilityMap = kvp.Value.M;
-                                    foreach (var keyval in availabilityMap)
-                                    {
-                                        availability.Add(keyval.Key, keyval.Value.BOOL);
-                                    }
-                                    break;
-                                case "bio":
-                                    bio = kvp.Value.S;
-                                    break;
-                                case "experienceLevel":
-                                    experienceLevel = kvp.Value.S;
-                                    break;
-                                case "fitFams":
-                                    var fitFamList = kvp.Value.SS.ToList<string>();
-                                    foreach (var groupId in fitFamList)
-                                    {
-                                        fitFams.Add(new Group(groupId));
-                                    }
-                                    break;
-                                case "friends":
-                                    if (mainUser)
-                                    {
-                                        var members = new Dictionary<User, bool>();
-                                        members.Add(this, true);
-                                       
-                                        var friendsList = kvp.Value.SS.ToList<string>();
-                                        foreach (var friendId in friendsList)
-                                        {                                        
-                                            userFam.addMember(new User(friendId, false), false);   
+                           
+                                switch (kvp.Key)
+                                {
+                                    case "activities":
+                                        activities = kvp.Value.SS.ToList<string>();
+                                        break;
+                                    case "availability":
+                                        this.availabilitySet = true;
+                                        var availabilityMap = kvp.Value.M;
+                                        foreach (var keyval in availabilityMap)
+                                        {
+                                            availability.Add(keyval.Key, keyval.Value.BOOL);
                                         }
-                                    }
-                                    else
-                                    {
-                                        userFam = null;
-                                    }
-                                    break;
-                                case "gender":
-                                    gender = kvp.Value.S;
-                                    break;
-                                case "joinedEvents":
-                                    var joinedEventList = kvp.Value.SS.ToList<string>();
-                                    foreach (var eventId in joinedEventList)
-                                    {
-                                        joinedEvents.Add(new Event(eventId));
-                                    }
-                                    break;
-                                case "pic":
-                                    pic = kvp.Value.S;
-                                    break;
-                                case "sharedEvents":
-                                    var sharedEventsList = kvp.Value.SS.ToList<string>();
-                                    foreach (var eventId in sharedEventsList)
-                                    {
-                                        sharedEvents.Add(new Event(eventId));
-                                    }
-                                    break;               
-                                default:
-                                    break;
+                                        break;
+                                    case "bio":
+                                        bio = kvp.Value.S;
+                                        break;
+                                    case "experienceLevel":
+                                        experienceLevel = kvp.Value.S;
+                                        break;
+                                    case "fitFams":
+                                        var fitFamList = kvp.Value.SS.ToList<string>();
+                                        foreach (var groupId in fitFamList)
+                                        {
+                                            fitFams.Add(new Group(groupId));
+                                        }
+                                        break;
+                                    case "friends":
+                                        if (mainUser)
+                                        {
+                                            var members = new Dictionary<User, bool>();
+                                            members.Add(this, true);
 
+                                            var friendsList = kvp.Value.SS.ToList<string>();
+                                            foreach (var friendId in friendsList)
+                                            {
+                                                userFam.addMember(new User(friendId, false), false);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            userFam = null;
+                                        }
+                                        break;
+                                    case "gender":
+                                        gender = kvp.Value.S;
+                                        break;
+                                    case "joinedEvents":
+                                        var joinedEventList = kvp.Value.SS.ToList<string>();
+                                        foreach (var eventId in joinedEventList)
+                                        {
+                                            joinedEvents.Add(new Event(eventId));
+                                        }
+                                        break;
+                                    case "pic":
+                                        pic = kvp.Value.S;
+                                        break;
+                                    case "sharedEvents":
+                                        var sharedEventsList = kvp.Value.SS.ToList<string>();
+                                        foreach (var eventId in sharedEventsList)
+                                        {
+                                            sharedEvents.Add(new Event(eventId));
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
+                           
+
+                            
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("User Exception: {0}\n{1}", ex.Message, ex.Source);
+
                         }
                     }
                 }
