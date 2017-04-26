@@ -167,7 +167,10 @@ namespace fitfam
                 tagsArr = tagsInput.Split(delimiters);
                 for (int i = 0; i < tagsArr.Length; i++)
                 {
-                    tagsList.Add(tagsArr[i]);
+                    if (tagsArr[i] != "")
+                    {
+                        tagsList.Add(tagsArr[i]);
+                    }
                 }
 
                 // experience
@@ -214,40 +217,31 @@ namespace fitfam
                     {
                         if (kvp.Key == "tags")
                         {
-                            var eventTags = kvp.Value.L;
+                            var eventTags = kvp.Value.SS;
                             foreach (var t in eventTags)
                             {
-                                string s = t.S;
+                                string s = t;
                                 foreach (string tag in tagsList)
                                 {
-                                    Console.WriteLine(s + " compared to " + tag);
-                                    if (s.ToLower() == tag.ToLower())
+                                    //Console.WriteLine(s + " compared to " + tag);
+                                    string lowerS = s.ToLower().Replace(" ", "");
+                                    string lowerTag = tag.ToLower().Replace(" ", "");
+                                    if (lowerS == lowerTag && s != "" && tag != "")
                                     {
                                         numMatches++;
                                     }
                                 }
                             }
                         }
-                        else if (kvp.Key == "experienceLevel")
+                        else if (kvp.Key == "experienceLevels")
                         {
-                            var experienceLevels = kvp.Value.L;
+                            var experienceLevels = kvp.Value.SS;
                             int numExp = 0;
                             foreach (var e in experienceLevels)
                             {
-                                string s = e.S;
+                                string s = e;
                                 numExp++;
                                 if (s[0] == experienceLevel[0])
-                                {
-                                    numMatches++;
-                                }
-                            }
-                        }
-                        else if (kvp.Key == "description")
-                        {
-                            var desc = kvp.Value.S;
-                            foreach (string tag in tagsList)
-                            {
-                                if (desc.ToLower().Contains(tag))
                                 {
                                     numMatches++;
                                 }
@@ -256,7 +250,7 @@ namespace fitfam
                     }
                     if (numMatches >= 2)
                     {
-                        System.Console.WriteLine("Number of event matches found: " + numMatches);
+                        System.Console.WriteLine("Number of event matches found: " + numMatches + " Event "+ item["eventId"].S.ToString()+" added");
                         results.Add(item["eventId"].S);
                     }
                 }

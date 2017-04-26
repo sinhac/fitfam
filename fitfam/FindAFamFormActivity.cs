@@ -125,20 +125,28 @@ namespace fitfam
             // button that routes to the matches page when ready to find groups
             Button findFamButton = FindViewById<Button>(Resource.Id.findFamButton);
             findFamButton.Click += async delegate {
-                System.Console.WriteLine("Entered button click");
+                //System.Console.WriteLine("Entered button click");
                 var experienceLevel = (string)experienceSpinner.GetItemAtPosition(experienceSpinner.SelectedItemPosition);
                 var results = new List<string>();
                 var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 var client = awsClient.getDynamoDBClient();
-                System.Console.WriteLine("Finished basic business");
+                //System.Console.WriteLine("Finished basic business");
 
                 char[] delimiters = { ',', '\t', '\n' };
                 tagsArr = tagsInput.Split(delimiters);
                 for (int i = 0; i < tagsArr.Length; i++)
                 {
-                    tagsList.Add(tagsArr[i]);
+                    if (tagsArr[i] != "")
+                    {
+                        tagsList.Add(tagsArr[i]);
+                    }
                 }
-                System.Console.WriteLine("Finished tags array, size " + tagsList.Count);
+                Console.WriteLine("HEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEE");
+                foreach(var tagssss in tagsList)
+                {
+                    Console.WriteLine(tagssss);
+                }
+                //System.Console.WriteLine("Finished tags array, size " + tagsList.Count);
 
                 var request = new ScanRequest
                 {
@@ -146,7 +154,7 @@ namespace fitfam
                 };
                 var response = await client.ScanAsync(request);
                 var result = response.Items;
-                System.Console.WriteLine("Looking for results");
+                //System.Console.WriteLine("Looking for results");
 
                 // algorithm to find matches
                 int numRows = 0;
@@ -160,46 +168,61 @@ namespace fitfam
                     {
                         if (kvp.Key == "tags")
                         {
+                            Console.WriteLine("Found tags: "+kvp.Value.SS.Count);
                             var groupTags = kvp.Value.SS;
                             foreach (var t in groupTags)
                             {
                                 string s = t;
                                 foreach (string tag in tagsList)
                                 {
-                                    Console.WriteLine(s + " compared to " + tag);
-                                    if (s.ToLower() == tag.ToLower())
+                                    string lowerS = s.ToLower().Replace(" ", "");
+                                    string lowerTag = tag.ToLower().Replace(" ","");
+                                    if (lowerS == lowerTag)
                                     {
                                         numMatches++;
+                                        Console.WriteLine(lowerS + " compared to " + lowerTag + " SUCCESS");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine(lowerS + " compared to " + lowerTag + " FAIL");
                                     }
                                 }
                             }
                         }
-                        if (kvp.Key == "experienceLevel")
+                        if (kvp.Key == "experienceLevels")
                         {
                             var experienceLevels = kvp.Value.SS;
                             int numExp = 0;
                             foreach (var e in experienceLevels)
                             {
+                                Console.WriteLine("ENTERED EXPERIENCE LOOP "+experienceLevel);
                                 string s = e;
                                 numExp++;
-                                if (s[0] == experienceLevel[0])
+                                string lowerS = s.ToLower().Replace(" ", "");
+                                string lowerExp = experienceLevel.ToLower().Replace(" ", "");
+                                if (lowerS[0] == lowerExp[0])
                                 {
+                                    Console.WriteLine("SUCCESS " + lowerS + " " + lowerExp);
                                     numMatches++;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("FAIL " + lowerS + " " + lowerExp);
                                 }
                             }
                         }
                     }
                     if(numMatches >= 2)
                     {
-                        System.Console.WriteLine("Number of matches found: " + numMatches);
+                        //System.Console.WriteLine("Number of matches found: " + numMatches);
                         results.Add(item["groupId"].S);
-                        System.Console.WriteLine("added to group? I think? Size of results: " + results.Count);
+                        //System.Console.WriteLine("added to group? I think? Size of results: " + results.Count);
                     }
                 }
-                System.Console.WriteLine("Made it past the for loop.");
+                //System.Console.WriteLine("Made it past the for loop.");
 
                 Intent intent = new Intent(this, typeof(MatchesActivity));
-                System.Console.WriteLine("Starting intent stuff");
+                //System.Console.WriteLine("Starting intent stuff");
                 intent.PutExtra("matches", results.ToArray());
                 intent.PutExtra("userId", userId);
                 intent.PutExtra("profileId", userId);
@@ -207,7 +230,7 @@ namespace fitfam
                 intent.PutExtra("location", location);
                 intent.PutExtra("username", username);
                 intent.PutExtra("gender", user.Gender);
-                System.Console.WriteLine("Ended intent stuff, heading to activity");
+                //System.Console.WriteLine("Ended intent stuff, heading to activity");
                 StartActivity(intent);
             };
         }

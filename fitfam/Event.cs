@@ -1,20 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Amazon.DynamoDBv2.Model;
-using Amazon;
 using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DocumentModel;
 
 namespace fitfam
-{ 
+{
     class Event
     {
         private string eventId;
@@ -304,6 +296,42 @@ namespace fitfam
             }
             get { return boost; }
         }
+       /* private List<string> experienceLevels = new List<string>();
+        public List<string> ExperienceLevels
+        {
+            get { return experienceLevels; }
+        }
+        public void addExperienceLevel(string experienceLevel)
+        {
+            string expression;
+            if (experienceLevels.Count == 0)
+            {
+                expression = "SET #T = :newExperienceLevel";
+            }
+            else
+            {
+                expression = "ADD #T  :newExperienceLevel";
+            }
+            experienceLevels.Add(experienceLevel);
+            AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
+            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            var request = new UpdateItemRequest
+            {
+                TableName = "fitfam-mobilehub-2083376203-events",
+                Key = new Dictionary<string, AttributeValue>() { { "eventId", new AttributeValue { S = eventId } } },
+                ExpressionAttributeNames = new Dictionary<string, string>()
+                {
+                    {"#T", "experienceLevels"},  // attribute to be updated
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                {
+                    {":newExperienceLevel",new AttributeValue { S = experienceLevel }},  // new activity to add to event tags 
+                },
+                // activity added to list in database entry
+                UpdateExpression = expression
+            };
+            var response = dbclient.UpdateItemAsync(request);
+        }*/
 
         public Event(string name, string description, string location, DateTime startTime, DateTime endTime, bool publicEvent, List<string> tags, User creator, double boost)
         {
@@ -314,33 +342,70 @@ namespace fitfam
             this.endTime = endTime;
             this.publicEvent = publicEvent;
             this.tags = new List<string>(tags);
+            //this.experienceLevels = new List<string>(experienceLevels);
             this.creator = creator;
             this.addAttending(creator);
             this.boost = boost;
+            eventId = eventName + creator.UserId + startTime.ToString();
+            writeEvent();
+        }
 
-            using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
-            {
+        private async void writeEvent()
+        {
+            try { 
+                using (var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1))
+                {
                 using (var client = awsClient.getDynamoDBClient())
                 {
-                    eventId = creator.UserId + eventName + startTime.ToString();
-                    // create list of userids from list of attending Users
-                    List<string> attending_userids = new List<string>();
-                    attending_userids.Add(creator.UserId);
-                    this.tags.Add("test");
-                    Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
-                    {
-                        { "eventId", new AttributeValue { S = eventId} },
-                        { "eventName", new AttributeValue { S = eventName } },
-                        { "description", new AttributeValue { S = description } },
-                        { "location", new AttributeValue { S = location } },
-                        { "startTime", new AttributeValue { S = startTime.ToString() } },
-                        { "endTime", new AttributeValue { S = endTime.ToString() } },
-                        { "publicEvent", new AttributeValue { BOOL = publicEvent } },
-                        { "tags", new AttributeValue { SS = this.tags } },
-                        { "attending", new AttributeValue { SS = attending_userids } }
-                    };
-                    awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));
+/*eventId = creator.UserId + eventName + startTime.ToString();
+// create list of userids from list of attending Users
+List<string> attending_userids = new List<string>();
+attending_userids.Add(creator.UserId);
+this.tags.Add("test");
+Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
+{
+    { "eventId", new AttributeValue { S = eventId} },
+    { "eventName", new AttributeValue { S = eventName } },
+    { "description", new AttributeValue { S = description } },
+    { "location", new AttributeValue { S = location } },
+    { "startTime", new AttributeValue { S = startTime.ToString() } },
+    { "endTime", new AttributeValue { S = endTime.ToString() } },
+    { "publicEvent", new AttributeValue { BOOL = publicEvent } },
+    { "tags", new AttributeValue { SS = this.tags } },
+    { "attending", new AttributeValue { SS = attending_userids } }
+};
+awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-events", item));*/
+            try
+            {
+                            var table = awsClient.getTable(client, "fitfam-mobilehub-2083376203-events");
+                            var eventEntry = new Document();
+                            eventEntry["eventId"] = eventId;
+                            eventEntry["eventName"] = eventName;
+                            eventEntry["description"] = description;
+                            var attendingDoc = new Document();
+                            attendingDoc[Creator.UserId] = true;
+                            eventEntry["attending"] = attendingDoc;
+                            eventEntry["tags"] = tags;
+                            //eventEntry["experienceLevels"] = experienceLevels;
+                            eventEntry["startTime"] = startTime.ToString();
+                            eventEntry["endTime"] = endTime.ToString();
+                            eventEntry["location"] = location;
+                            Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
+                            key.Add("eventId", new AttributeValue { S = eventId });
+                            var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-event", key);
+                            var response = await table.PutItemAsync(eventEntry);
+                            System.Console.WriteLine("wrote to database");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Event Exception: {0}\n{1}", ex.Message, ex.Source);
+                        }
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("EXCEPTION: {0}\n{1}", ex.Message, ex.ToString());
             }
         }
 
@@ -365,7 +430,7 @@ namespace fitfam
             this.startTime = Convert.ToDateTime(eventInfo["startTime"].S);
             this.endTime = Convert.ToDateTime(eventInfo["endTime"].S);
             this.publicEvent = eventInfo["publicEvent"].BOOL;
-            this.tags = eventInfo["tags"].SS.ToList<string>();
+            this.tags = eventInfo["tags"].SS;
             this.creator = new User(eventInfo["creator"].S, true);
             var sharedList = eventInfo["shared"].SS.ToList<string>();
             foreach (var userId in sharedList)

@@ -125,6 +125,11 @@ namespace fitfam
                 tagsInput = e.Text.ToString();
             };
 
+            // capture user input for experience level
+            CheckBox plebian = FindViewById<CheckBox>(Resource.Id.plebeianCheckBox);
+            CheckBox intermediate = FindViewById<CheckBox>(Resource.Id.intermediateCheckBox);
+            CheckBox olympian = FindViewById<CheckBox>(Resource.Id.olympianCheckBox);
+
             // capture user input on boost value
             // boost value number will later be used for monetary reasons
             EditText boostText = FindViewById<EditText>(Resource.Id.boost);
@@ -147,6 +152,20 @@ namespace fitfam
                         tagsList.Add(myTI.ToLower(tagsArr[i]));
                         Console.WriteLine(tagsArr[i]);
                     }
+                }
+
+                List<string> experienceLevels = new List<string>();
+                if (plebian.Checked)
+                {
+                    experienceLevels.Add("Plebian");
+                }
+                if (intermediate.Checked)
+                {
+                    experienceLevels.Add("Intermediate");
+                }
+                if (olympian.Checked)
+                {
+                    experienceLevels.Add("Olympian");
                 }
 
                 var members = new Dictionary<User, bool>();

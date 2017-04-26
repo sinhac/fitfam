@@ -115,17 +115,17 @@
                 p1:text="Plebeian (I've never heard of this - I've done this once)"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/checkBox1" />
+                p1:id="@+id/plebeianCheckBox" />
             <CheckBox
                 p1:text="Intermediate (I haven't done this in a while - I do this occasionally)"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/checkBox2" />
+                p1:id="@+id/intermediateCheckBox" />
             <CheckBox
                 p1:text="Olympian (I do this regularly - This is my life)"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/checkBox3" />
+                p1:id="@+id/olympianCheckBox" />
             <LinearLayout
                 p1:orientation="vertical"
                 p1:layout_width="match_parent"

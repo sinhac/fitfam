@@ -138,7 +138,10 @@ namespace fitfam
             };
 
             // enter code for collecting experience level
-            
+            CheckBox plebian = FindViewById<CheckBox>(Resource.Id.plebeianCheckBox);
+            CheckBox intermediate = FindViewById<CheckBox>(Resource.Id.intermediateCheckBox);
+            CheckBox olympian = FindViewById<CheckBox>(Resource.Id.olympianCheckBox);
+
             // date picker
             DatePicker date = FindViewById<DatePicker>(Resource.Id.datePicker1);
             DateTime startInput;
@@ -210,10 +213,26 @@ namespace fitfam
                 TextInfo myTI = new CultureInfo("en-US",false).TextInfo;
                 for (int i = 0; i < tagsArr.Length; i++)
                 {
-                    Console.WriteLine(tagsArr[i]);
-                    tagsList.Add(myTI.ToLower(tagsArr[i]));
+                    if (tagsArr[i] != "")
+                    {
+                        Console.WriteLine(tagsArr[i]);
+                        tagsList.Add(myTI.ToLower(tagsArr[i]));
+                    }
                 }
 
+                List<string> experienceLevels = new List<string>();
+                if (plebian.Checked)
+                {
+                    experienceLevels.Add("Plebian");
+                }
+                if (intermediate.Checked)
+                {
+                    experienceLevels.Add("Intermediate");
+                }
+                if (olympian.Checked)
+                {
+                    experienceLevels.Add("Olympian");
+                }
 
                 hour = (string)endHour.GetItemAtPosition(endHour.SelectedItemPosition);
                 endInput = endInput.AddHours(Convert.ToDouble(hour));

@@ -1,17 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Amazon.DynamoDBv2.Model;
 using Amazon.DynamoDBv2.DocumentModel;
-using System.Globalization;
 
 namespace fitfam
 {
@@ -285,19 +275,19 @@ namespace fitfam
             }
             get { return boost; }
         }
-
-        private List<string> experienceLevel = new List<string>();
-        public List<string> ExperienceLevel
+        /*
+        private List<string> experienceLevels = new List<string>();
+        public List<string> ExperienceLevels
         {
-            get { return experienceLevel; }
+            get { return experienceLevels; }
         }
-        public void addExperienceLevel(string level)
+        public void addExperienceLevel(string experienceLevel)
         {
             string expression;
-            if (experienceLevel.Count == 0)
+            if (ExperienceLevels.Count == 0)
             {
-                expression = "SET #EL = :newLevel";
-                experienceLevel.Add(level);
+                expression = "SET #T = :newExperienceLevel";
+                ExperienceLevels.Add(experienceLevel);
                 AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
                 var request = new UpdateItemRequest
@@ -306,13 +296,12 @@ namespace fitfam
                     Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
                     ExpressionAttributeNames = new Dictionary<string, string>()
                 {
-                    {"#EL", "experienceLevel"},  // attribute to be updated
+                    {"#T", "experienceLevels"},  // attribute to be updated
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newLevel", new AttributeValue { L = new List<AttributeValue> { new AttributeValue { S = level } } } }
+                    {":newExperienceLevel",new AttributeValue { L = new List<AttributeValue>() { new AttributeValue { S = experienceLevel } } }},  // new experience level to update user's activities with 
                 },
-
                     // activity added to list in database entry
                     UpdateExpression = expression
                 };
@@ -320,8 +309,8 @@ namespace fitfam
             }
             else
             {
-                expression = "ADD #EL :newLevel";
-                experienceLevel.Add(level);
+                expression = "ADD #T  :newExperienceLevel";
+                ExperienceLevels.Add(experienceLevel);
                 AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
                 var request = new UpdateItemRequest
@@ -330,22 +319,21 @@ namespace fitfam
                     Key = new Dictionary<string, AttributeValue>() { { "groupId", new AttributeValue { S = groupId } } },
                     ExpressionAttributeNames = new Dictionary<string, string>()
                 {
-                    {"#EL", "experienceLevel"},  // attribute to be updated
+                    {"#T", "experienceLevels"},  // attribute to be updated
                 },
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
                 {
-                    {":newLevel", new AttributeValue { S = level } } // new activity to update user's activities with 
+                    {":newExperienceLevel",new AttributeValue { S = experienceLevel }},  // new activity to update user's activities with 
                 },
-
                     // activity added to list in database entry
                     UpdateExpression = expression
                 };
                 var response = dbclient.UpdateItemAsync(request);
             }
 
-        }
+        }*/
 
-        public void removeExperienceLevel(string level)
+        /*public void removeExperienceLevel(string level)
         {
             experienceLevel.Remove(level);
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
@@ -367,7 +355,7 @@ namespace fitfam
                 UpdateExpression = "DELETE #EL :oldLevel"
             };
             var response = dbclient.UpdateItemAsync(request);
-        }
+        }*/
 
         public Group(string groupId)
         {
@@ -399,12 +387,12 @@ namespace fitfam
                                     eventList.Add(new Event(eventId.S));
                                 }
                                 break;
-                            case "experienceLevel":
+                            /*case "experienceLevels":
                                 foreach (var item in kvp.Value.L)
                                 {
-                                    experienceLevel.Add(item.S);
+                                    experienceLevels.Add(item.S);
                                 }
-                                break;
+                                break;*/
                             case "groupName":
                                 groupName = kvp.Value.S;
                                 break;
@@ -442,38 +430,10 @@ namespace fitfam
             this.members = new Dictionary<User, bool>(members);
             this.tags = new List<string>(tags);
             this.boost = boost;
+            //this.experienceLevels = new List<string>(experienceLevels);
             groupId = creator.UserId + GroupName;
             creatorId = creator.UserId;
             writeGroup();
-            /* if (awsClient.GetItemAsync(client, request) == null)
-             {
-
-             }
-             else
-             {
-                 Console.WriteLine("Choose a new group name");
-             }*/
-            /*
-            Dictionary<string, AttributeValue> item = new Dictionary<string, AttributeValue>()
-            {
-                { "groupId", new AttributeValue { S = groupId} },
-                { "groupName", new AttributeValue { S = groupName } },
-                { "description", new AttributeValue { S = description } },
-                //{ "members", new AttributeValue { M = } }
-
-            };
-            Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
-            key.Add("groupId", new AttributeValue { S = groupId });
-            var request = awsClient.makeGetRequest("fitfam-mobilehub-2083376203-groups", key);
-            if (awsClient.GetItemAsync(client, request) == null)
-            {
-                awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-groups", item));
-            }
-            else
-            {
-                Console.WriteLine("Choose a new group name");
-            }
-            */
 
         }
 
@@ -501,6 +461,7 @@ namespace fitfam
                             membersDoc[creatorId] = true;
                             groupEntry["members"] = membersDoc;
                             groupEntry["tags"] = tags;
+                            //groupEntry["experienceLevels"] = experienceLevels;
                             Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>();
                             key.Add("groupId", new AttributeValue { S = groupId });
                             //     groupEntry["experienceLevel"] = experienceLevel;

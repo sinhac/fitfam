@@ -610,10 +610,11 @@ namespace fitfam
                     }
                 }
             }
+            List<string> expLev = new List<string>();
             var members = new Dictionary<User, bool>();
             members.Add(this, true);
             userFam = new Group(String.Format("{0}'s Fam", this.username), "These are other FitFam users you have connected with", this, members, activities, 0);
-            userFam.addExperienceLevel(experienceLevel);
+            //userFam.addExperienceLevel(experienceLevel);
             addFitFam(userFam);
         }
 
