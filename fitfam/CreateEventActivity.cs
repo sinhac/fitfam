@@ -1,4 +1,3 @@
-using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -6,7 +5,6 @@ using Android.Widget;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Xamarin.Forms.Platform.Android;
 
 /*
  * FitFam 

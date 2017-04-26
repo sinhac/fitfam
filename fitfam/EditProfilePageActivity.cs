@@ -1,5 +1,3 @@
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -13,7 +11,7 @@ namespace fitfam
     public class EditProfilePageActivity : Activity
     {
         private string userId;
-        protected async override void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.EditProfilePage);

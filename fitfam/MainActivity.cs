@@ -1,10 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
-using Android.Runtime;
-using Android.Widget;
 using Android.OS;
-using Android.Views;
 using Android.Gms.Common.Apis;
 using Android.Gms.Common;
 using Android.Gms.Plus;
