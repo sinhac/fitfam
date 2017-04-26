@@ -2,12 +2,9 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.OS;
-using Android.Util;
 using Android.Views;
-using Android.Graphics;
 using Android.Widget;
 using System.Collections.Generic;
-using static Android.Resource;
 using System;
 using Android.Content;
 

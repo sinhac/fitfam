@@ -3,12 +3,10 @@ using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
-using static Android.Resource;
 
 /*
  * FitFam 

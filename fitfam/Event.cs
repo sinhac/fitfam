@@ -494,7 +494,7 @@ awsClient.putItem(client, awsClient.makePutRequest("fitfam-mobilehub-2083376203-
             shared.Add(sharedUser);
 
             AWSClient awsclient = new AWSClient(Amazon.RegionEndpoint.USEast1);
-            Amazon.DynamoDBv2.AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
+            AmazonDynamoDBClient dbclient = awsclient.getDynamoDBClient();
             var request = new UpdateItemRequest
             {
                 TableName = "fitfam-mobilehub-2083376203-events",
