@@ -1,3 +1,4 @@
+using Amazon.DynamoDBv2.Model;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -31,7 +32,7 @@ namespace fitfam
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateAFamForm);
-            
+
             // get information from previous page
             userId = Intent.GetStringExtra("userId") ?? "null";
             creator = new User(userId, true);
@@ -123,7 +124,7 @@ namespace fitfam
             {
                 tagsInput = e.Text.ToString();
             };
-            
+
             // capture user input on boost value
             // boost value number will later be used for monetary reasons
             EditText boostText = FindViewById<EditText>(Resource.Id.boost);
@@ -141,19 +142,23 @@ namespace fitfam
                 string[] tagsArr = tagsInput.Split(delimiters);
                 for (int i = 0; i < tagsArr.Length; i++)
                 {
-                    tagsList.Add(myTI.ToLower(tagsArr[i]));
-                }
-                
-                var members = new Dictionary<User, bool>();
-                members.Add(creator, true);
-                if(boostInput == "") { boostInput = "0"; }
-                double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
-                Group fam = new Group(famNameInput, descriptionInput, creator, members, tagsList, boost);
-                foreach (var tag in tagsList)
-                {
-                    fam.addTag(tag);
+                    if (tagsArr[i] != " ")
+                    {
+                        tagsList.Add(myTI.ToLower(tagsArr[i]));
+                        Console.WriteLine(tagsArr[i]);
+                    }
                 }
 
+                var members = new Dictionary<User, bool>();
+                members.Add(creator, true);
+                if (boostInput == "") { boostInput = "0"; }
+                double boost = double.Parse(boostInput, System.Globalization.CultureInfo.InvariantCulture);
+                Group fam = new Group(famNameInput, descriptionInput, creator, members, tagsList, boost);
+                /*foreach (var tag in tagsList)
+                {
+                    fam.addTag(tag);
+                }*/
+                creator.addFitFam(fam);
                 var intent = new Intent(this, typeof(FamDetailsPageActivity));
                 intent.PutExtra("groupId", fam.GroupId);
                 intent.PutExtra("userId", userId);

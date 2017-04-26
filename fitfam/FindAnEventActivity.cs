@@ -174,20 +174,20 @@ namespace fitfam
                 var experienceLevel = (string)experienceSpinner.GetItemAtPosition(experienceSpinner.SelectedItemPosition);
 
                 // date
-                startInput = dateStart.DateTime;
-                endInput = dateEnd.DateTime;
+                //startInput = dateStart.DateTime;
+                //endInput = dateEnd.DateTime;
 
-                // start time
-                string hour = (string)startHourSpinner.GetItemAtPosition(startHourSpinner.SelectedItemPosition);
-                startInput = startInput.AddHours(Convert.ToDouble(hour));
-                string minute = (string)startMinSpinner.GetItemAtPosition(startMinSpinner.SelectedItemPosition);
-                startInput = startInput.AddMinutes(Convert.ToDouble(minute));
+                //// start time
+                //string hour = (string)startHourSpinner.GetItemAtPosition(startHourSpinner.SelectedItemPosition);
+                //startInput = startInput.AddHours(Convert.ToDouble(hour));
+                //string minute = (string)startMinSpinner.GetItemAtPosition(startMinSpinner.SelectedItemPosition);
+                //startInput = startInput.AddMinutes(Convert.ToDouble(minute));
 
-                // end time
-                hour = (string)endHourSpinner.GetItemAtPosition(endHourSpinner.SelectedItemPosition);
-                endInput = endInput.AddHours(Convert.ToDouble(hour));
-                minute = (string)endMinSpinner.GetItemAtPosition(endMinSpinner.SelectedItemPosition);
-                endInput = endInput.AddMinutes(Convert.ToDouble(minute));
+                //// end time
+                //hour = (string)endHourSpinner.GetItemAtPosition(endHourSpinner.SelectedItemPosition);
+                //endInput = endInput.AddHours(Convert.ToDouble(hour));
+                //minute = (string)endMinSpinner.GetItemAtPosition(endMinSpinner.SelectedItemPosition);
+                //endInput = endInput.AddMinutes(Convert.ToDouble(minute));
 
                 var awsClient = new AWSClient(Amazon.RegionEndpoint.USEast1);
                 var client = awsClient.getDynamoDBClient();
@@ -228,7 +228,7 @@ namespace fitfam
                                 }
                             }
                         }
-                        if (kvp.Key == "experienceLevel")
+                        else if (kvp.Key == "experienceLevel")
                         {
                             var experienceLevels = kvp.Value.L;
                             int numExp = 0;
@@ -236,7 +236,18 @@ namespace fitfam
                             {
                                 string s = e.S;
                                 numExp++;
-                                if (s == experienceLevel)
+                                if (s[0] == experienceLevel[0])
+                                {
+                                    numMatches++;
+                                }
+                            }
+                        }
+                        else if (kvp.Key == "description")
+                        {
+                            var desc = kvp.Value.S;
+                            foreach (string tag in tagsList)
+                            {
+                                if (desc.ToLower().Contains(tag))
                                 {
                                     numMatches++;
                                 }

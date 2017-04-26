@@ -118,6 +118,7 @@ namespace fitfam
             //num_buttons will be taken from database COUNT(matches)
             int num_buttons = matches.Length;
 
+            System.Console.WriteLine("MAAAAAAAAAAAAAAAAAAAATCHES " + matches.Length);
             ViewGroup matchButtonLayout = (ViewGroup)FindViewById(Resource.Id.radioGroup1);  // This is the id of the RadioGroup we defined
             for (var i = 0; i < matches.Length; i++)
             {
@@ -182,41 +183,7 @@ namespace fitfam
                 }
             }
 
-            ////num_buttons will be taken from database COUNT(matches)
-            //int num_buttons = 10;
-
-            //ViewGroup matchButtonLayout = (ViewGroup)FindViewById(Resource.Id.radioGroup1);  // This is the id of the RadioGroup we defined
-            //for (var i = 0; i < num_buttons; i++)
-            //{
-            //    Button button = new Button(this);
-            //    //Does not change
-            //    button.Id = (i);
-            //    button.SetBackgroundResource(Resource.Drawable.gold_button); // This is a custom button drawable, defined in XML 
-            //    float scale = button.Resources.DisplayMetrics.Density;
-            //    button.SetHeight((int)(75 * scale + 0.5f));
-            //    button.SetWidth((int)(500 * scale + 0.5f));
-            //    int padding = (int)(16 * scale + 0.5f);
-            //    button.SetPadding(padding, padding, padding, padding);
-            //    Android.Graphics.Drawables.Drawable drawable = Resources.GetDrawable(Resource.Drawable.miniMightyMan);
-            //    drawable.SetBounds(0, 0, (int)(drawable.IntrinsicWidth * 0.5), (int)(drawable.IntrinsicHeight * 0.5));
-            //    Android.Graphics.Drawables.ScaleDrawable sd = new Android.Graphics.Drawables.ScaleDrawable(drawable, 0, (int)(drawable.IntrinsicWidth * scale + 0.5f), (int)(drawable.IntrinsicHeight * scale + 0.5f));
-            //    button.SetCompoundDrawables(sd.Drawable, null, null, null);
-
-            //    //Should get fed in from database
-            //    button.Text = "SS Quarter Finals";
-
-            //    matchButtonLayout.AddView(button);
-
-            //    Space sp = new Space(this);
-            //    sp.SetPadding(padding, padding, padding, padding);
-
-            //    matchButtonLayout.AddView(sp);
-
-            //    button.Click += delegate {
-            //        StartActivity(typeof(EventDetailsPageActivity));
-            //    };
-            //};
-
+           
 
         }
     }

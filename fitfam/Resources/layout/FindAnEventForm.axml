@@ -84,7 +84,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner5"
+                android:id="@+id/experienceSpinner"
                 android:prompt="@string/experience_prompt" />
             <TextView
                 android:text="When is the earliest you are available?"
